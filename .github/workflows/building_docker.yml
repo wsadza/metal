@@ -96,7 +96,7 @@ jobs:
   #
   builder:
     name: "Build: Github Package"
-    needs: [ prepare ]
+    needs: [ prepare, linter ]
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJson(needs.prepare.outputs.RELEASES_MATRIX) }}
