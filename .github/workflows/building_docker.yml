@@ -15,8 +15,8 @@ jobs:
   # -----------------
   # Prepare: Find Dockerfile
   #
-  prepare:
-    name: "Prepare"
+  gathering_informations:
+    name: "Gathering Informations"
     runs-on: ubuntu-latest
     outputs:
       DOCKERFILE_PATH:     ${{ steps.dockerfile_find.outputs.DOCKERFILE_PATH }}
@@ -33,7 +33,7 @@ jobs:
           fetch-depth: 0
 
       # -----------------
-      # Prepare: Find Dockerfile
+      # Gathering Informations: Find Dockerfile
       #
       - name: 'Find Dockerfile'
         id: dockerfile_find
@@ -51,7 +51,7 @@ jobs:
           echo "DOCKERFILE_DIR=${DOCKERFILE_PATH/\/Dockerfile.*}" >> $GITHUB_OUTPUT
 
       # -----------------
-      # Prepare: Prepare Release Matrix 
+      # Gathering Informations: Prepare Release Matrix 
       #
       - name: 'Prepare Releases Matrix'
         id: releases_matrix 
@@ -61,7 +61,7 @@ jobs:
           echo "RELEASES_MATRIX=${parsed_matrix}" >> $GITHUB_OUTPUT
 
       # -----------------
-      # Prepare: Extract Repository Metadata (tags, labels)
+      # Gathering Informations: Extract Repository Metadata (tags, labels)
       #
       - name: 'Extract Repository Metadata'
         id: repository_metadata
@@ -70,11 +70,11 @@ jobs:
           images: ghcr.io/${{ github.repository }}
 
   # -----------------
-  # Docker linter
+  # Quality Assurance
   #
-  linter:
-     needs: [ prepare ]
-     name: "Lint: Dockerfile"
+  quality_assurance:
+     needs: [ gathering_informations ]
+     name: "QA: Linting"
      runs-on: ubuntu-latest
      steps:
 
@@ -90,13 +90,14 @@ jobs:
         with:
           file: ${{ needs.prepare.outputs.DOCKERFILE_PATH }}
           ignoreRule: "SC1008,SC2174"
-  #         
+
+  
   # -----------------
   # Building & Pushing 
   #
   builder:
     name: "Build: Github Package"
-    needs: [ prepare, linter ]
+    needs: [ gathering_informations, quality_assurance ]
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJson(needs.prepare.outputs.RELEASES_MATRIX) }}
@@ -161,7 +162,7 @@ jobs:
         with:
 
           # Required 
-          auth_token:             ${{ secrets.token }}
+          auth_token:             ${{ github.token }}
           dockerfile_context:     ${{ needs.prepare.outputs.DOCKERFILE_DIR }} 
           dockerfile_path:        ${{ needs.prepare.outputs.DOCKERFILE_PATH }} 
           
