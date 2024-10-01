@@ -151,7 +151,7 @@ jobs:
             jq -r '.tags[]' <<< '${{ needs.prepare.outputs.REPOSITORY_METADATA }}' \
             | sed 's/:/\/'${{ matrix.name }}':/' \
           )";
-          echo "TAG=${TAG}" >> $GITHUB_OUTPUT
+          echo "DOCKER_TAG=${DOCKER_TAG}" >> $GITHUB_OUTPUT
 
       # -----------------
       # Builder: Github package 
@@ -166,4 +166,4 @@ jobs:
           
           # Optional
           docker_build_arguments: ${{ steps.prepare_build_arguments.outputs.BUILD_ARGUMENTS }}
-          docker_build_tag:       ${{ steps.prepare_tag.outputs.TAG }}
+          docker_build_tag:       ${{ steps.prepare_tag.outputs.DOCKER_TAG }}
