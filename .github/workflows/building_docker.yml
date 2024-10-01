@@ -151,6 +151,7 @@ jobs:
             jq -r '.tags[]' <<< '${{ needs.prepare.outputs.REPOSITORY_METADATA }}' \
             | sed 's/:/\/'${{ matrix.name }}':/' \
           )";
+          DOCKER_TAG="'$(echo ${DOCKER_TAG})'"
           echo "DOCKER_TAG=${DOCKER_TAG}" >> $GITHUB_OUTPUT
 
       # -----------------
