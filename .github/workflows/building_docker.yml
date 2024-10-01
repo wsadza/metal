@@ -147,7 +147,7 @@ jobs:
         id: prepare_tag
         shell: bash
         run: |
-          TAG="$( \
+          DOCKER_TAG="$( \
             jq -r '.tags[]' <<< '${{ needs.prepare.outputs.REPOSITORY_METADATA }}' \
             | sed 's/:/\/'${{ matrix.name }}':/' \
           )";
