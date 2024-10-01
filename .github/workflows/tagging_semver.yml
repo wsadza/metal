@@ -24,7 +24,7 @@ jobs:
             (always() && (format('refs/heads/{0}', github.event.repository.default_branch) == github.ref)) }}
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/tagging/semver/major@develop
+      - uses: ./.github/actions/tagging/semver/major
         with:
           token: ${{ secrets.token }}
   
@@ -39,7 +39,7 @@ jobs:
             (always() && (format('refs/heads/{0}', github.event.repository.default_branch) == github.ref)) }}
     runs-on: ubuntu-latest
     steps:
-    - uses: ./.github/actions/tagging/semver/minor@develop
+    - uses: ./.github/actions/tagging/semver/minor
       with:
         token: ${{ secrets.token }}
       
@@ -52,6 +52,6 @@ jobs:
     if: ${{ startsWith(github.ref, 'refs/heads/fix/') && endsWith(github.ref, '.x') }}
     runs-on: ubuntu-latest
     steps:
-    - uses: ./.github/actions/tagging/semver/patch@develop
+    - uses: ./.github/actions/tagging/semver/patch
       with:
         token: ${{ secrets.token }}
