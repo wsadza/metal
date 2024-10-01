@@ -9,6 +9,7 @@ inputs:
   ignoreRule:
     description: "Hadolint comma separated list of rule codes which will be ignored."
     required: true
+    default: "" 
 
 runs:
   using: composite
@@ -16,7 +17,7 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Lint Dockerfile
+    - name: 'Lint Dockerfile'
       shell: bash
       run: |
         docker run --rm -i -e \

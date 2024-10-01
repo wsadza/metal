@@ -1,5 +1,5 @@
 # building.yml
-name: Building Docker
+name: 'Building Docker'
 
 on:
   # Trigger on each tag-push;
@@ -14,72 +14,156 @@ jobs:
 
   # -----------------
   # Prepare: Find Dockerfile
-  # -----------------
-  prepare-find-dockerfile:
-    name: "Build: Prepare - find dockerfile"
+  #
+  prepare:
+    name: "Prepare"
     runs-on: ubuntu-latest
     outputs:
-      dockerfilepath: ${{ steps.find-dockerfile.outputs.DOCKERFILE_PATH }}
-      dockerfiledir: ${{ steps.find-dockerfile.outputs.DOCKERFILE_DIR }}
+      DOCKERFILE_PATH:     ${{ steps.dockerfile_find.outputs.DOCKERFILE_PATH }}
+      DOCKERFILE_DIR:      ${{ steps.dockerfile_find.outputs.DOCKERFILE_DIR }}
+      REPOSITORY_METADATA: ${{ steps.repository_metadata.outputs.json }}
+      RELEASES_MATRIX:     ${{ steps.releases_matrix.outputs.RELEASES_MATRIX }}
     steps:
-      - uses: actions/checkout@v4
 
-      # Find Dockerfile
-      - shell: bash
-        name: Find Dockerfile
-        id: find-dockerfile
+      # -----------------
+      # Prepare: Checkout 
+      #
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # -----------------
+      # Prepare: Find Dockerfile
+      #
+      - name: 'Find Dockerfile'
+        id: dockerfile_find
+        shell: bash
         run: |
-          DOCKERFILE_PATH=$(find ${PWD} -name "Dockerfile.*");
-          if [ -z "${DOCKERFILE_PATH}" ]; then exit 1; fi
+          DOCKERFILE_PATH=$(find ${PWD} -name "Dockerfile.*" -print -quit);
+
+          # If no Dockerfile is found, exit with an error
+          if [ -z "${DOCKERFILE_PATH}" ]; then
+            echo "No Dockerfile found in the repository."
+            exit 1
+          fi
+
           echo "DOCKERFILE_PATH=${DOCKERFILE_PATH}" >> $GITHUB_OUTPUT
           echo "DOCKERFILE_DIR=${DOCKERFILE_PATH/\/Dockerfile.*}" >> $GITHUB_OUTPUT
 
-  # -----------------
-  # Prepare: Parse build arguments 
-  # -----------------
-  prepare-parse-build:
-    name: "Build: Prepare - parse build arguments"
-    runs-on: ubuntu-latest
-    outputs:
-      dockerfilepath: ${{ steps.find-dockerfile.outputs.DOCKERFILE_PATH }}
-      dockerfiledir: ${{ steps.find-dockerfile.outputs.DOCKERFILE_DIR }}
-    steps:
-      - uses: actions/checkout@v4
-
-      # Find Dockerfile
-      - shell: bash
-        name: Find Dockerfile
-        id: find-dockerfile
+      # -----------------
+      # Prepare: Prepare Release Matrix 
+      #
+      - name: 'Prepare Releases Matrix'
+        id: releases_matrix 
+        shell: bash
         run: |
-          DOCKERFILE_PATH=$(find ${PWD} -name "Dockerfile.*");
-          if [ -z "${DOCKERFILE_PATH}" ]; then exit 1; fi
-          echo "DOCKERFILE_PATH=${DOCKERFILE_PATH}" >> $GITHUB_OUTPUT
-          echo "DOCKERFILE_DIR=${DOCKERFILE_PATH/\/Dockerfile.*}" >> $GITHUB_OUTPUT
+          parsed_matrix=$(yq -o=j -I=0 '.' .cicd/releases.yml | jq -c)
+          echo "RELEASES_MATRIX=${parsed_matrix}" >> $GITHUB_OUTPUT
+
+      # -----------------
+      # Prepare: Extract Repository Metadata (tags, labels)
+      #
+      - name: 'Extract Repository Metadata'
+        id: repository_metadata
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
 
   # -----------------
   # Docker linter
-  # -----------------
-  hadolint:
+  #
+  linter:
      needs: [ prepare ]
      name: "Lint: Dockerfile"
      runs-on: ubuntu-latest
      steps:
-       - uses: .github/actions/linting/docker/hadolint
-         with:
-           file: ${{ needs.prepare.outputs.dockerfilepath }}
-           
-  # -----------------
-  # Building & Pushing to Github registry 
-  # -----------------
-  github:
-    name: "Build: Github Package"
-    needs: [ prepare, hadolint ]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: .github/actions/building/docker/github
+
+      # -----------------
+      # Linter: Checkout 
+      - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.token || github.token }}
-          context: ${{ needs.prepare.outputs.dockerfiledir }}
-          file: ${{ needs.prepare.outputs.dockerfilepath }}
-          buildkit: 'false'
-          build-args: 
+          fetch-depth: 0
+
+      # -----------------
+      # Linter: Hadolint
+      - uses: ./.github/actions/linting/docker/hadolint
+        with:
+          file: ${{ needs.prepare.outputs.DOCKERFILE_PATH }}
+          ignoreRule: "SC1008,SC2174"
+  #         
+  # -----------------
+  # Building & Pushing 
+  #
+  builder:
+    name: "Build: Github Package"
+    needs: [ prepare ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.prepare.outputs.RELEASES_MATRIX) }}
+    steps:
+      
+      # -----------------
+      # Builder: Checkout 
+      #
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # -----------------
+      # Builder: Prepare Docker Build Arguments
+      #
+      - name: 'Prepare - Docker Build Arguments'
+        id: prepare_build_arguments 
+        shell: bash
+        run: |
+          BUILD_ARGUMENTS="$(
+            echo "${{ toJSON(matrix.build.arguments) }}" \
+            | yq -r 'to_entries | .[] | "--build-arg " + "\""+ .key + "=" + .value + "\""'
+          )";
+          BUILD_ARGUMENTS="'$(echo ${BUILD_ARGUMENTS})'"
+          echo "BUILD_ARGUMENTS=${BUILD_ARGUMENTS}" >> $GITHUB_OUTPUT
+
+      # -----------------
+      # Builder: Prepare Docker Lables 
+      #
+      - name: 'Prepare - Docker Labels'
+        id: prepare_lables
+        shell: bash
+        run: |
+          labels="$( \
+            jq -r \
+            '.labels | to_entries[] | "\(.key)=\"\(.value)\""' \
+            <<< '${{ needs.prepare.outputs.REPOSITORY_METADATA }}'\
+          )";
+          # append labels to final docker image
+          echo "${labels//\//\\\/}" | while read -r label; do 
+            sed -i "/^FROM/a LABEL $label" ${{ needs.prepare.outputs.DOCKERFILE_PATH }};
+          done
+
+      # -----------------
+      # Builder: Prepare Docker Tag 
+      #
+      - name: 'Prepare - Docker Tag'
+        id: prepare_tag
+        shell: bash
+        run: |
+          TAG="$( \
+            jq -r '.tags[]' <<< '${{ needs.prepare.outputs.REPOSITORY_METADATA }}' \
+            | sed 's/:/\/'${{ matrix.name }}':/' \
+          )";
+          echo "TAG=${TAG}" >> $GITHUB_OUTPUT
+
+      # -----------------
+      # Builder: Github package 
+      # 
+      - uses: ./.github/actions/building/docker/github
+        with:
+
+          # Required 
+          auth_token:             ${{ secrets.token }}
+          dockerfile_context:     ${{ needs.prepare.outputs.DOCKERFILE_DIR }} 
+          dockerfile_path:        ${{ needs.prepare.outputs.DOCKERFILE_PATH }} 
+          
+          # Optional
+          docker_build_arguments: ${{ steps.prepare_build_arguments.outputs.BUILD_ARGUMENTS }}
+          docker_build_tag:       ${{ steps.prepare_tag.outputs.TAG }}
