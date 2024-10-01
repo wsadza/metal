@@ -99,6 +99,9 @@ jobs:
     name: "Build: Github Package"
     needs: [ gathering_informations, quality_assurance ]
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     strategy:
       matrix: ${{ fromJson(needs.gathering_informations.outputs.RELEASES_MATRIX) }}
     steps:
