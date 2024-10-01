@@ -57,7 +57,7 @@ jobs:
         id: releases_matrix 
         shell: bash
         run: |
-          parsed_matrix=$(yq -o=j -I=0 '.' .cicd/releases.yml | jq -c)
+          parsed_matrix=$(yq -o=j -I=0 '.' .cicd/releases/releases.yml | jq -c)
           echo "RELEASES_MATRIX=${parsed_matrix}" >> $GITHUB_OUTPUT
 
       # -----------------
