@@ -88,7 +88,7 @@ jobs:
       # Linter: Hadolint
       - uses: ./.github/actions/linting/docker/hadolint
         with:
-          file: ${{ needs.prepare.outputs.DOCKERFILE_PATH }}
+          file: ${{ needs.gathering_informations.outputs.DOCKERFILE_PATH }}
           ignoreRule: "SC1008,SC2174"
 
   
@@ -100,7 +100,7 @@ jobs:
     needs: [ gathering_informations, quality_assurance ]
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson(needs.prepare.outputs.RELEASES_MATRIX) }}
+      matrix: ${{ fromJson(needs.gathering_informations.outputs.RELEASES_MATRIX) }}
     steps:
       
       # -----------------
@@ -138,7 +138,7 @@ jobs:
           )";
           # append labels to final docker image
           echo "${labels//\//\\\/}" | while read -r label; do 
-            sed -i "/^FROM/a LABEL $label" ${{ needs.prepare.outputs.DOCKERFILE_PATH }};
+            sed -i "/^FROM/a LABEL $label" ${{ needs.gathering_informations.outputs.DOCKERFILE_PATH }};
           done
 
       # -----------------
@@ -149,7 +149,7 @@ jobs:
         shell: bash
         run: |
           DOCKER_TAG="$( \
-            jq -r '.tags[0]' <<< '${{ needs.prepare.outputs.REPOSITORY_METADATA }}' \
+            jq -r '.tags[0]' <<< '${{ needs.gathering_informations.outputs.REPOSITORY_METADATA }}' \
             | sed 's/:/\/'${{ matrix.name }}':/' \
           )";
           DOCKER_TAG="'$(echo ${DOCKER_TAG})'"
@@ -163,8 +163,8 @@ jobs:
 
           # Required 
           auth_token:             ${{ github.token }}
-          dockerfile_context:     ${{ needs.prepare.outputs.DOCKERFILE_DIR }} 
-          dockerfile_path:        ${{ needs.prepare.outputs.DOCKERFILE_PATH }} 
+          dockerfile_context:     ${{ needs.gathering_informations.outputs.DOCKERFILE_DIR }} 
+          dockerfile_path:        ${{ needs.gathering_informations.outputs.DOCKERFILE_PATH }} 
           
           # Optional
           docker_build_arguments: ${{ steps.prepare_build_arguments.outputs.BUILD_ARGUMENTS }}
