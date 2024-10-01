@@ -148,7 +148,7 @@ jobs:
         shell: bash
         run: |
           DOCKER_TAG="$( \
-            jq -r '.tags[]' <<< '${{ needs.prepare.outputs.REPOSITORY_METADATA }}' \
+            jq -r '.tags[0]' <<< '${{ needs.prepare.outputs.REPOSITORY_METADATA }}' \
             | sed 's/:/\/'${{ matrix.name }}':/' \
           )";
           DOCKER_TAG="'$(echo ${DOCKER_TAG})'"
