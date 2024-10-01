@@ -1,0 +1,1400 @@
+############################################################
+# Copyright (c) 2024 Utilizable 
+# Released under the MIT license
+# ----------------------------------------------------------
+#
+############################################################
+#
+#   /$$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$$$
+#  | $$__  $$ /$$__  $$ /$$__  $$| $$_____/
+#  | $$  \ $$| $$  \ $$| $$  \__/| $$      
+#  | $$$$$$$ | $$$$$$$$|  $$$$$$ | $$$$$   
+#  | $$__  $$| $$__  $$ \____  $$| $$__/   
+#  | $$  \ $$| $$  | $$ /$$  \ $$| $$      
+#  | $$$$$$$/| $$  | $$|  $$$$$$/| $$$$$$$$
+#  |_______/ |__/  |__/ \______/ |________/
+#
+
+# Define build-time arguments.
+ARG \
+    DISTRIBUTION=24.04 \
+		OS=ubuntu
+    
+FROM ${OS}:${DISTRIBUTION}
+
+# Define build-time arguments.
+ARG \
+    DEBIAN_FRONTEND=noninteractive
+
+# Configure locale 
+ARG \
+    TZ=UTC \
+    LANG="en_US.UTF-8" \
+    LANGUAGE="en_US:en" \
+    LC_CTYPE="en_US.UTF-8" \
+    LC_ALL="en_US.UTF-8"
+
+ENV \
+    LANG=${LANG} \
+    LC_ALL=${LC_ALL} \
+    LANGUAGE=${LANGUAGE} \
+    TZ=${TZ}
+
+# -----------------------------------------------
+# Base: User Tools 
+
+RUN \
+    echo "**** Base: User Tools ****" \
+        && dpkg --add-architecture i386 \
+        && apt-get update \
+        && apt-get install --no-install-recommends -y \
+           apt-utils \
+           locales \
+           ssl-cert \
+           lsb-release \
+           sudo \
+           udev \
+           tzdata \
+           dialog \
+    && \
+    echo "**** Set locale and timezone ****" \ 
+        && locale-gen ${LANG} \
+        && localedef -i en_US -f UTF-8 en_US.UTF-8 \
+        && ln -snf \
+          "/usr/share/zoneinfo/${TZ}" \
+          /etc/localtime \
+        && echo "${TZ}" > /etc/timezone \
+    && \
+    echo "**** Section cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*
+
+# -----------------------------------------------
+# Base-Debian: Debian non-free apt configuration
+
+RUN \
+    echo "**** Base: APT Configure (debian) ****" \
+		    && ID="$(\
+        	     grep ^ID= /etc/os-release \
+        	     | cut -d= -f2 \
+        	     | tr -d '\"' \
+        )" \
+        && if [ "${ID}" = "debian" ]; \
+		    then \
+		      echo "**** Base: Debian apt configuration ****" \
+		      && DEB_URL="http://deb.debian.org/debian/" \
+		      && SOURCES="contrib non-free non-free-firmware" \
+          && echo "deb ${DEB_URL} $(lsb_release -cs) ${SOURCES}" \
+		      		 | tee -a /etc/apt/sources.list; \
+        fi
+
+# -----------------------------------------------
+# Base: Configure user 
+
+ARG \
+    USER_NAME=ubuntu \
+    USER_PASSWORD=ubuntu \
+    USER_UID=1000
+
+RUN \
+    echo "**** Base: User Configure ****" \     
+        && groupadd -g ${USER_UID} ${USER_NAME} \
+        && useradd -m -l -s /bin/bash \
+            -u ${USER_UID}  \
+            -g ${USER_UID}  \
+               ${USER_NAME} \
+    && \
+    echo "**** Configure SUDO Privileges ****" \     
+        && usermod -aG sudo ${USER_NAME} \
+        && echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd \ 
+        && grep -q "^${USER_NAME} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers \
+            || echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" \
+               >> /etc/sudoers \
+    && \
+    echo "**** Configure XDG_RUNTIME_DIR ****" \     
+        && mkdir -p /run/user/${USER_UID} \
+        && chown -R ${USER_UID}:${USER_UID} /run/user/${USER_UID} \
+        && chmod 0700 /run/user/${USER_UID}
+
+ENV \
+    XDG_RUNTIME_DIR=/run/user/${USER_UID}
+
+#RUN \
+#    echo "**** Base: User Configure ****" \     
+#        && getent group ${USER_NAME} \
+#           || groupadd -g ${USER_UID} ${USER_NAME} \
+#        && id -u ${USER_NAME} &>/dev/null \
+#           || useradd -m -l -s /bin/bash \
+#              -u ${USER_UID}  \
+#              -g ${USER_NAME} \
+#                 ${USER_NAME} \
+#    && \
+#    echo "**** Configure SUDO Privilages ****" \     
+#        && usermod -aG sudo ${USER_NAME} \
+#        && echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd \ 
+#        && grep -q "^${USER_NAME} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers \
+#            || echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" \
+#               >> /etc/sudoers \
+#    && \
+#    echo "**** Configure XDG_RUNTIME_DIR ****" \     
+#        && mkdir /run/user/${USER_UID} \
+#        && chown -R ${USER_UID}:${USER_UID} /run/user/${USER_UID} \
+#        && chmod 0700 /run/user/${USER_UID}
+#
+ENV \
+    XDG_RUNTIME_DIR=/run/user/${USER_UID}
+
+# Switch to non-root user.
+USER ${USER_NAME}
+
+# Execute bash as root for futher installations.
+SHELL [ "/usr/bin/sudo", "-E", "--", "/bin/bash", "-c" ]
+
+############################################################
+#
+#    /$$$$$$   /$$$$$$  /$$$$$$$  /$$$$$$$$
+#   /$$__  $$ /$$__  $$| $$__  $$| $$_____/
+#  | $$  \__/| $$  \ $$| $$  \ $$| $$      
+#  | $$      | $$  | $$| $$$$$$$/| $$$$$   
+#  | $$      | $$  | $$| $$__  $$| $$__/   
+#  | $$    $$| $$  | $$| $$  \ $$| $$      
+#  |  $$$$$$/|  $$$$$$/| $$  | $$| $$$$$$$$
+#   \______/  \______/ |__/  |__/|________/
+#
+#
+
+# -----------------------------------------------
+# Core: Install Nvidia VAAPI 
+
+RUN \
+    echo "**** Core: Install NVIDIA VAAPI ****" \
+    && \
+    echo "**** Prepare ****" \
+        && apt-get update \
+        && apt-get install --no-install-recommends -y \          
+           software-properties-common \
+           curl \
+           jq \
+           meson \
+           gcc \
+           libgstreamer-plugins-bad1.0-dev \
+           cmake \
+           libva-dev \
+    && \
+    echo "**** Installation ****" \
+        && GH_API_BASE="https://api.github.com/repos" \
+        && NVIDIA_VAAPI_DRIVER_REPO="${GH_API_BASE}/elFarto/nvidia-vaapi-driver" \
+        && NVIDIA_VAAPI_DRIVER_TARBALL="$( \
+              curl -fsSL \
+              "${NVIDIA_VAAPI_DRIVER_REPO}/releases/latest" | \
+              jq -r '.tarball_url' \
+           )" \
+        && mkdir /tmp/nvidia-vaapi-driver \
+        && curl -fsSL "${NVIDIA_VAAPI_DRIVER_TARBALL}" | \ 
+           tar zxf - -C \
+            /tmp/nvidia-vaapi-driver \
+            --strip-components 1 \ 
+        && cd /tmp/nvidia-vaapi-driver \
+        && meson setup build \
+        && meson install -C build \
+    && \
+    echo "**** Installation ****" \
+        && echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf \
+        && echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf \
+    && \
+    echo "**** Section cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*
+
+# -----------------------------------------------
+# Core: OpenCL/Vulkan/EGL Configuration
+
+RUN \
+    echo "**** Core: OpenCL/Vulkan/EGL Configuration ****" \
+    && \
+    echo "**** OpenCL Configuration ****" \
+        && mkdir -pm755 /etc/OpenCL/vendors \
+        && echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd \
+    && \
+    echo "**** Vulkan Configuration ****" \
+        && VULKAN_API_VERSION=$( \
+             dpkg -s libvulkan1 | \
+             grep -oP 'Version: [0-9|\.]+' | \
+             grep -oP '[0-9]+(\.[0-9]+)(\.[0-9]+)' \
+           ) \
+        && mkdir -pm 755 /etc/vulkan/icd.d/ \
+        && echo -e "\
+                    { \n\
+                      \"file_format_version\" : \"1.0.0\",\n\
+                      \"ICD\": { \n\
+                        \"library_path\": \"libGLX_nvidia.so.0\", \n\
+                        \"api_version\" : \"${VULKAN_API_VERSION}\"\n\
+                      } \n\
+                    }" \
+           > /etc/vulkan/icd.d/nvidia_icd.json \
+    && \
+    echo "**** EGL Configuration **** " \
+        && mkdir -pm 755 /usr/share/glvnd/egl_vendor.d/ \
+        && echo -e "\
+                    { \n\
+                      \"file_format_version\" : \"1.0.0\", \n\
+                      \"ICD\": { \n\
+                        \"library_path\": \"libEGL_nvidia.so.0\" \n\
+                      } \n\
+                    }" \
+           > /usr/share/glvnd/egl_vendor.d/10_nvidia.json
+
+# -----------------------------------------------
+# Core: Install Selkies Gstreamer 
+#
+# Ubuntu <-> Debian diff:
+# *alsa-base 				- not present on debian
+# *libjpeg-turbo8 	- not present on debian
+
+ARG \
+		SELKIES_DISTRIBUTION="24.04" \
+		SELKIES_VERSION="v1.6.2"
+
+RUN \
+    echo "**** Core: Install Gstreamer ****" \
+    && \
+    echo "**** Prepare ****" \
+        && apt-get update \
+        && apt-get install --no-install-recommends -y \          
+           software-properties-common \
+           curl \
+    && \
+    echo "**** Dependencies ****" \
+        && apt-get install --no-install-recommends -y \
+           python3-pip \
+           python3-dev \
+           python3-gi \
+           python3-setuptools \
+           python3-wheel \
+           libaa1 \
+           bzip2 \
+           libgcrypt20 \
+           libcairo-gobject2 \
+           libpangocairo-1.0-0 \
+           libgdk-pixbuf2.0-0 \
+           libsoup2.4-1 \
+           libsoup-gnome2.4-1 \
+           libgirepository-1.0-1 \
+           glib-networking \
+           libglib2.0-0 \
+           libjson-glib-1.0-0 \
+           libgudev-1.0-0 \
+           alsa-utils \
+           libjpeg-dev \
+           jackd2 \
+           libjack-jackd2-0 \
+           libpulse0 \
+           libogg0 \
+           libopus0 \
+           libvorbis-dev \
+           libopenjp2-7 \
+           libvpx-dev \
+           libwebp-dev \
+           x264 \
+           x265 \
+           libdrm2 \
+           libegl1 \
+           libgl1 \
+           libopengl0 \
+           libgles1 \
+           libgles2 \
+           libglvnd0 \
+           libglx0 \
+           wayland-protocols \
+           libwayland-dev \
+           libwayland-egl1 \
+           wmctrl \
+           xsel \
+           xdotool \
+           x11-utils \
+           x11-xserver-utils \
+           xserver-xorg-core \
+           libx11-xcb1 \
+           libxcb-dri3-0 \
+           libxkbcommon0 \
+           libxdamage1 \
+           libxfixes3 \
+           libxv1 \
+           libxtst6 \
+           libxext6 \
+           xcvt \
+           libopenh264-dev \
+           libde265-0 svt-av1 \
+           aom-tools \
+    && \
+    echo "**** Collecting System Info ****" \
+        && DISTRIBUTION="$( \
+             grep VERSION_ID= /etc/os-release \
+             | cut -d= -f2 \
+             | tr -d '\"' \
+           )" \
+        && ARCHITECTURE="$(dpkg --print-architecture)" \
+    && \
+    echo "**** Fetching Gstreamer Assets ****" \
+    && \
+    echo "**** [0]: Gstreamer Binaries ****" \
+				&& API_URL_BASE="https://api.github.com/repos" \
+        && API_URL="${API_URL_BASE}/selkies-project/selkies-gstreamer" \
+        && if [ "$SELKIES_VERSION" = "latest" ]; then \
+              SELKIES_VERSION="$(\
+                curl -fsSL ${API_URL}/releases/latest \
+                | jq -r .tag_name \
+              )"; \
+           fi \
+        && GS_TARBALL_RELEASE_TARGET="/opt/gstreamer" \
+        && GS_TARBALL_RELEASE_URL="$( \
+             curl -fsSL "${API_URL}/releases?per_page=100" | \
+               jq -r \
+							 --arg VERSION "${SELKIES_VERSION}" \
+               --arg DISTRIBUTION "${SELKIES_DISTRIBUTION}" \
+               --arg ARCHITECTURE "${ARCHITECTURE}" \
+               '.[] \
+							 | select( \
+							 		.tag_name == $VERSION \
+							 ) \ 
+							 | .assets[] \
+               | select( \
+                 .name \
+                 | contains("gpl") \
+                   and contains($DISTRIBUTION) \
+                   and contains($ARCHITECTURE) \
+                   and contains(".tar.gz") \
+               ) \ 
+               | .browser_download_url' \
+           )" \
+        && mkdir -p "${GS_TARBALL_RELEASE_TARGET}" \
+        && curl -fsSL "${GS_TARBALL_RELEASE_URL}" | \ 
+             tar zxf - -C "${GS_TARBALL_RELEASE_TARGET}" \
+               --strip-components=1 \
+    && \
+    echo "**** [1]: Selkies Streamer Application  ****" \
+        && GS_WHL_PY_URL="$( \
+             curl -fsSL "${API_URL}/releases?per_page=100" | \
+               jq -r \
+							 --arg VERSION "${SELKIES_VERSION}" \
+               '.[] \
+							 | select( \
+							 		.tag_name == $VERSION \
+							 ) \ 
+							 | .assets[] \
+               | select( \
+                 .name \
+                 | contains("py3-none-any.whl") \
+               ) \
+               | .browser_download_url' \
+           )" \
+        && curl -fsSL ${GS_WHL_PY_URL} -O \
+        && pip3 install \
+            --no-cache-dir \
+            --force-reinstall \
+            --break-system-packages \
+            ./*.whl \ 
+        && rm -f ./*.whl \
+    && \
+    echo "**** [2]: Selkies Streamer WebPack ****" \
+        && GS_TARBALL_WEB_TARGET="/opt/gst-web" \
+        && GS_TARBALL_WEB_URL="$( \
+            curl -fsSL "${API_URL}/releases?per_page=100" | \
+               jq -r \
+							 --arg VERSION "${SELKIES_VERSION}" \
+               '.[] \
+							 | select( \
+							 		.tag_name == $VERSION \
+							 ) \ 
+							 | .assets[] \
+               | select( \
+                  .name \
+                  | contains("web") \
+                ) \
+               | .browser_download_url' \
+           )" \
+        && mkdir "${GS_TARBALL_WEB_TARGET}" \
+        && curl -fsSL ${GS_TARBALL_WEB_URL} | \ 
+           tar zxf - -C "${GS_TARBALL_WEB_TARGET}" \
+             --strip-components 1 \
+    && \
+    echo "**** [3]: Selkies Streamer Joistic Interposer ****" \
+        && GS_DEB_INTERPOSER_URL="$( \
+            curl -fsSL "${API_URL}/releases?per_page=100" | \
+              jq -r \
+              --arg DISTRIBUTION "${SELKIES_DISTRIBUTION}" \
+              --arg ARCHITECTURE "${ARCHITECTURE}" \
+							--arg VERSION "${SELKIES_VERSION}" \
+              '.[] \
+							| select( \
+									.tag_name == $VERSION \
+							) \ 
+              .assets[] \
+              | select( \
+                .name \
+                | contains("interposer") \
+                  and contains($DISTRIBUTION) \
+                  and contains($ARCHITECTURE) \
+                  and contains(".deb") \
+                ) \
+              | .browser_download_url' \
+           )" \
+        && curl -fsSL ${GS_DEB_INTERPOSER_URL} -O \
+        && apt-get install --no-install-recommends -y \
+          ./*.deb \
+        && rm -f ./*.deb \
+    && \
+    echo "**** Cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*
+
+# -----------------------------------------------
+# Core: Install KDE Plasma 
+
+RUN \
+    echo "**** Core: Install Plasma  ****" \
+    && \
+    echo "**** Prepare ****" \
+        && apt-get update \
+        && apt-get install --no-install-recommends -y \          
+           software-properties-common \
+    && \
+    echo "**** Dependenciess ****" \
+        && apt-get install --no-install-recommends -y \
+            kde-baseapps \
+            plasma-desktop \
+            plasma-workspace \
+            adwaita-icon-theme-full \
+            appmenu-gtk3-module \
+            ark \
+            aspell \
+            aspell-en \
+            breeze \
+            breeze-cursor-theme \
+            breeze-gtk-theme \
+            breeze-icon-theme \
+            dbus-x11 \
+            debconf-kde-helper \
+            desktop-file-utils \
+            dolphin \
+            dolphin-plugins \
+            enchant-2 \
+            fcitx \
+            fcitx-frontend-gtk2 \
+            fcitx-frontend-gtk3 \
+            fcitx-frontend-qt5 \
+            fcitx-module-dbus \
+            fcitx-module-kimpanel \
+            fcitx-module-lua \
+            fcitx-module-x11 \
+            fcitx-tools \
+            fcitx-hangul \
+            fcitx-libpinyin \
+            fcitx-m17n \
+            fcitx-mozc \
+            fcitx-sayura \
+            fcitx-unikey \
+            filelight \
+            frameworkintegration \
+            gwenview \
+            haveged \
+            hunspell \
+            im-config \
+            kwrite \
+            kcalc \
+            kcharselect \
+            kdeadmin \
+            kde-config-fcitx \
+            kde-config-gtk-style \
+            kde-config-gtk-style-preview \
+            kdeconnect \
+            kdegraphics-thumbnailers \
+            kde-spectacle \
+            kdf \
+            kdialog \
+            kfind \
+            kget \
+            khotkeys \
+            kimageformat-plugins \
+            kinfocenter \
+            kio \
+            kio-extras \
+            kmag \
+            kmenuedit \
+            kmix \
+            kmousetool \
+            kmouth \
+            ksshaskpass \
+            ktimer \
+            kwin-addons \
+            kwin-x11 \
+            libdbusmenu-glib4 \
+            libdbusmenu-gtk3-4 \
+            libgail-common \
+            libgdk-pixbuf2.0-bin \
+            libgtk2.0-bin \
+            libgtk-3-bin \
+            libkf5baloowidgets-bin \
+            libkf5dbusaddons-bin \
+            libkf5iconthemes-bin \
+            libkf5kdelibs4support5-bin \
+            libkf5khtml-bin \
+            libkf5parts-plugins \
+            libqt5multimedia5-plugins \
+            librsvg2-common \
+            media-player-info \
+            okular \
+            okular-extra-backends \
+            plasma-browser-integration \
+            plasma-calendar-addons \
+            plasma-dataengines-addons \
+            plasma-discover \
+            plasma-integration \
+            plasma-runners-addons \
+            plasma-widgets-addons \
+            print-manager \
+            qapt-deb-installer \
+            qml-module-org-kde-runnermodel \
+            qml-module-org-kde-qqc2desktopstyle \
+            qml-module-qtgraphicaleffects \
+            qml-module-qt-labs-platform \
+            qml-module-qtquick-xmllistmodel \
+            qt5-gtk-platformtheme \
+            qt5-image-formats-plugins \
+            qt5-style-plugins \
+            qtspeech5-flite-plugin \
+            qtvirtualkeyboard-plugin \
+            software-properties-qt \
+            sweeper \
+            systemsettings \
+            xdg-user-dirs \
+            xdg-utils \
+    && \
+    echo "**** Initial Configuration ****" \
+        && MULTI_ARCH=$( \
+           dpkg --print-architecture | \
+           sed \
+             -e 's/arm64/aarch64-linux-gnu/' \
+             -e 's/armhf/arm-linux-gnueabihf/' \
+             -e 's/riscv64/riscv64-linux-gnu/' \
+             -e 's/ppc64el/powerpc64le-linux-gnu/' \
+             -e 's/s390x/s390x-linux-gnu/' \
+             -e 's/i.*86/i386-linux-gnu/' \
+             -e 's/amd64/x86_64-linux-gnu/' \
+             -e 's/unknown/x86_64-linux-gnu/' \
+           ) \
+        && cp -f /usr/lib/${MULTI_ARCH}/libexec/kf5/start_kdeinit /tmp/ \
+        && rm -f /usr/lib/${MULTI_ARCH}/libexec/kf5/start_kdeinit \
+        && cp -f /tmp/start_kdeinit \
+          /usr/lib/${MULTI_ARCH}/libexec/kf5/start_kdeinit \
+        && rm -f /tmp/start_kdeinit \
+    && \
+    echo "**** Cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*
+
+# -----------------------------------------------
+# Core: Install Gomplate 
+
+RUN \
+    echo "**** Core: Install Gomplate ****" \
+    && \
+    echo "**** Prepare ****" \
+        && apt-get update \
+        && apt-get install --no-install-recommends -y \          
+           software-properties-common \
+           curl \
+           jq \
+    && \
+    echo "**** Installation ****" \
+        && ARCHITECTURE="$(dpkg --print-architecture)" \
+        && API_URL="https://api.github.com/repos/hairyhenderson/gomplate" \
+        && BIN_RELEASE_URL="$( \
+             curl -fsSL "${API_URL}/releases/latest" | \
+               jq -r \
+               --arg ARCHITECTURE "${ARCHITECTURE}" \
+               '.assets[] \
+               | select( \
+                 .name \
+                 | contains("linux") \
+                   and contains($ARCHITECTURE) \
+               ) \ 
+               | .browser_download_url' \
+           )" \
+        && curl -o gomplate -fsSL "${BIN_RELEASE_URL}" \
+        && chmod +x gomplate \
+        && mv gomplate /usr/bin/gomplate \
+    && \
+    echo "**** Cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*
+
+# -----------------------------------------------
+# Core: Install Miscellaneous
+#
+
+RUN \
+    echo "**** Core: Miscellaneous ****" \
+  	  	&& apt-get update \
+    && \
+    echo "**** Install: Readiness checks dependenciess ****" \
+      	&& apt-get install -y --no-install-recommends \
+            supervisor \
+            pulseaudio-utils \
+            coturn \
+    && \
+    echo "**** Install: Virtual Display ****" \
+      	&& apt-get install -y --no-install-recommends \
+  					xvfb \
+            xfconf \
+            libxfconf-0-3 \
+    && \
+    echo "**** Install: Firefox-Nightly ****" \
+        && sudo install -d -m 0755 /etc/apt/keyrings \
+        && curl -fsSL https://packages.mozilla.org/apt/repo-signing-key.gpg \
+           | tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null \
+        && echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" \
+        | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null \
+  	  	&& apt-get update \
+  	  	&& apt-get install -y --no-install-recommends \
+              firefox-nightly \
+    && \
+    echo "**** Install: Miscellaneous ****" \
+  	  	&& apt-get install -y --no-install-recommends \
+            vim \
+    && \
+    echo "**** Cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*
+
+############################################################
+#
+#    /$$$$$$  /$$$$$$$$ /$$$$$$$  /$$$$$$  /$$$$$$  /$$   /$$  /$$$$$$  /$$      
+#   /$$__  $$|__  $$__/| $$__  $$|_  $$_/ /$$__  $$| $$$ | $$ /$$__  $$| $$      
+#  | $$  \ $$   | $$   | $$  \ $$  | $$  | $$  \ $$| $$$$| $$| $$  \ $$| $$      
+#  | $$  | $$   | $$   | $$$$$$$/  | $$  | $$  | $$| $$ $$ $$| $$$$$$$$| $$      
+#  | $$  | $$   | $$   | $$____/   | $$  | $$  | $$| $$  $$$$| $$__  $$| $$      
+#  | $$  | $$   | $$   | $$        | $$  | $$  | $$| $$\  $$$| $$  | $$| $$      
+#  |  $$$$$$/   | $$   | $$       /$$$$$$|  $$$$$$/| $$ \  $$| $$  | $$| $$$$$$$$
+#   \______/    |__/   |__/      |______/ \______/ |__/  \__/|__/  |__/|________/
+#                                                                                
+#                                                                                
+
+# -----------------------------------------------
+# Optional: Install VirtualGL 
+
+ARG \
+    INSTALL_VIRTUALGL="false"
+
+RUN \
+    echo "**** Optional: Install VirtualGL / (${INSTALL_VIRTUALGL}) ****" \
+    && \
+    if [ "${INSTALL_VIRTUALGL}" == "true" ]; \
+    then \
+    echo "**** Install VirtualGL ****" \
+        && curl -fsSL \
+           https://packagecloud.io/dcommander/virtualgl/gpgkey \ 
+           | gpg --dearmor >/etc/apt/trusted.gpg.d/VirtualGL.gpg \
+        && curl -X GET \
+            https://raw.githubusercontent.com/VirtualGL/repo/main/VirtualGL.list \
+            -O --output-dir /etc/apt/sources.list.d \
+        && apt-get update \
+        && apt-get install -y --no-install-recommends \
+            virtualgl \
+            virtualgl32 \
+        && chmod u+s \
+            /usr/lib/libvglfaker.so \
+            /usr/lib/libvglfaker-nodl.so \
+            /usr/lib/libvglfaker-opencl.so \
+            /usr/lib/libdlfaker.so \
+            /usr/lib/libgefaker.so \
+        && chmod u+s \
+            /usr/lib32/libvglfaker.so \
+            /usr/lib32/libvglfaker-nodl.so \
+            /usr/lib32/libvglfaker-opencl.so \
+            /usr/lib32/libdlfaker.so \
+            /usr/lib32/libgefaker.so \
+        && chmod u+s \
+            /usr/lib/i386-linux-gnu/libvglfaker.so \
+            /usr/lib/i386-linux-gnu/libvglfaker-nodl.so \
+            /usr/lib/i386-linux-gnu/libvglfaker-opencl.so \
+            /usr/lib/i386-linux-gnu/libdlfaker.so \
+            /usr/lib/i386-linux-gnu/libgefaker.so; \
+    fi
+
+# -----------------------------------------------
+# Optional: Install Wine 
+
+ARG \
+    INSTALL_WINE="false" \
+    WINE_VERSION="latest"
+
+RUN \
+    echo "**** Optional: Install Wine / (${INSTALL_WINE}) ****" \
+    && \
+    if [ "${INSTALL_WINE}" == "true" ]; \
+    then \
+    echo "**** Prepare ****" \
+        && dpkg --add-architecture i386 \
+        && apt-get update \
+        && apt-get install --no-install-recommends -y \          
+           software-properties-common \
+           curl \
+    && \
+    echo "**** Collecting System Info ****" \
+    	  && CODENAME="$(\
+    	    grep VERSION_CODENAME= /etc/os-release \
+    	      | cut -d= -f2 \
+    	      | tr -d '\"' \
+    	  )" \
+        && ID="$(\
+          grep ^ID= /etc/os-release \
+            | cut -d= -f2 \
+            | tr -d '\"' \
+        )" \
+    && \
+    echo "**** Installation ****" \
+    	  && WINEHQ_URL="https://dl.winehq.org/wine-builds" \
+    	  && mkdir -pm755 /etc/apt/keyrings \
+    	  && curl -fsSL \
+    	      -o /etc/apt/keyrings/winehq-archive.key \
+    	      "${WINEHQ_URL}/winehq.key" \
+    	  && curl -fsSL \
+    	      -o /etc/apt/sources.list.d/winehq-${CODENAME}.sources \
+    	      "${WINEHQ_URL}/${ID}/dists/${CODENAME}/winehq-${CODENAME}.sources" \
+    	  && apt-get update \
+        && if [ "${WINE_VERSION}" = "latest" ]; then \
+            echo "**** Fetching Latest Wine Version ****" \
+            && WINE_VERSION=$( \
+                 apt-cache madison winehq-staging \
+                 | head -1 \
+                 | awk '{print $3}'\
+               ) \
+            && echo "Latest Wine Version: ${WINE_VERSION}"; \
+        fi \
+    	  && apt-get install -y --install-recommends \
+    	      winehq-staging=${WINE_VERSION} \
+    	      wine-staging=${WINE_VERSION} \
+    	      wine-staging-amd64=${WINE_VERSION} \
+    	      wine-staging-i386=${WINE_VERSION} \
+    	      winetricks \
+    	      winbind  \
+    && \
+    echo "**** Section cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*; \
+    fi
+
+# -----------------------------------------------
+# Optional: Install Lutris 
+
+ARG \
+    INSTALL_LUTRIS="false" \
+    LUTRIS_VERSION="latest"
+
+RUN \
+    echo "**** Optional: Install Lutris / (${INSTALL_LUTRIS}) ****" \
+    && \
+    if [ "${INSTALL_LUTRIS}" == "true" ]; \
+    then \
+    echo "**** Prepare ****" \
+        && apt-get update \
+        && apt-get install --no-install-recommends -y \          
+            software-properties-common \
+            curl \
+            jq \
+    && \
+    echo "**** Fetching Release URL ****" \
+        && API_URL="https://api.github.com/repos/lutris/lutris" \
+        && if [ "$LUTRIS_VERSION" = "latest" ]; then \
+              LUTRIS_VERSION="$(\
+                curl -fsSL ${API_URL}/releases/latest \
+                | jq -r .tag_name \
+              )"; \
+           fi \
+        && RELEASE_URL="$( \
+             curl -fsSL "${API_URL}/releases?per_page=100" | \
+               jq -r --arg VERSION "${LUTRIS_VERSION}" \
+               '.[] \
+               | select( \
+                   .tag_name == $VERSION \
+               ) \
+               | .assets[] \
+               | select( \
+                   .browser_download_url \
+                   | contains($VERSION) \
+               ) \
+               | .browser_download_url' \
+           )" \
+    && \
+    echo "**** Installing Release ****" \
+        && curl -o lutris.deb -fsSL "${RELEASE_URL}" \
+        && apt-get install --no-install-recommends -y \
+            ./lutris.deb \
+        && rm -f lutris.deb \
+        && ln -s /usr/games/lutris /usr/bin/lutris \
+    && \
+    echo "**** Cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*; \
+    fi
+
+# -----------------------------------------------
+# Optional: Install Steam
+#
+# create virtual display (xvfb)
+# during docker runtime to evoke steam-updates and steam-extraction;
+
+ARG \
+    INSTALL_STEAM=false
+
+RUN \
+    echo "**** Optional: Install Steam / (${INSTALL_STEAM}) ****" \
+    && \
+    if [ "${INSTALL_STEAM}" == "true" ]; \
+    then \
+    echo "**** Prepare ****" \
+			  && dpkg --add-architecture i386 \
+			  && apt-get update \
+			  && apt-get install -y --no-install-recommends \
+			      xdotool \
+			      xvfb \
+			      debconf-utils \
+    && \
+    echo "**** Installation - Preparation ****" \
+			  && DEBIAN_FRONTEND=noninteractive \
+			  && DEBIAN_FRONTEND=teletype \
+			  && ACCEPT_EULA=Y \
+			  && echo steam steam/question select "I AGREE" \
+            | debconf-set-selections \
+			  && echo steam steam/license note '' \
+            | debconf-set-selections \
+    && \
+    echo "**** Installation - Base ****" \
+			  && apt-get install -y --no-install-recommends \
+			      steam-installer \
+			      steamcmd \
+    && \
+    echo "**** Installation - Steam Runtime Libraries ****" \
+			  && apt-get install -y --no-install-recommends \
+            libxrandr2:i386 \
+            libxrender1:i386 \
+            libgtk2.0-0:i386 \
+            libpipewire-0.3-0:i386 \
+            libpulse0:i386 \
+            libgdk-pixbuf-2.0-0 \
+            libxcb-res0:i386 \
+            libbz2-1.0:i386 \
+            lib32stdc++6 \
+            libx11-6:i386 \
+            libopenal1:i386 \
+            libsdl2-2.0-0:i386 \
+            libc6:i386 \
+            libxau6:i386 \
+            libxdmcp6:i386 \
+            libxcb1:i386 \
+            libxext6:i386 \
+            libx11-6:i386 \
+            libxv1:i386 \
+            libxtst6:i386 \
+            libdrm2:i386 \
+            libegl1:i386 \
+            libgl1:i386 \
+            libopengl0:i386 \
+            libgles1:i386 \
+            libgles2:i386 \
+            libglvnd0:i386 \
+            libglx0:i386 \
+            libglu1:i386 \
+            libsm6:i386 \
+    && \
+    echo "**** Post-Installation Configuration ****" \
+			  && ln -sf /usr/games/steam /usr/bin/steam \
+			  && ln -sf /usr/games/steamcmd /usr/bin/steamcmd \
+    && \
+    echo "**** Post-Installation [0] - Fetch Updates ****" \
+        && sudo -u ${SUDO_USER} bash -c "\
+             mkdir -p \"${HOME}/.local/share/\"; \
+             steamcmd +quit; \
+             export DISPLAY=:99; \
+             Xvfb :99 \
+                 -screen 0 \
+                 1024x768x24 \
+                 -noreset \
+                 -nolock \
+                 > /dev/null 2>&1 & \
+             steam_log_file=\$(mktemp); \
+             steam > \"\${steam_log_file}\" 2>&1 & \
+             steam_pid=\$!; \
+             tail -f \"\${steam_log_file}\" & \
+             sleep 2; \
+             xdotool key Tab; \
+             sleep 2; \
+             xdotool key Return; \
+             while true; do \
+                 grep 'Shutdown' \"\${steam_log_file}\" 2>&1 \
+                 && { \
+                     sleep 10; \
+                     kill \"\${steam_pid}\" 2>/dev/null; \
+                     wait \"\${steam_pid}\" 2>/dev/null; \
+                     break; \
+                 }; \
+             done; \
+             wait \"\${steam_pid}\"; \
+             rm \"\${steam_log_file}\"; \
+             STEAM_RUNTIME=0 \
+             steam -no-dwrite 2>&1 & \
+             steam_pid=\$!; \
+             file_path_log=\"${HOME}/.local/share/Steam/logs/webhelper-linux.txt\"; \
+             while true; do \
+                 grep \
+                  'kernel.unprivileged_userns_clone=1' \
+                  \"\${file_path_log}\" \
+                  > /dev/null 2>&1 \
+                 && { \
+                     kill \"\${steam_pid}\" 2>/dev/null; \
+                     wait \"\${steam_pid}\" 2>/dev/null; \
+                     break; \ 
+                 }; \
+             done; \
+             wait \"\${steam_pid}\"; \
+             pkill -f 'Xvfb.*:99'; \
+           " \
+    && \
+    echo "**** Cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*; \
+    fi
+
+# -----------------------------------------------
+# Optional: Install Heroic Launcher 
+
+ARG \
+    INSTALL_HEROIC=false \
+    HEROIC_VERSION="latest"
+
+RUN \
+    echo "**** Optional: Install Heroic / (${INSTALL_HEROIC}) ****" \
+    && \
+    if [ "${INSTALL_HEROIC}" == "true" ]; \ 
+    then \
+    echo "**** Prepare ****" \
+        && apt-get update \
+        && apt-get install --no-install-recommends -y \          
+           software-properties-common \
+           curl \
+           jq \
+    && \
+    echo "**** Fetching Release URL ****" \
+        && ARCHITECTURE="$(dpkg --print-architecture)" \
+        && API_BASE="https://api.github.com/repos" \
+        && API_URL="${API_BASE}/Heroic-Games-Launcher/HeroicGamesLauncher" \
+        && if [ "$HEROIC_VERSION" = "latest" ]; then \
+              HEROIC_VERSION="$(\
+                curl -fsSL ${API_URL}/releases/latest \
+                | jq -r .tag_name \
+              )"; \
+           fi \
+        && RELEASE_URL="$( \
+            curl -fsSL "${API_URL}/releases?per_page=100" \
+              | jq -r \
+                --arg VERSION "${HEROIC_VERSION}" \
+                --arg ARCHITECTURE "${ARCHITECTURE}" \
+                ' \
+                  .[] \
+                  | select( .tag_name == $VERSION ) \
+                  | .assets[] \
+                  | select( \
+                    .browser_download_url \
+                    | contains($VERSION) \ 
+                      and contains($ARCHITECTURE) \
+                      and contains(".deb") \
+                    ) \
+                  | .browser_download_url \
+                ' \
+           )" \
+    && \
+    echo "**** Installation ****" \
+        && echo "${RELEASE_URL}" \
+        && curl -o heroic.deb -fsSL "${RELEASE_URL}" \
+        && apt-get install --no-install-recommends -y \  
+            ./heroic.deb \
+            gamemode \
+            mangohud \
+        && rm -f heroic.deb \
+    && \
+    echo "**** Post Installation Configuration ****" \
+        && ln -s /usr/games/gamemoderun /usr/bin/gamemoderun \
+        && echo "alias heroic='heroic --no-sandbox'" >> /etc/bash.bashrc \
+        && sed -i \
+          's|Exec=/opt/Heroic/heroic %U|Exec=/opt/Heroic/heroic %U --no-sandbox|' \
+          /usr/share/applications/heroic.desktop \
+    && \
+    echo "**** Cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*; \
+    fi
+
+# -----------------------------------------------
+# Optional: Install Pipewire & Pipewire-Pulse & Wireplumber 
+
+ARG \
+    INSTALL_PIPEWIRE=true
+
+RUN \
+    echo "**** Optional: Install Pipewire / (${INSTALL_PIPEWIRE}) ****" \
+    && \
+    if [ "${INSTALL_PIPEWIRE}" == "true" ]; \
+    then \
+    echo "**** Prepare ****" \
+        && apt-get update \
+        && apt-get install --no-install-recommends -y \          
+           software-properties-common \
+           curl \
+        && ID="$(\
+          grep ^ID= /etc/os-release \
+            | cut -d= -f2 \
+            | tr -d '\"' \
+        )" \
+    && \
+    echo "**** Installation ****" \
+    && \
+    if [ "${ID}" == "ubuntu" ]; \
+    then \
+    echo "**** Pipewire - PPA ****" \
+        && mkdir -p /etc/apt/trusted.gpg.d \
+        && chmod 0755 /etc/apt/trusted.gpg.d \
+        && KEYSERVER_LOOKUP_URL="https://keyserver.ubuntu.com/pks/lookup" \
+        && KEY="0xFC43B7352BCC0EC8AF2EEB8B25088A0359807596" \
+        && curl -fsSL \
+          "${KEYSERVER_LOOKUP_URL}?op=get&search=${KEY}" \
+          | gpg \
+            --batch \
+            --no-tty \
+            --dearmor \
+            -o /etc/apt/trusted.gpg.d/pipewire-debian-ubuntu-pipewire-upstream.gpg \
+    && \
+    echo "**** Pipewire - Sources ****" \      
+        && SOURCES_BASE="/etc/apt/sources.list.d/pipewire-debian-ubuntu" \
+        && VERSION_CODENAME="$(\
+             grep VERSION_CODENAME= /etc/os-release \
+             | cut -d= -f2 \
+             | tr -d '\"'\
+           )" \
+        && mkdir -p /etc/apt/sources.list.d \
+        && chmod 0755 /etc/apt/sources.list.d \
+        && echo \
+          "deb https://ppa.launchpadcontent.net/pipewire-debian/pipewire-upstream/ubuntu \
+            ${VERSION_CODENAME} main" \
+             > "${SOURCES_BASE}-pipewire-upstream-${VERSION_CODENAME}.list" \
+    && \
+    echo "**** Wireplumber - Sources ****" \      
+        && SOURCES_BASE="/etc/apt/sources.list.d/pipewire-debian-ubuntu" \
+        && mkdir -p /etc/apt/sources.list.d \ 
+        && chmod 0755 /etc/apt/sources.list.d \ 
+        && echo \
+          "deb https://ppa.launchpadcontent.net/pipewire-debian/wireplumber-upstream/ubuntu \
+            ${VERSION_CODENAME} main" \
+             > "${SOURCES_BASE}-wireplumber-upstream-${VERSION_CODENAME}.list"; \
+    fi \
+    && \
+    echo "**** Pipewire - Installation ****" \     
+        && apt-get update \
+        && apt-get install --no-install-recommends -y \
+          pipewire \
+          pipewire-alsa \
+          pipewire-pulse \
+          pipewire-audio-client-libraries \
+          pipewire-v4l2 \
+          pipewire-libcamera \
+          gstreamer1.0-pipewire \
+          libpipewire-0.3-modules \
+          wireplumber \
+          pulseaudio-utils \
+          dbus-x11 \
+    && \
+    echo "**** Section cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*; \
+    fi
+
+# -----------------------------------------------
+# Optional: Install Miscellaneous
+
+RUN \
+    echo "**** Optional: Install Miscellaneous  ****" \
+  	  	&& apt-get update \
+      	&& apt-get install -y --no-install-recommends \
+            socat \
+            dnsutils \
+            bash-completion \
+            git \
+    && \
+    echo "**** Cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*
+
+# -----------------------------------------------
+# Optional: Install Libraries 
+
+RUN \
+    echo "**** Optional: Install Libraries ****" \
+    && \
+    echo "**** Update apt database ****" \
+        && dpkg --add-architecture i386 \
+        && apt-get update \
+    && \
+    echo "**** Install Intel media drivers and VAAPI ****" \
+        && apt-get install -y --no-install-recommends \
+            intel-media-va-driver-non-free \
+            i965-va-driver-shaders \
+            libva2 \
+    && \
+    echo "**** Install OpenGL libraries ****" \
+        && apt-get install -y --no-install-recommends \
+           libxau6 \
+           libxdmcp6 \
+           libxcb1 \
+           libxext6 \
+           libx11-6 \
+           libxv1 \
+           libxtst6 \
+           libdrm2 \
+           libegl1 \
+           libgl1 \
+           libopengl0 \
+           libgles1 \
+           libgles2 \
+           libglvnd0 \
+           libglx0 \
+           libglu1 \
+           libsm6  \
+    && \
+    echo "**** Install Development Libraries ****" \
+        && apt-get install -y --no-install-recommends \
+           libc6-dev \
+           libelf-dev \
+           libvulkan-dev:i386 \
+    && \
+    echo "**** Install GPU Drivers & Tools ****" \
+        && apt-get install -y --no-install-recommends \
+           libpci3 \
+           intel-gpu-tools \
+           nvtop \
+    && \
+    echo "**** Install Intel VA-API Drivers ****" \
+        && apt-get install -y --no-install-recommends \
+           va-driver-all \
+           i965-va-driver-shaders \
+           intel-media-va-driver-non-free \
+           va-driver-all:i386 \
+           i965-va-driver-shaders:i386 \
+           intel-media-va-driver-non-free:i386 \ 
+    && \
+    echo "**** Install 32-bit Vulkan and Video Decoding Drivers ****" \
+        && apt-get install -y --no-install-recommends \
+           libva2:i386 \
+           vdpau-driver-all:i386 \
+           mesa-vulkan-drivers:i386 \
+    && \
+    echo "**** Install Core 32-bit Libraries ****" \
+        && apt-get install -y --no-install-recommends \
+           libc6:i386 \
+           libxau6:i386 \
+           libxdmcp6:i386 \
+           libxcb1:i386 \
+           libxext6:i386 \
+           libx11-6:i386 \
+    && \
+    echo "**** Install Additional 32-bit Graphics Libraries ****" \
+        && apt-get install -y --no-install-recommends \
+           libxv1:i386 \
+           libxtst6:i386 \
+           libdrm2:i386 \
+           libegl1:i386 \
+           libgl1:i386 \
+           libopengl0:i386 \
+           libgles1:i386 \
+           libgles2:i386 \
+           libglvnd0:i386 \
+           libglx0:i386 \
+           libglu1:i386 \
+           libsm6:i386 \
+    && \
+    echo "**** Section cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*
+
+############################################################
+#
+#    /$$$$$$   /$$$$$$  /$$   /$$ /$$$$$$$$ /$$$$$$  /$$$$$$ 
+#   /$$__  $$ /$$__  $$| $$$ | $$| $$_____/|_  $$_/ /$$__  $$
+#  | $$  \__/| $$  \ $$| $$$$| $$| $$        | $$  | $$  \__/
+#  | $$      | $$  | $$| $$ $$ $$| $$$$$     | $$  | $$ /$$$$
+#  | $$      | $$  | $$| $$  $$$$| $$__/     | $$  | $$|_  $$
+#  | $$    $$| $$  | $$| $$\  $$$| $$        | $$  | $$  \ $$
+#  |  $$$$$$/|  $$$$$$/| $$ \  $$| $$       /$$$$$$|  $$$$$$/
+#   \______/  \______/ |__/  \__/|__/      |______/ \______/ 
+#                                                            
+#                                                            
+#                                                            
+
+# -----------------------------------------------
+# Configuration - Graphic 
+
+ENV \
+	  NVIDIA_VISIBLE_DEVICES=all \
+	  NVIDIA_DRIVER_CAPABILITIES=all \
+    LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/nvidia/lib:/usr/local/nvidia/lib64" \
+    PATH="/usr/local/nvidia/bin${PATH:+:${PATH}}" \
+	  EGL_DEVICE_INDEX=0 \
+	  __NV_PRIME_RENDER_OFFLOAD=1 \
+	  __GL_SYNC_TO_VBLANK=0 \
+	  __GLX_VENDOR_LIBRARY_NAME=mesa \
+    PRIME_RENDERER_GLOBAL="true" \ 
+    PRIME_RENDERER_WINE="true" 
+
+# -----------------------------------------------
+# Configuration - Display 
+#
+# - Maximum resolution for `nvh264enc` encoder is 4k
+#
+ENV \
+	  DISPLAY=:0 \
+	  DISPLAY_SIZE_X=4096 \
+	  DISPLAY_SIZE_Y=2160 \
+	  DISPLAY_REFRESH=60 \
+	  DISPLAY_DPI=96 \
+	  DISPLAY_CDEPTH=24
+
+# -----------------------------------------------
+# Configuration - Selkies Gstreamer 
+#
+ENV \
+    SELKIES_AUDIO_BITRATE="128000" \
+    SELKIES_FRAMERATE="60" \
+    SELKIES_VIDEO_BITRATE="2000" \
+    SELKIES_ENABLE_BASIC_AUTH="false" \
+    SELKIES_ENABLE_RESIZE="true" \
+    SELKIES_ENCODER="x264enc" \
+    SELKIES_INTERPOSER="/usr/$LIB/selkies_joystick_interposer.so" \
+    GST_DEBUG="${GST_DEBUG:-*:2}"\
+    GSTREAMER_PATH="/opt/gstreamer" \
+    SELKIES_ENABLE_METRICS_HTTP="true" \
+    SELKIES_METRICS_HTTP_PORT="9090" \
+    SELKIES_ADDR="0.0.0.0" \
+    SELKIES_PORT="8080" \
+    SELKIES_TURN_PORT="3478" \
+    SELKIES_TURN_USERNAME="user" \
+    SELKIES_TURN_PASSWORD="password" 
+
+# -----------------------------------------------
+# Configuration - Plasma Desktop 
+#
+ENV \
+    DESKTOP_SESSION=plasma \
+    XDG_SESSION_DESKTOP=KDE \
+    XDG_CURRENT_DESKTOP=KDE \
+    XDG_SESSION_TYPE=x11 \
+    KDE_FULL_SESSION=true \
+    KDE_SESSION_VERSION=5 \
+    KDE_APPLICATIONS_AS_SCOPE=1 \
+    KWIN_COMPOSE=N \
+    KWIN_EFFECTS_FORCE_ANIMATIONS=0 \
+    KWIN_EXPLICIT_SYNC=0 \
+    KWIN_X11_NO_SYNC_TO_VBLANK=1 \
+    GTK_IM_MODULE=fcitx \
+    QT_IM_MODULE=fcitx \
+    XIM=fcitx \
+    XMODIFIERS="@im=fcitx"
+
+# -----------------------------------------------
+# Configuration - Pipewire 
+
+ENV \
+	  DISABLE_RTKIT=y \
+    PIPEWIRE_PORT="4713" \
+    PIPEWIRE_DEBUG="E" \
+    WIREPLUMBER_DEBUG="E" \
+    PIPEWIRE_LATENCY="32/48000" 
+
+# -----------------------------------------------
+# Configuration - Turn server 
+
+ENV \
+    TURN_PORT="3478" \
+    TURN_USERNAME="user" \
+    TURN_PASSWORD="password" \
+    TURN_MIN_PORT="49160" \
+    TURN_MAX_PORT="49200" \
+    TURN_REALM="local.host"
+
+# -----------------------------------------------
+# Configuration - Misc 
+
+ENV \
+    DBUS_SESSION_BUS_ADDRESS=unix:path=${XDG_RUNTIME_DIR}/dbus-session \
+    APPIMAGE_EXTRACT_AND_RUN=1 \
+    SUPERVISOR_PORT=9091 \
+    PULSE_SERVER="unix:${XDG_RUNTIME_DIR}/pulse-server" 
+
+# -----------------------------------------------
+# Execute
+
+# Add FS overlay and set permissions in one step
+COPY --chmod=0755 overlay / 
+
+# Set entrypoint
+ENTRYPOINT ["/entrypoint.sh"]

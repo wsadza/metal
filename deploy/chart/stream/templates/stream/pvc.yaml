@@ -1,0 +1,20 @@
+{{- if .Values.stream.extraVolumes }}
+{{- range .Values.stream.extraVolumes }}
+{{- with . }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}
+  annotations:
+    {{- toYaml .annotations | nindent 4 }}
+spec:
+  accessModes:
+    {{- toYaml .accessModes | nindent 4 }}
+  resources:
+    requests:
+      storage: {{ .storage }}
+  storageClassName: {{ .storageClassName }}
+{{- end }}
+{{- end }}
+{{- end }}

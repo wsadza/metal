@@ -1,0 +1,81 @@
+# github.yml 
+name: building_docker_github
+description: ''
+
+inputs:
+  token:
+    description: "GitHub Token used to authenticate against a repository for Git context."
+    required: true
+    default: '' 
+  context:
+    description: "Build's context is the set of files located in the specified PATH or URL (default Git context)"
+    required: false
+    default: './'
+  file:
+    description: "Path to the Dockerfile. (default {context}/Dockerfile)"
+    required: false
+    default: './Dockerfile'
+  buildkit:
+    description: "Enable docker buildkit"
+    required: false
+    default: 'true'
+  build-args:
+    description: "List of build-time variables"
+    required: false
+    default: '' 
+
+runs:
+  using: composite 
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+             
+    - name: Log in to the Container registry
+      uses: docker/login-action@v3
+      with:
+        registry: 'ghcr.io' 
+        username: ${{ github.actor }}
+        password: ${{ inputs.token }}
+
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ghcr.io/${{ github.repository }}
+
+    - name: Build and push Docker image - (LEGACY)
+      if: ${{ inputs.buildkit == 'false' }}
+      shell: bash
+      working-directory: "${{ inputs.context }}"
+      env:
+        DOCKER_BUILDKIT: 0
+      run: |
+        # extract metadata
+        tags=$(jq -r '.tags[]' <<< '${{ steps.meta.outputs.json }}')
+        labels=$(jq -r '.labels | to_entries[] | "\(.key)=\"\(.value)\""' <<< '${{ steps.meta.outputs.json }}')
+
+        # append labels to final docker image
+        echo "${labels//\//\\\/}" | while read -r label; do 
+          sed -i "/^FROM/a LABEL $label" ${{ inputs.file }};
+        done
+
+        # build 
+        docker build -t docker -f ${{ inputs.file }} .
+        
+        # retag & push; latest and tagged version
+        echo "$tags" | while read -r tag; do
+          docker tag docker ${tag}
+          docker push ${tag}
+        done
+        
+    - name: Build and push Docker image - (BUILDKIT)
+      if: ${{ inputs.buildkit == 'true' }}
+      uses: docker/build-push-action@v6
+      with:
+        no-cache: true
+        context: ${{ inputs.context }}
+        file: ${{ inputs.file }}
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        build-args: ${{ inputs.build-args }}

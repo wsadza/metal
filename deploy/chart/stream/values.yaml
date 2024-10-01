@@ -1,0 +1,134 @@
+
+# ------------------------
+
+global:
+  annotations: {}
+
+# CORE
+# ------------------------
+
+stream:
+
+  ## stream.image configuration to configure the Console image specifics
+  image:
+    ## @param stream.image.registry can be used to set the Docker registry for the stream image. 
+    registry: docker.io/library
+    ## @param stream.image.repository defines which image repository to use
+    repository: stream
+    ## @param stream.image.tag can be used to set the Docker image tag for the stream image. 
+    tag: 1.0.0
+    ## @param stream.image.pullSecrets can be used to configure image pull secrets https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
+    pullSecrets: []
+    ## @param stream.image.pullSecrets can be used to specify how you want the Kubelet to pull an image if there’s any change (restart, update, etc.) to a Pod. 
+    pullPolicy: Never
+              # IfNotPresent
+              # Always
+              # Never
+
+  ## @param stream.env can be used to set extra environment variables in each app container
+  env: []
+  ## @param stream.command can be used to override the default command provided by the container image. See https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/
+  command: [] 
+         # [ "bash", "-c", "while true; do continue; done" ]
+  ## @param stream.extraVolumes can be used to define extra volumes for the Console pods, useful for TLS and self-signed certificates
+  extraVolumes: []
+  ## @param stream.extraVolumeMounts can be used to mount extra volumes for the Console pods, useful for TLS and self-signed certificates
+  extraVolumeMounts: []
+
+  ## stream.service configuration to configure the Console service.
+  service:
+    ## @param stream.service.annotations can be used to define annotations, which will be applied to the Console service
+    annotations: {}
+    ## @param stream.service.type defines the type of the service https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+    type: ClusterIP
+    ## @param stream.service.port defines the port number where the web application will be available
+    port: 8080
+    ## @param stream.service.serverName defines the port name where the web application will be available
+    serverName: http
+    ## @param stream.service.managementPort defines the management port used to access metrics and app status
+    managementPort: 9100
+
+  resources:
+    requests:
+      memory: 5Gi 
+      nvidia.com/gpu: 1
+    limits:
+      memory: 10Gi
+      nvidia.com/gpu: 1
+
+  env: 
+  - name: SELKIES_PORT
+    value: "8080"
+  - name: SELKIES_METRICS_HTTP_PORT
+    value: "9090"
+  - name: SUPERVISOR_PORT
+    value: "9091"
+  - name: DBUS_PORT
+    value: "9092"
+  - name: PULSE_SERVER
+    value: "tcp:anykey.pl:4713"
+  - name: SELKIES_TURN_HOST
+    value: "anykey.pl"
+  - name: SELKIES_TURN_PORT
+    value: "3478"
+  - name: SELKIES_TURN_USERNAME
+    value: "root"
+  - name: SELKIES_TURN_PASSWORD
+    value: "9311540"
+  - name: SELKIES_ENCODER
+    value: "nvh264enc"
+  - name: PRIME_RENDERER_GLOBAL
+    value: "true" 
+
+  extraVolumes:
+    - name: config
+      accessModes:
+        - ReadWriteMany
+      storage: 50Gi
+      storageClassName: storage-local-retain
+      volumeMount: /opt/config
+      annotations:
+        "helm.sh/resource-policy": "keep"
+
+    - name: games 
+      accessModes:
+        - ReadWriteMany
+      storage: 200Gi
+      storageClassName: storage-local-retain
+      volumeMount: /opt/games
+      annotations:
+        "helm.sh/resource-policy": "keep"
+
+  ingress:
+    enabled: true 
+    className: traefik
+    annotations:
+      "traefik.ingress.kubernetes.io/router.entrypoints": websecure
+    path: "/"
+    host: "egl.anykey.pl"
+    tls: [] 
+
+  nodeSelector: 
+    nvidia.com/gpu.count: "1"
+
+  tolerations: []
+
+  affinity: {}
+
+  startupProbe:
+  readinessProbe:
+  livnessProbe:
+    
+# ------------------------
+#
+#sound:
+#
+#turn:
+#
+#
+# Additions
+# ------------------------
+
+#prometheus:
+#elasticsearch:
+

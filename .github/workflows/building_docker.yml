@@ -1,0 +1,85 @@
+# building.yml
+name: Building Docker
+
+on:
+  # Trigger on each tag-push;
+  push:
+    tags:
+      - '*'
+
+  # Trigger major on default ref;
+  workflow_dispatch:
+
+jobs:
+
+  # -----------------
+  # Prepare: Find Dockerfile
+  # -----------------
+  prepare-find-dockerfile:
+    name: "Build: Prepare - find dockerfile"
+    runs-on: ubuntu-latest
+    outputs:
+      dockerfilepath: ${{ steps.find-dockerfile.outputs.DOCKERFILE_PATH }}
+      dockerfiledir: ${{ steps.find-dockerfile.outputs.DOCKERFILE_DIR }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Find Dockerfile
+      - shell: bash
+        name: Find Dockerfile
+        id: find-dockerfile
+        run: |
+          DOCKERFILE_PATH=$(find ${PWD} -name "Dockerfile.*");
+          if [ -z "${DOCKERFILE_PATH}" ]; then exit 1; fi
+          echo "DOCKERFILE_PATH=${DOCKERFILE_PATH}" >> $GITHUB_OUTPUT
+          echo "DOCKERFILE_DIR=${DOCKERFILE_PATH/\/Dockerfile.*}" >> $GITHUB_OUTPUT
+
+  # -----------------
+  # Prepare: Parse build arguments 
+  # -----------------
+  prepare-parse-build:
+    name: "Build: Prepare - parse build arguments"
+    runs-on: ubuntu-latest
+    outputs:
+      dockerfilepath: ${{ steps.find-dockerfile.outputs.DOCKERFILE_PATH }}
+      dockerfiledir: ${{ steps.find-dockerfile.outputs.DOCKERFILE_DIR }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Find Dockerfile
+      - shell: bash
+        name: Find Dockerfile
+        id: find-dockerfile
+        run: |
+          DOCKERFILE_PATH=$(find ${PWD} -name "Dockerfile.*");
+          if [ -z "${DOCKERFILE_PATH}" ]; then exit 1; fi
+          echo "DOCKERFILE_PATH=${DOCKERFILE_PATH}" >> $GITHUB_OUTPUT
+          echo "DOCKERFILE_DIR=${DOCKERFILE_PATH/\/Dockerfile.*}" >> $GITHUB_OUTPUT
+
+  # -----------------
+  # Docker linter
+  # -----------------
+  hadolint:
+     needs: [ prepare ]
+     name: "Lint: Dockerfile"
+     runs-on: ubuntu-latest
+     steps:
+       - uses: .github/actions/linting/docker/hadolint
+         with:
+           file: ${{ needs.prepare.outputs.dockerfilepath }}
+           
+  # -----------------
+  # Building & Pushing to Github registry 
+  # -----------------
+  github:
+    name: "Build: Github Package"
+    needs: [ prepare, hadolint ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: .github/actions/building/docker/github
+        with:
+          token: ${{ secrets.token || github.token }}
+          context: ${{ needs.prepare.outputs.dockerfiledir }}
+          file: ${{ needs.prepare.outputs.dockerfilepath }}
+          buildkit: 'false'
+          build-args: 

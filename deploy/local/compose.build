@@ -1,0 +1,46 @@
+############################################################
+# Copyright (c) 2024 Utilizable 
+# Released under the MIT license
+# ----------------------------------------------------------
+#
+# Example of building compose with most of core arguments 
+#
+############################################################
+
+version: '3.8'
+services:
+
+# ----------------------------
+# Stream Server
+
+    stream:
+      build:
+        context: '../../../build'
+        dockerfile: './Dockerfile.debbased'
+        args:
+          # Base
+          DISTRIBUTION: "24.04"
+          OS: "ubuntu"
+
+          # VirtualGL 
+          INSTALL_VIRTUALGL: "true"
+          VIRTUALGL_VERSION: "latest"
+
+          # Steam
+          INSTALL_STEAM: "true"
+
+          # Lutris 
+          INSTALL_LUTRIS: "true"
+          LUTRIS_VERSION: "latest"
+
+          # Wine 
+          INSTALL_WINE: "true"
+          WINE_VERSION: "9.15~*-1"
+
+          # Heroic Launcher
+          INSTALL_HEROIC: "true"
+          HEROIC_VERSION: "latest"
+
+          # Pipewire
+          INSTALL_PIPEWIRE: "true"
+          PIPEWIRE_VERSION: "latest"
