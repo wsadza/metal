@@ -1,9 +1,9 @@
 Metal
 ============
 
-Ever been fascinated by remote gaming? Same! Inspired by the [Selkies-GSTreamer]("https://github.com/selkies-project/selkies-gstreamer") project (a relic of Google Stadia's epicness), I decided to repack their [EGL solution]("https://github.com/selkies-project/docker-nvidia-egl-desktop") - for fun, obviously.
+Ever been fascinated by remote gaming? Same! Inspired by the [`selkies-gstreamer`](https://github.com/selkies-project/selkies-gstreamer) project (a relic of Google Stadia's epicness), I decided to repack their [`egl solution`](https://github.com/selkies-project/docker-nvidia-egl-desktop) - for fun, obviously.
 
-Introducing my totally modular, Dockerized streaming service. Build it your way, whether you're on Debian or Ubuntu (I went agnostic on dependencies to keep it flexible). I revamped the structure for ultimate control, throwing in Supervisord magic, with a dash of [s6-overlay]("https://github.com/just-containers/s6-overlay") and some [Docker-Steam-Headless]("https://github.com/Steam-Headless/docker-steam-headless") trickery.
+Introducing my totally modular, Dockerized streaming service. Build it your way, whether you're on Debian or Ubuntu (I went agnostic on dependencies to keep it flexible). I revamped the structure for ultimate control, throwing in Supervisord magic, with a dash of [`s6-overlay`](https://github.com/just-containers/s6-overlay) and some [`docker-steam-headless`](https://github.com/Steam-Headless/docker-steam-headless) trickery.
 
 Now it's a streaming powerhouse. Why? Just because!
 
