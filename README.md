@@ -16,8 +16,9 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 <img src=".media/test.gif" align="center" style="width: 7%; height: auto;" />
 
 ## Configuration
-<img src=".media/asset-d.png" align="left" />
-
+<p align="center">
+<img src=".media/asset-f.png" style="width: 45%; height: auto;" />
+</p>
 
 #Metal Repository README.strucutre
 
