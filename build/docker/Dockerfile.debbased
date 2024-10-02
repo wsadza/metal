@@ -21,7 +21,7 @@
 # --
 ARG \
 		DISTRIBUTION=ubuntu \
-    RELEASE=24.04
+    SUITE=24.04
 
 # It also works!
 # --
@@ -29,7 +29,7 @@ ARG \
 #		DISTRIBUTION=debian \
 #   RELEASE=trixie
 
-FROM ${DISTRIBUTION}:${RELEASE}
+FROM ${DISTRIBUTION}:${SUITE}
 
 # Define build-time arguments.
 # --
@@ -270,7 +270,7 @@ RUN \
 # *libjpeg-turbo8 	- not present on debian
 
 ARG \
-		SELKIES_RELEASE="24.04" \
+		SELKIES_SUITE="24.04" \
 		SELKIES_VERSION="latest"
 
 RUN \
@@ -369,7 +369,7 @@ RUN \
              curl -fsSL "${API_URL}/releases?per_page=100" | \
                jq -r \
                --arg VERSION "${SELKIES_VERSION}" \
-               --arg RELEASE "${SELKIES_RELEASE}" \
+               --arg SUITE "${SELKIES_SUITE}" \
                --arg ARCHITECTURE "${ARCHITECTURE}" \
                '.[] \
                | select( \
@@ -379,7 +379,7 @@ RUN \
                | select( \
                  .name \
                  | contains("gpl") \
-                   and contains($RELEASE) \
+                   and contains($SUITE) \
                    and contains($ARCHITECTURE) \
                    and contains(".tar.gz") \
                ) \ 
@@ -440,7 +440,7 @@ RUN \
         && GS_DEB_INTERPOSER_URL="$( \
             curl -fsSL "${API_URL}/releases?per_page=100" | \
               jq -r \
-              --arg RELEASE "${SELKIES_RELEASE}" \
+              --arg SUITE "${SELKIES_SUITE}" \
               --arg ARCHITECTURE "${ARCHITECTURE}" \
               --arg VERSION "${SELKIES_VERSION}" \
               '.[] \
@@ -451,7 +451,7 @@ RUN \
               | select( \
                 .name \
                 | contains("interposer") \
-                  and contains($RELEASE) \
+                  and contains($SUITE) \
                   and contains($ARCHITECTURE) \
                   and contains(".deb") \
                 ) \

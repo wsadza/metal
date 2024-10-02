@@ -73,7 +73,12 @@ readiness_pulse() {
 readiness_turn() {
   echo "Checking Turn server connectivity..."
   # Check if turn server is arleady exposed;
-  SELKIES_TURN_HOST=${SELKIES_TURN_HOST:=$DOCKER_HOST}
+  
+  # Use internal turn server in case of lack of remote setting 
+  if [ -z "${SELKIES_TURN_HOST}" ]; then
+    export SELKIES_TURN_HOST="${DOCKER_HOST:=localhost}"
+  fi
+
   timeout $TIMEOUT bash -c '
     while ! turnutils_uclient -T \
               -u '${SELKIES_TURN_USERNAME}' \
