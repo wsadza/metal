@@ -20,7 +20,7 @@
 # Define build-time arguments.
 # --
 ARG \
-		DISTRIBUTION=ubuntu \
+    DISTRIBUTION=ubuntu \
     SUITE=24.04
 
 # It also works!
@@ -96,10 +96,11 @@ RUN \
         )" \
         && if [ "${ID}" = "debian" ]; \
 		    then \
-		         DEB_URL="http://deb.debian.org/debian/" \
-		      && SOURCES="contrib non-free non-free-firmware" \
-          && echo "deb ${DEB_URL} $(lsb_release -cs) ${SOURCES}" \
-		      		 | tee -a /etc/apt/sources.list; \
+             DEB_URL="http://deb.debian.org/debian/" \
+          && SOURCES="contrib non-free non-free-firmware" \
+          && echo \
+            "deb ${DEB_URL} $(lsb_release -cs) ${SOURCES}" \
+            | tee -a /etc/apt/sources.list; \
         fi
 
 # -----------------------------------------------

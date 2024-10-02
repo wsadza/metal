@@ -169,7 +169,7 @@ jobs:
         with:
 
           # Required 
-          auth_token:         ${{ github.token }}
+          auth_token:         ${{ secrets.token }}
           dockerfile_context: ${{ needs.gathering_informations.outputs.DOCKERFILE_DIR }} 
           dockerfile_path:    ${{ needs.gathering_informations.outputs.DOCKERFILE_PATH }} 
           

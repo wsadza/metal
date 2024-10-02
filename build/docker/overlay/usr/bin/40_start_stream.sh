@@ -32,7 +32,7 @@ readiness_pulse
 # wait for xorg server 
 readiness_xorg
 
-# initialy reszie stream (xrandr) 
+# initialy resie stream (xrandr) 
 /usr/local/bin/selkies-gstreamer-resize "800x600"
 
 # consume gstreamer variables
