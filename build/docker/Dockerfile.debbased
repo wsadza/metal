@@ -693,6 +693,7 @@ RUN \
     echo "**** Install: Miscellaneous ****" \
   	  	&& apt-get install -y --no-install-recommends \
             vim \
+            iputils-ping \
     && \
     echo "**** Cleanup ****" \
         && apt-get clean autoclean -y \
