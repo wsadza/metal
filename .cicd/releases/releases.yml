@@ -9,37 +9,7 @@
 
 include:
 
-  #  - name: minimal-ubuntu
-  #    build:
-  #      arguments:
-  #        # Core: Base
-  #        DISTRIBUTION: "ubuntu"
-  #        RELEASE: "24.04"
-  #     
-  #        # Core: Selkies Gstreamer
-  #        SELKIES_RELEASE: "24.04" 
-  #        SELKIES_VERSION: "latest"
-  #
-  #        # Optional: Pipewire
-  #        INSTALL_PIPEWIRE: "true"
-  #        PIPEWIRE_VERSION: "latest"
-  #
-  #  - name: minimal-debian
-  #    build:
-  #      arguments:
-  #        # Core: Base
-  #        DISTRIBUTION: "debain"
-  #        RELEASE: "trixie"
-  #     
-  #        # Core: Selkies Gstreamer
-  #        SELKIES_RELEASE: "24.04" 
-  #        SELKIES_VERSION: "latest"
-  #
-  #        # Optional: Pipewire
-  #        INSTALL_PIPEWIRE: "true"
-  #        PIPEWIRE_VERSION: "latest"
-  #
-  - name: full-ubuntu
+  - name: minimal-ubuntu
     build:
       arguments:
         # Core: Base
@@ -50,25 +20,55 @@ include:
         SELKIES_RELEASE: "24.04" 
         SELKIES_VERSION: "latest"
 
-        # VirtualGL 
-        INSTALL_VIRTUALGL: "true"
-        VIRTUALGL_VERSION: "latest"
-
-        # Steam
-        INSTALL_STEAM: "true"
-
-        # Lutris 
-        INSTALL_LUTRIS: "true"
-        LUTRIS_VERSION: "latest"
-
-        # Wine 
-        INSTALL_WINE: "true"
-        WINE_VERSION: "9.15~*-1"
-
-        # Heroic Launcher
-        INSTALL_HEROIC: "true"
-        HEROIC_VERSION: "latest"
-
-        # Pipewire
+        # Optional: Pipewire
         INSTALL_PIPEWIRE: "true"
         PIPEWIRE_VERSION: "latest"
+
+  - name: minimal-debian
+    build:
+      arguments:
+        # Core: Base
+        DISTRIBUTION: "debain"
+        RELEASE: "trixie"
+     
+        # Core: Selkies Gstreamer
+        SELKIES_RELEASE: "24.04" 
+        SELKIES_VERSION: "latest"
+
+        # Optional: Pipewire
+        INSTALL_PIPEWIRE: "true"
+        PIPEWIRE_VERSION: "latest"
+
+  #- name: full-ubuntu
+  #  build:
+  #    arguments:
+  #      # Core: Base
+  #      DISTRIBUTION: "ubuntu"
+  #      RELEASE: "24.04"
+  #   
+  #      # Core: Selkies Gstreamer
+  #      SELKIES_RELEASE: "24.04" 
+  #      SELKIES_VERSION: "latest"
+
+  #      # VirtualGL 
+  #      INSTALL_VIRTUALGL: "true"
+  #      VIRTUALGL_VERSION: "latest"
+
+  #      # Steam
+  #      INSTALL_STEAM: "true"
+
+  #      # Lutris 
+  #      INSTALL_LUTRIS: "true"
+  #      LUTRIS_VERSION: "latest"
+
+  #      # Wine 
+  #      INSTALL_WINE: "true"
+  #      WINE_VERSION: "9.15~*-1"
+
+  #      # Heroic Launcher
+  #      INSTALL_HEROIC: "true"
+  #      HEROIC_VERSION: "latest"
+
+  #      # Pipewire
+  #      INSTALL_PIPEWIRE: "true"
+  #      PIPEWIRE_VERSION: "latest"
