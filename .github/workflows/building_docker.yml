@@ -151,12 +151,16 @@ jobs:
         id: prepare_tag
         shell: bash
         run: |
-          DOCKER_TAG="$( \
+
+          latest_tag="$( \
             jq -r '.tags[0]' <<< '${{ needs.gathering_informations.outputs.REPOSITORY_METADATA }}' \
-            | sed 's/:/\/'${{ matrix.name }}':/' \
           )";
-          DOCKER_TAG="'$(echo ${DOCKER_TAG})'"
-          echo "DOCKER_TAG=${DOCKER_TAG}" >> $GITHUB_OUTPUT
+
+          TAG_CURRENT="$(echo ${latest_tag} | sed 's/:/\/'${{ matrix.name }}':/' )"
+          echo "TAG_CURRENT=${TAG_CURRENT}" >> $GITHUB_OUTPUT
+
+          TAG_LATEST="$(echo ${TAG_CURRENT} | sed -s 's/:.*/:latest/g' )"
+          echo "TAG_LATEST=${TAG_LATEST}" >> $GITHUB_OUTPUT
 
       # -----------------
       # Builder: Github package 
@@ -165,10 +169,11 @@ jobs:
         with:
 
           # Required 
-          auth_token:             ${{ github.token }}
-          dockerfile_context:     ${{ needs.gathering_informations.outputs.DOCKERFILE_DIR }} 
-          dockerfile_path:        ${{ needs.gathering_informations.outputs.DOCKERFILE_PATH }} 
+          auth_token:         ${{ github.token }}
+          dockerfile_context: ${{ needs.gathering_informations.outputs.DOCKERFILE_DIR }} 
+          dockerfile_path:    ${{ needs.gathering_informations.outputs.DOCKERFILE_PATH }} 
           
           # Optional
-          docker_build_arguments: ${{ steps.prepare_build_arguments.outputs.BUILD_ARGUMENTS }}
-          docker_build_tag:       ${{ steps.prepare_tag.outputs.DOCKER_TAG }}
+          docker_build_arguments:   ${{ steps.prepare_build_arguments.outputs.BUILD_ARGUMENTS }}
+          docker_build_tag_current: ${{ steps.prepare_tag.outputs.TAG_CURRENT }}
+          docker_build_tag_latest:  ${{ steps.prepare_tag.outputs.TAG_LATEST }}

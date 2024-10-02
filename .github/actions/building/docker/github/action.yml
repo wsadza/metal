@@ -29,7 +29,11 @@ inputs:
     description: "Custom build arguments."
     required: false
 
-  docker_build_tag:
+  docker_build_tag_current:
+    description: "Tag for the Docker image."
+    required: false
+
+  docker_build_tag_latest:
     description: "Tag for the Docker image."
     required: false
 
@@ -53,12 +57,34 @@ runs:
         DOCKER_BUILDKIT: 1
       run: |
 
-        # build 
-        docker build                                   \
-          $(echo ${{ inputs.docker_build_arguments }}) \
-          --tag ${{ inputs.docker_build_tag }}         \
-          --file ${{ inputs.dockerfile_path }}         \
-          .
+        echo '${{ inputs.docker_build_tag_current }}' 
+        echo '${{ inputs.docker_build_tag_latest }}' 
+        echo '${{ inputs.docker_build_arguments }}' 
 
-        # push
-        docker push ${{ inputs.docker_build_tag }} 
+        # build
+        docker_build_arguments=$(echo ${{ inputs.docker_build_arguments }})
+        dockerfile_path=$(echo ${{ inputs.dockerfile_path }}) 
+
+        # tags
+        docker_build_tag_current=$(echo ${{ inputs.docker_build_tag_current }})
+        docker_build_tag_latest=$(echo ${{ inputs.docker_build_tag_latest }})
+
+        # build 
+        DOCKER_COMMAND="$(
+          echo \
+            docker buildx build \
+              ${docker_build_arguments} \
+              --tag dummy \
+              --file ${dockerfile_path} \
+              .
+        )";
+
+        eval "${DOCKER_COMMAND}"
+
+        # current 
+        docker tag dummy "${{ inputs.docker_build_tag_current }}";
+        docker push "${{ inputs.docker_build_tag_current }}";
+
+        # latest 
+        docker tag dummy "${{ inputs.docker_build_tag_latest }}";
+        docker push "${{ inputs.docker_build_tag_latest }}";
