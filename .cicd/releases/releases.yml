@@ -28,7 +28,7 @@ include:
     build:
       arguments:
         # Core: Base
-        DISTRIBUTION: "debain"
+        DISTRIBUTION: "debian"
         RELEASE: "trixie"
      
         # Core: Selkies Gstreamer
