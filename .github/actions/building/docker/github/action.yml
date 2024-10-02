@@ -76,13 +76,19 @@ runs:
       run: |
 
         # build
-        docker_build_arguments=$(echo ${{ inputs.docker_build_arguments }})
-        dockerfile_path=$(echo ${{ inputs.dockerfile_path }}) 
-
+        docker_build_arguments=$(
+          echo ${{ inputs.docker_build_arguments }}
+        );
+        dockerfile_path=$(
+          echo ${{ inputs.dockerfile_path }}
+        ); 
         # tags
-        docker_build_tag_current=$(echo ${{ inputs.docker_build_tag_current }})
-        docker_build_tag_latest=$(echo ${{ inputs.docker_build_tag_latest }})
-
+        docker_build_tag_current=$(
+          echo ${{ inputs.docker_build_tag_current }}
+        );
+        docker_build_tag_latest=$(
+          echo ${{ inputs.docker_build_tag_latest }}
+        );
         # build command
         DOCKER_COMMAND="$(
           echo \

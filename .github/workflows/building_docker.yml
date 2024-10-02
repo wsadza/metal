@@ -79,13 +79,13 @@ jobs:
      steps:
 
       # -----------------
-      # Linter: Checkout 
+      # QA: Checkout 
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       # -----------------
-      # Linter: Hadolint
+      # QA: Dockerfile Lint ~ Hadolint
       - uses: ./.github/actions/linting/docker/hadolint
         with:
           file: ${{ needs.gathering_informations.outputs.DOCKERFILE_PATH }}
