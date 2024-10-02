@@ -15,26 +15,14 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 ## Preview
 <img src=".media/test.gif" align="center" style="width: 7%; height: auto;" />
 
+## Usage
+
+## Setup
+
 ## Configuration
 <p align="center">
-<img src=".media/asset-f.png" style="width: 45%; height: auto;" />
 </p>
 
-#Metal Repository README.strucutre
-
-header: Logo
-body-a: TLDR
-footer: Link to FUNDING.md
-
-metal:
-    sectrion:
-        - name: logo
-
-        - name: TLDR 
-        
-        - name: Description 
-
-        - questions:
 
           - questions: Why we don't need to install nvidia-drivers?
             answer: nvidia-docker-toolkit attach host EGL libraries (32/64bit) into container 
@@ -51,10 +39,18 @@ metal:
 #sudo apt install libc6:i386
 #sudo ./nvidia-installer --install-compat32-libs
 
----
 
-<img src=".media/asset-c.png" align="left" style="width: 5%; height: auto;" />
+## Disclaimers
 
-<p align="right"">
-    <sub><code>Thanks again Selkies-Gstreamer Team!</code></sub>
+> [!IMPORTANT]  
+> I am not the owner of the [`selkies-gstreamer`](https://github.com/selkies-project/selkies-gstreamer) software, solution belongs to its orginal creators.
+        
+> [!NOTE]  
+> None of the containers prepared in this repository contain pre-installed games.
+
+## 
+
+<p align="center">
+  <img src=".media/asset-g.png" style="width: 35%; height: auto;" />
 </p>
+  
