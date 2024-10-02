@@ -26,7 +26,7 @@ ARG \
 # It also works!
 # --
 #ARG \
-#		DISTRIBUTION=debian \
+#   DISTRIBUTION=debian \
 #   RELEASE=trixie
 
 FROM ${DISTRIBUTION}:${SUITE}

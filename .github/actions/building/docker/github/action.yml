@@ -37,29 +37,43 @@ inputs:
     description: "Tag for the Docker image."
     required: false
 
+  docker_build_labels:
+    description: "Lables for the Docker image."
+    required: false
+
 runs:
   using: composite 
   steps:
-    - name: Checkout repository
+    - name: 'Checkout repository'
       uses: actions/checkout@v4
              
-    - name: Log in to the Container registry
+    - name: 'Log in to the Container registry'
       uses: docker/login-action@v3
       with:
         registry: 'ghcr.io' 
         username: ${{ github.actor }}
         password: ${{ inputs.auth_token }}
 
-    - name: Build and push Docker image
+    - name: 'Prepare - Docker Labels'
+      id: prepare_lables
+      shell: bash
+      run: |
+        LABELS="$( \
+          jq -r \
+          '.labels | to_entries[] | "\(.key)=\"\(.value)\""' \
+          <<< '${{ inputs.docker_build_labels }}'\
+        )";
+        # append labels to final docker image
+        echo "${LABELS//\//\\\/}" | while read -r LABEL; do 
+          sed -i "/^FROM/a LABEL ${LABEL}" '${{ inputs.dockerfile_path }}' 
+        done
+
+    - name: 'Build and push Docker image'
       shell: bash
       working-directory: "${{ inputs.dockerfile_context }}"
       env:
         DOCKER_BUILDKIT: 1
       run: |
-
-        echo '${{ inputs.docker_build_tag_current }}' 
-        echo '${{ inputs.docker_build_tag_latest }}' 
-        echo '${{ inputs.docker_build_arguments }}' 
 
         # build
         docker_build_arguments=$(echo ${{ inputs.docker_build_arguments }})
@@ -69,7 +83,7 @@ runs:
         docker_build_tag_current=$(echo ${{ inputs.docker_build_tag_current }})
         docker_build_tag_latest=$(echo ${{ inputs.docker_build_tag_latest }})
 
-        # build 
+        # build command
         DOCKER_COMMAND="$(
           echo \
             docker buildx build \
@@ -78,13 +92,14 @@ runs:
               --file ${dockerfile_path} \
               .
         )";
-
+        
+        # build execute
         eval "${DOCKER_COMMAND}"
 
-        # current 
+        # Push - tag 'branch/ref'
         docker tag dummy "${{ inputs.docker_build_tag_current }}";
         docker push "${{ inputs.docker_build_tag_current }}";
 
-        # latest 
+        # Push - tag 'latest'
         docker tag dummy "${{ inputs.docker_build_tag_latest }}";
         docker push "${{ inputs.docker_build_tag_latest }}";

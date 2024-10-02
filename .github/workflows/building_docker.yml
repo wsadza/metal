@@ -100,7 +100,7 @@ jobs:
     needs: [ gathering_informations, quality_assurance ]
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write 
       packages: write
     strategy:
       matrix: ${{ fromJson(needs.gathering_informations.outputs.RELEASES_MATRIX) }}
@@ -128,23 +128,6 @@ jobs:
           echo "BUILD_ARGUMENTS=${BUILD_ARGUMENTS}" >> $GITHUB_OUTPUT
 
       # -----------------
-      # Builder: Prepare Docker Lables 
-      #
-      - name: 'Prepare - Docker Labels'
-        id: prepare_lables
-        shell: bash
-        run: |
-          labels="$( \
-            jq -r \
-            '.labels | to_entries[] | "\(.key)=\"\(.value)\""' \
-            <<< '${{ needs.prepare.outputs.REPOSITORY_METADATA }}'\
-          )";
-          # append labels to final docker image
-          echo "${labels//\//\\\/}" | while read -r label; do 
-            sed -i "/^FROM/a LABEL $label" ${{ needs.gathering_informations.outputs.DOCKERFILE_PATH }};
-          done
-
-      # -----------------
       # Builder: Prepare Docker Tag 
       #
       - name: 'Prepare - Docker Tag'
@@ -169,7 +152,7 @@ jobs:
         with:
 
           # Required 
-          auth_token:         ${{ secrets.token }}
+          auth_token:         ${{ github.token }}
           dockerfile_context: ${{ needs.gathering_informations.outputs.DOCKERFILE_DIR }} 
           dockerfile_path:    ${{ needs.gathering_informations.outputs.DOCKERFILE_PATH }} 
           
@@ -177,3 +160,4 @@ jobs:
           docker_build_arguments:   ${{ steps.prepare_build_arguments.outputs.BUILD_ARGUMENTS }}
           docker_build_tag_current: ${{ steps.prepare_tag.outputs.TAG_CURRENT }}
           docker_build_tag_latest:  ${{ steps.prepare_tag.outputs.TAG_LATEST }}
+          docker_build_labels:      ${{ needs.gathering_informations.outputs.REPOSITORY_METADATA }}
