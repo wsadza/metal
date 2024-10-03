@@ -1,5 +1,5 @@
 # Metal
-<img src=".media/asset-a.png" align="left" style="width: 7%; height: auto;" />
+<img src=".media/asset-a.png" align="right" style="width: 7%; height: auto;" />
 
 Ever been fascinated by remote gaming? Same! Inspired by the [`selkies-gstreamer`](https://github.com/selkies-project/selkies-gstreamer) project (a relic of [`Google Stadia's`](https://github.com/GoogleCloudPlatform/selkies-examples/tree/master) epicness), I decided to repack their [`egl solution`](https://github.com/selkies-project/docker-nvidia-egl-desktop) for fun and glory - obviously.
 
