@@ -48,7 +48,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
 
 ##
 > [!NOTE]  
-> Below, I have posted the complete configuration that will enable you to use the GPU and run Steam.
+> Below is a complete one-line configuration that will enable GPU usage and allow you to run Steam.
 
 > [!CAUTION]
 > - The snippet below requires the Nvidia Container Toolkit!
