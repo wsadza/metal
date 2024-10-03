@@ -19,27 +19,6 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 
 ## Setup
 
-## Configuration
-<p align="center">
-</p>
-
-
-          - questions: Why we don't need to install nvidia-drivers?
-            answer: nvidia-docker-toolkit attach host EGL libraries (32/64bit) into container 
-
-          - questions: Why we don't need to install nvidia-drivers?
-            answer: nvidia-docker-toolkit attach host EGL libraries (32/64bit) into container 
-
-
-
-#sudo dpkg --add-architecture i386
-#sudo apt update
-#sudo apt install libc6:i386
-#sudo apt install -y pkg-config libglvnd-dev
-#sudo apt install libc6:i386
-#sudo ./nvidia-installer --install-compat32-libs
-
-
 ## Disclaimers
 
 > [!IMPORTANT]  
@@ -50,7 +29,16 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 
 ## 
 
-<p align="center">
-  <img src=".media/asset-g.png" style="width: 35%; height: auto;" />
-</p>
-  
+<table width="100%" style="table-layout: fixed;">
+  <tr>
+    <td align="left" width="25%">
+      <img src=".media/asset-h.png" width="100%" />
+    </td>
+    <td align="center" width="50%">
+      <strong>This is centered text</strong>
+    </td>
+    <td align="right" width="25%">
+      <img src=".media/asset-i.png" width="100%" />
+    </td>
+  </tr>
+</table>
