@@ -6,64 +6,99 @@ Introducing my totally modular, Dockerized streaming service. Build it your way,
 
 Now it's a streaming powerhouse. Why? Just because!
 
-### TLDR;
+### TLDR; 
 ```sh
 docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n" 
 ```
 
-## Preview
+## 🔸 Preview
 <img src=".media/preview.gif" align="center"/>
 
-## Usage
+## 🔹 Usage
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
 
 ##
+### Docker;
 
-### Docker-Compose;
+> [!TIP]
+> The DOCKER_HOST variable should point to IP of the machine where stream-instance is launching.
+
+- Minimal-Debian:
+  <br>
+  ```sh
+  docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+  ```
+  
+- Minimal-Ubuntu:
+  <br>
+  ```sh
+  docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+  ```
+  
+- Full-Ubuntu:
+  <br>
+  ```sh
+  docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+  ```
+  
+### Docker - Compose;
 
 > [!IMPORTANT]  
 > Please read the compose-file header before proceeding with the setup.
 
 <table>
     <tr>
-        <td><a href=".github/workflows/building_docker.yml">Compose - Nvidia</a></td>
-        <td>How to Use nvidia runtime in docker container.</td>
+        <td><a href=".github/workflows/building_docker.yml">Nvidia</a></td>
+        <td>Guide on using the Nvidia runtime within Docker containers.</td>
     </tr>
     <tr>
-        <td><a href=".github/workflows/building_docker.yml">Compose - Companion</a></td>
-        <td>How to re-use build-in coturn server from second stream instance.</td>
+        <td><a href=".github/workflows/building_docker.yml">Companion</a></td>
+        <td>Instructions on reusing the built-in Coturn server for a second stream instance.</td>
     </tr>
     <tr>
-        <td><a href=".github/workflows/building_docker.yml">Compose - Steam</a></td>
-        <td>How to break isolation for flatpak (steam) apps.</td>
+        <td><a href=".github/workflows/building_docker.yml">Steam</a></td>
+        <td>Steps to disable isolation for Flatpak Steam applications.</td>
     </tr>
     <tr>
-        <td><a href=".github/workflows/building_docker.yml">Compose - Coturn</a></td>
-        <td>How to spin-up external coturn server and configure stream to use it.</td>
+        <td><a href=".github/workflows/building_docker.yml">Coturn</a></td>
+        <td>Setup for an external Coturn server and configuring stream to use it.</td>
     </tr>
     <tr>
-        <td><a href=".github/workflows/building_docker.yml">Compose - Build</a></td>
-        <td>How to build, all build arguments are listed.</td>
+        <td><a href=".github/workflows/building_docker.yml">Build</a></td>
+        <td>Instructions for building with a list of all available build arguments.</td>
     </tr>
 </table>
 
 ##
 
-### K8S Manifest;
+### K8S - Manifest;
 
 > [!CAUTION]
 > Deployment below contains non-secure configuration (breaking container isolation) to fulfill steam-client needs.
 
 <table>
     <tr>
-        <td><a href=".github/workflows/building_docker.yml">Manifest - Deployment</a></td>
-        <td>Fully configured deployment which uses Nvidia Runtime, breaking isolation, uses host networking,</td>
+        <td><a href=".github/workflows/building_docker.yml">Deployment</a></td>
+        <td>A fully configured deployment utilizing the Nvidia runtime, with broken isolation, host networking, and an internal (built-in) TURN server.</td>
     </tr>
 </table>
 
+##
 
-## Setup
+### K8S - Helm;
+
+> [!WARNING]  
+> 🚧 Under Construction. 🚧
+
+<table>
+    <tr>
+        <td><a href=".github/workflows/building_docker.yml">Chart</a></td>
+        <td>Update in progress; no content available yet!</td>
+    </tr>
+</table>
+
+## 🔸 Setup
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
 Ready to use workflows:
@@ -82,6 +117,6 @@ Ready to use workflows:
 
 <br>
 
-## Disclaimers
+## 🔹 Disclaimers
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
