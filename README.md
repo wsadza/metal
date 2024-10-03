@@ -13,7 +13,7 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 ```
 
 ## Preview
-<img src=".media/test.gif" align="center" style="width: 7%; height: auto;" />
+<img src=".media/preview.gif" align="center" style="width: 7%; height: auto;" />
 
 ## Usage
 
@@ -29,16 +29,6 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 
 ## 
 
-<table width="100%" style="table-layout: fixed;">
-  <tr>
-    <td align="left" width="25%">
-      <img src=".media/asset-h.png" width="100%" />
-    </td>
-    <td align="center" width="50%">
-      <strong>This is centered text</strong>
-    </td>
-    <td align="right" width="25%">
-      <img src=".media/asset-i.png" width="100%" />
-    </td>
-  </tr>
-</table>
+<div align="center">
+<img src=".media/asset-g.png" align="center" style="width: 30%; height: auto;" />
+</div>
