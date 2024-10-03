@@ -14,17 +14,71 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 ## Preview
 <img src=".media/preview.gif" align="center"/>
 
-<br>
-
 ## Usage
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
 
-<br>
+##
+
+### Docker-Compose;
+
+> [!IMPORTANT]  
+> Please read the compose-file header before proceeding with the setup.
+
+<table>
+    <tr>
+        <td><a href=".github/workflows/building_docker.yml">Compose - Nvidia</a></td>
+        <td>How to Use nvidia runtime in docker container.</td>
+    </tr>
+    <tr>
+        <td><a href=".github/workflows/building_docker.yml">Compose - Companion</a></td>
+        <td>How to re-use build-in coturn server from second stream instance.</td>
+    </tr>
+    <tr>
+        <td><a href=".github/workflows/building_docker.yml">Compose - Steam</a></td>
+        <td>How to break isolation for flatpak (steam) apps.</td>
+    </tr>
+    <tr>
+        <td><a href=".github/workflows/building_docker.yml">Compose - Coturn</a></td>
+        <td>How to spin-up external coturn server and configure stream to use it.</td>
+    </tr>
+    <tr>
+        <td><a href=".github/workflows/building_docker.yml">Compose - Build</a></td>
+        <td>How to build, all build arguments are listed.</td>
+    </tr>
+</table>
+
+##
+
+### K8S Manifest;
+
+> [!CAUTION]
+> Deployment below contains non-secure configuration (breaking container isolation) to fulfill steam-client needs.
+
+<table>
+    <tr>
+        <td><a href=".github/workflows/building_docker.yml">Manifest - Deployment</a></td>
+        <td>Fully configured deployment which uses Nvidia Runtime, breaking isolation, uses host networking,</td>
+    </tr>
+</table>
+
 
 ## Setup
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
+Ready to use workflows:
+
+### Base:
+
+- [`Nvidia Container Toolkit`](.github/workflows/building_docker.yml)
+
+### Nvidia:
+
+- [`Nvidia Container Toolkit`](.github/workflows/building_docker.yml)
+
+### K3S:
+
+- [`Nvidia GPU Device Plugin`](.github/workflows/tagging_semver.yml)
 
 <br>
 
