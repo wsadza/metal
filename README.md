@@ -78,7 +78,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
 ### K8S - Manifest;
 
 > [!CAUTION]
-> Deployment below contains non-secure configuration (breaking container isolation) to fulfill steam-client needs.
+> The deployment below contains configurations that break container isolation to meet the requirements of the Steam client.
 
 <table>
     <tr>
