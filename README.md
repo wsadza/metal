@@ -42,6 +42,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
   ```sh
   docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
+
+##
+> [!NOTE]  
+> Below, I have posted the complete configuration that will enable you to use the GPU and run Steam.
+
+> [!CAUTION]
+> - The snippet below requires the Nvidia Container Toolkit!
+> - It includes configurations that break container isolation!
+
+- Give me the power! 🤘
+  <br>
+  
+  ```sh
+  docker run -d --hostname stream -p 8080:8080 -e DOCKER_HOST=$(hostname -I | awk '{print $1}') -e SELKIES_ENCODER=nvh264enc --gpus '"device=0"' --tmpfs /dev/shm:rw --shm-size 64m --ipc host --ulimit nofile=1024:524288 --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+  ```
   
 ##
 
