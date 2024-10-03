@@ -15,9 +15,26 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 ## Preview
 <img src=".media/preview.gif" align="center" style="width: 7%; height: auto;" />
 
+<br>
+<br>
+<br>
+
 ## Usage
+<img src=".media/asset-j.png" align="left" style="width: 6%; height: auto;" />
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
+
+<br>
+<br>
+<br>
 
 ## Setup
+<img src=".media/asset-k.png" align="left" style="width: 6%; height: auto;" />
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
+
+<br>
+<br>
+<br>
 
 ## Disclaimers
 
