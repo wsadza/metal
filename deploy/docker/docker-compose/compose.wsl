@@ -1,0 +1,142 @@
+############################################################
+# Copyright (c) 2024 Utilizable
+# Released under the MIT license
+# ----------------------------------------------------------
+#
+# Example of attaching NVIDIA gpu into docker inside wsl-container.
+# 
+# ----------------------------------------------------------
+#
+# Setup:
+#   Powershell:
+#     - wsl --install Ubuntu-24.04 --web-download
+#     - wsl --install Ubuntu-24.04 (hit ctrl+c when `Enter new UNIX username` pops up)
+#     - wsl -d ubuntu-24.04 -u root
+#     - wsl --shutdown
+#     - wsl --unregister Ubutnu-24.04
+#
+#   WSL:
+#      # Install docker / docker-compose / nvidia-container-toolkit
+#      #!/bin/bash
+#      # Add i386 architecture support
+#      sudo dpkg --add-architecture i386
+#      # Add NVIDIA container toolkit GPG key and repository
+#      curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+#      curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+#        sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+#        sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+#      # Update package lists
+#      sudo apt-get update
+#      # Install required packages
+#      sudo apt-get install -y \
+#        docker.io \
+#        docker-compose \
+#        nvidia-container-toolkit
+#      # Configure NVIDIA container toolkit for Docker
+#      sudo nvidia-ctk runtime configure --runtime=docker
+#      # Restart Docker service to apply changes
+#      sudo systemctl restart docker
+#
+# ----------------------------------------------------------
+# Informations:
+#
+# - Wsl container are very slow there a lot of comparisions WSL1 vs WSL2 vs Native linux.
+# - Install latest Mesa driver - https://itsfoss.com/install-mesa-ubuntu/
+# - Attach WSL libraries as volume.
+# - Dont touch Nvidia drivers! (it needs to be inherited from Windows). 
+#  
+# ----------------------------------------------------------
+#
+# Links:
+# - https://wiki.archlinux.org/title/OpenGL
+# - https://itsfoss.com/install-mesa-ubuntu/
+# - https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg
+# - https://learn.microsoft.com/en-us/windows/wsl/wsl-config#example-wslconfig-file
+#
+# ----------------------------------------------------------
+# Configuration:
+#
+# General:
+# LIBVA_DRIVER_NAME=d3d12
+# MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA glxgears
+#
+# Vulkan:
+# VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/dzn_icd.x86_64.json vkcube
+# VK_INSTANCE_LAYERS='VK_LAYER_MESA_overlay' vkcube --present_mode 0
+#
+############################################################
+
+version: '3.8'
+services:
+
+# ----------------------------
+# Stream Server
+
+    stream:
+      hostname: stream
+      image: "ghcr.io/utilizable/metal/full-ubuntu:latest"
+      entrypoint: [ "/bin/bash", "-c" ]
+
+# Slightly mod entrypoint.sh
+      command:
+        - |
+          sudo sed -i '1,/^# Execute all container core init scripts/d' /entrypoint.sh;
+          echo "LD_LIBRARY_PATH=\"$${LD_LIBRARY_PATH:+$${LD_LIBRARY_PATH}:}/usr/lib/wsl/lib\"" \
+                | sudo tee -a /etc/bash.bashrc;
+          sudo apt-get update && sudo apt-get install mesa-vulkan-drivers;
+          sudo add-apt-repository ppa:oibaf/graphics-drivers;
+          sudo apt update && sudo apt upgrade;
+          /entrypoint.sh
+
+      ports:
+# Expose app - stream
+        - "8080:8080"
+        - "3478:3478/udp"
+        - "3478:3478/tcp"
+      environment:
+# Use internal turn server in case of lack of remote setting
+        DOCKER_HOST: "172.20.25.46"
+
+# WSL: ~
+#   https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg
+        MESA_D3D12_DEFAULT_ADAPTER_NAME: "NVIDIA"
+        LIBVA_DRIVER_NAME: "d3d12"
+Use 
+        VK_ICD_FILENAMES: "/usr/share/vulkan/icd.d/dzn_icd.x86_64.json"
+            
+# Apply gpu resource
+      deploy:
+          resources:
+            reservations:
+              devices:
+                - driver: nvidia
+                  count: all
+                  capabilities: [gpu]
+
+# To Make Steam working we need to break isolation
+      tmpfs:
+        - /dev/shm:rw
+      shm_size: 64
+      ipc: host # Could also be set to 'shareable'
+      ulimits:
+        nofile:
+          soft: 1024
+          hard: 524288
+      cap_add:
+        - NET_ADMIN
+        - SYS_ADMIN
+        - SYS_NICE
+        - IPC_LOCK
+      security_opt:
+        - seccomp:unconfined
+        - apparmor:unconfined
+
+# ------------------------------------------------
+
+# WSL: ~
+#   Attach WSL libraries
+      volumes:
+      - /usr/lib/wsl:/usr/lib/wsl:ro
+
+
+#
