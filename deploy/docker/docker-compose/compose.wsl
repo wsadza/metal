@@ -101,7 +101,6 @@ services:
 #   https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg
         MESA_D3D12_DEFAULT_ADAPTER_NAME: "NVIDIA"
         LIBVA_DRIVER_NAME: "d3d12"
-Use 
         VK_ICD_FILENAMES: "/usr/share/vulkan/icd.d/dzn_icd.x86_64.json"
             
 # Apply gpu resource
