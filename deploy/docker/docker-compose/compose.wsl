@@ -6,8 +6,8 @@
 # Example of attaching NVIDIA gpu into docker inside wsl-container.
 # 
 # ----------------------------------------------------------
-#
 # Setup:
+#
 #   Powershell:
 #     - wsl --install Ubuntu-24.04 --web-download
 #     - wsl --install Ubuntu-24.04 (hit ctrl+c when `Enter new UNIX username` pops up)
@@ -46,8 +46,8 @@
 # - Dont touch Nvidia drivers! (it needs to be inherited from Windows). 
 #  
 # ----------------------------------------------------------
-#
 # Links:
+#
 # - https://wiki.archlinux.org/title/OpenGL
 # - https://itsfoss.com/install-mesa-ubuntu/
 # - https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg
@@ -56,13 +56,13 @@
 # ----------------------------------------------------------
 # Configuration:
 #
-# General:
-# LIBVA_DRIVER_NAME=d3d12
-# MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA glxgears
+#   General:
+#     - LIBVA_DRIVER_NAME=d3d12 glxgears
+#     - MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA glxgears
 #
-# Vulkan:
-# VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/dzn_icd.x86_64.json vkcube
-# VK_INSTANCE_LAYERS='VK_LAYER_MESA_overlay' vkcube --present_mode 0
+#   Vulkan:
+#     - VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/dzn_icd.x86_64.json vkcube
+#     - VK_INSTANCE_LAYERS='VK_LAYER_MESA_overlay' vkcube --present_mode 0
 #
 ############################################################
 
