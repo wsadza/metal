@@ -1,6 +1,7 @@
-> [!WARNING]  
-> - This project acts as a glue, integrating multiple solutions and patterns.
-> - I'm just here to containerize it! 🐳
+> [!NOTE]  
+> - Low-Latency streaming service
+> - Game everywhere
+> - Docker is new gaming platform
 
 # Metal
 
@@ -9,6 +10,11 @@ Ever been fascinated by remote gaming? Same! Inspired by the [`selkies-gstreamer
 Introducing my totally modular, Dockerized streaming service. Build it your way, whether you're on Debian or Ubuntu (I went agnostic on dependencies to keep it flexible). I revamped the structure for ultimate control, throwing in Supervisord magic, with a dash of [`s6-overlay`](https://github.com/just-containers/s6-overlay) and some [`docker-steam-headless`](https://github.com/Steam-Headless/docker-steam-headless) trickery.
 
 Now it's a streaming powerhouse. Why? Just because!
+
+> [!WARNING]  
+> - This project acts as a glue, integrating multiple solutions and patterns.
+> - I'm just here to containerize it! 🐳
+> - Obviously games are not included 😉
 
 ##
 
