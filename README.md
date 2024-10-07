@@ -11,7 +11,7 @@ Introducing my totally modular, Dockerized streaming service. Build it your way,
 
 Now it's a streaming powerhouse. Why? Just because!
 
-> [!WARNING]  
+> [!IMPORTANT]  
 > - This project acts as a glue, integrating multiple solutions and patterns.
 > - I'm just here to containerize it! 🐳
 > - Obviously games are not included 😉
