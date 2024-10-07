@@ -2,8 +2,15 @@
 > - The instructions below are designed to leverage the NVIDIA GPU.
 > - Hardware rendering may encounter significant issues.
 
+> [!NOTE]  
+> - WSL setup can be useful for software-rendering usage.
+
 # WSL
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta mi sem, ac fringilla mi posuere a. Morbi porttitor posuere pellentesque. Phasellus ultrices aliquet ex. Curabitur a velit dolor. Etiam ultrices diam velit, non fermentum purus laoreet eget. Nam a ante pulvinar, tincidunt nisi non, porttitor orci. Nulla suscipit odio ultricies lacus euismod pulvinar. Nullam consectetur faucibus pellentesque. Suspendisse et fringilla urna. Cras lobortis dolor et ullamcorper finibus. Praesent nec fringilla nibh, in fringilla dolor. 
+Throughout my exploration of WSL, I've gathered key insights about graphics rendering. It turns out that relying on EGL rendering isn't the best option. However, using the software renderer (llvmpipe) can still provide you some gaming experience - atleast terraria works 😉
+
+#### Key problems:
+- It seems that WSL struggles with utilizing the EGL/GLX NVIDIA libraries, relying instead on the libraries provided by WSL at `/usr/lib/wsl/lib`.
+- Each time I attempted to install or use the libnvidia-egl package along with the -iglx extension of Xvfb, it resulted in an error.
 
 
 #### Helpful Resources:
@@ -16,7 +23,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta mi sem,
  - [Nvidia/Nvidia-Cuda Installation Guide](https://gist.github.com/wangruohui/df039f0dc434d6486f5d4d098aa52d07)
 
 
-## Setting Up - Windows
+## 🔸 Setting Up - Windows
 
 Install Chocolatey (Windows Package Manager):
 
@@ -37,9 +44,18 @@ Install Windows Subsystem for Linux:
     ```sh
     choco install wsl2
     ```
+    
+> [!WARNING]
+> - Depending on your setup, you may need to enable the `Windows Subsystem for Linux` feature in Windows.
+> - Open PowerShell and run the following command:
+> 
+>   ```sh
+>   optionalfeatures
+>   ```
+
 ##
 
-### WSL configuration (Optional):
+### WSL configuration (Optional)
 
 To create or open the .wslconfig file, use the following Powershell command:
 
@@ -64,7 +80,7 @@ swap=32GB
 
 ##
 
-### WSL Snippets:
+### WSL Snippets
 
 Most common WSL commands:
 
@@ -85,9 +101,9 @@ Most common WSL commands:
     wsl --shutdown Ubutnu-24.04 # Turning-off Ubuntu 24.04
     ```
     
-## Setting Up - WSL Linux
+## 🔹 Setting Up - WSL Linux
 
-### Installation Script:
+### Installation Script
 
 This bash script automates the installation of Docker, Docker Compose, and the NVIDIA container toolkit.
 
@@ -116,7 +132,9 @@ sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
 ```
 
-### Environment Variables:
+##
+
+### Environment Variables
 
 To optimize the GPU utilization and configure necessary services within your WSL environment, the following environment variables should be set:
 
