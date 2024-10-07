@@ -15,8 +15,8 @@ Now it's a streaming powerhouse. Why? Just because!
 docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n" 
 ```
 
-## 🔸 Preview
-<img src=".media/preview.gif" align="center"/>
+## 🔸 Preview - 2xClients
+<img src=".media/preview.gif" align="center" width="800" height="auto"/>
 
 ## 🔹 Usage
 
@@ -24,7 +24,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
 
 ##
 
-### Docker;
+### Docker:
 
 > [!TIP]
 > The DOCKER_HOST variable should point to IP of the machine where stream-instance is launching.
@@ -64,7 +64,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
   
 ##
 
-### Docker - Compose;
+### Docker - Compose:
 
 > [!IMPORTANT]  
 > Please read the compose-file header before proceeding with the setup.
@@ -94,7 +94,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
 
 ##
 
-### K8S - Manifest;
+### K8S - Manifest:
 
 > [!CAUTION]
 > The deployment below contains configurations that break container isolation to meet the requirements of the Steam client.
@@ -108,7 +108,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
 
 ##
 
-### K8S - Helm;
+### K8S - Helm:
 
 > [!WARNING]  
 > 🚧 Under Construction. 🚧
@@ -119,6 +119,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
         <td>Update in progress; no content available yet!</td>
     </tr>
 </table>
+
+## 🔹 Preview - Steam
+<img src=".media/preview-steam.gif" align="center" width="800" height="auto"/>
 
 ## 🔸 Setup
 
