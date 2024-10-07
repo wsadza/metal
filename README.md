@@ -15,7 +15,7 @@ Now it's a streaming powerhouse. Why? Just because!
 docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n" 
 ```
 
-## 🔸 Preview - Steam\
+## 🔸 Preview - Steam
 <div align="center">
 <kbd><img src=".media/preview-steam.gif" width="800" height="auto"/></kbd>
 </div>
