@@ -8,10 +8,16 @@
 # WSL
 Throughout my exploration of WSL, I've gathered key insights about graphics rendering. It turns out that relying on EGL rendering isn't the best option. However, using the software renderer (llvmpipe) can still provide you some gaming experience - atleast terraria works 😉
 
+##
+
 #### Key problems:
 - It seems that WSL struggles with utilizing the EGL/GLX NVIDIA libraries, relying instead on the libraries provided by WSL at `/usr/lib/wsl/lib`.
 - Each time I attempted to install or use the libnvidia-egl package along with the -iglx extension of Xvfb, it resulted in an error.
-
+  
+##
+  
+#### Poor Performance of glxgears64
+<img src=".media/glxspheres64.png" align="center"/>
 
 #### Helpful Resources:
 
