@@ -1,9 +1,11 @@
 > [!CAUTION]
 > - The instructions below are designed to leverage the NVIDIA GPU.
 > - Hardware rendering may encounter significant issues.
+> - Vulkan isn't functioning properly; only native games are working.
 
 > [!NOTE]  
 > - WSL setup can be useful for software-rendering usage.
+> - Consider this as a POC.
 
 # WSL
 Throughout my exploration of WSL, I've gathered key insights about graphics rendering. It turns out that relying on EGL rendering isn't the best option. However, using the software renderer (llvmpipe) can still provide you some gaming experience - atleast terraria works 😉
@@ -27,15 +29,30 @@ Throughout my exploration of WSL, I've gathered key insights about graphics rend
      
 ## Preview
 
-#### Poor Performance of glxspheres
+> [!NOTE]  
+> - Something is missing here 😩
+> - <=1.0 FPS is not the performance we’re looking for.
+
+#### Performance of glxspheres:
 <img src=".media/glxspheres.png" align="center" width="800" height="auto"/>
 
-#### Good Performance of glxgears
+##
+
+#### Performance of glxgears:
 <img src=".media/glxgears.png" align="center" width="800" height="auto"/>
 
-#### Good Performance of vkcube
+##
+
+> [!NOTE]  
+> - After installing the latest Mesa package, Vulkan is "functioning"
+
+#### Performance of vkcube:
 <img src=".media/vkcube.png" align="center" width="800" height="auto"/>
 
+##
+
+#### Performance of vkcube:
+<img src=".media/preview.gif" align="center" width="800" height="auto"/>
 
 ## 🔸 Setting Up - Windows
 
