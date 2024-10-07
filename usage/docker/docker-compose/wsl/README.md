@@ -1,15 +1,12 @@
 > [!WARNING]
-> - Vulkan isn't functioning properly; only linux-native games are working.
+> - Vulkan isn't functioning properly; only selected linux-native games are working.
 > - Performance is lacking; you can only play very lightweight games.
-
-> [!CAUTION]
-> - The instructions below are designed to leverage the NVIDIA GPU.
-> - Hardware rendering may encounter significant issues.
 
 > [!NOTE]  
 > - WSL setup can be useful for software-rendering usage.
 > - Consider this as a POC.
-
+> - The instructions below are designed to leverage the NVIDIA GPU.
+ 
 # WSL
 Throughout my exploration of WSL, I've gathered key insights about graphics rendering. It turns out that relying on EGL rendering isn't the best option. However, using the software renderer (llvmpipe) can still provide you some gaming experience - atleast terraria works 😉
 
