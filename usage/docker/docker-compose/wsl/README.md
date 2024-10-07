@@ -146,43 +146,11 @@ sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
 ```
 
-##
-
-### Environment Variables
-
-To optimize the GPU utilization and configure necessary services within your WSL environment, the following environment variables should be set:
-
-<table>
-    <thead>
-        <tr>
-            <th>Environment Variable</th>
-            <th>Value</th>
-            <th>Description</th>
-        </tr>
-    </thead>  
-    <tr>
-        <td><code>LIBVA_DRIVER_NAME</code></td>
-        <td><code>d3d12</code></td>
-        <td>Specifies the VA driver to use.</td>
-    </tr>
-    <tr>
-        <td><code>MESA_D3D12_DEFAULT_ADAPTER_NAME</code></td>
-        <td><code>NVIDIA</code></td>
-        <td>Sets the default D3D12 adapter name.</td>
-    </tr>
-    <tr>
-        <td><code>VK_ICD_FILENAMES</code></td>
-        <td><code>/usr/share/vulkan/icd.d/dzn_icd.x86_64.json</code></td>
-        <td>Path to the Vulkan ICD file.</td>
-    </tr>
-    <tr>
-        <td><code>LD_LIBRARY_PATH</code></td>
-        <td><code>/usr/lib/wsl/lib</code></td>
-        <td>Specifies the library search path.</td>
-    </tr>
-</table>
-
 ## 🔸 Usage
+
+### Docker-Compose
+
+Here’s a fully prepared Docker Compose file that allows you to run Steam and use attached NVIDIA GPU.
 
 ```sh
 export DOCKER_HOST="${hostname -I | cut -d' ' -f1}"
@@ -200,7 +168,9 @@ services:
       image: "ghcr.io/utilizable/metal/full-ubuntu:latest"
       entrypoint: [ "/bin/bash", "-c" ]
 
-# Slightly mod entrypoint.sh
+# Slightly modyfied entrypoint.sh (WIP - to move this to final container)
+# -------------------------------------------------
+
       command:
         - |
           sudo sed -i '1,/^# Execute all container core init scripts/d' /entrypoint.sh;
@@ -218,6 +188,8 @@ services:
             libc6:i386;
           sudo apt upgrade -y;
           /entrypoint.sh
+
+# -------------------------------------------------
 
       ports:
 # Expose app - stream
@@ -273,3 +245,42 @@ services:
         - seccomp:unconfined
         - apparmor:unconfined
 ```
+
+### Environment Variables
+
+To optimize the GPU utilization and configure necessary services within your WSL environment, the following environment variables should be set:
+
+<table>
+    <thead>
+        <tr>
+            <th>Environment Variable</th>
+            <th>Value</th>
+            <th>Description</th>
+        </tr>
+    </thead>  
+    <tr>
+        <td><code>LIBVA_DRIVER_NAME</code></td>
+        <td><code>d3d12</code></td>
+        <td>Specifies the VA driver to use.</td>
+    </tr>
+    <tr>
+        <td><code>MESA_D3D12_DEFAULT_ADAPTER_NAME</code></td>
+        <td><code>NVIDIA</code></td>
+        <td>Sets the default D3D12 adapter name.</td>
+    </tr>
+    <tr>
+        <td><code>VK_ICD_FILENAMES</code></td>
+        <td><code>/usr/share/vulkan/icd.d/dzn_icd.x86_64.json</code></td>
+        <td>Path to the Vulkan ICD file.</td>
+    </tr>
+    <tr>
+        <td><code>LD_LIBRARY_PATH</code></td>
+        <td><code>/usr/lib/wsl/lib</code></td>
+        <td>Specifies the library search path.</td>
+    </tr>
+    <tr>
+        <td><code>DOCKER_HOST</code></td>
+        <td><code>$(hostname -I | cut -d' ' -f1)</code></td>
+        <td>Docker Host IP address - (it must be accessible from the client (where web browser is opened))</td>
+    </tr>
+</table>
