@@ -4,17 +4,13 @@
 # BASE 
 #######################################
 
-- name: Gather system facts
-  setup:
-
-- name: Presence
-  command: nvidia-smi 
-  register: check_nvidia
-  changed_when: false
-  failed_when: false
+#- name: Presence
+#  command: nvidia-smi 
+#  register: check_nvidia
+#  changed_when: false
+#  failed_when: false
 
 - name: Installation 
-  hosts: localhost
   block:
     - name: Get the latest NVIDIA download URL
       command: >
@@ -22,21 +18,19 @@
       register: nvidia_url_output
       changed_when: false  # To prevent Ansible from marking this task as changed unnecessarily
 
-    - name: Ensure NVIDIA URL is fetched
-      fail:
-        msg: "Failed to fetch the NVIDIA download URL."
-      when: nvidia_url_output.stdout is not none
-
     - name: Fetch latest Nvidia driver
       get_url:
-        url: "https://download.nvidia.com/XFree86/{{ nvidia_url_output.stdout }}"
+        url: "https://download.nvidia.com/XFree86/Linux-x86_64/{{ nvidia_url_output.stdout.split()[1] }}"
         dest: /tmp/nvidia.run
         mode: '0755'
       when: nvidia_url_output.stdout is not none
 
     - name: Install latest Nvidia driver 
       command: >
-        /tmp/nvidia.run --silent --install-compat32-libs
+        /tmp/nvidia.run \
+          --silent \
+          --install-compat32-libs \
+          --no-kernel-module 
       when: nvidia_url_output.stdout is not none
       register: install_output
 
@@ -45,4 +39,4 @@
         var: install_output.stdout_lines
       when: install_output is defined
 
-  when: check_nvidia.rc !=0
+        #  when: check_nvidia.rc !=0

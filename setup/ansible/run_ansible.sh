@@ -14,6 +14,6 @@ echo -e "->Installing dependencies" \
 echo -e "->Executing Ansible" \
   && TARGET_HOST=localhost \
      LC_ALL=C.UTF-8 \
-     ANSIBLE_CONFIG=./ansible/ansible.cfg \
-     ANSIBLE_INVENTORY=./ansible/inventories/hosts \
-     ansible-playbook ./ansible/playbooks/playbook.yml
+     ANSIBLE_CONFIG=./ansible.cfg \
+     ANSIBLE_INVENTORY=./inventories/hosts \
+     ansible-playbook ./playbooks/playbook.yml
