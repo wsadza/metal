@@ -28,13 +28,13 @@ Throughout my exploration of WSL, I've gathered key insights about graphics rend
 ## Preview
 
 #### Poor Performance of glxspheres
-<img src=".media/glxspheres.png" align="center"/>
+<img src=".media/glxspheres.png" align="center" width="800" height="auto"/>
 
 #### Good Performance of glxgears
-<img src=".media/glxgears.png" align="center"/>
+<img src=".media/glxgears.png" align="center" width="800" height="auto"/>
 
 #### Good Performance of vkcube
-<img src=".media/vkcube.png" align="center"/>
+<img src=".media/vkcube.png" align="center" width="800" height="auto"/>
 
 
 ## 🔸 Setting Up - Windows
