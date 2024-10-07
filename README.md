@@ -1,6 +1,6 @@
 > [!NOTE]  
 > - This project acts as a glue, integrating multiple solutions and patterns.
-> - Online Game Streaming Platform.
+> - Online Gaming Streaming Platform.
 
 # Metal
 
