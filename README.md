@@ -1,6 +1,6 @@
-> [!NOTE]  
+> [!WARNING]  
 > - This project acts as a glue, integrating multiple solutions and patterns.
-> - I'm just here to containerize it! 🐋
+> - I'm just here to containerize it! 🐳
 
 # Metal
 
@@ -10,7 +10,12 @@ Introducing my totally modular, Dockerized streaming service. Build it your way,
 
 Now it's a streaming powerhouse. Why? Just because!
 
+##
+
 ### TLDR; 
+> [!NOTE]  
+> - Minimal Ubuntu image that utilizes software rendering ([llvmpipe](https://docs.mesa3d.org/drivers/llvmpipe.html])), suitable for WSL / Native linux instances.
+
 ```sh
 docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n" 
 ```
