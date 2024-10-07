@@ -13,11 +13,8 @@ Throughout my exploration of WSL, I've gathered key insights about graphics rend
 #### Key problems:
 - It seems that WSL struggles with utilizing the EGL/GLX NVIDIA libraries, relying instead on the libraries provided by WSL at `/usr/lib/wsl/lib`.
 - Each time I attempted to install or use the libnvidia-egl package along with the -iglx extension of Xvfb, it resulted in an error.
-  
+
 ##
-  
-#### Poor Performance of glxgears64
-<img src=".media/glxspheres64.png" align="center"/>
 
 #### Helpful Resources:
 
@@ -27,6 +24,17 @@ Throughout my exploration of WSL, I've gathered key insights about graphics rend
  - [Sample WSL Configuration File](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#example-wslconfig-file)
  - [WSLg GPU Docker Examples](https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md)
  - [Nvidia/Nvidia-Cuda Installation Guide](https://gist.github.com/wangruohui/df039f0dc434d6486f5d4d098aa52d07)
+     
+## Preview
+
+#### Poor Performance of glxspheres
+<img src=".media/glxspheres.png" align="center"/>
+
+#### Good Performance of glxgears
+<img src=".media/glxgears.png" align="center"/>
+
+#### Good Performance of vkcube
+<img src=".media/vkcube.png" align="center"/>
 
 
 ## 🔸 Setting Up - Windows
