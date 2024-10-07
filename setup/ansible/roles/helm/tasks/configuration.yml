@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+
+#####################################
+# Configuration: 
+#####################################
+
+- name: Bash Completion 
+  shell: helm completion bash | tee /etc/bash_completion.d/helm > /dev/null
+

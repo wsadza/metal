@@ -1,0 +1,46 @@
+#!/usr/bin/env ansible-playbook
+
+######################################
+# BASE 
+######################################
+
+- name: Gather system facts
+  setup:
+
+- name: Presence
+  command: helm version
+  register: check
+  changed_when: false
+  failed_when: false
+
+- name: Installation
+  block:
+
+    - name: Prerequisites
+      package:
+        name:
+          - curl
+          - gnupg
+          - software-properties-common
+          - apt-transport-https
+        state: present
+
+    - name: GPG Key
+      get_url:
+        url: https://baltocdn.com/helm/signing.asc
+        dest: /usr/share/keyrings/helm.asc
+        mode: '0644'
+        force: true
+
+    - name: APT Repository
+      apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/helm.asc] https://baltocdn.com/helm/stable/debian/ all main"
+        state: present
+
+    - name: Package Installation
+      package:
+        update_cache: true
+        name:
+          - helm 
+        state: present
+

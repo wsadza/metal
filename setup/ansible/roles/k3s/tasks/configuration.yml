@@ -1,0 +1,8 @@
+#!/usr/bin/env ansible-playbook
+
+#####################################
+# Configuration: 
+#####################################
+
+- name: Expose Kubeconfig globaly
+  shell: echo -e KUBECONFIG=/etc/rancher/k3s/k3s.yaml | tee -a /etc/environment

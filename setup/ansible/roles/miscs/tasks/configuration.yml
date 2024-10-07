@@ -1,0 +1,27 @@
+#!/usr/bin/env ansible-playbook
+
+#####################################
+# Configuration: 
+#####################################
+
+- name: Bashrc
+  blockinfile: 
+    block: |
+        if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+        fi
+        set -o vi
+        export PATH=~/.local/bin:$PATH
+
+        # Docker BuildKit
+        export DOCKER_BUILDKIT=1
+        export COMPOSE_DOCKER_CLI_BUILD=1
+    path: ~/.bashrc
+  become: true
+  become_user: root
+
+- name: Bash Completion - Git
+  command: cp /usr/share/bash-completion/completions/git /etc/bash_completion.d/git
+
+- name: Tmux Configuration
+  command: curl -X GET https://raw.githubusercontent.com/utilizable/snippets/develop/tmux/tmux.conf -o  ~/.tmux.conf

@@ -1,0 +1,8 @@
+#!/usr/bin/env ansible-playbook
+
+#####################################
+# Configuration: 
+#####################################
+
+- name: Bash Completion 
+  shell: docker completion bash | tee /etc/bash_completion.d/docker > /dev/null

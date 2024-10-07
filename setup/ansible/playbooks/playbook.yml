@@ -1,0 +1,78 @@
+#!/usr/bin/env ansible-playbook
+---
+
+- hosts: target 
+ 
+  become:       false 
+  gather_facts: false 
+
+  roles:
+  
+  #######################################
+  # Miscellaneous 
+  #######################################
+  
+  - role: miscs
+    package:
+      - curl
+      - libc6:i386
+      - libc6
+      - pkg-config 
+      - libglvnd-dev 
+      - dkms 
+      - build-essential 
+      - libegl-dev 
+      - libegl1 
+      - libgl-dev 
+      - libgl1 
+      - libgles-dev 
+      - libgles1 
+      - libglvnd-core-dev 
+      - libglx-dev 
+      - libopengl-dev 
+      - gcc 
+      - make
+
+  #######################################
+  # Nvidia-Driver
+  #######################################
+  
+  - role: nvidia-driver 
+
+  #######################################
+  # Docker 
+  #######################################
+  
+  - role: docker 
+
+  #######################################
+  # Nvidia Container Toolkit
+  #######################################
+  
+  - role: nvidia-ctr 
+  
+  #######################################
+  # Helm 
+  #######################################
+
+  - role: helm 
+  
+  #######################################
+  # Kubernetes Client
+  #######################################
+  
+  - role: kubectl 
+  
+  #######################################
+  # K9S 
+  #######################################
+
+  - role: k9s
+
+  #######################################
+  # K3S
+  #######################################
+
+  - role: k3s 
+
+...

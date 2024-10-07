@@ -1,0 +1,8 @@
+#!/usr/bin/env ansible-playbook
+
+######################################
+# Configuration: 
+######################################
+
+- name: Bash Completion
+  shell: kubectl completion bash | tee /etc/bash_completion.d/kubectl > /dev/null

@@ -1,0 +1,14 @@
+#!/usr/bin/env ansible-playbook
+
+#######################################
+# BASE 
+#######################################
+
+- name: Installation 
+  block:
+    - name: Package
+      package:
+        name:
+          - docker.io 
+          - docker-compose
+        state: present

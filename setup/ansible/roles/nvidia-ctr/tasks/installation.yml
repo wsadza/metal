@@ -1,0 +1,54 @@
+#!/usr/bin/env ansible-playbook
+
+######################################
+# BASE 
+######################################
+
+- name: Gather system facts
+  setup:
+
+- name: Presence
+  command: nvidia-ctk --version
+  register: check_nvidia_ctk
+  changed_when: false
+  failed_when: false
+
+- name: Installation
+  block:
+
+    - name: Prerequisites
+      package:
+        name:
+          - curl
+          - gnupg
+          - software-properties-common
+          - apt-transport-https
+        state: present
+
+    - name: GPG Key
+      get_url:
+        url: https://nvidia.github.io/libnvidia-container/gpgkey
+        dest: /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+        mode: '0644'
+        force: true
+
+
+    - name: Add NVIDIA Container Toolkit APT repository
+      command: >
+        curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list |
+        sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' |
+        tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+      args:
+        executable: /bin/bash
+      changed_when: true  # Mark this task as changed if it runs
+
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+
+    - name: Install NVIDIA Container Toolkit
+      package:
+        name: nvidia-container-toolkit
+        state: present
+
+  when: check_nvidia_ctk != 0

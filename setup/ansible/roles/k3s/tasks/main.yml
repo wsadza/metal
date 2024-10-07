@@ -1,0 +1,7 @@
+#!/usr/bin/env ansible-playbook
+
+- name: Installation 
+  import_tasks: './installation.yml'
+
+- name: Configuration 
+  import_tasks: './configuration.yml'

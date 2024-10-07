@@ -1,0 +1,11 @@
+#!/usr/bin/env ansible-playbook
+
+#####################################
+# Configuration: 
+#####################################
+
+- name: Nvidia Runtime - containerd 
+  shell: nvidia-ctk runtime configure 
+
+- name: Nvidia Runtime - docker 
+  shell: nvidia-ctk runtime configure --runtime=docker
