@@ -1,7 +1,10 @@
+> [!WARNING]
+> - Vulkan isn't functioning properly; only linux-native games are working.
+> - Performance is lacking; you can only play very lightweight games.
+
 > [!CAUTION]
 > - The instructions below are designed to leverage the NVIDIA GPU.
 > - Hardware rendering may encounter significant issues.
-> - Vulkan isn't functioning properly; only native games are working.
 
 > [!NOTE]  
 > - WSL setup can be useful for software-rendering usage.
@@ -12,9 +15,11 @@ Throughout my exploration of WSL, I've gathered key insights about graphics rend
 
 ##
 
-#### Key problems:
-- It seems that WSL struggles with utilizing the EGL/GLX NVIDIA libraries, relying instead on the libraries provided by WSL at `/usr/lib/wsl/lib`.
-- Each time I attempted to install or use the libnvidia-egl package along with the -iglx extension of Xvfb, it resulted in an error.
+#### Tested Games:
+
+- `Terraria` - playable.
+- `Torchlight II` - playable.
+- `Divinity: Original Sin - Enhanced Edition` - unplayable.
 
 ##
 
@@ -29,11 +34,12 @@ Throughout my exploration of WSL, I've gathered key insights about graphics rend
      
 ## Preview
 
+#### Performance of glxspheres:
+
 > [!NOTE]  
 > - Something is missing here 😩
 > - <=1.0 FPS is not the performance we’re looking for.
 
-#### Performance of glxspheres:
 <img src=".media/glxspheres.png" align="center" width="800" height="auto"/>
 
 ##
@@ -43,16 +49,21 @@ Throughout my exploration of WSL, I've gathered key insights about graphics rend
 
 ##
 
+#### Performance of vkcube:
+
 > [!NOTE]  
 > - After installing the latest Mesa package, Vulkan is "functioning"
 
-#### Performance of vkcube:
+
 <img src=".media/vkcube.png" align="center" width="800" height="auto"/>
 
 ##
 
-#### Performance of vkcube:
+#### Torchlight II:
+
 <img src=".media/preview.gif" align="center" width="800" height="auto"/>
+
+
 
 ## 🔸 Setting Up - Windows
 
