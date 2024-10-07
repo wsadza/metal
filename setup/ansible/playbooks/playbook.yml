@@ -49,11 +49,23 @@
   # Nvidia Container Toolkit
   #######################################
   
-  - role: nvidia-ctr 
-    package: "nvidia-ctr"
-    check_command: "nvidia-ctr --version"
-    gpg_key_url: "https://nvidia.github.io/libnvidia-container/gpgkey"
-    repo_url: "https://nvidia.github.io/libnvidia-container/stable/deb/$(ARCH) /"
+  - role: apt-gpg 
+
+# Installation 
+    installation:
+      package: "nvidia-container-toolkit"
+      check_command: "nvidia-ctr --version"
+      gpg_key_url: "https://nvidia.github.io/libnvidia-container/gpgkey"
+      repo_url: "https://nvidia.github.io/libnvidia-container/stable/deb/$(ARCH) /"
+
+    configuration:
+# Configure Nvidia Runtime for Conteinerd 
+      - |
+        nvidia-ctk runtime configure
+
+# Configure Nvidia Runtime for Docker 
+      - |
+        nvidia-ctk runtime configure --runtime=docker
   
   #######################################
   # Helm 
