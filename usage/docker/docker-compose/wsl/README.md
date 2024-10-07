@@ -182,3 +182,90 @@ To optimize the GPU utilization and configure necessary services within your WSL
     </tr>
 </table>
 
+## 🔸 Usage
+
+```sh
+export DOCKER_HOST="${hostname -I | cut -d' ' -f1}"
+```
+
+```
+version: '3.8'
+services:
+
+# ----------------------------
+# Stream Server
+
+    stream:
+      hostname: stream
+      image: "ghcr.io/utilizable/metal/full-ubuntu:latest"
+      entrypoint: [ "/bin/bash", "-c" ]
+
+# Slightly mod entrypoint.sh
+      command:
+        - |
+          sudo sed -i '1,/^# Execute all container core init scripts/d' /entrypoint.sh;
+          echo "LD_LIBRARY_PATH=\"$${LD_LIBRARY_PATH:+$${LD_LIBRARY_PATH}:}/usr/lib/wsl/lib\"" \
+                | sudo tee -a /etc/bash.bashrc;
+          sudo add-apt-repository -y ppa:oibaf/graphics-drivers;
+          sudo apt-get update;
+          sudo dpkg --add-architecture i386;
+          sudo apt-get install -y\
+            vainfo \
+            mesa-vulkan-drivers \
+            libgl1-mesa-dev \
+            pkg-config \
+            libglvnd-dev \
+            libc6:i386;
+          sudo apt upgrade -y;
+          /entrypoint.sh
+
+      ports:
+# Expose app - stream
+        - "8080:8080"
+        - "3478:3478/udp"
+        - "3478:3478/tcp"
+
+
+      environment:
+# Use internal turn server in case of lack of remote setting
+        DOCKER_HOST: "${DOCKER_HOST}"
+
+# WSL: ~
+#   https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg
+        MESA_D3D12_DEFAULT_ADAPTER_NAME: "NVIDIA"
+        LIBVA_DRIVER_NAME: "d3d12"
+        VK_ICD_FILENAMES: "/usr/share/vulkan/icd.d/dzn_icd.x86_64.json"
+
+# Apply gpu resource
+      deploy:
+          resources:
+            reservations:
+              devices:
+                - driver: nvidia
+                  count: all
+                  capabilities: [gpu]
+
+# The following devices must be shared with the container.
+      devices:
+        - /dev/dri/card0
+        - /dev/dri/renderD128
+        - /dev/dxg
+
+# To Make Steam working we need to break isolation
+      tmpfs:
+        - /dev/shm:rw
+      shm_size: 64
+      ipc: host # Could also be set to 'shareable'
+      ulimits:
+        nofile:
+          soft: 1024
+          hard: 524288
+      cap_add:
+        - NET_ADMIN
+        - SYS_ADMIN
+        - SYS_NICE
+        - IPC_LOCK
+      security_opt:
+        - seccomp:unconfined
+        - apparmor:unconfined
+```
