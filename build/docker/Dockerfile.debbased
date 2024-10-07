@@ -67,6 +67,7 @@ RUN \
            udev \
            tzdata \
            dialog \
+           pkg-config \
     && \
     echo "**** Set locale and timezone ****" \ 
         && locale-gen ${LANG} \
@@ -1217,6 +1218,7 @@ RUN \
             intel-media-va-driver-non-free \
             i965-va-driver-shaders \
             libva2 \
+            vainfo \
     && \
     echo "**** Install OpenGL libraries ****" \
         && apt-get install -y --no-install-recommends \
@@ -1237,6 +1239,7 @@ RUN \
            libglx0 \
            libglu1 \
            libsm6  \
+           libglvnd-dev \
     && \
     echo "**** Install Development Libraries ****" \
         && apt-get install -y --no-install-recommends \
@@ -1266,7 +1269,7 @@ RUN \
            mesa-vulkan-drivers:i386 \
            mesa-vulkan-drivers \
            libva2 \
-	   vdpau-driver-all \
+	         vdpau-driver-all \
     && \
     echo "**** Install Core 32-bit Libraries ****" \
         && apt-get install -y --no-install-recommends \
@@ -1299,6 +1302,28 @@ RUN \
             /var/lib/apt/lists/* \
             /var/tmp/* \
             /tmp/*
+
+RUN \
+    echo "**** Optional: Ubuntu Mesa ****" \
+		    && ID="$(\
+        	     grep ^ID= /etc/os-release \
+        	     | cut -d= -f2 \
+        	     | tr -d '\"' \
+        )" \
+        && if [ "${ID}" = "ubuntu" ]; \
+		    then \
+              add-apt-repository -y ppa:oibaf/graphics-drivers \
+              && apt-get update \ 
+              && apt-get upgrade -y \
+        && \
+        echo "**** Section cleanup ****" \
+            && apt-get clean autoclean -y \
+            && apt-get autoremove -y \
+            && rm -rf \
+                /var/lib/apt/lists/* \
+                /var/tmp/* \
+                /tmp/*; \
+        fi
 
 ############################################################
 #
