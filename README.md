@@ -1,9 +1,10 @@
 > [!NOTE]  
-> - Low-Latency streaming service
-> - Game everywhere
-> - Docker is new gaming platform
+> - Low-Latency streaming service.
+> - Game everywhere.
+> - Docker is your-new gaming platform.
 
 # Metal
+<img src=".media/sections/section-a.png" align="left" width="5%" height="auto"/>
 
 Ever been fascinated by remote gaming? Same! Inspired by the [`selkies-gstreamer`](https://github.com/selkies-project/selkies-gstreamer) project (a relic of [`Google Stadia's`](https://github.com/GoogleCloudPlatform/selkies-examples/tree/master) epicness), I decided to repack their [`egl solution`](https://github.com/selkies-project/docker-nvidia-egl-desktop) for fun and learning - obviously.
 
@@ -13,8 +14,8 @@ Now it's a streaming powerhouse. Why? Just because!
 
 > [!IMPORTANT]  
 > - This project acts as a glue, integrating multiple solutions and patterns.
-> - I'm just here to containerize it! 🐳
-> - Obviously games are not included 😉
+> - I'm just here to containerize it!
+> - Obviously games are not included. 😉
 
 ##
 
@@ -26,21 +27,20 @@ Now it's a streaming powerhouse. Why? Just because!
 docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n" 
 ```
 
-## 🔸 Preview - Steam
+## Preview - Steam
 <div align="center">
 <kbd><img src=".media/preview-steam.gif" width="800" height="auto"/></kbd>
 </div>
 
-## 🔹 Usage
+## Usage
+<img src=".media/sections/section-b.png" align="left" width="5%" height="auto"/>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
-
-##
+This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
 ### Docker:
 
 > [!TIP]
-> The DOCKER_HOST variable should point to IP of the machine where stream-instance is launching.
+> The `${DOCKER_HOST}` variable should point to IP of the machine where stream-instance is launching.
 
 - Minimal-Debian:
   <br>
@@ -133,12 +133,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
     </tr>
 </table>
 
-## 🔹 Preview - Second Instance
+## Preview - Second Instance
 <div align="center">
 <kbd><img src=".media/preview.gif" align="center" width="800" height="auto"/></kbd>
 </div>
 
-## 🔸 Setup
+## Setup
+<img src=".media/sections/section-c.png" align="left" width="5%" height="auto"/>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
 Ready to use workflows:
@@ -157,6 +158,12 @@ Ready to use workflows:
 
 <br>
 
-## 🔹 Disclaimers
+## Disclaimers
+<img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
+
+## Further Works / To-do
+<img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
