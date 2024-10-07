@@ -4,5 +4,9 @@
 # Configuration: 
 #####################################
 
-- name: Expose Kubeconfig globaly
-  shell: echo KUBECONFIG=/etc/rancher/k3s/k3s.yaml | tee -a /etc/environment
+- name: Copy Kubeconfig to user's home directory
+  ansible.builtin.copy:
+    src: /etc/rancher/k3s/k3s.yaml
+    dest: "{{ ansible_env.HOME }}/.kube/config"
+    owner: "{{ ansible_env.USER }}"
+    mode: '0644'

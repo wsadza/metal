@@ -50,6 +50,10 @@
   #######################################
   
   - role: nvidia-ctr 
+    package: "nvidia-ctr"
+    check_command: "nvidia-ctr --version"
+    gpg_key_url: "https://nvidia.github.io/libnvidia-container/gpgkey"
+    repo_url: "https://nvidia.github.io/libnvidia-container/stable/deb/$(ARCH) /"
   
   #######################################
   # Helm 
