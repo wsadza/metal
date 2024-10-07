@@ -16,7 +16,7 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 ```
 
 ## 🔸 Preview - Multi-Instance
-<img src=".media/preview.gif" align="center" width="800" height="auto"/>
+<kbd><img src=".media/preview.gif" align="center" width="800" height="auto"/></kbd>
 
 ## 🔹 Usage
 
@@ -121,7 +121,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
 </table>
 
 ## 🔹 Preview - Steam
-<img src=".media/preview-steam.gif" align="center" width="800" height="auto"/>
+<kbd><img src=".media/preview-steam.gif" align="center" width="800" height="auto"/></kbd>
 
 ## 🔸 Setup
 
