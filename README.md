@@ -1,6 +1,6 @@
 > [!NOTE]  
 > - This project acts as a glue, integrating multiple solutions and patterns.
-> - Online Gaming Streaming Platform.
+> - I'm just here to containerize it! 🐋
 
 # Metal
 
