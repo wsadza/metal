@@ -230,11 +230,21 @@ services:
 # Use internal turn server in case of lack of remote setting
         DOCKER_HOST: "${DOCKER_HOST}"
 
-# WSL: ~
-#   https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg
+# WSL:
+# -------------------------------------------------
+
+# WSL configuration
         MESA_D3D12_DEFAULT_ADAPTER_NAME: "NVIDIA"
         LIBVA_DRIVER_NAME: "d3d12"
         VK_ICD_FILENAMES: "/usr/share/vulkan/icd.d/dzn_icd.x86_64.json"
+
+# The following devices must be shared with the container.
+      devices:
+        - /dev/dri/card0
+        - /dev/dri/renderD128
+        - /dev/dxg
+
+# -------------------------------------------------
 
 # Apply gpu resource
       deploy:
@@ -244,12 +254,6 @@ services:
                 - driver: nvidia
                   count: all
                   capabilities: [gpu]
-
-# The following devices must be shared with the container.
-      devices:
-        - /dev/dri/card0
-        - /dev/dri/renderD128
-        - /dev/dxg
 
 # To Make Steam working we need to break isolation
       tmpfs:
