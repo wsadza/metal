@@ -29,7 +29,7 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 
 ##
 
-### TOC:[](#TOC)
+### toc:[](#toc)
 - [Usage](#usage)
   - [Usage `docker`](#docker)
   - [Usage `docker-compose`](#docker--compose)
@@ -84,7 +84,7 @@ This section provides guidance on deploying and configuring streaming instances 
   ```
 
 <br>
-<div align="right">[ <a href="#TOC">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ##
 
@@ -103,7 +103,7 @@ This section provides guidance on deploying and configuring streaming instances 
   ```
   
 <br>
-<div align="right">[ <a href="#TOC">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ##
 
@@ -136,7 +136,7 @@ This section provides guidance on deploying and configuring streaming instances 
 </table>
 
 <br>
-<div align="right">[ <a href="#TOC">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ##
 
@@ -153,7 +153,7 @@ This section provides guidance on deploying and configuring streaming instances 
 </table>
 
 <br>
-<div align="right">[ <a href="#TOC">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ##
 
@@ -170,7 +170,7 @@ This section provides guidance on deploying and configuring streaming instances 
 </table>
 
 <br>
-<div align="right">[ <a href="#TOC">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ## Preview - Second Instance
 <div align="center">
@@ -252,7 +252,7 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./en
 ```
 
 <br>
-<div align="right">[ <a href="#TOC">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ## Disclaimers
 <img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
@@ -260,7 +260,7 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./en
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
 
 <br>
-<div align="right">[ <a href="#TOC">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ## Further Works / To-do
 <img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
@@ -268,4 +268,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
 
 <br>
-<div align="right">[ <a href="#TOC">↑ Back to top ↑</a> ]</div>
+<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
