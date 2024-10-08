@@ -27,9 +27,11 @@ Now it's a streaming powerhouse. Why? Just because!
 docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n" 
 ```
 
+##
+
 ### TOC:[](#TOC)
 - [Usage](#usage)
-  - [Usage `docker`](#usage-docker)
+  - [Usage `docker`](#usage--docker)
   - [Usage `docker-compose`](#usage-docker-compose)
   - [Usage `kubernetes`](#usage-kubernetes)
   - [Usage `helm`](#usage-helm)
@@ -56,7 +58,7 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
-### Docker:
+### Docker:[](#usage-docker)
 
 > [!TIP]
 > The `${DOCKER_HOST}` variable should point to IP of the machine where stream-instance is launching.
@@ -96,7 +98,7 @@ This section provides guidance on deploying and configuring streaming instances 
   
 ##
 
-### Docker - Compose:
+### Docker - Compose:[](#usage-docker-compose)
 
 > [!IMPORTANT]  
 > Please read the compose-file header before proceeding with the setup.
