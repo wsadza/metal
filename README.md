@@ -83,9 +83,6 @@ This section provides guidance on deploying and configuring streaming instances 
   docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
 
-<br>
-<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
-
 ##
 
 > [!NOTE]  
@@ -102,9 +99,6 @@ This section provides guidance on deploying and configuring streaming instances 
   docker run -d --hostname stream -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') -e SELKIES_ENCODER=nvh264enc --gpus '"device=0"' --tmpfs /dev/shm:rw --shm-size 64m --ipc host --ulimit nofile=1024:524288 --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
   
-<br>
-<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
-
 ##
 
 ### Docker - Compose:
@@ -135,9 +129,6 @@ This section provides guidance on deploying and configuring streaming instances 
     </tr>
 </table>
 
-<br>
-<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
-
 ##
 
 ### Kubernetes - Manifest:
@@ -151,9 +142,6 @@ This section provides guidance on deploying and configuring streaming instances 
         <td>A fully configured deployment utilizing the Nvidia runtime, with broken isolation, host networking, and an internal (built-in) TURN server.</td>
     </tr>
 </table>
-
-<br>
-<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ##
 
@@ -195,7 +183,7 @@ This repository features an [Ansible script](./setup/ansible) that guides you th
 
 > [!Note]
 > <details>
->  <summary>Key Components:</summary>
+>  <summary>Key Components ↓ </summary>
 >    <br>
 >    <ul>
 >        <li>nvidia-driver</li>
@@ -204,24 +192,6 @@ This repository features an [Ansible script](./setup/ansible) that guides you th
 >        <li>nvidia-container-toolkit</li>
 >        <li>k3s</li>
 >    </ul>
-> </table>
-> </details>
-
-> [!TIP]
-> <details>
->  <summary>Helpful Resources:</summary>
->    <br>
-> <ul>
->    <li><a href="https://www.reddit.com/r/devops/comments/10xty21/comparison_among_techniques_to_share_gpus_in/">Techniques to share GPU in Kubernetes</a></li>
->    <li><a href="https://docs.google.com/document/d/1H-ddA11laPQf_1olwXRjEDbzNihxprjPr74pZ4Vdf2M/edit?pli=1">MPS Support in the Kubernetes GPU Device Plugin</a></li>
->    <li><a href="https://www.declarativesystems.com/2023/11/04/kubernetes-nvidia.html">Kubernetes + NVIDIA on K3S</a></li>
->    <li><a href="https://jayground8-github-io.translate.goog/blog/20240324-k8s-device-plugin?_x_tr_sl=auto&_x_tr_tl=pl&_x_tr_hl=pl&_x_tr_hist=true">Using NVIDIA GPU Multi-Process Service with k8s-device-plugin</a></li>
->    <li><a href="https://gist.github.com/bgulla/5ea0e7fd310b5db4f9b66036d1cdb3d3">GPU Operator Snippet</a></li>
->    <li><a href="https://github.com/NVIDIA/k8s-device-plugin/tree/main/deployments/helm/nvidia-device-plugin">Nvidia Device Plugin</a></li>
->    <li><a href="https://github.com/UntouchedWagons/K3S-NVidia">K3S-NVidia</a></li>
->    <li><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a></li>
-> </ul>
-> </table>
 > </details>
 
 > [!WARNING]  
@@ -229,7 +199,6 @@ This repository features an [Ansible script](./setup/ansible) that guides you th
 
 ##
 
-#setup-ansible
 ### Ansible
 
 Clone this repository and run the [run ansible](./setup/ansible/run_ansible.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
@@ -251,7 +220,25 @@ Clone this repository and run the [run ansible](./setup/ansible/run_ansible.sh) 
 git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./entrypoint.sh
 ```
 
-<br>
+##
+
+> [!TIP]
+> <details>
+>  <summary>Helpful Resources ↓ </summary>
+>    <br>
+> <ul>
+>    <li><a href="https://www.reddit.com/r/devops/comments/10xty21/comparison_among_techniques_to_share_gpus_in/">Techniques to share GPU in Kubernetes</a></li>
+>    <li><a href="https://docs.google.com/document/d/1H-ddA11laPQf_1olwXRjEDbzNihxprjPr74pZ4Vdf2M/edit?pli=1">MPS Support in the Kubernetes GPU Device Plugin</a></li>
+>    <li><a href="https://www.declarativesystems.com/2023/11/04/kubernetes-nvidia.html">Kubernetes + NVIDIA on K3S</a></li>
+>    <li><a href="https://jayground8-github-io.translate.goog/blog/20240324-k8s-device-plugin?_x_tr_sl=auto&_x_tr_tl=pl&_x_tr_hl=pl&_x_tr_hist=true">Using NVIDIA GPU Multi-Process Service with k8s-device-plugin</a></li>
+>    <li><a href="https://gist.github.com/bgulla/5ea0e7fd310b5db4f9b66036d1cdb3d3">GPU Operator Snippet</a></li>
+>    <li><a href="https://github.com/NVIDIA/k8s-device-plugin/tree/main/deployments/helm/nvidia-device-plugin">Nvidia Device Plugin</a></li>
+>    <li><a href="https://github.com/UntouchedWagons/K3S-NVidia">K3S-NVidia</a></li>
+>    <li><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a></li>
+> </ul>
+> </table>
+> </details>
+
 <div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ## Disclaimers
@@ -259,7 +246,6 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./en
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
 
-<br>
 <div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ## Further Works / To-do
@@ -267,5 +253,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
 
-<br>
 <div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
