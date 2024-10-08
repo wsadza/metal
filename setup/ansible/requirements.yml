@@ -1,6 +1,0 @@
-#!/usr/bin/env ansible-playbook
----
-#- name: utilizable-proxmox-vm-preseeding
-#  src: https://github.com/utilizable/ansible-role-proxmox-vm-preseeding.git
-#  version: develop 
-...

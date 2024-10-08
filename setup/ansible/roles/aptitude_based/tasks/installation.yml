@@ -44,19 +44,11 @@
       debug:
         msg: "The Repo URL is: {{ repo_url.stdout }}"
 
-        #    - name: "{{ installation.name }} - Download GPG Key"
-        #      get_url:
-        #        url: "{{ gpg_key_url.stdout }}"
-        #        dest: "/usr/share/keyrings/{{ installation.name }}-keyring.asc"
-        #        mode: '0644'
-        #        force: true
-
     - name: "{{ installation.name }} - Download GPG Key using curl"
       command: >
         curl -fsSL {{ gpg_key_url.stdout }} -o /usr/share/keyrings/{{ installation.name }}-keyring.asc
       args:
         creates: "/usr/share/keyrings/{{ installation.name }}-keyring.asc"  # This prevents the command from running if the file already exists
-
 
     - name: "{{ installation.name }} - Add APT Repository"
       copy:
