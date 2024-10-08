@@ -99,7 +99,7 @@ This section provides guidance on deploying and configuring streaming instances 
   
 ##
 
-{#usage-docker-compose}
+#usage-docker-compose
 ### Docker - Compose:
 
 > [!IMPORTANT]  
@@ -130,8 +130,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ##
 
-{#usage-kubernetes-manifests}
-
+#usage-kubernetes-manifests
 ### Kubernetes - Manifest:
 
 > [!CAUTION]
@@ -146,7 +145,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ##
 
-{#usage-kubernetes-helm}
+#usage-kubernetes-helm
 ### Kubernetes - Helm:
 
 > [!WARNING]  
@@ -178,6 +177,7 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
  \______/ \________|   \__|    \______/ \__|      
 --->
 
+#setup
 ## Setup
 <img src=".media/sections/section-c.png" align="left" width="5%" height="auto"/>
 
@@ -219,6 +219,7 @@ This repository features an [Ansible script](./setup/ansible) that guides you th
 
 ##
 
+#setup-ansible
 ### Ansible
 
 Clone this repository and run the [run ansible](./setup/ansible/run_ansible.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
@@ -229,6 +230,7 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && .
 
 ##
 
+#setup-bash
 ### Bash
 
 > [!WARNING]  
