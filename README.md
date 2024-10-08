@@ -32,6 +32,17 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 <kbd><img src=".media/preview-steam.gif" width="800" height="auto"/></kbd>
 </div>
 
+<!---
+$$\   $$\  $$$$$$\   $$$$$$\   $$$$$$\  $$$$$$$$\ 
+$$ |  $$ |$$  __$$\ $$  __$$\ $$  __$$\ $$  _____|
+$$ |  $$ |$$ /  \__|$$ /  $$ |$$ /  \__|$$ |      
+$$ |  $$ |\$$$$$$\  $$$$$$$$ |$$ |$$$$\ $$$$$\    
+$$ |  $$ | \____$$\ $$  __$$ |$$ |\_$$ |$$  __|   
+$$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |      
+\$$$$$$  |\$$$$$$  |$$ |  $$ |\$$$$$$  |$$$$$$$$\ 
+ \______/  \______/ \__|  \__| \______/ \________|
+--->
+
 ## Usage
 <img src=".media/sections/section-b.png" align="left" width="5%" height="auto"/>
 
@@ -138,25 +149,63 @@ This section provides guidance on deploying and configuring streaming instances 
 <kbd><img src=".media/preview.gif" align="center" width="800" height="auto"/></kbd>
 </div>
 
+<!---
+ $$$$$$\  $$$$$$$$\ $$$$$$$$\ $$\   $$\ $$$$$$$\  
+$$  __$$\ $$  _____|\__$$  __|$$ |  $$ |$$  __$$\ 
+$$ /  \__|$$ |         $$ |   $$ |  $$ |$$ |  $$ |
+\$$$$$$\  $$$$$\       $$ |   $$ |  $$ |$$$$$$$  |
+ \____$$\ $$  __|      $$ |   $$ |  $$ |$$  ____/ 
+$$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |      
+\$$$$$$  |$$$$$$$$\    $$ |   \$$$$$$  |$$ |      
+ \______/ \________|   \__|    \______/ \__|      
+-->
+
 ## Setup
 <img src=".media/sections/section-c.png" align="left" width="5%" height="auto"/>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
-Ready to use workflows:
+This repository features an Ansible script that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The Ansible playbook is tailored for Ubuntu and Debian distributions, as well as NVIDIA hardware. 
 
-### Base:
+> [!Note]
+> <details>
+>  <summary>Key Components:</summary>
+>    <br>
+>    <ul>
+>        <li>nvidia-driver</li>
+>        <li>nvidia-device-plugin</li>
+>        <li>docker</li>
+>        <li>nvidia-container-toolkit</li>
+>        <li>k3s</li>
+>    </ul>
+> </table>
+> </details>
 
-- [`Nvidia Container Toolkit`](.github/workflows/building_docker.yml)
+> [!TIP]
+> <details>
+>  <summary>Helpful Resources:</summary>
+>    <br>
+> <ul>
+>    <li><a href="https://www.reddit.com/r/devops/comments/10xty21/comparison_among_techniques_to_share_gpus_in/">Techniques to share GPU in Kubernetes</a></li>
+>    <li><a href="https://docs.google.com/document/d/1H-ddA11laPQf_1olwXRjEDbzNihxprjPr74pZ4Vdf2M/edit?pli=1">MPS Support in the Kubernetes GPU Device Plugin</a></li>
+>    <li><a href="https://www.declarativesystems.com/2023/11/04/kubernetes-nvidia.html">Kubernetes + NVIDIA on K3S</a></li>
+>    <li><a href="https://jayground8-github-io.translate.goog/blog/20240324-k8s-device-plugin?_x_tr_sl=auto&_x_tr_tl=pl&_x_tr_hl=pl&_x_tr_hist=true">Using NVIDIA GPU Multi-Process Service with k8s-device-plugin</a></li>
+>    <li><a href="https://gist.github.com/bgulla/5ea0e7fd310b5db4f9b66036d1cdb3d3">GPU Operator Snippet</a></li>
+>    <li><a href="https://github.com/NVIDIA/k8s-device-plugin/tree/main/deployments/helm/nvidia-device-plugin">Nvidia Device Plugin</a></li>
+>    <li><a href="https://github.com/UntouchedWagons/K3S-NVidia">K3S-NVidia</a></li>
+>    <li><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a></li>
+>    <li><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Runtime Support</a></li>
+> </ul>
+> </table>
+> </details>
 
-### Nvidia:
+> [!WARNING]  
+> - You can execute setup-ansible-playbook on WSL, but please note that the final GPU-Sharing (MPS) functionality isn't working there [#3024](https://github.com/canonical/microk8s/issues/3024).
+> - An Ansible playbook is tailored for Debian-Based Linux distributions.
 
-- [`Nvidia Container Toolkit`](.github/workflows/building_docker.yml)
+Clone this repository and run the run_ansible bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
 
-### K3S:
-
-- [`Nvidia GPU Device Plugin`](.github/workflows/tagging_semver.yml)
-
-<br>
+```sh
+git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && ./run_ansible.sh
+```
 
 ## Disclaimers
 <img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
