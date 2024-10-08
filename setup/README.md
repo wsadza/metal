@@ -26,7 +26,7 @@ This repository features an Ansible script that guides you through a minimal set
 > [!CAUTION]
 > - Ansible script is suitable for debbased distributions!
 
-Simply cone this repository and execute run_ansible bash script, it should fetch all ansible dependencies and execute playbook
+Clone this repository and run the run_ansible bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
 
 ```sh
 git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && ./run_ansible.sh
