@@ -1,32 +1,46 @@
 > [!NOTE]  
-> This project acts as a glue, integrating multiple solutions and patterns.
+> - Low-Latency streaming service.
+> - Game everywhere.
+> - Docker is your-new gaming platform.
 
 # Metal
+<img src=".media/sections/section-a.png" align="left" width="5%" height="auto"/>
 
-Ever been fascinated by remote gaming? Same! Inspired by the [`selkies-gstreamer`](https://github.com/selkies-project/selkies-gstreamer) project (a relic of [`Google Stadia's`](https://github.com/GoogleCloudPlatform/selkies-examples/tree/master) epicness), I decided to repack their [`egl solution`](https://github.com/selkies-project/docker-nvidia-egl-desktop) for fun and glory - obviously.
+Ever been fascinated by remote gaming? Same! Inspired by the [`selkies-gstreamer`](https://github.com/selkies-project/selkies-gstreamer) project (a relic of [`Google Stadia's`](https://github.com/GoogleCloudPlatform/selkies-examples/tree/master) epicness), I decided to repack their [`egl solution`](https://github.com/selkies-project/docker-nvidia-egl-desktop) for fun and learning - obviously.
 
 Introducing my totally modular, Dockerized streaming service. Build it your way, whether you're on Debian or Ubuntu (I went agnostic on dependencies to keep it flexible). I revamped the structure for ultimate control, throwing in Supervisord magic, with a dash of [`s6-overlay`](https://github.com/just-containers/s6-overlay) and some [`docker-steam-headless`](https://github.com/Steam-Headless/docker-steam-headless) trickery.
 
 Now it's a streaming powerhouse. Why? Just because!
 
+> [!IMPORTANT]  
+> - This project acts as a glue, integrating multiple solutions and patterns.
+> - I'm just here to containerize it!
+> - Obviously games are not included. 😉
+
+##
+
 ### TLDR; 
+> [!NOTE]  
+> - Minimal Ubuntu image that utilizes software rendering ([llvmpipe](https://docs.mesa3d.org/drivers/llvmpipe.html])), suitable for WSL / Native linux instances.
+
 ```sh
 docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n" 
 ```
 
-## 🔸 Preview
-<img src=".media/preview.gif" align="center"/>
+## Preview - Steam
+<div align="center">
+<kbd><img src=".media/preview-steam.gif" width="800" height="auto"/></kbd>
+</div>
 
-## 🔹 Usage
+## Usage
+<img src=".media/sections/section-b.png" align="left" width="5%" height="auto"/>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
+This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
-##
-
-### Docker;
+### Docker:
 
 > [!TIP]
-> The DOCKER_HOST variable should point to IP of the machine where stream-instance is launching.
+> The `${DOCKER_HOST}` variable should point to IP of the machine where stream-instance is launching.
 
 - Minimal-Debian:
   <br>
@@ -63,7 +77,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
   
 ##
 
-### Docker - Compose;
+### Docker - Compose:
 
 > [!IMPORTANT]  
 > Please read the compose-file header before proceeding with the setup.
@@ -93,7 +107,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
 
 ##
 
-### K8S - Manifest;
+### K8S - Manifest:
 
 > [!CAUTION]
 > The deployment below contains configurations that break container isolation to meet the requirements of the Steam client.
@@ -107,7 +121,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
 
 ##
 
-### K8S - Helm;
+### K8S - Helm:
 
 > [!WARNING]  
 > 🚧 Under Construction. 🚧
@@ -119,7 +133,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
     </tr>
 </table>
 
-## 🔸 Setup
+## Preview - Second Instance
+<div align="center">
+<kbd><img src=".media/preview.gif" align="center" width="800" height="auto"/></kbd>
+</div>
+
+## Setup
+<img src=".media/sections/section-c.png" align="left" width="5%" height="auto"/>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
 Ready to use workflows:
@@ -138,6 +158,12 @@ Ready to use workflows:
 
 <br>
 
-## 🔹 Disclaimers
+## Disclaimers
+<img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
+
+## Further Works / To-do
+<img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
