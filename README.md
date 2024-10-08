@@ -31,11 +31,13 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 
 ### TOC:[](#TOC)
 - [Usage](#usage)
-  - [Usage `docker`](#usage-docker)
-  - [Usage `docker-compose`](#usage-docker-compose)
-  - [Usage `kubernetes`](#usage-kubernetes-manifest)
-  - [Usage `helm`](#usage-kubernetes-helm)
-- [Setup](#setup-integration)
+  - [Usage `docker`](#docker)
+  - [Usage `docker-compose`](#docker-compose)
+  - [Usage `kubernetes`](#kubernetes-manifest)
+  - [Usage `helm`](#kubernetes-helm)
+- [Setup](#setup)
+  - [Setup Ansible](#ansible)
+  - [Setup Bash](#bash)
 
 ## Preview - Steam
 <div align="center">
@@ -58,7 +60,6 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
-{#usage-docker}
 ### Docker:
 
 > [!TIP]
@@ -99,8 +100,6 @@ This section provides guidance on deploying and configuring streaming instances 
   
 ##
 
-#usage-docker-compose
-
 ### Docker - Compose:
 
 > [!IMPORTANT]  
@@ -131,7 +130,6 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ##
 
-#usage-kubernetes-manifests
 ### Kubernetes - Manifest:
 
 > [!CAUTION]
@@ -146,7 +144,6 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ##
 
-#usage-kubernetes-helm
 ### Kubernetes - Helm:
 
 > [!WARNING]  
@@ -178,7 +175,6 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
  \______/ \________|   \__|    \______/ \__|      
 --->
 
-#setup
 ## Setup
 <img src=".media/sections/section-c.png" align="left" width="5%" height="auto"/>
 
@@ -231,7 +227,6 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && .
 
 ##
 
-#setup-bash
 ### Bash
 
 > [!WARNING]  
