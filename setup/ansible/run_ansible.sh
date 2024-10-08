@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Add google DNS server
-echo "nameserver 8.8.8.8" \
+echo -e "->Adding Google DNS Server" \
+  && echo "nameserver 8.8.8.8" \
 	| sudo tee /etc/resolv.conf > /dev/null
 
 # Install Tools 
