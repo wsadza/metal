@@ -31,10 +31,10 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 
 ### TOC:[](#TOC)
 - [Usage](#usage)
-  - [Usage `docker`](#usage--docker)
+  - [Usage `docker`](#usage-docker)
   - [Usage `docker-compose`](#usage-docker-compose)
-  - [Usage `kubernetes`](#usage-kubernetes)
-  - [Usage `helm`](#usage-helm)
+  - [Usage `kubernetes`](#usage-kubernetes-manifest)
+  - [Usage `helm`](#usage-kubernetes-helm)
 - [Setup](#setup-integration)
 
 ## Preview - Steam
@@ -58,7 +58,8 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
-### Docker:[](#usage-docker)
+{#usage-docker}
+### Docker:
 
 > [!TIP]
 > The `${DOCKER_HOST}` variable should point to IP of the machine where stream-instance is launching.
@@ -98,7 +99,8 @@ This section provides guidance on deploying and configuring streaming instances 
   
 ##
 
-### Docker - Compose:[](#usage-docker-compose)
+{#usage-docker-compose}
+### Docker - Compose:
 
 > [!IMPORTANT]  
 > Please read the compose-file header before proceeding with the setup.
@@ -128,7 +130,8 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ##
 
-### K8S - Manifest:
+{#usage-kubernetes-manifests}
+### Kubernetes - Manifest:
 
 > [!CAUTION]
 > The deployment below contains configurations that break container isolation to meet the requirements of the Steam client.
@@ -142,7 +145,8 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ##
 
-### K8S - Helm:
+{#usage-kubernetes-helm}
+### Kubernetes - Helm:
 
 > [!WARNING]  
 > 🚧 Under Construction. 🚧
