@@ -6,6 +6,8 @@ This repository features an Ansible script that guides you through a minimal set
 > [!NOTE]  
 > You can execute setup playbook on WSL, but please note that the final MPS-sharing functionality isn't working there [#3024](https://github.com/canonical/microk8s/issues/3024).
 
+##
+
 #### Helpful Resources:
 
  - Kubernetes
@@ -20,6 +22,8 @@ This repository features an Ansible script that guides you through a minimal set
    - [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
  - K3S
     - [NVIDIA Container Runtime Support](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+      
+##
 
 #### Usage:
 
