@@ -19,13 +19,21 @@ Now it's a streaming powerhouse. Why? Just because!
 
 ##
 
-### TLDR; 
+### TLDR: 
 > [!NOTE]  
 > - Minimal Ubuntu image that utilizes software rendering ([llvmpipe](https://docs.mesa3d.org/drivers/llvmpipe.html])), suitable for WSL / Native linux instances.
 
 ```sh
 docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n" 
 ```
+
+### TOC:[](#table-of-contents)
+- [Usage](#usage)
+  - [Usage `docker`](#usage-docker)
+  - [Usage `docker-compose`](#usage-docker-compose)
+  - [Usage `kubernetes`](#usage-kubernetes)
+  - [Usage `helm`](#usage-helm)
+- [Setup](#setup-integration)
 
 ## Preview - Steam
 <div align="center">
@@ -144,6 +152,9 @@ This section provides guidance on deploying and configuring streaming instances 
     </tr>
 </table>
 
+<br>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+
 ## Preview - Second Instance
 <div align="center">
 <kbd><img src=".media/preview.gif" align="center" width="800" height="auto"/></kbd>
@@ -196,11 +207,12 @@ This repository features an [Ansible script](./setup/ansible) that guides you th
 > </table>
 > </details>
 
+> [!WARNING]  
+> - Final GPU-Sharing (MPS) functionality isn't working on WSL. ([#3024](https://github.com/canonical/microk8s/issues/3024))
+
 ##
 
-> [!WARNING]  
-> - You can execute setup-ansible-playbook on WSL, but please note that the final GPU-Sharing (MPS) functionality isn't working there [#3024](https://github.com/canonical/microk8s/issues/3024).
-> - An Ansible playbook is tailored for Debian-Based Linux distributions.
+### Ansible
 
 Clone this repository and run the [run ansible](./setup/ansible/run_ansible.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
 
@@ -208,12 +220,34 @@ Clone this repository and run the [run ansible](./setup/ansible/run_ansible.sh) 
 git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && ./run_ansible.sh
 ```
 
+##
+
+### Bash
+
+> [!WARNING]  
+> 🚧 Under Construction. 🚧
+
+Clone this repository and run the [run ansible](./setup/ansible/run_ansible.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
+
+```sh
+git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./entrypoint.sh
+```
+
+<br>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+
 ## Disclaimers
 <img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
 
+<br>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
+
 ## Further Works / To-do
 <img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
+
+<br>
+<div align="right">[ <a href="#table-of-contents">↑ Back to top ↑</a> ]</div>
