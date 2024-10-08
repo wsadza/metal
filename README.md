@@ -196,6 +196,8 @@ This repository features an [Ansible script](./setup/ansible) that guides you th
 > </table>
 > </details>
 
+##
+
 > [!WARNING]  
 > - You can execute setup-ansible-playbook on WSL, but please note that the final GPU-Sharing (MPS) functionality isn't working there [#3024](https://github.com/canonical/microk8s/issues/3024).
 > - An Ansible playbook is tailored for Debian-Based Linux distributions.
