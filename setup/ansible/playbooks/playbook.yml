@@ -243,8 +243,8 @@
         EOF
 # Label Node 
       - |
-	NODE="$(kubectl get nodes --output=jsonpath='{.items[*].metadata.name}')"
-	kubectl label node ${NODE} nvidia.com/mps.capable=true	
+        NODE="$(kubectl get nodes --output=jsonpath='{.items[*].metadata.name}')"
+        kubectl label node ${NODE} nvidia.com/mps.capable=true	
 
 # CONFIGURATION 
     configuration: []
