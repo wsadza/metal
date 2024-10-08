@@ -163,7 +163,7 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 ## Setup
 <img src=".media/sections/section-c.png" align="left" width="5%" height="auto"/>
 
-This repository features an Ansible script that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The Ansible playbook is tailored for Ubuntu and Debian distributions, as well as NVIDIA hardware. 
+This repository features an [Ansible script](./setup/ansible) that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The Ansible playbook is tailored for Ubuntu and Debian distributions, as well as NVIDIA hardware. 
 
 > [!Note]
 > <details>
@@ -200,7 +200,7 @@ This repository features an Ansible script that guides you through a minimal set
 > - You can execute setup-ansible-playbook on WSL, but please note that the final GPU-Sharing (MPS) functionality isn't working there [#3024](https://github.com/canonical/microk8s/issues/3024).
 > - An Ansible playbook is tailored for Debian-Based Linux distributions.
 
-Clone this repository and run the run_ansible bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
+Clone this repository and run the [run ansible](./setup/ansible/run_ansible.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
 
 ```sh
 git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && ./run_ansible.sh
