@@ -37,58 +37,148 @@
   # Nvidia-Driver
   #######################################
   
-  - role: nvidia-driver 
+  - role: script_based
+# INSTALLATION 
+    installation:
+      name: nvidia-driver
+      check_command: "nvidia-smi"
+      steps:
+# Fetching latest Nvidia Drivers
+      - |
+        NVIDIA_LATEST="$(
+          curl -s -X GET https://download.nvidia.com/XFree86/Linux-x86_64/latest.txt | sed 's/^.* //'
+        )"; 
+        curl -X GET -o /tmp/nvidia.run \
+          https://download.nvidia.com/XFree86/Linux-x86_64/${NVIDIA_LATEST}
+
+# Installing Nvidia Drivers
+      - |
+        /tmp/nvidia.run \
+          --silent \
+          --install-compat32-libs \
+          --no-kernel-module
+
+# CONFIGURATION 
+    configuration: []
 
   #######################################
   # Docker 
   #######################################
   
-  - role: docker 
+  - role: aptitude_based
+
+# INSTALLATION 
+    installation:
+      name: docker 
+      check_command: "docker --version"
+      gpg_key_url: "https://download.docker.com/linux/$(. /etc/os-release | echo $ID)/gpg"
+      repo_url: "https://download.docker.com/linux/$(. /etc/os-release | echo $ID) $(. /etc/os-release | echo \"$VERSION_CODENAME\") stable"
+      packages:
+      - docker-ce 
+      - docker-ce-cli 
+      - containerd.io 
+      - docker-buildx-plugin 
+      - docker-compose-plugin
+
+# CONFIGURATION 
+    configuration: []
 
   #######################################
   # Nvidia Container Toolkit
   #######################################
-  
-  - role: apt-gpg 
 
-# Installation 
+  - role: aptitude_based
+
+# INSTALLATION 
     installation:
-      package: "nvidia-container-toolkit"
-      check_command: "nvidia-ctr --version"
+      name: nvidia-container-toolkit
+      check_command: "nvidia-container-toolkit --version"
       gpg_key_url: "https://nvidia.github.io/libnvidia-container/gpgkey"
       repo_url: "https://nvidia.github.io/libnvidia-container/stable/deb/$(ARCH) /"
+      packages: 
+      - nvidia-container-toolkit
 
+# CONFIGURATION 
     configuration:
 # Configure Nvidia Runtime for Conteinerd 
-      - |
-        nvidia-ctk runtime configure
+    - |
+      nvidia-ctk runtime configure
 
 # Configure Nvidia Runtime for Docker 
-      - |
-        nvidia-ctk runtime configure --runtime=docker
-  
+    - |
+      nvidia-ctk runtime configure --runtime=docker
+
   #######################################
   # Helm 
   #######################################
 
-  - role: helm 
+  - role: aptitude_based 
+
+# INSTALLATION 
+    installation:
+      name: helm 
+      check_command: "helm version"
+      gpg_key_url: "https://baltocdn.com/helm/signing.asc"
+      repo_url: "https://baltocdn.com/helm/stable/debian/ all main"
+      packages: 
+      - helm 
+
+# CONFIGURATION 
+    configuration:
+# Configure helm completion 
+    - |
+      helm completion bash | tee /etc/bash_completion.d/helm > /dev/null
   
   #######################################
   # Kubernetes Client
   #######################################
-  
-  - role: kubectl 
+
+  - role: aptitude_based
+
+# INSTALLATION 
+    installation:
+      name: kubectl 
+      check_command: "kubectl version"
+      gpg_key_url: "https://pkgs.k8s.io/core:/stable:/$(curl -L -s https://dl.k8s.io/release/stable.txt | sed 's/\\.[^.]*$//')/deb/Release.key"
+      repo_url: "https://pkgs.k8s.io/core:/stable:/$(curl -L -s https://dl.k8s.io/release/stable.txt | sed 's/\\.[^.]*$//')/deb/ /"
+      packages: 
+      - kubectl 
+
+# CONFIGURATION 
+    configuration:
+# Configure bash completion 
+    - |
+      kubectl completion bash | tee /etc/bash_completion.d/kubectl > /dev/null
   
   #######################################
   # K9S 
   #######################################
 
-  - role: k9s
+  - role: script_based
+# INSTALLATION 
+    installation:
+      name: k9s
+      check_command: "k9s info"
+      steps:
+      - |
+        curl -sS https://webinstall.dev/k9s | bash
+
+# CONFIGURATION 
+    configuration: []
 
   #######################################
   # K3S
   #######################################
 
-  - role: k3s 
+  - role: script_based
+# INSTALLATION 
+    installation:
+      name: k3s
+      check_command: "k3s --version"
+      steps:
+      - |
+        curl -sfL https://get.k3s.io | sh -s -
 
+# CONFIGURATION 
+    configuration: []
 ...
