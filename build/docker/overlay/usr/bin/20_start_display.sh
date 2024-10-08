@@ -40,6 +40,9 @@ rm -rf "/tmp/.X*"
   -noreset \
   -shmem &
 
+# continous monitoring - xorg
+while true; do sleep 5 && readiness_xorg; done &
+
 #################
 
 pid=$!

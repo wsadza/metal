@@ -67,6 +67,7 @@ RUN \
            udev \
            tzdata \
            dialog \
+           pkg-config \
     && \
     echo "**** Set locale and timezone ****" \ 
         && locale-gen ${LANG} \
@@ -267,12 +268,12 @@ RUN \
 # Core: Install Selkies Gstreamer 
 #
 # Ubuntu <-> Debian diff:
-# *alsa-base 				- not present on debian
-# *libjpeg-turbo8 	- not present on debian
+# *alsa-base - not present on debian
+# *libjpeg-turbo8 - not present on debian
 
 ARG \
-		SELKIES_SUITE="24.04" \
-		SELKIES_VERSION="latest"
+    SELKIES_SUITE="24.04" \
+    SELKIES_VERSION="latest"
 
 RUN \
     echo "**** Core: Install Gstreamer ****" \
@@ -1217,6 +1218,7 @@ RUN \
             intel-media-va-driver-non-free \
             i965-va-driver-shaders \
             libva2 \
+            vainfo \
     && \
     echo "**** Install OpenGL libraries ****" \
         && apt-get install -y --no-install-recommends \
@@ -1237,6 +1239,7 @@ RUN \
            libglx0 \
            libglu1 \
            libsm6  \
+           libglvnd-dev \
     && \
     echo "**** Install Development Libraries ****" \
         && apt-get install -y --no-install-recommends \
@@ -1259,11 +1262,14 @@ RUN \
            i965-va-driver-shaders:i386 \
            intel-media-va-driver-non-free:i386 \ 
     && \
-    echo "**** Install 32-bit Vulkan and Video Decoding Drivers ****" \
+    echo "**** Install 32/64-bit Vulkan and Video Decoding Drivers ****" \
         && apt-get install -y --no-install-recommends \
            libva2:i386 \
            vdpau-driver-all:i386 \
            mesa-vulkan-drivers:i386 \
+           mesa-vulkan-drivers \
+           libva2 \
+	         vdpau-driver-all \
     && \
     echo "**** Install Core 32-bit Libraries ****" \
         && apt-get install -y --no-install-recommends \
@@ -1296,6 +1302,28 @@ RUN \
             /var/lib/apt/lists/* \
             /var/tmp/* \
             /tmp/*
+
+RUN \
+    echo "**** Optional: Ubuntu Mesa ****" \
+		    && ID="$(\
+        	     grep ^ID= /etc/os-release \
+        	     | cut -d= -f2 \
+        	     | tr -d '\"' \
+        )" \
+        && if [ "${ID}" = "ubuntu" ]; \
+		    then \
+              add-apt-repository -y ppa:oibaf/graphics-drivers \
+              && apt-get update \ 
+              && apt-get upgrade -y \
+        && \
+        echo "**** Section cleanup ****" \
+            && apt-get clean autoclean -y \
+            && apt-get autoremove -y \
+            && rm -rf \
+                /var/lib/apt/lists/* \
+                /var/tmp/* \
+                /tmp/*; \
+        fi
 
 ############################################################
 #
@@ -1412,6 +1440,17 @@ ENV \
 
 # -----------------------------------------------
 # Execute
+
+RUN \
+    echo "**** Execute: Final Touch ****" \
+    && \
+    echo "Make sure that everything under ${HOME} belongs to user" \
+        && chmod -R a+rwX ${HOME} \
+        && chown -R ${USER_UID}:${USER_UID} ${HOME} \
+    && \
+    echo "Change Permissions for config opt" \
+        && chmod -R a+rwX /opt \
+        && chown -R ${USER_UID}:${USER_UID} /opt
 
 # Add FS overlay and set permissions in one step
 COPY --chmod=0755 overlay / 

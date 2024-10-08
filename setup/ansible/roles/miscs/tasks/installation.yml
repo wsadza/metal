@@ -1,0 +1,21 @@
+#!/usr/bin/env ansible-playbook
+
+#######################################
+## BASE 
+#######################################
+
+- name: Gather system facts
+  setup:
+
+- name: Add i386 architecture
+  command: dpkg --add-architecture i386
+
+- name: Update package lists
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install Packages 
+  package:
+    name: "{{item}}"
+    state: present
+  loop: "{{package}}"

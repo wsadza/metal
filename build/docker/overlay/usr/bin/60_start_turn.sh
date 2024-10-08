@@ -17,6 +17,9 @@ readiness_dbus
 # execute coturn server
 /usr/bin/turnserver &
 
+# continous monitoring - pulse
+while true; do sleep 5 && readiness_turn; done &
+
 #################
 
 pid=$!

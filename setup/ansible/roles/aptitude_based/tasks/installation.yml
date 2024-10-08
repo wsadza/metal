@@ -1,0 +1,69 @@
+#!/usr/bin/env ansible-playbook
+
+######################################
+# BASE 
+######################################
+
+- name: Gather system facts
+  setup:
+
+- name: "{{ installation.name }} - Check for existing installation"
+  command: >
+    {{ installation.check_command }}
+  register: check_package
+  changed_when: false
+  failed_when: false
+
+- name: "{{ installation.name }} - Installation"
+  block:
+
+    - name: "{{ installation.name }} - Prerequisites"
+      package:
+        name:
+          - curl
+          - gnupg
+          - software-properties-common
+          - apt-transport-https
+        state: present
+
+    - name: "{{ installation.name }} - Prepare GPG Key"
+      shell: >
+        echo "{{ installation.gpg_key_url }}"
+      register: gpg_key_url
+
+    - name: "Debug Repo URL"
+      debug:
+        msg: "The Repo URL is: {{ gpg_key_url.stdout }}"
+
+    - name: "{{ installation.name }} - Prepare Repo Url"
+      shell: >
+        echo "{{ installation.repo_url }}"
+      register: repo_url 
+
+    - name: "Debug Repo URL"
+      debug:
+        msg: "The Repo URL is: {{ repo_url.stdout }}"
+
+    - name: "{{ installation.name }} - Download GPG Key using curl"
+      command: >
+        curl -fsSL {{ gpg_key_url.stdout }} -o /usr/share/keyrings/{{ installation.name }}-keyring.asc
+      args:
+        creates: "/usr/share/keyrings/{{ installation.name }}-keyring.asc"  # This prevents the command from running if the file already exists
+
+    - name: "{{ installation.name }} - Add APT Repository"
+      copy:
+        content: "deb [signed-by=/usr/share/keyrings/{{ installation.name }}-keyring.asc] {{ repo_url.stdout }}"
+        dest: "/etc/apt/sources.list.d/{{ installation.name }}.list"
+        mode: '0644'
+
+    - name: "{{ installation.name }} - Update APT Cache"
+      apt:
+        update_cache: yes
+
+    - name: "{{ installation.name }} - Install Packages"
+      package:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ installation.packages }}"
+
+  when: check_package.rc != 0

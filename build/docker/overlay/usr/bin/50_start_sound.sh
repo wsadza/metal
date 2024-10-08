@@ -26,6 +26,9 @@ wireplumber &
 # start pipewire-pulse 
 pipewire-pulse &
 
+# continous monitoring - pulse
+while true; do sleep 5 && readiness_pulse; done &
+
 #################
 
 # WAIT FOR CHILD PROCESS:

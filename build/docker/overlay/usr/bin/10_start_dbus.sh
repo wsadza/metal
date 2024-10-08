@@ -15,6 +15,9 @@ dbus-daemon \
   --address=unix:path=${XDG_RUNTIME_DIR}/dbus-session \
   --nofork
 
+# continous monitoring - dbus
+while true; do sleep 5 && readiness_dbus; done &
+
 #################
 
 pid=$!

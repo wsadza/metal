@@ -1,0 +1,34 @@
+#!/usr/bin/env ansible-playbook
+
+######################################
+# BASE 
+######################################
+
+- name: Gather system facts
+  setup:
+
+- name: "{{ installation.name }} - Check for existing installation"
+  command: >
+    {{ installation.check_command }}
+  register: check_package
+  changed_when: false
+  failed_when: false
+
+- name: "{{ installation.name }} - Installation"
+  block:
+
+    - name: "{{ installation.name }} - Prerequisites"
+      package:
+        name:
+          - curl
+          - gnupg
+          - software-properties-common
+          - apt-transport-https
+        state: present
+
+    - name: "{{ installation.name }} - Installation Script"
+      shell: "{{ item }}"
+      loop: "{{ installation.steps | flatten | list }}"
+      when: installation.steps | list | length > 0
+
+  when: check_package.rc != 0
