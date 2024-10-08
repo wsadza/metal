@@ -87,23 +87,14 @@ This section provides guidance on deploying and configuring streaming instances 
   ```sh
   docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
-
-##
-
-> [!NOTE]  
-> Below is a complete one-line configuration that will enable GPU usage and allow you to run Steam.
-
-> [!CAUTION]
-> - The snippet below requires the Nvidia Container Toolkit!
-> - It includes configurations that break container isolation!
-
-- Give me the power! 🤘
-  <br>
   
+- Full-Power: 🤘
+  <br>
   ```sh
   docker run -d --hostname stream -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') -e SELKIES_ENCODER=nvh264enc --gpus '"device=0"' --tmpfs /dev/shm:rw --shm-size 64m --ipc host --ulimit nofile=1024:524288 --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
-  
+  <sup>[Ensure that nvidia-ctr is installed](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)</sup>
+
 ##
 
 ### Docker - Compose:
@@ -183,6 +174,8 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 --->
 
 ## Setup
+<sup>[(Back to top)](#table-of-contents)</sup>
+
 <img src=".media/sections/section-c.png" align="left" width="5%" height="auto"/>
 
 This repository features an [Ansible script](./setup/ansible) that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The Ansible playbook is tailored for Ubuntu and Debian distributions, as well as NVIDIA hardware. 
@@ -206,6 +199,7 @@ This repository features an [Ansible script](./setup/ansible) that guides you th
 ##
 
 ### Ansible
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 Clone this repository and run the [run ansible](./setup/ansible/run_ansible.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
 
@@ -216,6 +210,7 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && .
 ##
 
 ### Bash
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 > [!WARNING]  
 > 🚧 Under Construction. 🚧
@@ -245,18 +240,18 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./en
 > </table>
 > </details>
 
-<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ## Disclaimers
+<sup>[(Back to top)](#table-of-contents)</sup>
+
 <img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
 
-<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ## Further Works / To-do
+<sup>[(Back to top)](#table-of-contents)</sup>
+
 <img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
-
-<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
