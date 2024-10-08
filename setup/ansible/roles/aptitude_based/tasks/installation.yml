@@ -53,7 +53,7 @@
 
     - name: "{{ installation.name }} - Download GPG Key using curl"
       command: >
-        curl -L -s {{ gpg_key_url.stdout }} -o /usr/share/keyrings/{{ installation.name }}-keyring.asc
+        curl -fsSL {{ gpg_key_url.stdout }} -o /usr/share/keyrings/{{ installation.name }}-keyring.asc
       args:
         creates: "/usr/share/keyrings/{{ installation.name }}-keyring.asc"  # This prevents the command from running if the file already exists
 

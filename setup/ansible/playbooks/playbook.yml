@@ -71,8 +71,8 @@
     installation:
       name: docker 
       check_command: "docker --version"
-      gpg_key_url: "https://download.docker.com/linux/$(. /etc/os-release | echo $ID)/gpg"
-      repo_url: "https://download.docker.com/linux/$(. /etc/os-release | echo $ID) $(. /etc/os-release | echo \"$VERSION_CODENAME\") stable"
+      gpg_key_url: "https://download.docker.com/linux/$(. /etc/os-release && echo $ID)/gpg"
+      repo_url: "https://download.docker.com/linux/$(. /etc/os-release && echo $ID) $(. /etc/os-release && echo \"$VERSION_CODENAME\") stable"
       packages:
       - docker-ce 
       - docker-ce-cli 
