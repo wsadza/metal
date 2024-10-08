@@ -131,6 +131,7 @@ This section provides guidance on deploying and configuring streaming instances 
 ##
 
 {#usage-kubernetes-manifests}
+
 ### Kubernetes - Manifest:
 
 > [!CAUTION]
