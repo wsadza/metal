@@ -1,4 +1,17 @@
 #!/usr/bin/env ansible-playbook
+############################################################
+# Copyright (c) 2024 Utilizable 
+# Released under the MIT license
+# ----------------------------------------------------------
+#
+#  Ansible playbok to automate installation of:
+#  - nvidia-driver
+#  - nvidia-device-plugin
+#  - docker
+#  - nvidia-container-toolkit
+#  - k3s
+#
+############################################################
 ---
 
 - hosts: target 
