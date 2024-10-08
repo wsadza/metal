@@ -58,6 +58,10 @@
           --install-compat32-libs \
           --no-kernel-module
 
+# Uninstalling i386 architecture
+      - |
+        dpkg --remove-architecture i386
+
 # CONFIGURATION 
     configuration: []
 
@@ -94,7 +98,7 @@
       name: nvidia-container-toolkit
       check_command: "nvidia-container-toolkit --version"
       gpg_key_url: "https://nvidia.github.io/libnvidia-container/gpgkey"
-      repo_url: "https://nvidia.github.io/libnvidia-container/stable/deb/$(ARCH) /"
+      repo_url: 'https://nvidia.github.io/libnvidia-container/stable/deb/\$(ARCH) /'
       packages: 
       - nvidia-container-toolkit
 
@@ -176,8 +180,13 @@
       name: k3s
       check_command: "k3s --version"
       steps:
+# Install K3S 
       - |
         curl -sfL https://get.k3s.io | sh -s -
+# Expose Kubeconfig for user 
+      - |
+        mkdi ~/.kube/config
+        cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 
 # CONFIGURATION 
     configuration: []
