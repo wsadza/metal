@@ -99,7 +99,8 @@ This section provides guidance on deploying and configuring streaming instances 
   
 ##
 
-##usage-docker-compose
+#usage-docker-compose
+
 ### Docker - Compose:
 
 > [!IMPORTANT]  
