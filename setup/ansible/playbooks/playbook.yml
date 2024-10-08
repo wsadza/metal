@@ -88,31 +88,6 @@
     configuration: []
 
   #######################################
-  # Nvidia Container Toolkit
-  #######################################
-
-  - role: aptitude_based
-
-# INSTALLATION 
-    installation:
-      name: nvidia-container-toolkit
-      check_command: "nvidia-container-toolkit --version"
-      gpg_key_url: "https://nvidia.github.io/libnvidia-container/gpgkey"
-      repo_url: 'https://nvidia.github.io/libnvidia-container/stable/deb/\$(ARCH) /'
-      packages: 
-      - nvidia-container-toolkit
-
-# CONFIGURATION 
-    configuration:
-# Configure Nvidia Runtime for Conteinerd 
-    - |
-      nvidia-ctk runtime configure
-
-# Configure Nvidia Runtime for Docker 
-    - |
-      nvidia-ctk runtime configure --runtime=docker
-
-  #######################################
   # Helm 
   #######################################
 
@@ -185,8 +160,87 @@
         curl -sfL https://get.k3s.io | sh -s -
 # Expose Kubeconfig for user 
       - |
-        mkdi ~/.kube/config
+        mkdir -p ~/.kube
         cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+
+# CONFIGURATION 
+    configuration: []
+
+  #######################################
+  # Nvidia Container Toolkit
+  #######################################
+
+  - role: aptitude_based
+
+# INSTALLATION 
+    installation:
+      name: nvidia-container-toolkit
+      check_command: "nvidia-container-toolkit --version"
+      gpg_key_url: "https://nvidia.github.io/libnvidia-container/gpgkey"
+      repo_url: 'https://nvidia.github.io/libnvidia-container/stable/deb/\$(ARCH) /'
+      packages: 
+      - nvidia-container-toolkit
+
+# CONFIGURATION 
+    configuration:
+# Configure Nvidia Runtime for Containerd 
+    - |
+      nvidia-ctk runtime configure --runtime=containerd
+
+# Configure Nvidia Runtime for Docker 
+    - |
+      nvidia-ctk runtime configure --runtime=docker
+
+  #######################################
+  # Nvidia Device Plugin 
+  #######################################
+
+  - role: script_based
+# INSTALLATION 
+    installation:
+      name: nvidia-device-plugin 
+      check_command: ""
+      steps:
+# Add HELM repo
+      - |
+        helm repo add nvdp https://nvidia.github.io/k8s-device-plugin
+# Expose Kubeconfig for user 
+      - |
+        helm upgrade -i nvidia-device-plugin nvdp/nvidia-device-plugin \
+          --version 0.16.0 \
+          --set gfd.enabled=true \
+          --set runtimeClassName=nvidia \
+          --set config.name=gpu-sharing-config \
+          --namespace nvidia-device-plugin \
+          --create-namespace 
+# Create Nvidia ConfigMap (share GPU)
+      - |
+        cat <<EOF | kubectl apply -f -
+        ---
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: gpu-sharing-config
+          namespace: nvidia-device-plugin
+        data:
+          config.yaml: |
+            version: v1
+            sharing:
+              mps:
+                resources:
+                  - name: nvidia.com/gpu
+                    replicas: 5 
+        EOF
+# Create Nvidia Runtime Class 
+      - |
+        cat <<EOF | kubectl apply -f -
+        ---
+        apiVersion: node.k8s.io/v1
+        kind: RuntimeClass
+        metadata:
+          name: nvidia
+        handler: nvidia
+        EOF
 
 # CONFIGURATION 
     configuration: []
