@@ -56,11 +56,16 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 --->
 
 ## Usage
+<sup>[(Back to top)](#table-of-contents)</sup>
+
 <img src=".media/sections/section-b.png" align="left" width="5%" height="auto"/>
 
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
+##
+
 ### Docker:
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 > [!TIP]
 > The `${DOCKER_HOST}` variable should point to IP of the machine where stream-instance is launching.
@@ -102,6 +107,7 @@ This section provides guidance on deploying and configuring streaming instances 
 ##
 
 ### Docker - Compose:
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 > [!IMPORTANT]  
 > Please read the compose-file header before proceeding with the setup.
@@ -132,6 +138,7 @@ This section provides guidance on deploying and configuring streaming instances 
 ##
 
 ### Kubernetes - Manifest:
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 > [!CAUTION]
 > The deployment below contains configurations that break container isolation to meet the requirements of the Steam client.
@@ -146,6 +153,7 @@ This section provides guidance on deploying and configuring streaming instances 
 ##
 
 ### Kubernetes - Helm:
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 > [!WARNING]  
 > 🚧 Under Construction. 🚧
@@ -157,8 +165,6 @@ This section provides guidance on deploying and configuring streaming instances 
     </tr>
 </table>
 
-<br>
-<div align="right">[ <a href="#toc">↑ Back to top ↑</a> ]</div>
 
 ## Preview - Second Instance
 <div align="center">
