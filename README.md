@@ -1,7 +1,7 @@
 > [!NOTE]  
 > - Low-Latency streaming service.
 > - Game everywhere.
-> - Docker is your-new gaming platform.
+> - Docker is new gaming platform.
 
 # Metal
 <img src=".media/sections/section-a.png" align="left" width="5%" height="auto"/>
@@ -12,16 +12,11 @@ Introducing my totally modular, Dockerized streaming service. Build it your way,
 
 Now it's a streaming powerhouse. Why? Just because!
 
-> [!IMPORTANT]  
-> - This project acts as a glue, integrating multiple solutions and patterns.
-> - I'm just here to containerize it!
-> - Obviously games are not included. 😉
-
 ##
 
 ### TLDR: 
 > [!NOTE]  
-> - Minimal Ubuntu image that utilizes software rendering ([llvmpipe](https://docs.mesa3d.org/drivers/llvmpipe.html])), suitable for WSL / Native linux instances.
+> Minimal Ubuntu image that utilizes software rendering ([llvmpipe](https://docs.mesa3d.org/drivers/llvmpipe.html])), suitable for WSL / Native linux instances.
 
 ```sh
 docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n" 
@@ -38,6 +33,13 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 - [Setup](#setup)
   - [Setup Ansible](#ansible)
   - [Setup Bash](#bash)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+  - [Structure - Dockerfile](#dockerfile)
+  - [Structure - Repository](#repository)
+  - [workflow - cicd](#cicd)
+  - [todo](#todo)
+- [Disclaimer](#disclaimer)
 
 ## Preview - Steam
 <div align="center">
@@ -180,8 +182,25 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 
 This repository features an [Ansible Playbook](./setup/ansible) that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The [Ansible playbook](./setup/ansible/playbooks/playbook.yml) is self explanatory - tailored for Ubuntu and Debian distributions, as well as NVIDIA hardware. 
 
+> [!TIP]
+> <details>
+>  <summary>Helpful Resources </summary>
+>    <br>
+> <ul>
+>    <li><a href="https://www.reddit.com/r/devops/comments/10xty21/comparison_among_techniques_to_share_gpus_in/">Techniques to share GPU in Kubernetes</a></li>
+>    <li><a href="https://docs.google.com/document/d/1H-ddA11laPQf_1olwXRjEDbzNihxprjPr74pZ4Vdf2M/edit?pli=1">MPS Support in the Kubernetes GPU Device Plugin</a></li>
+>    <li><a href="https://www.declarativesystems.com/2023/11/04/kubernetes-nvidia.html">Kubernetes + NVIDIA on K3S</a></li>
+>    <li><a href="https://jayground8-github-io.translate.goog/blog/20240324-k8s-device-plugin?_x_tr_sl=auto&_x_tr_tl=pl&_x_tr_hl=pl&_x_tr_hist=true">Using NVIDIA GPU Multi-Process Service with k8s-device-plugin</a></li>
+>    <li><a href="https://gist.github.com/bgulla/5ea0e7fd310b5db4f9b66036d1cdb3d3">GPU Operator Snippet</a></li>
+>    <li><a href="https://github.com/NVIDIA/k8s-device-plugin/tree/main/deployments/helm/nvidia-device-plugin">Nvidia Device Plugin</a></li>
+>    <li><a href="https://github.com/UntouchedWagons/K3S-NVidia">K3S-NVidia</a></li>
+>    <li><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a></li>
+> </ul>
+> </table>
+> </details>
+
 > [!WARNING]  
-> - Final GPU-Sharing (MPS) functionality isn't working on WSL. ([#3024](https://github.com/canonical/microk8s/issues/3024))
+> GPU-Sharing functionality (MPS) isn't working under WSL-Linux. ([#3024](https://github.com/canonical/microk8s/issues/3024))
 
 ##
 
@@ -210,30 +229,25 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./en
 
 ##
 
-> [!TIP]
-> <details>
->  <summary>Helpful Resources ↓ </summary>
->    <br>
-> <ul>
->    <li><a href="https://www.reddit.com/r/devops/comments/10xty21/comparison_among_techniques_to_share_gpus_in/">Techniques to share GPU in Kubernetes</a></li>
->    <li><a href="https://docs.google.com/document/d/1H-ddA11laPQf_1olwXRjEDbzNihxprjPr74pZ4Vdf2M/edit?pli=1">MPS Support in the Kubernetes GPU Device Plugin</a></li>
->    <li><a href="https://www.declarativesystems.com/2023/11/04/kubernetes-nvidia.html">Kubernetes + NVIDIA on K3S</a></li>
->    <li><a href="https://jayground8-github-io.translate.goog/blog/20240324-k8s-device-plugin?_x_tr_sl=auto&_x_tr_tl=pl&_x_tr_hl=pl&_x_tr_hist=true">Using NVIDIA GPU Multi-Process Service with k8s-device-plugin</a></li>
->    <li><a href="https://gist.github.com/bgulla/5ea0e7fd310b5db4f9b66036d1cdb3d3">GPU Operator Snippet</a></li>
->    <li><a href="https://github.com/NVIDIA/k8s-device-plugin/tree/main/deployments/helm/nvidia-device-plugin">Nvidia Device Plugin</a></li>
->    <li><a href="https://github.com/UntouchedWagons/K3S-NVidia">K3S-NVidia</a></li>
->    <li><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a></li>
-> </ul>
-> </table>
-> </details>
-
-
-## Disclaimers
+## Configuration
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 <img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
+
+##
+
+## Disclaimer
+<sup>[(Back to top)](#table-of-contents)</sup>
+
+<img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
+
+I hereby declare that I do not claim any rights to the software used in this repository. All software, including any components, libraries, and dependencies, belongs to their original creators.
+
+All copyright and other intellectual property rights associated with this software remain with their respective owners. This statement is intended to clarify that I do not assert any rights to the intellectual property or any part of this software.
+
+It is recommended to review the licensing terms of each used component before using or modifying them.
 
 
 ## Further Works / To-do
