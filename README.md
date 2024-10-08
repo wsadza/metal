@@ -32,9 +32,9 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 ### TOC:[](#TOC)
 - [Usage](#usage)
   - [Usage `docker`](#docker)
-  - [Usage `docker-compose`](#docker-compose)
-  - [Usage `kubernetes`](#kubernetes-manifest)
-  - [Usage `helm`](#kubernetes-helm)
+  - [Usage `docker-compose`](#docker--compose)
+  - [Usage `kubernetes`](#kubernetes--manifest)
+  - [Usage `helm`](#kubernetes--helm)
 - [Setup](#setup)
   - [Setup Ansible](#ansible)
   - [Setup Bash](#bash)
@@ -83,7 +83,11 @@ This section provides guidance on deploying and configuring streaming instances 
   docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
 
+<br>
+<div align="right">[ <a href="#TOC">↑ Back to top ↑</a> ]</div>
+
 ##
+
 > [!NOTE]  
 > Below is a complete one-line configuration that will enable GPU usage and allow you to run Steam.
 
@@ -98,6 +102,9 @@ This section provides guidance on deploying and configuring streaming instances 
   docker run -d --hostname stream -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') -e SELKIES_ENCODER=nvh264enc --gpus '"device=0"' --tmpfs /dev/shm:rw --shm-size 64m --ipc host --ulimit nofile=1024:524288 --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
   
+<br>
+<div align="right">[ <a href="#TOC">↑ Back to top ↑</a> ]</div>
+
 ##
 
 ### Docker - Compose:
@@ -128,6 +135,9 @@ This section provides guidance on deploying and configuring streaming instances 
     </tr>
 </table>
 
+<br>
+<div align="right">[ <a href="#TOC">↑ Back to top ↑</a> ]</div>
+
 ##
 
 ### Kubernetes - Manifest:
@@ -141,6 +151,9 @@ This section provides guidance on deploying and configuring streaming instances 
         <td>A fully configured deployment utilizing the Nvidia runtime, with broken isolation, host networking, and an internal (built-in) TURN server.</td>
     </tr>
 </table>
+
+<br>
+<div align="right">[ <a href="#TOC">↑ Back to top ↑</a> ]</div>
 
 ##
 
