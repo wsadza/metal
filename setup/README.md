@@ -4,7 +4,7 @@
 This repository features an Ansible script that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The Ansible playbook is tailored for Ubuntu and Debian distributions, as well as NVIDIA hardware. 
 
 > [!NOTE]  
-> You can execute setup playbook on WSL, but please note that the final MPS-sharing functionality isn't working there [#3024](https://github.com/canonical/microk8s/issues/3024).
+> You can execute setu-ansible-playbook on WSL, but please note that the final MPS-sharing functionality isn't working there [#3024](https://github.com/canonical/microk8s/issues/3024).
 
 ##
 
