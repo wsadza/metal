@@ -201,10 +201,20 @@
       name: nvidia-device-plugin 
       check_command: ""
       steps:
+# Create Nvidia Runtime Class 
+      - |
+        cat <<EOF | kubectl apply -f -
+        ---
+        apiVersion: node.k8s.io/v1
+        kind: RuntimeClass
+        metadata:
+          name: nvidia
+        handler: nvidia
+        EOF
 # Add HELM repo
       - |
         helm repo add nvdp https://nvidia.github.io/k8s-device-plugin
-# Expose Kubeconfig for user 
+# Install Nvidia Device Plugin 
       - |
         helm upgrade -i nvidia-device-plugin nvdp/nvidia-device-plugin \
           --version 0.16.0 \
@@ -231,16 +241,10 @@
                   - name: nvidia.com/gpu
                     replicas: 5 
         EOF
-# Create Nvidia Runtime Class 
+# Label Node 
       - |
-        cat <<EOF | kubectl apply -f -
-        ---
-        apiVersion: node.k8s.io/v1
-        kind: RuntimeClass
-        metadata:
-          name: nvidia
-        handler: nvidia
-        EOF
+	NODE="$(kubectl get nodes --output=jsonpath='{.items[*].metadata.name}')"
+	kubectl label node ${NODE} nvidia.com/mps.capable=true	
 
 # CONFIGURATION 
     configuration: []
