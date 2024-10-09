@@ -43,7 +43,7 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
   - [Structure Repository](#contributing---repository)
   - [Workflow CICD](#contributing---cicd)
   - [Futher Works](#contributing---futher---works)
-- [Disclaimer](#disclaimer)
+- [Disclaimers](#disclaimers)
 
 ## Preview - Steam
 <div align="center">
@@ -250,7 +250,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
 
 ##
 
-## Disclaimer
+## Disclaimers
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 <img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
