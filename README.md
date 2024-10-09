@@ -285,9 +285,6 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 > </table>
 > </details>
 
-> [!WARNING]  
-> GPU-Sharing functionality (MPS) isn't working under WSL-Linux. ([#3024](https://github.com/canonical/microk8s/issues/3024))
-
 ##
 <!---
 #####################################################
@@ -320,6 +317,20 @@ Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash s
 ```sh
 git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./setup.sh
 ```
+
+### Setup - WSL
+<sup>[(Back to top)](#table-of-contents)</sup>
+<!---
+#####################################################
+Setup - WSL
+#####################################################
+--->
+Think of this as a curiosity rather than a genuine configuration; you can join me on this exploration—perhaps you'll uncover the missing pieces that I couldn't find.
+
+> [!WARNING]  
+> - GPU-Sharing functionality (MPS) isn't working under WSL-Linux. ([#3024](https://github.com/canonical/microk8s/issues/3024))
+> - Vulkan isn't functioning properly; only selected linux-native games are working.
+> - Performance is lacking; you can only play very lightweight games.
 
 <!---
  $$$$$$\   $$$$$$\  $$\   $$\ $$$$$$$$\ $$$$$$\  $$$$$$\  $$\   $$\ $$$$$$$\   $$$$$$\ $$$$$$$$\ $$$$$$\  $$$$$$\  $$\   $$\ 
