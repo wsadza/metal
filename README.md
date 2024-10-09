@@ -283,7 +283,7 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 ## Setup
 <sup>[(Back to top)](#table-of-contents)</sup>
 
-<img src=".media/sections/section-c.png" align="left" width="5%" height="auto"/>
+<img src=".media/asset/section/asset_section_c.png" align="left" width="5%" height="auto"/>
 
 This repository features an [Ansible Playbook](./setup/ansible) that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The [Ansible playbook](./setup/ansible/playbooks/playbook.yml) is self explanatory - tailored for Ubuntu and Debian distributions, as well as NVIDIA hardware. 
 
