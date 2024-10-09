@@ -160,9 +160,8 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ### Kubernetes - Helm:
 <sup>[(Back to top)](#table-of-contents)</sup>
+<img src=".media/work_in_progress.png" align="right" width="10%" height="auto"/>
 
-> [!WARNING]  
-> 🚧 Under Construction. 🚧
 
 <table>
     <tr>
@@ -230,14 +229,9 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && .
 
 ### Bash
 <sup>[(Back to top)](#table-of-contents)</sup>
+<img src=".media/work_in_progress.png" align="right" width="10%" height="auto"/>
 
-<img src=".media/under_construction.png" align="right" width="5%" height="auto"/>
-
-
-> [!WARNING]  
-> 🚧 Under Construction. 🚧
-
-Clone this repository and run the [run ansible](./setup/ansible/run_ansible.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
+Clone this repository and run the [entrypoint.sh](./setup/setup/bash/entrypoint.sh) bash script. This will fetch and install all the necessary dependencies.
 
 ```sh
 git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./entrypoint.sh
