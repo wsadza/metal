@@ -26,19 +26,23 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 
 ### Table Of Contents:
 - [Usage](#usage)
-  - [Usage `docker`](#docker)
-  - [Usage `docker-compose`](#docker---compose)
-  - [Usage `kubernetes`](#kubernetes---manifest)
-  - [Usage `helm`](#kubernetes---helm)
+  - [Usage `docker`](#usage---docker)
+  - [Usage `docker-compose`](#usage---docker---compose)
+  - [Usage `kubernetes`](#usage---kubernetes---manifest)
+  - [Usage `helm`](#usage---kubernetes---helm)
 - [Setup](#setup)
-  - [Setup Ansible](#ansible)
-  - [Setup Bash](#bash)
+  - [Setup by `Ansible`](#setup---ansible)
+  - [Setup by `Bash`](#setup---bash)
 - [Configuration](#configuration)
+  - [Configuration - `Selkies Gstreamer`](#configuration---streamer)
+  - [Configuration - `Pipewire`](#configuration---pipewire)
+  - [Configuration - `Coturn`](#configuration---coturn)
+  - [Configuration - `Miscellaneous`](#configuration---coturn)
 - [Contributing](#contributing)
-  - [Structure - Dockerfile](#dockerfile)
-  - [Structure - Repository](#repository)
-  - [Workflow - CICD](#cicd)
-  - [Futher Works](#todo)
+  - [Structure - Dockerfile](#contributing---dockerfile)
+  - [Structure - Repository](#contributing---repository)
+  - [Workflow - CICD](#contributing---cicd)
+  - [Futher Works](#contributing---futher---works)
 - [Disclaimer](#disclaimer)
 
 ## Preview - Steam
@@ -66,7 +70,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ##
 
-### Docker
+### Usage - Docker
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 > [!TIP]
@@ -109,10 +113,7 @@ This section provides guidance on deploying and configuring streaming instances 
   ```
 ##
 
-
-
-
-### Docker - Compose:
+### Usage - Docker - Compose:
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 > [!IMPORTANT]  
@@ -143,7 +144,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ##
 
-### Kubernetes - Manifest:
+### Usage - Kubernetes - Manifest:
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 > [!CAUTION]
@@ -158,7 +159,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ##
 
-### Kubernetes - Helm:
+### Usage - Kubernetes - Helm:
 <sup>[(Back to top)](#table-of-contents)</sup>
 <img src=".media/work_in_progress.png" align="right" width="10%" height="auto"/>
 
@@ -216,25 +217,25 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 
 ##
 
-### Ansible
+### Setup - Ansible
 <sup>[(Back to top)](#table-of-contents)</sup>
 
-Clone this repository and run the [run ansible](./setup/ansible/run_ansible.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
+Clone this repository and run the [setup.sh](./setup/ansible/setup.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
 
 ```sh
-git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && ./run_ansible.sh
+git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && ./setup.sh
 ```
 
 ##
 
-### Bash
+### Setup - Bash
 <sup>[(Back to top)](#table-of-contents)</sup>
 <img src=".media/work_in_progress.png" align="right" width="10%" height="auto"/>
 
-Clone this repository and run the [entrypoint.sh](./setup/setup/bash/entrypoint.sh) bash script. This will fetch and install all the necessary dependencies.
+Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash script. This will fetch and install all the necessary dependencies and components.
 
 ```sh
-git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./entrypoint.sh
+git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./setup.sh
 ```
 
 ##
