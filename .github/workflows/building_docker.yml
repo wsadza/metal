@@ -2,15 +2,20 @@
 name: 'Building Docker'
 
 on:
-  # Trigger this workflow on each tag push
+# Trigger this workflow on each tag push
+
   push:
-    # Specify that it should only trigger when a tag is pushed.
-    # The wildcard '*' means any tag name will match.
+# Specify that it should only trigger when a tag is pushed.
+# The wildcard '*' means any tag name will match.
     tags:
       - '*'
-      
-    # Restrict the workflow to trigger only when changes are made within the 'build/' directory.
-    # This ensures that pushes unrelated to 'build/' won't trigger the workflow.
+
+# https://github.com/orgs/community/discussions/26273
+    branches:
+      - 'develop'
+
+# Restrict the workflow to trigger only when changes are made within the 'build/' directory.
+# This ensures that pushes unrelated to 'build/' won't trigger the workflow.
     paths: 
       - 'build/**'
 
