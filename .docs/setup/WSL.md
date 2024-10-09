@@ -37,12 +37,12 @@ Throughout my exploration of WSL, I've gathered key insights about graphics rend
 > - Something is missing here 😩
 > - <=1.0 FPS is not the performance we’re looking for.
 
-<kbd><img src=".media/wsl/preview/img/wsl_preview_img_glxspheres.png" align="center" width="800" height="auto"/></kbd>
+<kbd><img src="../../.media/wsl/preview/img/wsl_preview_img_glxspheres.png" align="center" width="800" height="auto"/></kbd>
 
 ##
 
 #### Performance of glxgears:
-<kbd><img src=".media/wsl/preview/img/wsl_preview_img_glxgears.png" align="center" width="800" height="auto"/></kbd>
+<kbd><img src="../../.media/wsl/preview/img/wsl_preview_img_glxgears.png" align="center" width="800" height="auto"/></kbd>
 
 ##
 
@@ -52,13 +52,13 @@ Throughout my exploration of WSL, I've gathered key insights about graphics rend
 > - After installing the latest Mesa package, Vulkan is "functioning"
 
 
-<kbd><img src=".media/wsl/preview/img/wsl_preview_img_vkcube.png" align="center" width="800" height="auto"/></kbd>
+<kbd><img src="../../.media/wsl/preview/img/wsl_preview_img_vkcube.png" align="center" width="800" height="auto"/></kbd>
 
 ##
 
 #### Torchlight II:
 
-<kbd><img src=".media/wsl/preview/img/wsl_preview_gif_usage.gif" align="center" width="800" height="auto"/></kbd>
+<kbd><img src="../../.media/wsl/preview/img/wsl_preview_gif_usage.gif" align="center" width="800" height="auto"/></kbd>
 
 
 ## 🔸 Setting Up - Windows
