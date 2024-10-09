@@ -1,3 +1,9 @@
+<div align="center">
+   <img src=".media/asset/badge/asset_badge_project.jpg" width="55%" height="auto"/>
+</div>
+<br>
+
+
 > [!NOTE]  
 > - Low-Latency streaming service.
 > - Game everywhere.
