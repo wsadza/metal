@@ -53,7 +53,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>It was easy, right?</code></sup>
 <br>
-<kbd><img src=".media/native/preview/preview_native_gif_tldr.gif" width="800" height="auto"/></kbd>
+<kbd><img src=".media/native/preview/native_preview_gif_tldr.gif" width="800" height="auto"/></kbd>
 </div>
 
 ##
@@ -108,7 +108,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Steam? No Problem!</code></sup>
 <br>
-<kbd><img src=".media/native/preview/preview_steam.gif" width="800" height="auto"/></kbd>
+<kbd><img src=".media/native/preview/native_preview_steam.gif" width="800" height="auto"/></kbd>
 </div>
 
 <!---
