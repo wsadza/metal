@@ -15,7 +15,7 @@ $$ | \_/ $$ |$$$$$$$$\    $$ |   $$ |  $$ |$$$$$$$$\
 --->
 
 # Metal
-<img src=".media/sections/section-a.png" align="left" width="5%" height="auto"/>
+<img src=".media/asset/section/asset_section_a.png" align="left" width="5%" height="auto"/>
 
 Ever been fascinated by remote gaming? Same! Inspired by the [`selkies-gstreamer`](https://github.com/selkies-project/selkies-gstreamer) project (a relic of [`Google Stadia's`](https://github.com/GoogleCloudPlatform/selkies-examples/tree/master) epicness), I decided to repack their [`egl solution`](https://github.com/selkies-project/docker-nvidia-egl-desktop) for fun - obviously. My main goal was to create a product that serves as a foundation for exploring Kubernetes and containerization.
 
@@ -53,7 +53,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>It was easy, right?</code></sup>
 <br>
-<kbd><img src=".media/preview/preview_tldr.gif" width="800" height="auto"/></kbd>
+<kbd><img src=".media/native/preview/preview_native_gif_tldr.gif" width="800" height="auto"/></kbd>
 </div>
 
 ##
@@ -108,7 +108,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Steam? No Problem!</code></sup>
 <br>
-<kbd><img src=".media/preview/preview_steam.gif" width="800" height="auto"/></kbd>
+<kbd><img src=".media/native/preview/preview_steam.gif" width="800" height="auto"/></kbd>
 </div>
 
 <!---
@@ -125,7 +125,7 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 ## Usage
 <sup>[(Back to top)](#table-of-contents)</sup>
 
-<img src=".media/sections/section-b.png" align="left" width="5%" height="auto"/>
+<img src=".media/asset/section/asset_section_b.png" align="left" width="5%" height="auto"/>
 
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
@@ -242,7 +242,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ### Usage - Kubernetes - Helm:
 <sup>[(Back to top)](#table-of-contents)</sup>
-<img src=".media/work_in_progress.png" align="right" width="10%" height="auto"/>
+<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 <table>
     <tr>
@@ -266,7 +266,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Want to play with others?</code></sup>
 <br>
-<kbd><img src=".media/preview/preview_companion.gif" align="center" width="800" height="auto"/></kbd>
+<kbd><img src=".media/native/preview/native_preview_gif_companion.gif" align="center" width="800" height="auto"/></kbd>
 </div>
 
 <!---
@@ -329,7 +329,7 @@ Setup - Bash - WIP!
 
 ### Setup - Bash
 <sup>[(Back to top)](#table-of-contents)</sup>
-<img src=".media/work_in_progress.png" align="right" width="10%" height="auto"/>
+<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash script. This will fetch and install all the necessary dependencies and components.
 
@@ -365,7 +365,7 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$
 ## Configuration
 <sup>[(Back to top)](#table-of-contents)</sup>
 
-<img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
+<img src=".media/asset/section/asset_section_d.png" align="left" width="5%" height="auto"/>
 
 This section highlights the critical configurations and components necessary for maximizing the performance and functionality of your media streaming and communication setup. Each configuration is tailored to improve the overall user experience. You can find all the configurations described below in the [Dockerfile](https://github.com/utilizable/metal/blob/develop/build/docker/Dockerfile.debbased#L1314).
 
@@ -779,7 +779,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Play anywhere!</code></sup>
 <br>
-<img src=".media/preview/preview_mobile.gif" align="center" width="800" height="auto"/>   
+<img src=".media/native/preview/native_preview_gif_mobile.gif" align="center" width="800" height="auto"/>   
 <br>
 </div>
 
@@ -797,7 +797,7 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |   $$ |   $$ |  $$ |  $$ |  $$ |  $$ |$$ |  $$ |  
 ## Contributing
 <sup>[(Back to top)](#table-of-contents)</sup>
 
-<img src=".media/sections/section-e.png" align="left" width="5%" height="auto"/>
+<img src=".media/asset/section/asset_section_e.png" align="left" width="5%" height="auto"/>
 
 ### Structure Dockerfile
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -825,7 +825,7 @@ $$$$$$$  |$$$$$$\ \$$$$$$  |\$$$$$$  |$$$$$$$$\ $$ |  $$ |$$$$$$\ $$ | \_/ $$ |$
 ## Disclaimers
 <sup>[(Back to top)](#table-of-contents)</sup>
 
-<img src=".media/sections/section-f.png" align="left" width="5%" height="auto"/>
+<img src=".media/asset/section/asset_section_f.png" align="left" width="5%" height="auto"/>
 
 This section contains important disclaimers regarding the ownership of software and the funding sources for the project. Please review the details carefully to understand the rights associated with the software and the contributions of supporting organizations.
 
