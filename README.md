@@ -238,8 +238,6 @@ Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash s
 git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./setup.sh
 ```
 
-##
-
 ## Configuration
 <sup>[(Back to top)](#table-of-contents)</sup>
 
