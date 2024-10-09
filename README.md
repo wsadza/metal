@@ -37,8 +37,8 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 - [Contributing](#contributing)
   - [Structure - Dockerfile](#dockerfile)
   - [Structure - Repository](#repository)
-  - [workflow - cicd](#cicd)
-  - [todo](#todo)
+  - [Workflow - CICD](#cicd)
+  - [Futher Works](#todo)
 - [Disclaimer](#disclaimer)
 
 ## Preview - Steam
@@ -90,14 +90,27 @@ This section provides guidance on deploying and configuring streaming instances 
   docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
   
-- Full-Power: 🤘
-  <br>
+- <details>
+    <summary>Full-Power: 📍</summary>
+    <br>
+    <ul>
+      <sup style="display: block; margin-top: 5px;">
+        <li><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">[Ensure that nvidia-ctr is installed]</a></li>
+      </sup>
+      <br>
+      <sup style="display: block; margin-top: 5px;">
+        <li><a href="">[Flatpak (steam) requires breaking container isolation]</a></li>
+      </sup>
+    </ul>
+  </details>  
+  
   ```sh
   docker run -d --hostname stream -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') -e SELKIES_ENCODER=nvh264enc --gpus '"device=0"' --tmpfs /dev/shm:rw --shm-size 64m --ipc host --ulimit nofile=1024:524288 --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
-  <sup>[Ensure that nvidia-ctr is installed](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)</sup>
-
 ##
+
+
+
 
 ### Docker - Compose:
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -218,6 +231,9 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && .
 ### Bash
 <sup>[(Back to top)](#table-of-contents)</sup>
 
+<img src=".media/under_construction.png" align="right" width="5%" height="auto"/>
+
+
 > [!WARNING]  
 > 🚧 Under Construction. 🚧
 
@@ -236,6 +252,7 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./en
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
 
+
 ##
 
 ## Disclaimer
@@ -243,12 +260,29 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id 
 
 <img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
 
-I hereby declare that I do not claim any rights to the software used in this repository. All software, including any components, libraries, and dependencies, belongs to their original creators.
+This section contains important disclaimers regarding the ownership of software and the funding sources for the project. Please review the details carefully to understand the rights associated with the software and the contributions of supporting organizations.
 
-All copyright and other intellectual property rights associated with this software remain with their respective owners. This statement is intended to clarify that I do not assert any rights to the intellectual property or any part of this software.
+<br>
 
-It is recommended to review the licensing terms of each used component before using or modifying them.
-
+<ul>
+  
+  <details>
+  <summary>Copyright</summary>
+  <br>
+    I hereby declare that I do not claim any rights to the software used in this repository. 
+    All software, including any components, libraries, and dependencies, belongs to their original creators.
+    All copyright and other intellectual property rights associated with this software remain with their respective owners. 
+    This statement is intended to clarify that I do not assert any rights to the intellectual property or any part of this software.
+    It is recommended to review the licensing terms of each used component before using or modifying them.
+  </details> 
+  
+  <details>
+  <summary>Selkies Gstreamer</summary>
+  <br>
+    This project has been developed and is supported in part by the National Research Platform (NRP) and the Cognitive Hardware and Software Ecosystem Community Infrastructure (CHASE-CI) at the University of California, San Diego, by funding from the National Science Foundation (NSF), with awards #1730158, #1540112, #1541349, #1826967, #2138811, #2112167, #2100237, and #2120019, as well as additional funding from community partners, infrastructure utilization from the Open Science Grid Consortium, supported by the National Science Foundation (NSF) awards #1836650 and #2030508, and infrastructure utilization from the Chameleon testbed, supported by the National Science Foundation (NSF) awards #1419152, #1743354, and #2027170. This project has also been funded by the Seok-San Yonsei Medical Scientist Training Program (MSTP) Song Yong-Sang Scholarship, College of Medicine, Yonsei University, the MD-PhD/Medical Scientist Training Program (MSTP) through the Korea Health Industry Development Institute (KHIDI), funded by the Ministry of Health & Welfare, Republic of Korea, and the Student Research Bursary of Song-dang Institute for Cancer Research, College of Medicine, Yonsei University.
+  </details> 
+  
+</ul>
 
 ## Further Works / To-do
 <sup>[(Back to top)](#table-of-contents)</sup>
