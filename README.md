@@ -3,6 +3,17 @@
 > - Game everywhere.
 > - Docker is new gaming platform.
 
+<!---
+$$\      $$\ $$$$$$$$\ $$$$$$$$\  $$$$$$\  $$\       
+$$$\    $$$ |$$  _____|\__$$  __|$$  __$$\ $$ |      
+$$$$\  $$$$ |$$ |         $$ |   $$ /  $$ |$$ |      
+$$\$$\$$ $$ |$$$$$\       $$ |   $$$$$$$$ |$$ |      
+$$ \$$$  $$ |$$  __|      $$ |   $$  __$$ |$$ |      
+$$ |\$  /$$ |$$ |         $$ |   $$ |  $$ |$$ |      
+$$ | \_/ $$ |$$$$$$$$\    $$ |   $$ |  $$ |$$$$$$$$\ 
+\__|     \__|\________|   \__|   \__|  \__|\________
+--->
+
 # Metal
 <img src=".media/sections/section-a.png" align="left" width="5%" height="auto"/>
 
@@ -14,6 +25,12 @@ Now it's a streaming powerhouse. Why? Just because!
 
 ##
 
+<!---
+#####################################################
+# TLDR
+#####################################################
+--->
+
 ### TLDR: 
 > [!NOTE]  
 > Minimal Ubuntu image that utilizes software rendering ([llvmpipe](https://docs.mesa3d.org/drivers/llvmpipe.html])), suitable for WSL / Native linux instances.
@@ -23,6 +40,17 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 ```
 
 ##
+
+<!---
+$$$$$$$$\  $$$$$$\   $$$$$$\  
+\__$$  __|$$  __$$\ $$  __$$\ 
+   $$ |   $$ /  $$ |$$ /  \__|
+   $$ |   $$ |  $$ |$$ |      
+   $$ |   $$ |  $$ |$$ |      
+   $$ |   $$ |  $$ |$$ |  $$\ 
+   $$ |    $$$$$$  |\$$$$$$  |
+   \__|    \______/  \______/
+--->
 
 ### Table Of Contents:
 - [Usage](#usage)
@@ -46,6 +74,17 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
   - [CICD Workflow](#contributing---cicd---workflow)
   - [Futher Works](#contributing---futher---works)
 - [Disclaimers](#disclaimers)
+
+<!---
+$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
+$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
+$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
+$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
+$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
+$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
+$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
+\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
+--->
 
 ## Preview - Steam
 <div align="center">
@@ -71,6 +110,12 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
 ##
+
+<!---
+#####################################################
+# Usage - Docker
+#####################################################
+--->
 
 ### Usage - Docker:
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -114,6 +159,11 @@ This section provides guidance on deploying and configuring streaming instances 
   docker run -d --hostname stream -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') -e SELKIES_ENCODER=nvh264enc --gpus '"device=0"' --tmpfs /dev/shm:rw --shm-size 64m --ipc host --ulimit nofile=1024:524288 --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
 ##
+<!---
+#####################################################
+# Usage - Docker-Compose
+#####################################################
+--->
 
 ### Usage - Docker-Compose:
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -145,6 +195,11 @@ This section provides guidance on deploying and configuring streaming instances 
 </table>
 
 ##
+<!---
+#####################################################
+# Usage - Kubernetes - Manifest
+#####################################################
+--->
 
 ### Usage - Kubernetes - Manifest:
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -160,6 +215,11 @@ This section provides guidance on deploying and configuring streaming instances 
 </table>
 
 ##
+<!---
+#####################################################
+# Usage - Kubernetes - Helm
+#####################################################
+--->
 
 ### Usage - Kubernetes - Helm:
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -173,6 +233,16 @@ This section provides guidance on deploying and configuring streaming instances 
     </tr>
 </table>
 
+<!---
+$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
+$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
+$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
+$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
+$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
+$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
+$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
+\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
+--->
 
 ## Preview - Second Instance
 <div align="center">
@@ -218,6 +288,11 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 > GPU-Sharing functionality (MPS) isn't working under WSL-Linux. ([#3024](https://github.com/canonical/microk8s/issues/3024))
 
 ##
+<!---
+#####################################################
+# Setup - Ansible
+#####################################################
+--->
 
 ### Setup - Ansible
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -229,6 +304,11 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && .
 ```
 
 ##
+<!---
+#####################################################
+Setup - Bash
+#####################################################
+--->
 
 ### Setup - Bash
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -241,6 +321,17 @@ Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash s
 git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./setup.sh
 ```
 
+<!---
+ $$$$$$\   $$$$$$\  $$\   $$\ $$$$$$$$\ $$$$$$\  $$$$$$\  $$\   $$\ $$$$$$$\   $$$$$$\ $$$$$$$$\ $$$$$$\  $$$$$$\  $$\   $$\ 
+$$  __$$\ $$  __$$\ $$$\  $$ |$$  _____|\_$$  _|$$  __$$\ $$ |  $$ |$$  __$$\ $$  __$$\\__$$  __|\_$$  _|$$  __$$\ $$$\  $$ |
+$$ /  \__|$$ /  $$ |$$$$\ $$ |$$ |        $$ |  $$ /  \__|$$ |  $$ |$$ |  $$ |$$ /  $$ |  $$ |     $$ |  $$ /  $$ |$$$$\ $$ |
+$$ |      $$ |  $$ |$$ $$\$$ |$$$$$\      $$ |  $$ |$$$$\ $$ |  $$ |$$$$$$$  |$$$$$$$$ |  $$ |     $$ |  $$ |  $$ |$$ $$\$$ |
+$$ |      $$ |  $$ |$$ \$$$$ |$$  __|     $$ |  $$ |\_$$ |$$ |  $$ |$$  __$$< $$  __$$ |  $$ |     $$ |  $$ |  $$ |$$ \$$$$ |
+$$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$ |  $$ |  $$ |     $$ |  $$ |  $$ |$$ |\$$$ |
+\$$$$$$  | $$$$$$  |$$ | \$$ |$$ |      $$$$$$\ \$$$$$$  |\$$$$$$  |$$ |  $$ |$$ |  $$ |  $$ |   $$$$$$\  $$$$$$  |$$ | \$$ |
+ \______/  \______/ \__|  \__|\__|      \______| \______/  \______/ \__|  \__|\__|  \__|  \__|   \______| \______/ \__|  \__|
+--->
+
 ## Configuration
 <sup>[(Back to top)](#table-of-contents)</sup>
 
@@ -249,6 +340,11 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./se
 This section highlights the critical configurations and components necessary for maximizing the performance and functionality of your media streaming and communication setup. Each configuration is tailored to improve the overall user experience. You can find all the configurations described below in the [Dockerfile](https://github.com/utilizable/metal/blob/develop/build/docker/Dockerfile.debbased#L1314).
 
 ##
+<!---
+#####################################################
+# Configuration - Selkies-Gstreamer
+#####################################################
+--->
 
 ### Configuration - Selkies-Gstreamer
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -349,6 +445,11 @@ Selkies-GStreamer is an open-source low-latency high-performance Linux-native GP
 </details>
 
 ##
+<!---
+#####################################################
+# Configuration - Pipewire
+#####################################################
+--->
 
 ### Configuration - Pipewire
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -393,6 +494,11 @@ PipeWire is a project that aims to greatly improve handling of audio and video u
 </details>
 
 ##
+<!---
+#####################################################
+# Configuration - Coturn
+#####################################################
+--->
 
 ### Configuration - Coturn
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -442,6 +548,11 @@ Coturn is a free open source implementation of TURN and STUN Server. For more in
 </details>
 
 ##
+<!---
+#####################################################
+# Configuration - Miscellaneous
+#####################################################
+--->
 
 ### Configuration - Miscellaneous
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -449,6 +560,13 @@ Coturn is a free open source implementation of TURN and STUN Server. For more in
 The Miscellaneous subsection includes various additional configurations.
 
 <ul>
+  
+<!---
+#####################################################
+# Configuration - Miscellaneous - Graphic
+#####################################################
+--->  
+
   <li>
     <h4>Configuration - Miscellaneous - Graphic</h4>
      <details>
@@ -513,6 +631,12 @@ The Miscellaneous subsection includes various additional configurations.
       </table>
     </details>
   </li>
+
+<!---
+#####################################################
+# Configuration - Miscellaneous - Desktop Environment
+#####################################################
+--->  
 
   <li>
     <h4>Configuration - Miscellaneous - Desktop Environment</h4>
@@ -605,12 +729,45 @@ The Miscellaneous subsection includes various additional configurations.
   </li>
 </ul>
 
-## Further Works / To-do
+<!---
+ $$$$$$\   $$$$$$\  $$\   $$\ $$$$$$$$\ $$$$$$$\  $$$$$$\ $$$$$$$\  $$\   $$\ $$$$$$$$\ $$$$$$\ $$\   $$\  $$$$$$\  
+$$  __$$\ $$  __$$\ $$$\  $$ |\__$$  __|$$  __$$\ \_$$  _|$$  __$$\ $$ |  $$ |\__$$  __|\_$$  _|$$$\  $$ |$$  __$$\ 
+$$ /  \__|$$ /  $$ |$$$$\ $$ |   $$ |   $$ |  $$ |  $$ |  $$ |  $$ |$$ |  $$ |   $$ |     $$ |  $$$$\ $$ |$$ /  \__|
+$$ |      $$ |  $$ |$$ $$\$$ |   $$ |   $$$$$$$  |  $$ |  $$$$$$$\ |$$ |  $$ |   $$ |     $$ |  $$ $$\$$ |$$ |$$$$\ 
+$$ |      $$ |  $$ |$$ \$$$$ |   $$ |   $$  __$$<   $$ |  $$  __$$\ $$ |  $$ |   $$ |     $$ |  $$ \$$$$ |$$ |\_$$ |
+$$ |  $$\ $$ |  $$ |$$ |\$$$ |   $$ |   $$ |  $$ |  $$ |  $$ |  $$ |$$ |  $$ |   $$ |     $$ |  $$ |\$$$ |$$ |  $$ |
+\$$$$$$  | $$$$$$  |$$ | \$$ |   $$ |   $$ |  $$ |$$$$$$\ $$$$$$$  |\$$$$$$  |   $$ |   $$$$$$\ $$ | \$$ |\$$$$$$  |
+ \______/  \______/ \__|  \__|   \__|   \__|  \__|\______|\_______/  \______/    \__|   \______|\__|  \__| \______/
+ --->
+
+## Contributing
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 <img src=".media/sections/section-e.png" align="left" width="5%" height="auto"/>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
+### Structure Dockerfile
+<sup>[(Back to top)](#table-of-contents)</sup>
+
+### Structure Repository
+<sup>[(Back to top)](#table-of-contents)</sup>
+
+### CICD Workflow
+<sup>[(Back to top)](#table-of-contents)</sup>
+
+### Futher Works
+<sup>[(Back to top)](#table-of-contents)</sup>
+
+
+<!---
+$$$$$$$\  $$$$$$\  $$$$$$\   $$$$$$\  $$\        $$$$$$\  $$$$$$\ $$\      $$\ $$$$$$$$\ $$$$$$$\   $$$$$$\  
+$$  __$$\ \_$$  _|$$  __$$\ $$  __$$\ $$ |      $$  __$$\ \_$$  _|$$$\    $$$ |$$  _____|$$  __$$\ $$  __$$\ 
+$$ |  $$ |  $$ |  $$ /  \__|$$ /  \__|$$ |      $$ /  $$ |  $$ |  $$$$\  $$$$ |$$ |      $$ |  $$ |$$ /  \__|
+$$ |  $$ |  $$ |  \$$$$$$\  $$ |      $$ |      $$$$$$$$ |  $$ |  $$\$$\$$ $$ |$$$$$\    $$$$$$$  |\$$$$$$\  
+$$ |  $$ |  $$ |   \____$$\ $$ |      $$ |      $$  __$$ |  $$ |  $$ \$$$  $$ |$$  __|   $$  __$$<  \____$$\ 
+$$ |  $$ |  $$ |  $$\   $$ |$$ |  $$\ $$ |      $$ |  $$ |  $$ |  $$ |\$  /$$ |$$ |      $$ |  $$ |$$\   $$ |
+$$$$$$$  |$$$$$$\ \$$$$$$  |\$$$$$$  |$$$$$$$$\ $$ |  $$ |$$$$$$\ $$ | \_/ $$ |$$$$$$$$\ $$ |  $$ |\$$$$$$  |
+\_______/ \______| \______/  \______/ \________|\__|  \__|\______|\__|     \__|\________|\__|  \__| \______/
+--->
 
 ## Disclaimers
 <sup>[(Back to top)](#table-of-contents)</sup>
