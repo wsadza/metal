@@ -38,6 +38,8 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
   - [Configuration `Pipewire`](#configuration---pipewire)
   - [Configuration `Coturn`](#configuration---coturn)
   - [Configuration `Miscellaneous`](#configuration---coturn)
+    - [Configuration `Miscellaneous` - `Graphic`](#configuration---graphic)
+    - [Configuration `Miscellaneous` - `Desktop Environment`](#configuration---desktop-environment)
 - [Contributing](#contributing)
   - [Structure Dockerfile](#contributing---dockerfile)
   - [Structure Repository](#contributing---repository)
