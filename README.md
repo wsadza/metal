@@ -51,7 +51,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 
 <h2>Preview</h2>
 <div align="center">
-<sup><code>Easy as F*</code></sup>
+<sup><code>It was easy, right?</code></sup>
 <br>
 <kbd><img src=".media/preview-tldr.gif" width="800" height="auto"/></kbd>
 </div>
