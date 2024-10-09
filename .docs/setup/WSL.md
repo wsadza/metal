@@ -58,7 +58,7 @@ Throughout my exploration of WSL, I've gathered key insights about graphics rend
 
 #### Torchlight II:
 
-<kbd><img src="../../.media/wsl/preview/img/wsl_preview_gif_usage.gif" align="center" width="800" height="auto"/></kbd>
+<kbd><img src="../../.media/wsl/preview/gif/wsl_preview_gif_usage.gif" align="center" width="800" height="auto"/></kbd>
 
 
 ## 🔸 Setting Up - Windows
