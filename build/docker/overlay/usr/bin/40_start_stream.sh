@@ -13,7 +13,7 @@ trap _term SIGTERM SIGINT
 
 # Use internal turn server in case of lack of remote setting 
 if [ -z "${SELKIES_TURN_HOST}" ]; then
-  export SELKIES_TURN_HOST="${DOCKER_HOST:=localhost}"
+  export SELKIES_TURN_HOST="${STREAMER_HOST:=localhost}"
 fi
 
 # If nvidia-gpu is not reachable switch encoder to x264enc 

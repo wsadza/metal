@@ -14,6 +14,9 @@ trap _term SIGTERM SIGINT
 # wait for xorg server 
 readiness_xorg
 
+# wait for pulse server 
+readiness_pulse
+
 # execute kde plasma
 /usr/bin/startplasma-x11 &
 

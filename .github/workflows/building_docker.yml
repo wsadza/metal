@@ -2,12 +2,19 @@
 name: 'Building Docker'
 
 on:
-  # Trigger on each tag-push;
+  # Trigger this workflow on each tag push
   push:
+    # Specify that it should only trigger when a tag is pushed.
+    # The wildcard '*' means any tag name will match.
     tags:
       - '*'
+      
+    # Restrict the workflow to trigger only when changes are made within the 'build/' directory.
+    # This ensures that pushes unrelated to 'build/' won't trigger the workflow.
+    paths: 
+      - 'build/**'
 
-  # Trigger major on default ref;
+# Allow manually triggering this workflow from the Actions tab in GitHub.
   workflow_dispatch:
 
 jobs:
