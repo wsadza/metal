@@ -215,13 +215,12 @@ This section provides guidance on deploying and configuring streaming instances 
 ##
 <!---
 #####################################################
-# Usage - Kubernetes - Helm
+# Usage - Kubernetes - Helm - WIP!
 #####################################################
 --->
 
 ### Usage - Kubernetes - Helm:
 <sup>[(Back to top)](#table-of-contents)</sup>
-
 <img src=".media/work_in_progress.png" align="right" width="10%" height="auto"/>
 
 <table>
@@ -304,13 +303,12 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && .
 ##
 <!---
 #####################################################
-Setup - Bash
+Setup - Bash - WIP!
 #####################################################
 --->
 
 ### Setup - Bash
 <sup>[(Back to top)](#table-of-contents)</sup>
-
 <img src=".media/work_in_progress.png" align="right" width="10%" height="auto"/>
 
 Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash script. This will fetch and install all the necessary dependencies and components.
