@@ -249,6 +249,8 @@ This section highlights the critical configurations and components necessary for
 ##
 
 ### Configuration - Selkies-Gstreamer
+<sup>[(Back to top)](#table-of-contents)</sup>
+
 Selkies-GStreamer is an open-source low-latency high-performance Linux-native GPU/CPU-accelerated WebRTC HTML5 remote desktop streaming platform. For more information, visit [selkies-gstreamer](https://github.com/selkies-project/selkies-gstreamer).
 
 
@@ -347,6 +349,8 @@ Selkies-GStreamer is an open-source low-latency high-performance Linux-native GP
 ##
 
 ### Configuration - Pipewire
+<sup>[(Back to top)](#table-of-contents)</sup>
+
 PipeWire is a project that aims to greatly improve handling of audio and video under Linux. For more information, visit [pipewire](https://gitlab.freedesktop.org/pipewire/pipewire).
 
 <details>
@@ -389,6 +393,8 @@ PipeWire is a project that aims to greatly improve handling of audio and video u
 ##
 
 ### Configuration - Coturn
+<sup>[(Back to top)](#table-of-contents)</sup>
+
 Coturn is a free open source implementation of TURN and STUN Server. For more information, visit [coturn](https://github.com/coturn/coturn).
 
 <details>
@@ -436,6 +442,8 @@ Coturn is a free open source implementation of TURN and STUN Server. For more in
 ##
 
 ### Configuration - Miscellaneous
+<sup>[(Back to top)](#table-of-contents)</sup>
+
 The "Miscellaneous" subsection includes various additional configurations.
 
 <ul>
