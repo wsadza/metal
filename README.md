@@ -34,7 +34,7 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
   - [Setup by `Ansible` Playbook](#setup---ansible)
   - [Setup by `Bash` Script](#setup---bash)
 - [Configuration](#configuration)
-  - [Configuration `Selkies Gstreamer`](#configuration---streamer)
+  - [Configuration `Selkies Gstreamer`](#configuration---selkies-gstreamer)
   - [Configuration `Pipewire`](#configuration---pipewire)
   - [Configuration `Coturn`](#configuration---coturn)
   - [Configuration `Miscellaneous`](#configuration---coturn)
@@ -161,8 +161,8 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ### Usage - Kubernetes - Helm:
 <sup>[(Back to top)](#table-of-contents)</sup>
-<img src=".media/work_in_progress.png" align="right" width="10%" height="auto"/>
 
+<img src=".media/work_in_progress.png" align="right" width="10%" height="auto"/>
 
 <table>
     <tr>
@@ -230,6 +230,7 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && .
 
 ### Setup - Bash
 <sup>[(Back to top)](#table-of-contents)</sup>
+
 <img src=".media/work_in_progress.png" align="right" width="10%" height="auto"/>
 
 Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash script. This will fetch and install all the necessary dependencies and components.
@@ -243,8 +244,297 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./se
 
 <img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor leo id eros venenatis, in ornare lacus rhoncus. Proin non tincidunt dolor. Integer mattis laoreet facilisis. Vivamus pharetra, risus eu elementum ultricies, erat tortor pulvinar ante, eu scelerisque turpis ligula sit amet orci. Pellentesque a ante nunc. Mauris ornare nisi ut ornare laoreet. Nunc convallis eu arcu eget sollicitudin. 
+This section outlines the key configurations and components essential for optimizing the performance and functionality of your media streaming and communication setup. Each configuration is designed to enhance the overall user experience, ensuring low-latency and high-quality audio and video transmission across various platforms. Below are descriptions of the major components involved in the configuration process.
 
+##
+
+### Configuration - Selkies-Gstreamer
+Selkies-GStreamer is an open-source low-latency high-performance Linux-native GPU/CPU-accelerated WebRTC HTML5 remote desktop streaming platform. For more information, visit [selkies-gstreamer](https://github.com/selkies-project/selkies-gstreamer).
+
+
+<details>
+  <summary>Environment Variables Overview 📍</summary>
+  <br>  
+  <table>
+      <tr>
+          <td><strong>VARIABLE</strong></td>
+          <td><strong>DESCRIPTION</strong></td>
+          <td><strong>DEFAULT</strong></td>
+      </tr>
+      <tr>
+          <td>SELKIES_AUDIO_BITRATE</td>
+          <td>Default audio bitrate in bits per second</td>
+          <td>128000</td>
+      </tr>
+      <tr>
+          <td>SELKIES_FRAMERATE</td>
+          <td>Framerate of the streamed remote desktop</td>
+          <td>60</td>
+      </tr>
+      <tr>
+          <td>SELKIES_VIDEO_BITRATE</td>
+          <td>Default video bitrate in kilobits per second</td>
+          <td>2000</td>
+      </tr>
+      <tr>
+          <td>SELKIES_ENABLE_BASIC_AUTH</td>
+          <td>Enable basic authentication on server</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>SELKIES_ENABLE_RESIZE</td>
+          <td>Enable dynamic resizing to match browser size</td>
+          <td>true</td>
+      </tr>
+      <tr>
+          <td>SELKIES_ENCODER</td>
+          <td>GStreamer video encoder to use</td>
+          <td>x264enc</td>
+      </tr>
+      <tr>
+          <td>SELKIES_INTERPOSER</td>
+          <td>Path to the joystick interposer plugin</td>
+          <td>/usr/$LIB/selkies_joystick_interposer.so</td>
+      </tr>
+      <tr>
+          <td>GST_DEBUG</td>
+          <td>GStreamer debug level</td>
+          <td>${GST_DEBUG:-*:2}</td>
+      </tr>
+      <tr>
+          <td>GSTREAMER_PATH</td>
+          <td>Path to GStreamer installation</td>
+          <td>/opt/gstreamer</td>
+      </tr>
+      <tr>
+          <td>SELKIES_ENABLE_METRICS_HTTP</td>
+          <td>Enable the Prometheus HTTP metrics port</td>
+          <td>true</td>
+      </tr>
+      <tr>
+          <td>SELKIES_METRICS_HTTP_PORT</td>
+          <td>Port to start the Prometheus metrics server on</td>
+          <td>9090</td>
+      </tr>
+      <tr>
+          <td>SELKIES_ADDR</td>
+          <td>Host to listen to for the signaling and web server</td>
+          <td>0.0.0.0</td>
+      </tr>
+      <tr>
+          <td>SELKIES_PORT</td>
+          <td>Port to listen to for the signaling and web server</td>
+          <td>8080</td>
+      </tr>
+      <tr>
+          <td>SELKIES_TURN_PORT</td>
+          <td>TURN port for signaling</td>
+          <td>3478</td>
+      </tr>
+      <tr>
+          <td>SELKIES_TURN_USERNAME</td>
+          <td>Username for TURN authentication</td>
+          <td>user</td>
+      </tr>
+      <tr>
+          <td>SELKIES_TURN_PASSWORD</td>
+          <td>Password for TURN authentication</td>
+          <td>password</td>
+      </tr>
+  </table>
+</details>
+
+##
+
+### Configuration - Pipewire
+PipeWire is a project that aims to greatly improve handling of audio and video under Linux. For more information, visit [pipewire](https://gitlab.freedesktop.org/pipewire/pipewire).
+
+<details>
+  <summary>Configuration Variables Table: 📍</summary>
+  <br>  
+  <table>
+      <tr>
+          <td><strong>VARIABLE</strong></td>
+          <td><strong>DESCRIPTION</strong></td>
+          <td><strong>DEFAULT</strong></td>
+      </tr>
+      <tr>
+          <td>DISABLE_RTKIT</td>
+          <td>Disables RTKit service</td>
+          <td>y</td>
+      </tr>
+      <tr>
+          <td>PIPEWIRE_PORT</td>
+          <td>Port for PipeWire audio server</td>
+          <td>4713</td>
+      </tr>
+      <tr>
+          <td>PIPEWIRE_DEBUG</td>
+          <td>Debug level for PipeWire</td>
+          <td>E</td>
+      </tr>
+      <tr>
+          <td>WIREPLUMBER_DEBUG</td>
+          <td>Debug level for WirePlumber</td>
+          <td>E</td>
+      </tr>
+      <tr>
+          <td>PIPEWIRE_LATENCY</td>
+          <td>Latency setting for PipeWire in the format "buffer size/sample rate"</td>
+          <td>32/48000</td>
+      </tr>
+  </table>
+</details>
+
+##
+
+### Configuration - Coturn
+Coturn is a free open source implementation of TURN and STUN Server. For more information, visit [coturn](https://github.com/coturn/coturn).
+
+<details>
+  <summary>Configuration Variables Table: 📍</summary>
+  <br>  
+  <table>
+      <tr>
+          <td><strong>VARIABLE</strong></td>
+          <td><strong>DESCRIPTION</strong></td>
+          <td><strong>DEFAULT</strong></td>
+      </tr>
+      <tr>
+          <td>TURN_PORT</td>
+          <td>Port for TURN server communication</td>
+          <td>3478</td>
+      </tr>
+      <tr>
+          <td>TURN_USERNAME</td>
+          <td>Username for TURN server authentication</td>
+          <td>user</td>
+      </tr>
+      <tr>
+          <td>TURN_PASSWORD</td>
+          <td>Password for TURN server authentication</td>
+          <td>password</td>
+      </tr>
+      <tr>
+          <td>TURN_MIN_PORT</td>
+          <td>Minimum port range for TURN allocation</td>
+          <td>49160</td>
+      </tr>
+      <tr>
+          <td>TURN_MAX_PORT</td>
+          <td>Maximum port range for TURN allocation</td>
+          <td>49200</td>
+      </tr>
+      <tr>
+          <td>TURN_REALM</td>
+          <td>Realm used for TURN authentication</td>
+          <td>local.host</td>
+      </tr>
+  </table>
+</details>
+
+##
+
+### Configuration - Miscellaneous
+The "Miscellaneous" subsection includes various additional configurations and tools.
+
+<ul>
+  
+  <li>
+    <h4>Configuration - Miscellaneous - Graphic</h4>
+      <details>
+        <summary>Configuration Variables Table: 📍</summary>
+        <br>  
+        <table>
+            <tr>
+                <td><strong>VARIABLE</strong></td>
+                <td><strong>DESCRIPTION</strong></td>
+                <td><strong>DEFAULT</strong></td>
+            </tr>
+            <tr>
+                <td>NVIDIA_VISIBLE_DEVICES</td>
+                <td>Specifies which NVIDIA devices are visible to the application</td>
+                <td>all</td>
+            </tr>
+            <tr>
+                <td>NVIDIA_DRIVER_CAPABILITIES</td>
+                <td>Specifies the capabilities that the NVIDIA driver should expose</td>
+                <td>all</td>
+            </tr>
+            <tr>
+                <td>LD_LIBRARY_PATH</td>
+                <td>Path for the dynamic linker to find shared libraries</td>
+                <td>${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/nvidia/lib:/usr/local/nvidia/lib64</td>
+            </tr>
+            <tr>
+                <td>PATH</td>
+                <td>Path to the NVIDIA binaries</td>
+                <td>/usr/local/nvidia/bin${PATH:+:${PATH}}</td>
+            </tr>
+            <tr>
+                <td>EGL_DEVICE_INDEX</td>
+                <td>Index of the EGL device to use</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>__NV_PRIME_RENDER_OFFLOAD</td>
+                <td>Enables PRIME render offload</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>__GL_SYNC_TO_VBLANK</td>
+                <td>Synchronizes OpenGL rendering to the vertical blank</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>__GLX_VENDOR_LIBRARY_NAME</td>
+                <td>Specifies the GLX vendor library to use</td>
+                <td>mesa</td>
+            </tr>
+            <tr>
+                <td>PRIME_RENDERER_GLOBAL</td>
+                <td>Enables or disables global PRIME rendering</td>
+                <td>true</td>
+            </tr>
+            <tr>
+                <td>PRIME_RENDERER_WINE</td>
+                <td>Enables or disables PRIME rendering for Wine applications</td>
+                <td>true</td>
+            </tr>
+        </table>
+      </details>
+  </li>
+  
+  <li>
+    <h4>Configuration - Miscellaneous - Graphic</h4>
+    <details>
+      <summary>Configuration: 📍</summary>
+      <br>  
+      <table>
+          <tr>
+              <td><a href=".github/workflows/building_docker.yml">Nvidia</a></td>
+              <td>Guide on using the Nvidia runtime within Docker containers.</td>
+          </tr>
+          <tr>
+              <td><a href=".github/workflows/building_docker.yml">Companion</a></td>
+              <td>Instructions on reusing the built-in Coturn server for a second stream instance.</td>
+          </tr>
+          <tr>
+              <td><a href=".github/workflows/building_docker.yml">Steam</a></td>
+              <td>Steps to disable isolation for Flatpak Steam applications.</td>
+          </tr>
+          <tr>
+              <td><a href=".github/workflows/building_docker.yml">Coturn</a></td>
+              <td>Setup for an external Coturn server and configuring stream to use it.</td>
+          </tr>
+          <tr>
+              <td><a href=".github/workflows/building_docker.yml">Build</a></td>
+              <td>Instructions for building with a list of all available build arguments.</td>
+          </tr>
+      </table>
+    </details>
+  </li>
+</ul>
 
 ##
 
@@ -270,7 +560,7 @@ This section contains important disclaimers regarding the ownership of software 
   </details> 
   
   <details>
-  <summary>Selkies Gstreamer</summary>
+  <summary>Selkies-Gstreamer</summary>
   <br>
     This project has been developed and is supported in part by the National Research Platform (NRP) and the Cognitive Hardware and Software Ecosystem Community Infrastructure (CHASE-CI) at the University of California, San Diego, by funding from the National Science Foundation (NSF), with awards #1730158, #1540112, #1541349, #1826967, #2138811, #2112167, #2100237, and #2120019, as well as additional funding from community partners, infrastructure utilization from the Open Science Grid Consortium, supported by the National Science Foundation (NSF) awards #1836650 and #2030508, and infrastructure utilization from the Chameleon testbed, supported by the National Science Foundation (NSF) awards #1419152, #1743354, and #2027170. This project has also been funded by the Seok-San Yonsei Medical Scientist Training Program (MSTP) Song Yong-Sang Scholarship, College of Medicine, Yonsei University, the MD-PhD/Medical Scientist Training Program (MSTP) through the Korea Health Industry Development Institute (KHIDI), funded by the Ministry of Health & Welfare, Republic of Korea, and the Student Research Bursary of Song-dang Institute for Cancer Research, College of Medicine, Yonsei University.
   </details> 
