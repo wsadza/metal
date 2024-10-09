@@ -53,7 +53,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>It was easy, right?</code></sup>
 <br>
-<kbd><img src=".media/native/preview/native_preview_gif_tldr.gif" width="800" height="auto"/></kbd>
+<kbd><img src=".media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="auto"/></kbd>
 </div>
 
 ##
@@ -108,7 +108,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Steam? No Problem!</code></sup>
 <br>
-<kbd><img src=".media/native/preview/native_preview_steam.gif" width="800" height="auto"/></kbd>
+<kbd><img src=".media/native/preview/gif/native_preview_steam.gif" width="800" height="auto"/></kbd>
 </div>
 
 <!---
@@ -266,7 +266,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Want to play with others?</code></sup>
 <br>
-<kbd><img src=".media/native/preview/native_preview_gif_companion.gif" align="center" width="800" height="auto"/></kbd>
+<kbd><img src=".media/native/preview/gif/native_preview_gif_companion.gif" align="center" width="800" height="auto"/></kbd>
 </div>
 
 <!---
@@ -779,7 +779,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Play anywhere!</code></sup>
 <br>
-<img src=".media/native/preview/native_preview_gif_mobile.gif" align="center" width="800" height="auto"/>   
+<img src=".media/native/preview/gif/native_preview_gif_mobile.gif" align="center" width="800" height="auto"/>   
 <br>
 </div>
 
