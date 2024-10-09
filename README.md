@@ -446,7 +446,7 @@ Coturn is a free open source implementation of TURN and STUN Server. For more in
 
 The Miscellaneous subsection includes various additional configurations.
 
-<h4>Miscellaneous - Graphic</h4>
+<h4>Configuration - Miscellaneous - Graphic</h4>
 <details>
   <summary>Environment Variables Overview: 📍</summary>
   <br>  
@@ -509,7 +509,7 @@ The Miscellaneous subsection includes various additional configurations.
   </table>
 </details>
 
-<h4>Miscellaneous - Desktop Environment</h4>
+<h4>Configuration - Miscellaneous - Desktop Environment</h4>
 <details>
   <summary>Environment Variables Overview: 📍</summary>
   <br>  
