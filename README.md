@@ -166,8 +166,8 @@ This section provides guidance on deploying and configuring streaming instances 
 
 <table>
     <tr>
-        <td><a href=".github/workflows/building_docker.yml">Chart</a></td>
-        <td>Update in progress; no content available yet!</td>
+        <td><a href="README.md">Chart</a></td>
+        <td>Work in progress.</td>
     </tr>
 </table>
 
@@ -244,7 +244,7 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./se
 
 <img src=".media/sections/section-d.png" align="left" width="5%" height="auto"/>
 
-This section outlines the key configurations and components essential for optimizing the performance and functionality of your media streaming and communication setup. Each configuration is designed to enhance the overall user experience, ensuring low-latency and high-quality audio and video transmission across various platforms. Below are descriptions of the major components involved in the configuration process.
+This section highlights the critical configurations and components necessary for maximizing the performance and functionality of your media streaming and communication setup. Each configuration is tailored to improve the overall user experience. You can find all the configurations described below in the [Dockerfile](https://github.com/utilizable/metal/blob/develop/build/docker/Dockerfile.debbased#L1314).
 
 ##
 
@@ -253,7 +253,7 @@ Selkies-GStreamer is an open-source low-latency high-performance Linux-native GP
 
 
 <details>
-  <summary>Environment Variables Overview 📍</summary>
+  <summary>Environment Variables Overview: 📍</summary>
   <br>  
   <table>
       <tr>
@@ -350,7 +350,7 @@ Selkies-GStreamer is an open-source low-latency high-performance Linux-native GP
 PipeWire is a project that aims to greatly improve handling of audio and video under Linux. For more information, visit [pipewire](https://gitlab.freedesktop.org/pipewire/pipewire).
 
 <details>
-  <summary>Configuration Variables Table: 📍</summary>
+  <summary>Environment Variables Overview: 📍</summary>
   <br>  
   <table>
       <tr>
@@ -392,7 +392,7 @@ PipeWire is a project that aims to greatly improve handling of audio and video u
 Coturn is a free open source implementation of TURN and STUN Server. For more information, visit [coturn](https://github.com/coturn/coturn).
 
 <details>
-  <summary>Configuration Variables Table: 📍</summary>
+  <summary>Environment Variables Overview: 📍</summary>
   <br>  
   <table>
       <tr>
@@ -436,100 +436,160 @@ Coturn is a free open source implementation of TURN and STUN Server. For more in
 ##
 
 ### Configuration - Miscellaneous
-The "Miscellaneous" subsection includes various additional configurations and tools.
+The "Miscellaneous" subsection includes various additional configurations.
 
 <ul>
   
   <li>
     <h4>Configuration - Miscellaneous - Graphic</h4>
-      <details>
-        <summary>Configuration Variables Table: 📍</summary>
-        <br>  
-        <table>
-            <tr>
-                <td><strong>VARIABLE</strong></td>
-                <td><strong>DESCRIPTION</strong></td>
-                <td><strong>DEFAULT</strong></td>
-            </tr>
-            <tr>
-                <td>NVIDIA_VISIBLE_DEVICES</td>
-                <td>Specifies which NVIDIA devices are visible to the application</td>
-                <td>all</td>
-            </tr>
-            <tr>
-                <td>NVIDIA_DRIVER_CAPABILITIES</td>
-                <td>Specifies the capabilities that the NVIDIA driver should expose</td>
-                <td>all</td>
-            </tr>
-            <tr>
-                <td>LD_LIBRARY_PATH</td>
-                <td>Path for the dynamic linker to find shared libraries</td>
-                <td>${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/nvidia/lib:/usr/local/nvidia/lib64</td>
-            </tr>
-            <tr>
-                <td>PATH</td>
-                <td>Path to the NVIDIA binaries</td>
-                <td>/usr/local/nvidia/bin${PATH:+:${PATH}}</td>
-            </tr>
-            <tr>
-                <td>EGL_DEVICE_INDEX</td>
-                <td>Index of the EGL device to use</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>__NV_PRIME_RENDER_OFFLOAD</td>
-                <td>Enables PRIME render offload</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>__GL_SYNC_TO_VBLANK</td>
-                <td>Synchronizes OpenGL rendering to the vertical blank</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>__GLX_VENDOR_LIBRARY_NAME</td>
-                <td>Specifies the GLX vendor library to use</td>
-                <td>mesa</td>
-            </tr>
-            <tr>
-                <td>PRIME_RENDERER_GLOBAL</td>
-                <td>Enables or disables global PRIME rendering</td>
-                <td>true</td>
-            </tr>
-            <tr>
-                <td>PRIME_RENDERER_WINE</td>
-                <td>Enables or disables PRIME rendering for Wine applications</td>
-                <td>true</td>
-            </tr>
-        </table>
-      </details>
-  </li>
-  
-  <li>
-    <h4>Configuration - Miscellaneous - Graphic</h4>
     <details>
-      <summary>Configuration: 📍</summary>
+      <summary>Environment Variables Overview: 📍</summary>
       <br>  
       <table>
           <tr>
-              <td><a href=".github/workflows/building_docker.yml">Nvidia</a></td>
-              <td>Guide on using the Nvidia runtime within Docker containers.</td>
+              <td><strong>VARIABLE</strong></td>
+              <td><strong>DESCRIPTION</strong></td>
+              <td><strong>DEFAULT</strong></td>
           </tr>
           <tr>
-              <td><a href=".github/workflows/building_docker.yml">Companion</a></td>
-              <td>Instructions on reusing the built-in Coturn server for a second stream instance.</td>
+              <td>NVIDIA_VISIBLE_DEVICES</td>
+              <td>Specifies which NVIDIA devices are visible to the application</td>
+              <td>all</td>
           </tr>
           <tr>
-              <td><a href=".github/workflows/building_docker.yml">Steam</a></td>
-              <td>Steps to disable isolation for Flatpak Steam applications.</td>
+              <td>NVIDIA_DRIVER_CAPABILITIES</td>
+              <td>Specifies the capabilities that the NVIDIA driver should expose</td>
+              <td>all</td>
           </tr>
           <tr>
-              <td><a href=".github/workflows/building_docker.yml">Coturn</a></td>
-              <td>Setup for an external Coturn server and configuring stream to use it.</td>
+              <td>LD_LIBRARY_PATH</td>
+              <td>Path for the dynamic linker to find shared libraries</td>
+              <td>${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/nvidia/lib:/usr/local/nvidia/lib64</td>
           </tr>
           <tr>
-              <td><a href=".github/workflows/building_docker.yml">Build</a></td>
-              <td>Instructions for building with a list of all available build arguments.</td>
+              <td>PATH</td>
+              <td>Path to the NVIDIA binaries</td>
+              <td>/usr/local/nvidia/bin${PATH:+:${PATH}}</td>
+          </tr>
+          <tr>
+              <td>EGL_DEVICE_INDEX</td>
+              <td>Index of the EGL device to use</td>
+              <td>0</td>
+          </tr>
+          <tr>
+              <td>__NV_PRIME_RENDER_OFFLOAD</td>
+              <td>Enables PRIME render offload</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>__GL_SYNC_TO_VBLANK</td>
+              <td>Synchronizes OpenGL rendering to the vertical blank</td>
+              <td>0</td>
+          </tr>
+          <tr>
+              <td>__GLX_VENDOR_LIBRARY_NAME</td>
+              <td>Specifies the GLX vendor library to use</td>
+              <td>mesa</td>
+          </tr>
+          <tr>
+              <td>PRIME_RENDERER_GLOBAL</td>
+              <td>Enables or disables global PRIME rendering</td>
+              <td>true</td>
+          </tr>
+          <tr>
+              <td>PRIME_RENDERER_WINE</td>
+              <td>Enables or disables PRIME rendering for Wine applications</td>
+              <td>true</td>
+          </tr>
+      </table>
+    </details>
+  </li>
+  
+  <li>
+    <h4>Configuration - Miscellaneous - Desktop Environment</h4>
+    <details>
+      <summary>Environment Variables Overview: 📍</summary>
+      <br>  
+      <table>
+          <tr>
+              <td><strong>VARIABLE</strong></td>
+              <td><strong>DESCRIPTION</strong></td>
+              <td><strong>DEFAULT</strong></td>
+          </tr>
+          <tr>
+              <td>DESKTOP_SESSION</td>
+              <td>Current desktop session type</td>
+              <td>plasma</td>
+          </tr>
+          <tr>
+              <td>XDG_SESSION_DESKTOP</td>
+              <td>Session desktop environment</td>
+              <td>KDE</td>
+          </tr>
+          <tr>
+              <td>XDG_CURRENT_DESKTOP</td>
+              <td>The current desktop environment</td>
+              <td>KDE</td>
+          </tr>
+          <tr>
+              <td>XDG_SESSION_TYPE</td>
+              <td>Type of session being run</td>
+              <td>x11</td>
+          </tr>
+          <tr>
+              <td>KDE_FULL_SESSION</td>
+              <td>Indicates if the full KDE session is active</td>
+              <td>true</td>
+          </tr>
+          <tr>
+              <td>KDE_SESSION_VERSION</td>
+              <td>Version of the KDE session in use</td>
+              <td>5</td>
+          </tr>
+          <tr>
+              <td>KDE_APPLICATIONS_AS_SCOPE</td>
+              <td>Whether to use KDE applications as scope</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>KWIN_COMPOSE</td>
+              <td>Enables or disables composition in KWin</td>
+              <td>N</td>
+          </tr>
+          <tr>
+              <td>KWIN_EFFECTS_FORCE_ANIMATIONS</td>
+              <td>Forces animations in KWin effects</td>
+              <td>0</td>
+          </tr>
+          <tr>
+              <td>KWIN_EXPLICIT_SYNC</td>
+              <td>Enables explicit synchronization for KWin</td>
+              <td>0</td>
+          </tr>
+          <tr>
+              <td>KWIN_X11_NO_SYNC_TO_VBLANK</td>
+              <td>Disables synchronization to vertical blank in KWin</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>GTK_IM_MODULE</td>
+              <td>Input method module for GTK applications</td>
+              <td>fcitx</td>
+          </tr>
+          <tr>
+              <td>QT_IM_MODULE</td>
+              <td>Input method module for Qt applications</td>
+              <td>fcitx</td>
+          </tr>
+          <tr>
+              <td>XIM</td>
+              <td>Input method for X11</td>
+              <td>fcitx</td>
+          </tr>
+          <tr>
+              <td>XMODIFIERS</td>
+              <td>Specifies input method modifiers</td>
+              <td>@im=fcitx</td>
           </tr>
       </table>
     </details>
