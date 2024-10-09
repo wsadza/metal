@@ -11,7 +11,7 @@ version: '3.8'
 services:
 
 # ----------------------------
-# Stream Server 
+# Stream Server [0]
 
     stream:
       hostname: stream 
