@@ -27,7 +27,7 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
 ### Table Of Contents:
 - [Usage](#usage)
   - [Usage `Docker`](#usage---docker)
-  - [Usage `Docker-Compose`](#usage---docker---compose)
+  - [Usage `Docker-Compose`](#usage---docker-compose)
   - [Usage `Kubernetes`](#usage---kubernetes---manifest)
   - [Usage `Helm`](#usage---kubernetes---helm)
 - [Setup](#setup)
@@ -70,7 +70,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ##
 
-### Usage - Docker
+### Usage - Docker:
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 > [!TIP]
@@ -113,7 +113,7 @@ This section provides guidance on deploying and configuring streaming instances 
   ```
 ##
 
-### Usage - Docker - Compose:
+### Usage - Docker-Compose:
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 > [!IMPORTANT]  
