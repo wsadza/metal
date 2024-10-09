@@ -777,6 +777,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <h2>Preview</h2>
 <div align="center">
 <sup><code>Play anywhere!</code></sup>
+<br>
 <img src=".media/preview/preview_mobile.gif" align="center" width="800" height="auto"/>   
 <br>
 </div>
