@@ -10,15 +10,6 @@ on:
     tags:
       - '*'
 
-# https://github.com/orgs/community/discussions/26273
-    branches:
-      - 'develop'
-
-# Restrict the workflow to trigger only when changes are made within the 'build/' directory.
-# This ensures that pushes unrelated to 'build/' won't trigger the workflow.
-    paths: 
-      - 'build/**'
-
 # Allow manually triggering this workflow from the Actions tab in GitHub.
   workflow_dispatch:
 
