@@ -35,7 +35,7 @@ Now it's a streaming powerhouse. Why? Just because!
 > Minimal Ubuntu image that utilizes software rendering ([llvmpipe](https://docs.mesa3d.org/drivers/llvmpipe.html])), suitable for WSL / Native linux instances.
 
 ```sh
-docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n" 
+docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 9091:9091 -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && sleep 10 && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n" 
 ```
 
 ##
@@ -126,19 +126,19 @@ This section provides guidance on deploying and configuring streaming instances 
 - Minimal-Debian:
   <br>
   ```sh
-  docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+  docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 9091:9091 -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
   
 - Minimal-Ubuntu:
   <br>
   ```sh
-  docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+  docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 9091:9091 -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
   
 - Full-Ubuntu:
   <br>
   ```sh
-  docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+  docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 9091:9091 -e DOCKER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
   
 - <details>
@@ -156,7 +156,7 @@ This section provides guidance on deploying and configuring streaming instances 
   </details>  
   
   ```sh
-  docker run -d --hostname stream -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(hostname -I | awk '{print $1}') -e SELKIES_ENCODER=nvh264enc --gpus '"device=0"' --tmpfs /dev/shm:rw --shm-size 64m --ipc host --ulimit nofile=1024:524288 --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+  docker run -d --hostname stream -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 9091:9091 -e DOCKER_HOST=$(hostname -I | awk '{print $1}') -e SELKIES_ENCODER=nvh264enc --gpus '"device=0"' --tmpfs /dev/shm:rw --shm-size 64m --ipc host --ulimit nofile=1024:524288 --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
   ```
 ##
 <!---
@@ -360,8 +360,7 @@ This section highlights the critical configurations and components necessary for
 ### Configuration - Selkies-Gstreamer
 <sup>[(Back to top)](#table-of-contents)</sup>
 
-Selkies-GStreamer is an open-source low-latency high-performance Linux-native GPU/CPU-accelerated WebRTC HTML5 remote desktop streaming platform. For more information, visit [selkies-gstreamer](https://github.com/selkies-project/selkies-gstreamer).
-
+Selkies-GStreamer is an open-source low-latency high-performance Linux-native GPU/CPU-accelerated WebRTC HTML5 remote desktop streaming platform. 
 
 <details>
   <summary>Environment Variables Overview: 📍</summary>
@@ -455,6 +454,8 @@ Selkies-GStreamer is an open-source low-latency high-performance Linux-native GP
   </table>
 </details>
 
+For more information, visit [selkies-gstreamer](https://github.com/selkies-project/selkies-gstreamer) home page.
+
 ##
 <!---
 #####################################################
@@ -465,7 +466,7 @@ Selkies-GStreamer is an open-source low-latency high-performance Linux-native GP
 ### Configuration - Pipewire
 <sup>[(Back to top)](#table-of-contents)</sup>
 
-PipeWire is a project that aims to greatly improve handling of audio and video under Linux. For more information, visit [pipewire](https://gitlab.freedesktop.org/pipewire/pipewire).
+PipeWire is a project that aims to greatly improve handling of audio and video under Linux. 
 
 <details>
   <summary>Environment Variables Overview: 📍</summary>
@@ -504,6 +505,8 @@ PipeWire is a project that aims to greatly improve handling of audio and video u
   </table>
 </details>
 
+For more information, visit [coturn](https://github.com/coturn/coturn) home page.
+
 ##
 <!---
 #####################################################
@@ -514,7 +517,8 @@ PipeWire is a project that aims to greatly improve handling of audio and video u
 ### Configuration - Coturn
 <sup>[(Back to top)](#table-of-contents)</sup>
 
-Coturn is a free open source implementation of TURN and STUN Server. For more information, visit [coturn](https://github.com/coturn/coturn).
+Coturn is a free open source implementation of TURN and STUN Server. 
+<br>
 
 <details>
   <summary>Environment Variables Overview: 📍</summary>
@@ -557,6 +561,8 @@ Coturn is a free open source implementation of TURN and STUN Server. For more in
       </tr>
   </table>
 </details>
+
+For more information, visit [coturn](https://github.com/coturn/coturn) home page.
 
 ##
 <!---
