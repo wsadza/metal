@@ -599,8 +599,6 @@ The Miscellaneous subsection includes various additional configurations.
   </table>
 </details>
 
-##
-
 ## Disclaimers
 <sup>[(Back to top)](#table-of-contents)</sup>
 
