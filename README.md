@@ -37,7 +37,7 @@ docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -e DOCKER_HOST=$(ho
   - [Configuration `Selkies Gstreamer`](#configuration---selkies-gstreamer)
   - [Configuration `Pipewire`](#configuration---pipewire)
   - [Configuration `Coturn`](#configuration---coturn)
-  - [Configuration Miscellaneous](#configuration---coturn)
+  - [Configuration Miscellaneous](#configuration---miscellaneous)
     - [Configuration Miscellaneous - `Graphic`](#configuration---miscellaneous)
     - [Configuration Miscellaneous - `Desktop Environment`](#configuration---miscellaneous)
 - [Contributing](#contributing)
