@@ -108,7 +108,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Steam? No Problem!</code></sup>
 <br>
-<kbd><img src=".media/native/preview/gif/native_preview_steam.gif" width="800" height="auto"/></kbd>
+<kbd><img src=".media/native/preview/gif/native_preview_gif_steam.gif" width="800" height="auto"/></kbd>
 </div>
 
 <!---
