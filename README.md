@@ -24,7 +24,6 @@ Introducing my totally modular, Dockerized streaming service. Build it your way,
 Now it's a streaming powerhouse. Why? Just because!
 
 ##
-
 <!---
 #####################################################
 # TLDR
@@ -110,7 +109,6 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
 ##
-
 <!---
 #####################################################
 # Usage - Docker
@@ -560,13 +558,12 @@ Coturn is a free open source implementation of TURN and STUN Server. For more in
 The Miscellaneous subsection includes various additional configurations.
 
 <ul>
-  
+   
 <!---
 #####################################################
 # Configuration - Miscellaneous - Graphic
 #####################################################
 --->  
-
   <li>
     <h4>Configuration - Miscellaneous - Graphic</h4>
      <details>
@@ -637,7 +634,6 @@ The Miscellaneous subsection includes various additional configurations.
 # Configuration - Miscellaneous - Desktop Environment
 #####################################################
 --->  
-
   <li>
     <h4>Configuration - Miscellaneous - Desktop Environment</h4>
     <details>
@@ -727,6 +723,7 @@ The Miscellaneous subsection includes various additional configurations.
       </table>
     </details>
   </li>
+  
 </ul>
 
 <!---
