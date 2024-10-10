@@ -10,10 +10,7 @@
       <img src="https://labl.es/svg?text=GPU%20Sharing&width=200&bgcolor=a50068" align="center"/>
       <img src="https://labl.es/svg?text=VDI&width=200&bgcolor=d35400" align="center"/>
    </div>
-   
 </div>
-
-
 
 <!---
 $$\      $$\ $$$$$$$$\ $$$$$$$$\  $$$$$$\  $$\       
