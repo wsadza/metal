@@ -178,7 +178,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>We want to see higher FPS here, ideally more than 2.</code></sup>
 <br>
-<img src="../../.media/wsl/preview/img/wsl_preview_img_glxspheres.png" width="800" height="auto"/>
+<img src="../../.media/wsl/preview/img/wsl_preview_img_glxspheres.png" width="650" height="auto"/>
 </div>
 
 <!---
@@ -197,7 +197,7 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$
 This section aims to help users set up resource limits and GPU settings for better performance when running Linux on WSL 2, especially for graphical applications using WSLg.
 
 Helpful Resources:
-<br>
+<br><br>
 <ul>
   <sup>
     <li><a href="https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg">WSLg GPU Selection Documentation</a></li>
@@ -334,21 +334,15 @@ The table below provides WSL-LINUX configuration settings for specifying `Nvidia
 </details>
 
 <!---
-$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
-$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
-$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
-$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
-$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
-$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
-$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
-\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
+$$\   $$\  $$$$$$\   $$$$$$\   $$$$$$\  $$$$$$$$\ 
+$$ |  $$ |$$  __$$\ $$  __$$\ $$  __$$\ $$  _____|
+$$ |  $$ |$$ /  \__|$$ /  $$ |$$ /  \__|$$ |      
+$$ |  $$ |\$$$$$$\  $$$$$$$$ |$$ |$$$$\ $$$$$\    
+$$ |  $$ | \____$$\ $$  __$$ |$$ |\_$$ |$$  __|   
+$$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |      
+\$$$$$$  |\$$$$$$  |$$ |  $$ |\$$$$$$  |$$$$$$$$\ 
+ \______/  \______/ \__|  \__| \______/ \________|
 --->
-<h2>Preview</h2>
-<div align="center">
-<sup><code>Vulkan is now "operational".</code></sup>
-<br>
-<img src="../../.media/wsl/preview/img/wsl_preview_img_vkcube.png" width="800" height="auto"/>
-</div>
 
 ## Usage
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -447,6 +441,23 @@ Here’s a fully prepared Docker Compose file that allows you to run Steam and u
  </ul>
  <!-- #list -->    
 </details>
+
+<!---
+$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
+$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
+$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
+$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
+$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
+$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
+$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
+\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
+--->
+<h2>Preview</h2>
+<div align="center">
+<sup><code>Vulkan is now "operational".</code></sup>
+<br>
+<img src="../../.media/wsl/preview/img/wsl_preview_img_vkcube.png" width="650" height="auto"/>
+</div>
 
 ##
 <!---
