@@ -10,6 +10,9 @@
       <img src="https://labl.es/svg?text=GPU%20Sharing&width=200&bgcolor=a50068" align="center"/>
       <img src="https://labl.es/svg?text=VDI&width=200&bgcolor=d35400" align="center"/>
    </div>
+   
+<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
+<br>
 </div>
 
 <!---
@@ -22,6 +25,7 @@ $$ |\$  /$$ |$$ |         $$ |   $$ |  $$ |$$ |
 $$ | \_/ $$ |$$$$$$$$\    $$ |   $$ |  $$ |$$$$$$$$\ 
 \__|     \__|\________|   \__|   \__|  \__|\________
 --->
+
 
 # Metal
 <img src=".media/asset/section/asset_section_a.png" align="left" width="5%" height="auto"/>
