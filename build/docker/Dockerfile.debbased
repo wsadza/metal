@@ -53,6 +53,7 @@ ENV \
 
 # -----------------------------------------------
 # Base: User Tools 
+# -----------------------------------------------
 
 RUN \
     echo "**** Base: User Tools ****" \
@@ -87,6 +88,7 @@ RUN \
 
 # -----------------------------------------------
 # Base-Debian: Debian non-free apt configuration
+# -----------------------------------------------
 
 RUN \
     echo "**** Base: APT Configure (debian) ****" \
@@ -106,26 +108,31 @@ RUN \
 
 # -----------------------------------------------
 # Base: Configure user 
+# -----------------------------------------------
 
 ARG \
     USER_NAME=ubuntu \
     USER_PASSWORD=ubuntu \
     USER_UID=1000
 
-RUN \
-    echo "**** Base: User Configure ****" \     
-        && groupadd -g ${USER_UID} ${USER_NAME} \
-        && useradd -m -l -s /bin/bash \
-            -u ${USER_UID}  \
-            -g ${USER_UID}  \
-               ${USER_NAME} \
+RUN \ 
+    echo "**** Base: User Configure ****" \
+        && if ! getent group ${USER_NAME}; \
+           then \
+             groupadd -g ${USER_UID} ${USER_NAME}; \
+           fi \
+        && if ! id -u ${USER_NAME} >/dev/null 2>&1; \
+           then \
+             useradd -m -s /bin/bash -u ${USER_UID} -g ${USER_NAME} ${USER_NAME}; \
+           fi \
     && \
-    echo "**** Configure SUDO Privileges ****" \     
+    echo "**** Configure SUDO Privileges ****" \
         && usermod -aG sudo ${USER_NAME} \
-        && echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd \ 
-        && grep -q "^${USER_NAME} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers \
-            || echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" \
-               >> /etc/sudoers \
+        && echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd \
+        && if ! grep -q "^${USER_NAME} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers; \
+           then \
+             echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers; \
+           fi \
     && \
     echo "**** Configure XDG_RUNTIME_DIR ****" \     
         && mkdir /run/user/${USER_UID} \
@@ -135,38 +142,13 @@ RUN \
 ENV \
     XDG_RUNTIME_DIR=/run/user/${USER_UID}
 
-#RUN \
-#    echo "**** Base: User Configure ****" \     
-#        && getent group ${USER_NAME} \
-#           || groupadd -g ${USER_UID} ${USER_NAME} \
-#        && id -u ${USER_NAME} &>/dev/null \
-#           || useradd -m -l -s /bin/bash \
-#              -u ${USER_UID}  \
-#              -g ${USER_NAME} \
-#                 ${USER_NAME} \
-#    && \
-#    echo "**** Configure SUDO Privilages ****" \     
-#        && usermod -aG sudo ${USER_NAME} \
-#        && echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd \ 
-#        && grep -q "^${USER_NAME} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers \
-#            || echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" \
-#               >> /etc/sudoers \
-#    && \
-#    echo "**** Configure XDG_RUNTIME_DIR ****" \     
-#        && mkdir /run/user/${USER_UID} \
-#        && chown -R ${USER_UID}:${USER_UID} /run/user/${USER_UID} \
-#        && chmod 0700 /run/user/${USER_UID}
-#
-ENV \
-    XDG_RUNTIME_DIR=/run/user/${USER_UID}
-
 # Switch to non-root user.
 USER ${USER_NAME}
 
 # Execute bash as root for futher installations.
 SHELL [ "/usr/bin/sudo", "-E", "--", "/bin/bash", "-c" ]
 
-############################################################
+#############################################################
 #
 #    /$$$$$$   /$$$$$$  /$$$$$$$  /$$$$$$$$
 #   /$$__  $$ /$$__  $$| $$__  $$| $$_____/
@@ -181,6 +163,7 @@ SHELL [ "/usr/bin/sudo", "-E", "--", "/bin/bash", "-c" ]
 
 # -----------------------------------------------
 # Core: Install Nvidia VAAPI 
+# -----------------------------------------------
 
 RUN \
     echo "**** Core: Install NVIDIA VAAPI ****" \
@@ -228,6 +211,7 @@ RUN \
 
 # -----------------------------------------------
 # Core: OpenCL/Vulkan/EGL Configuration
+# -----------------------------------------------
 
 RUN \
     echo "**** Core: OpenCL/Vulkan/EGL Configuration ****" \
@@ -266,6 +250,7 @@ RUN \
 
 # -----------------------------------------------
 # Core: Install Selkies Gstreamer 
+# -----------------------------------------------
 #
 # Ubuntu <-> Debian diff:
 # *alsa-base - not present on debian
@@ -474,6 +459,7 @@ RUN \
 
 # -----------------------------------------------
 # Core: Install KDE Plasma 
+# -----------------------------------------------
 
 RUN \
     echo "**** Core: Install Plasma  ****" \
@@ -623,6 +609,7 @@ RUN \
 
 # -----------------------------------------------
 # Core: Install Gomplate 
+# -----------------------------------------------
 
 RUN \
     echo "**** Core: Install Gomplate ****" \
@@ -663,7 +650,7 @@ RUN \
 
 # -----------------------------------------------
 # Core: Install Miscellaneous
-#
+# -----------------------------------------------
 
 RUN \
     echo "**** Core: Miscellaneous ****" \
@@ -719,6 +706,7 @@ RUN \
 
 # -----------------------------------------------
 # Optional: Install VirtualGL 
+# -----------------------------------------------
 
 ARG \
     INSTALL_VIRTUALGL="false"
@@ -769,6 +757,7 @@ RUN \
 
 # -----------------------------------------------
 # Optional: Install Wine 
+# -----------------------------------------------
 
 ARG \
     INSTALL_WINE="false" \
@@ -836,6 +825,7 @@ RUN \
 
 # -----------------------------------------------
 # Optional: Install Lutris 
+# -----------------------------------------------
 
 ARG \
     INSTALL_LUTRIS="false" \
@@ -894,6 +884,7 @@ RUN \
 
 # -----------------------------------------------
 # Optional: Install Steam
+# -----------------------------------------------
 #
 # create virtual display (xvfb)
 # during docker runtime to evoke steam-updates and steam-extraction;
@@ -1025,6 +1016,7 @@ RUN \
 
 # -----------------------------------------------
 # Optional: Install Heroic Launcher 
+# -----------------------------------------------
 
 ARG \
     INSTALL_HEROIC=false \
@@ -1098,6 +1090,7 @@ RUN \
 
 # -----------------------------------------------
 # Optional: Install Pipewire & Pipewire-Pulse & Wireplumber 
+# -----------------------------------------------
 
 ARG \
     INSTALL_PIPEWIRE=true
@@ -1185,6 +1178,7 @@ RUN \
 
 # -----------------------------------------------
 # Optional: Install Miscellaneous
+# -----------------------------------------------
 
 RUN \
     echo "**** Optional: Install Miscellaneous  ****" \
@@ -1205,6 +1199,7 @@ RUN \
 
 # -----------------------------------------------
 # Optional: Install Libraries 
+# -----------------------------------------------
 
 RUN \
     echo "**** Optional: Install Libraries ****" \
@@ -1303,27 +1298,27 @@ RUN \
             /var/tmp/* \
             /tmp/*
 
-RUN \
-    echo "**** Optional: Ubuntu Mesa ****" \
-		    && ID="$(\
-        	     grep ^ID= /etc/os-release \
-        	     | cut -d= -f2 \
-        	     | tr -d '\"' \
-        )" \
-        && if [ "${ID}" = "ubuntu" ]; \
-		    then \
-              add-apt-repository -y ppa:oibaf/graphics-drivers \
-              && apt-get update \ 
-              && apt-get upgrade -y \
-        && \
-        echo "**** Section cleanup ****" \
-            && apt-get clean autoclean -y \
-            && apt-get autoremove -y \
-            && rm -rf \
-                /var/lib/apt/lists/* \
-                /var/tmp/* \
-                /tmp/*; \
-        fi
+#RUN \
+#    echo "**** Optional: Ubuntu Mesa ****" \
+#		    && ID="$(\
+#        	     grep ^ID= /etc/os-release \
+#        	     | cut -d= -f2 \
+#        	     | tr -d '\"' \
+#        )" \
+#        && if [ "${ID}" = "ubuntu" ]; \
+#		    then \
+#              add-apt-repository -y ppa:oibaf/graphics-drivers \
+#              && apt-get update \ 
+#              && apt-get upgrade -y \
+#        && \
+#        echo "**** Section cleanup ****" \
+#            && apt-get clean autoclean -y \
+#            && apt-get autoremove -y \
+#            && rm -rf \
+#                /var/lib/apt/lists/* \
+#                /var/tmp/* \
+#                /tmp/*; \
+#        fi
 
 ############################################################
 #

@@ -1,17 +1,17 @@
 #!/bin/bash
 
-chmod -R a+rwX /opt 
-#chown -R ${SUDO_USER}:${SUDO_USER} /opt
-
-sudo -u ${SUDO_USER} bash << 'EOF'
-cp -r /opt/tmp/Prefixes /opt/games/Heroic/Prefixes
-EOF
-
-# Copy extra config to HOME directory 
-sudo -u ${SUDO_USER} bash << 'EOF'
-mkdir -p ${HOME}/.config
-cp -rf /opt/config/* ${HOME}/.config
-EOF
+#chmod -R a+rwX /opt 
+##chown -R ${SUDO_USER}:${SUDO_USER} /opt
+#
+#sudo -u ${SUDO_USER} bash << 'EOF'
+#cp -r /opt/tmp/Prefixes /opt/games/Heroic/Prefixes
+#EOF
+#
+## Copy extra config to HOME directory 
+#sudo -u ${SUDO_USER} bash << 'EOF'
+#mkdir -p ${HOME}/.config
+#cp -rf /opt/config/* ${HOME}/.config
+#EOF
 
 
 #------------------------------------
