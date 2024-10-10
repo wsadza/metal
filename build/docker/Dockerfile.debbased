@@ -123,7 +123,7 @@ RUN \
            fi \
         && if ! id -u ${USER_NAME} >/dev/null 2>&1; \
            then \
-             useradd -m -s /bin/bash -u ${USER_UID} -g ${USER_NAME} ${USER_NAME}; \
+             useradd -m -l -s /bin/bash -u ${USER_UID} -g ${USER_NAME} ${USER_NAME}; \
            fi \
     && \
     echo "**** Configure SUDO Privileges ****" \
