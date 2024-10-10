@@ -364,6 +364,8 @@ Think of this as a curiosity rather than a genuine configuration; you can join m
 > - Vulkan isn't functioning properly; only selected linux-native games are working.
 > - Performance is lacking; you can only play very lightweight games.
 
+I documented all my findings in separate setup-documentation file - [WSL.md](.docs/setup/WSL.md).
+
 <!---
  $$$$$$\   $$$$$$\  $$\   $$\ $$$$$$$$\ $$$$$$\  $$$$$$\  $$\   $$\ $$$$$$$\   $$$$$$\ $$$$$$$$\ $$$$$$\  $$$$$$\  $$\   $$\ 
 $$  __$$\ $$  __$$\ $$$\  $$ |$$  _____|\_$$  _|$$  __$$\ $$ |  $$ |$$  __$$\ $$  __$$\\__$$  __|\_$$  _|$$  __$$\ $$$\  $$ |
