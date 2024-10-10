@@ -350,13 +350,16 @@ Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash s
 git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./setup.sh
 ```
 
-### Setup - WSL
-<sup>[(Back to top)](#table-of-contents)</sup>
+##
 <!---
 #####################################################
 Setup - WSL
 #####################################################
 --->
+
+### Setup - WSL
+<sup>[(Back to top)](#table-of-contents)</sup>
+
 Think of this as a curiosity rather than a genuine configuration; you can join me on this exploration—perhaps you'll uncover the missing pieces that I couldn't find.
 
 > [!WARNING]  
@@ -364,7 +367,7 @@ Think of this as a curiosity rather than a genuine configuration; you can join m
 > - Vulkan isn't functioning properly; only selected linux-native games are working.
 > - Performance is lacking; you can only play very lightweight games.
 
-I documented all my findings in separate setup-documentation file - [WSL.md](.docs/setup/WSL.md).
+Instructions for setting up WSL with the D3D12 renderer are provided in a separate documentation file - [WSL.md](.docs/setup/WSL.md).
 
 <!---
  $$$$$$\   $$$$$$\  $$\   $$\ $$$$$$$$\ $$$$$$\  $$$$$$\  $$\   $$\ $$$$$$$\   $$$$$$\ $$$$$$$$\ $$$$$$\  $$$$$$\  $$\   $$\ 
