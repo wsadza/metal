@@ -1,5 +1,5 @@
-<div align="center">
-   <img src=".media/asset/badge/asset_badge_project.jpg" width="55%" height="auto"/>
+<div>
+   <img src=".media/asset/badge/asset_badge_project.jpg" width="100%" height="auto"/>
 </div>
 <br>
 
