@@ -77,7 +77,7 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
    \__|    \______/  \______/
 --->
 ### Table Of Contents:
-- [Setup](#setup)
+- Setup
    - [Setup - Windows](#setup---windows)
    - [Setup - Linux - WSL](#setup---linux---wsl)
 - [Configuration](#configuration)
@@ -98,6 +98,7 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 ## Setup
 
 #### Setup - Windows
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 First, we need to install [Chocolatey](https://chocolatey.org/install#generic), after which we can use it to obtain the NVIDIA driver and the Windows Subsystem for Linux (WSL).
 
@@ -122,6 +123,7 @@ First, we need to install [Chocolatey](https://chocolatey.org/install#generic), 
 --->
 
 ### Setup - Linux - WSL
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 Script belows installs Docker, Docker Compose, and the NVIDIA Container Toolkit on a Linux system.
 
@@ -191,6 +193,7 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$
  \______/  \______/ \__|  \__|\__|      \______| \______/  \______/ \__|  \__|\__|  \__|  \__|   \______| \______/ \__|  \__| 
 --->
 ## Configuration
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 This section aims to help users set up resource limits and GPU settings for better performance when running Linux on WSL 2, especially for graphical applications using WSLg.
 
@@ -218,6 +221,7 @@ Helpful Resources:
 --->
 
 ### Configuration - WSL
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 > [!NOTE]
 > This step is optional.
@@ -294,6 +298,7 @@ The [.wslconfig](https://learn.microsoft.com/en-us/windows/wsl/wsl-config) file 
 --->
 
 ### Configuration - Linux - WSL
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 The table below provides WSL-LINUX configuration settings for specifying `Nvidia` gpu-drivers and `Vulkan` usage.
 
@@ -347,6 +352,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 </div>
 
 ## Usage
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 Here’s a fully prepared Docker Compose file that allows you to run Steam and use attached NVIDIA GPU.
 
