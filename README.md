@@ -1,6 +1,7 @@
-<div>
+<div align="center">
    <img src=".media/asset/badge/asset_badge_project.jpg" width="100%" height="auto"/>
 </div>
+
 
 <!---
 $$\      $$\ $$$$$$$$\ $$$$$$$$\  $$$$$$\  $$\       
@@ -57,7 +58,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>It was easy, right?</code></sup>
 <br>
-<kbd><img src=".media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="auto"/></kbd>
+<img src=".media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="auto"/>
 </div>
 
 ##
@@ -112,7 +113,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Steam? No Problem!</code></sup>
 <br>
-<kbd><img src=".media/native/preview/gif/native_preview_gif_steam.gif" width="800" height="auto"/></kbd>
+<img src=".media/native/preview/gif/native_preview_gif_steam.gif" width="800" height="auto"/>
 </div>
 
 <!---
@@ -270,7 +271,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Want to play with others?</code></sup>
 <br>
-<kbd><img src=".media/native/preview/gif/native_preview_gif_companion.gif" align="center" width="800" height="auto"/></kbd>
+<img src=".media/native/preview/gif/native_preview_gif_companion.gif" align="center" width="800" height="auto"/>
 </div>
 
 <!---
