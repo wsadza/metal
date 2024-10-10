@@ -1,7 +1,10 @@
 <div align="center">
    <img src=".media/asset/badge/asset_badge_project.jpg" width="100%" height="auto"/>
+   <br>
+   <img src="https://labl.es/svg?text=Containerized%20Gaming&width=200&bgcolor=3a6351" align="center"/>
+   <img src="https://labl.es/svg?text=Real-Time%20Streaming%20Platform&width=200&bgcolor=6a7fdb" align="center"/>
+   <img src="https://labl.es/svg?text=Play%20Anywhere&width=200&bgcolor=bf9270" align="center"/>
 </div>
-
 
 <!---
 $$\      $$\ $$$$$$$$\ $$$$$$$$\  $$$$$$\  $$\       
@@ -22,11 +25,6 @@ Ever been fascinated by remote gaming? Same! Inspired by the [`selkies-gstreamer
 Introducing totally modular, Dockerized streaming service. Build it your way, whether you're on Debian or Ubuntu (I went agnostic on dependencies to keep it flexible). I revamped the structure for ultimate control, throwing in Supervisord magic, with a dash of [`s6-overlay`](https://github.com/just-containers/s6-overlay) and some [`docker-steam-headless`](https://github.com/Steam-Headless/docker-steam-headless) trickery.
 
 Now it's a streaming powerhouse. Why? Just because!
-
-> [!NOTE]  
-> - Low-Latency streaming service.
-> - Game everywhere.
-> - Docker is new gaming platform.
 
 ##
 <!---
