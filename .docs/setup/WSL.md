@@ -44,7 +44,7 @@ $$$$$$$$\ $$\       $$$$$$$\  $$$$$$$\
 > - The command below are designed to leverage the NVIDIA GPU.
 
 ```sh
-docker run -d --name stream --hostname stream --entrypoint "/bin/bash" --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined --ipc host --tmpfs /dev/shm:rw,size=64m --device /dev/dri/card0 --device /dev/dri/renderD128 --device /dev/dxg -e STREAMER_HOST="${STREAMER_HOST}" -e MESA_D3D12_DEFAULT_ADAPTER_NAME="NVIDIA" -e LIBVA_DRIVER_NAME="d3d12" -e VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/dzn_icd.x86_64.json" -e LD_LIBRARY_PATH="/usr/lib/wsl/lib" -v /usr/lib/wsl:/usr/lib/wsl:ro --gpus all -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 8091:9091 ghcr.io/utilizable/metal/full-ubuntu:latest
+docker run -d --name stream --hostname stream --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined --ipc host --tmpfs /dev/shm:rw,size=64m --device /dev/dri/card0 --device /dev/dri/renderD128 --device /dev/dxg -e STREAMER_HOST="${STREAMER_HOST}" -e MESA_D3D12_DEFAULT_ADAPTER_NAME="NVIDIA" -e LIBVA_DRIVER_NAME="d3d12" -e VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/dzn_icd.x86_64.json" -e LD_LIBRARY_PATH="/usr/lib/wsl/lib" -v /usr/lib/wsl:/usr/lib/wsl:ro --gpus all -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 8091:9091 ghcr.io/utilizable/metal/full-ubuntu:latest
 ```
 
 <!---
@@ -59,9 +59,9 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 --->
 <h2>Preview</h2>
 <div align="center">
-<sup><code>Steam? No Problem!</code></sup>
+<sup><code>d3d12 renderer is utilizing</code></sup>
 <br>
-<img src="../../../.media/wsl/preview/gif/wsl_preview_gif_usage.gif" width="800" height="auto"/>
+<img src="../../.media/wsl/preview/gif/wsl_preview_gif_usage.gif" width="800" height="auto"/>
 </div>
 
 ##
@@ -79,23 +79,6 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 ### Table Of Contents:
 - [Section-A](#section-a)
 - [Section-B](#section-b)
-
-<!---
-$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
-$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
-$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
-$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
-$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
-$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
-$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
-\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
---->
-<h2>Preview</h2>
-<div align="center">
-<sup><code>Steam? No Problem!</code></sup>
-<br>
-<img src="../../../.media/wsl/preview/gif/native_preview_gif_steam.gif" width="800" height="auto"/>
-</div>
 
 <!---
  $$$$$$\  $$$$$$$$\ $$$$$$$$\ $$\   $$\ $$$$$$$\  
@@ -187,29 +170,27 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 --->
 <h2>Preview</h2>
 <div align="center">
-<sup><code>Steam? No Problem!</code></sup>
+<sup><code>We want to see higher FPS here, ideally more than 2.</code></sup>
 <br>
-<img src="../../../.media/wsl/preview/img/wsl_preview_img_glxspheres.png" width="800" height="auto"/>
+<img src="../../.media/wsl/preview/img/wsl_preview_img_glxspheres.png" width="800" height="auto"/>
 </div>
 
 <!---
- $$$$$$\                       $$$$$$\  $$\                                         $$\     $$\                     
-$$  __$$\                     $$  __$$\ \__|                                        $$ |    \__|                    
-$$ /  \__| $$$$$$\  $$$$$$$\  $$ /  \__|$$\  $$$$$$\  $$\   $$\  $$$$$$\  $$$$$$\ $$$$$$\   $$\  $$$$$$\  $$$$$$$\  
-$$ |      $$  __$$\ $$  __$$\ $$$$\     $$ |$$  __$$\ $$ |  $$ |$$  __$$\ \____$$\\_$$  _|  $$ |$$  __$$\ $$  __$$\ 
-$$ |      $$ /  $$ |$$ |  $$ |$$  _|    $$ |$$ /  $$ |$$ |  $$ |$$ |  \__|$$$$$$$ | $$ |    $$ |$$ /  $$ |$$ |  $$ |
-$$ |  $$\ $$ |  $$ |$$ |  $$ |$$ |      $$ |$$ |  $$ |$$ |  $$ |$$ |     $$  __$$ | $$ |$$\ $$ |$$ |  $$ |$$ |  $$ |
-\$$$$$$  |\$$$$$$  |$$ |  $$ |$$ |      $$ |\$$$$$$$ |\$$$$$$  |$$ |     \$$$$$$$ | \$$$$  |$$ |\$$$$$$  |$$ |  $$ |
- \______/  \______/ \__|  \__|\__|      \__| \____$$ | \______/ \__|      \_______|  \____/ \__| \______/ \__|  \__|
-                                            $$\   $$ |                                                              
-                                            \$$$$$$  |                                                              
-                                             \______/  
+ $$$$$$\   $$$$$$\  $$\   $$\ $$$$$$$$\ $$$$$$\  $$$$$$\  $$\   $$\ $$$$$$$\   $$$$$$\ $$$$$$$$\ $$$$$$\  $$$$$$\  $$\   $$\ 
+$$  __$$\ $$  __$$\ $$$\  $$ |$$  _____|\_$$  _|$$  __$$\ $$ |  $$ |$$  __$$\ $$  __$$\\__$$  __|\_$$  _|$$  __$$\ $$$\  $$ |
+$$ /  \__|$$ /  $$ |$$$$\ $$ |$$ |        $$ |  $$ /  \__|$$ |  $$ |$$ |  $$ |$$ /  $$ |  $$ |     $$ |  $$ /  $$ |$$$$\ $$ |
+$$ |      $$ |  $$ |$$ $$\$$ |$$$$$\      $$ |  $$ |$$$$\ $$ |  $$ |$$$$$$$  |$$$$$$$$ |  $$ |     $$ |  $$ |  $$ |$$ $$\$$ |
+$$ |      $$ |  $$ |$$ \$$$$ |$$  __|     $$ |  $$ |\_$$ |$$ |  $$ |$$  __$$< $$  __$$ |  $$ |     $$ |  $$ |  $$ |$$ \$$$$ |
+$$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$ |  $$ |  $$ |     $$ |  $$ |  $$ |$$ |\$$$ |
+\$$$$$$  | $$$$$$  |$$ | \$$ |$$ |      $$$$$$\ \$$$$$$  |\$$$$$$  |$$ |  $$ |$$ |  $$ |  $$ |   $$$$$$\  $$$$$$  |$$ | \$$ |
+ \______/  \______/ \__|  \__|\__|      \______| \______/  \______/ \__|  \__|\__|  \__|  \__|   \______| \______/ \__|  \__| 
 --->
 ## Configuration
 
 This section aims to help users set up resource limits and GPU settings for better performance when running Linux on WSL 2, especially for graphical applications using WSLg.
 
 Helpful Resources:
+<br>
 <ul>
   <sup>
     <li><a href="https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg">WSLg GPU Selection Documentation</a></li>
@@ -355,9 +336,9 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 --->
 <h2>Preview</h2>
 <div align="center">
-<sup><code>Steam? No Problem!</code></sup>
+<sup><code>Vulkan is now "operational".</code></sup>
 <br>
-<img src="../../../.media/wsl/preview/img/wsl_preview_img_vkcube.png" width="800" height="auto"/>
+<img src="../../.media/wsl/preview/img/wsl_preview_img_vkcube.png" width="800" height="auto"/>
 </div>
 
 ## Usage
