@@ -79,7 +79,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 --->
 <h2>Preview</h2>
 <div align="center">
-<sup><code>d3d12 renderer is utilizing</code></sup>
+<sup><code>D3D12 renderer is useable under WSL.</code></sup>
 <br>
 <img src="../../.media/wsl/preview/gif/wsl_preview_gif_usage.gif" width="800" height="auto"/>
 </div>
