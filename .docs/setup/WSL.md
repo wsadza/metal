@@ -44,8 +44,25 @@ $$$$$$$$\ $$\       $$$$$$$\  $$$$$$$\
 > - The command below are designed to leverage the NVIDIA GPU.
 
 ```sh
-SOME CONTENT
+docker run -d --name stream --hostname stream --entrypoint "/bin/bash" --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined --ipc host --tmpfs /dev/shm:rw,size=64m --device /dev/dri/card0 --device /dev/dri/renderD128 --device /dev/dxg -e STREAMER_HOST="${STREAMER_HOST}" -e MESA_D3D12_DEFAULT_ADAPTER_NAME="NVIDIA" -e LIBVA_DRIVER_NAME="d3d12" -e VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/dzn_icd.x86_64.json" -e LD_LIBRARY_PATH="/usr/lib/wsl/lib" -v /usr/lib/wsl:/usr/lib/wsl:ro --gpus all -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 8091:9091 ghcr.io/utilizable/metal/full-ubuntu:latest
 ```
+
+<!---
+$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
+$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
+$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
+$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
+$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
+$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
+$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
+\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
+--->
+<h2>Preview</h2>
+<div align="center">
+<sup><code>Steam? No Problem!</code></sup>
+<br>
+<img src="../../../.media/wsl/preview/gif/wsl_preview_gif_usage.gif" width="800" height="auto"/>
+</div>
 
 ##
 
@@ -73,9 +90,12 @@ $$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
 $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 \__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
 --->
-## Preview
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non gravida diam. Nam dignissim pharetra convallis. Nunc maximus porttitor sem. Proin non maximus ipsum. Vivamus quis ornare dui.
+<h2>Preview</h2>
+<div align="center">
+<sup><code>Steam? No Problem!</code></sup>
+<br>
+<img src="../../../.media/wsl/preview/gif/native_preview_gif_steam.gif" width="800" height="auto"/>
+</div>
 
 <!---
  $$$$$$\  $$$$$$$$\ $$$$$$$$\ $$\   $$\ $$$$$$$\  
@@ -165,9 +185,12 @@ $$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
 $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 \__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
 --->
-## Preview
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non gravida diam. Nam dignissim pharetra convallis. Nunc maximus porttitor sem. Proin non maximus ipsum. Vivamus quis ornare dui.
+<h2>Preview</h2>
+<div align="center">
+<sup><code>Steam? No Problem!</code></sup>
+<br>
+<img src="../../../.media/wsl/preview/img/wsl_preview_img_glxspheres.png" width="800" height="auto"/>
+</div>
 
 <!---
  $$$$$$\                       $$$$$$\  $$\                                         $$\     $$\                     
@@ -232,15 +255,15 @@ The [.wslconfig](https://learn.microsoft.com/en-us/windows/wsl/wsl-config) file 
        <summary>Apply this optional configuration:📍</summary>
        <br>
     
-       [wsl2]
-       # Limits the virtual machine's memory usage to 8 GB; defaults to 50% of total RAM.
-       memory=8GB
-       
-       # Specifies the virtual machine to utilize 6 virtual processors, corresponding to the number of CPU cores.
-       processors=6
-       
-       # Allocates 32 GB of swap space; the default is typically 25% of the available RAM.
-       swap=32GB
+    [wsl2]
+    # Limits the virtual machine's memory usage to 8 GB; defaults to 50% of total RAM.
+    memory=8GB
+    
+    # Specifies the virtual machine to utilize 6 virtual processors, corresponding to the number of CPU cores.
+    processors=6
+    
+    # Allocates 32 GB of swap space; the default is typically 25% of the available RAM.
+    swap=32GB
             
    </details>
    </li>
@@ -330,13 +353,109 @@ $$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
 $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 \__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
 --->
-## Preview
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non gravida diam. Nam dignissim pharetra convallis. Nunc maximus porttitor sem. Proin non maximus ipsum. Vivamus quis ornare dui.
+<h2>Preview</h2>
+<div align="center">
+<sup><code>Steam? No Problem!</code></sup>
+<br>
+<img src="../../../.media/wsl/preview/img/wsl_preview_img_vkcube.png" width="800" height="auto"/>
+</div>
 
 ## Usage
 
+Here’s a fully prepared Docker Compose file that allows you to run Steam and use attached NVIDIA GPU.
 
+<details><summary>usage: 📍</summary>
+ <!-- list -->   
+ <ul>
+  
+   <!-- element [0] -->    
+   <li>
+   <p>Just before run setup <code>$STREAMER_HOST</code> variable to point your host machine:</p>
+   <pre><code>export STREAMER_HOST="$(hostname -I | cut -d' ' -f1)"</code></pre>
+   </li>
+   <!-- #element [0] -->
+  
+   <!-- element [1] -->  
+   <li>
+   <p>Fully Configured <code>Docker-Compose</code>:</p>   
+
+    version: '3.8'
+    services:
+   
+    # ----------------------------
+    # Stream Server
+   
+       stream:
+         hostname: stream
+         image: "ghcr.io/utilizable/metal/full-ubuntu:latest"
+         entrypoint: [ "/bin/bash", "-c" ]
+   
+         ports:
+    # Expose app - stream
+           - "8080:8080"
+           - "3478:3478/udp"
+           - "3478:3478/tcp"
+           - "8091:9091"
+   
+   
+         environment:
+    # Use internal turn server in case of lack of remote setting
+           STREAMER_HOST: "${STREAMER_HOST}"
+   
+    # WSL:
+    # -------------------------------------------------
+   
+    # WSL configuration
+           MESA_D3D12_DEFAULT_ADAPTER_NAME: "NVIDIA"
+           LIBVA_DRIVER_NAME: "d3d12"
+           VK_ICD_FILENAMES: "/usr/share/vulkan/icd.d/dzn_icd.x86_64.json"
+           LD_LIBRARY_PATH: "/usr/lib/wsl/lib"
+   
+    # The following devices must be shared with the container.
+         devices:
+           - /dev/dri/card0
+           - /dev/dri/renderD128
+           - /dev/dxg
+   
+    # Attach WSL libraries
+         volumes:
+         - /usr/lib/wsl:/usr/lib/wsl:ro
+   
+    # -------------------------------------------------
+   
+    # Apply gpu resource
+         deploy:
+             resources:
+               reservations:
+                 devices:
+                   - driver: nvidia
+                     count: all
+                     capabilities: [gpu]
+   
+    # To Make Steam working we need to break isolation
+         tmpfs:
+           - /dev/shm:rw
+         shm_size: 64
+         ipc: host # Could also be set to 'shareable'
+         ulimits:
+           nofile:
+             soft: 1024
+             hard: 524288
+         cap_add:
+           - NET_ADMIN
+           - SYS_ADMIN
+           - SYS_NICE
+           - IPC_LOCK
+         security_opt:
+           - seccomp:unconfined
+           - apparmor:unconfined
+         
+   </li>
+   <!-- #element [1] -->
+   
+ </ul>
+ <!-- #list -->    
+</details>
 
 ##
 <!---
@@ -348,113 +467,3 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
 <div align="center">
    <img src="../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
-
-
-
-</br>
-
-## 🔸 Usage
-
-### Docker-Compose
-
-Here’s a fully prepared Docker Compose file that allows you to run Steam and use attached NVIDIA GPU.
-
-```sh
-export STREAMER_HOST="$(hostname -I | cut -d' ' -f1)"
-```
-
-```
-version: '3.8'
-services:
-
-# ----------------------------
-# Stream Server
-
-    stream:
-      hostname: stream
-      image: "ghcr.io/utilizable/metal/full-ubuntu:latest"
-      entrypoint: [ "/bin/bash", "-c" ]
-
-# Slightly modyfied entrypoint.sh (WIP - to move this to final container)
-# -------------------------------------------------
-
-      command:
-        - |
-          #sudo sed -i '1,/^# Execute all container core init scripts/d' /entrypoint.sh;
-          echo "LD_LIBRARY_PATH=\"$${LD_LIBRARY_PATH:+$${LD_LIBRARY_PATH}:}/usr/lib/wsl/lib\"" \
-                | sudo tee -a /etc/bash.bashrc;
-          sudo add-apt-repository ppa:kisak/kisak-mesa;
-          sudo apt-get update;
-          sudo dpkg --add-architecture i386;
-          sudo apt-get install -y\
-            vainfo \
-            mesa-vulkan-drivers \
-            libgl1-mesa-dev \
-            pkg-config \
-            libglvnd-dev \
-            libc6:i386;
-          sudo apt upgrade -y;
-          /entrypoint.sh
-
-# -------------------------------------------------
-
-      ports:
-# Expose app - stream
-        - "8080:8080"
-        - "3478:3478/udp"
-        - "3478:3478/tcp"
-        - "8091:9091"
-
-
-      environment:
-# Use internal turn server in case of lack of remote setting
-        STREAMER_HOST: "${STREAMER_HOST}"
-
-# WSL:
-# -------------------------------------------------
-
-# WSL configuration
-        MESA_D3D12_DEFAULT_ADAPTER_NAME: "NVIDIA"
-        LIBVA_DRIVER_NAME: "d3d12"
-        VK_ICD_FILENAMES: "/usr/share/vulkan/icd.d/dzn_icd.x86_64.json"
-        LD_LIBRARY_PATH: "/usr/lib/wsl/lib"
-
-# The following devices must be shared with the container.
-      devices:
-        - /dev/dri/card0
-        - /dev/dri/renderD128
-        - /dev/dxg
-
-# Attach WSL libraries
-      volumes:
-      - /usr/lib/wsl:/usr/lib/wsl:ro
-
-# -------------------------------------------------
-
-# Apply gpu resource
-      deploy:
-          resources:
-            reservations:
-              devices:
-                - driver: nvidia
-                  count: all
-                  capabilities: [gpu]
-
-# To Make Steam working we need to break isolation
-      tmpfs:
-        - /dev/shm:rw
-      shm_size: 64
-      ipc: host # Could also be set to 'shareable'
-      ulimits:
-        nofile:
-          soft: 1024
-          hard: 524288
-      cap_add:
-        - NET_ADMIN
-        - SYS_ADMIN
-        - SYS_NICE
-        - IPC_LOCK
-      security_opt:
-        - seccomp:unconfined
-        - apparmor:unconfined
-```
