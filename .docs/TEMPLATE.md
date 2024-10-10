@@ -67,11 +67,67 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
 > - Less Is More!
 > - Keep It Super Simple!
 > - Check [github markdown icons](https://gist.github.com/rxaviers/7360908).
+> - [Markdown highlights options](https://github.com/orgs/community/discussions/16925)
 
 ##
 
 #### Label:
 <img src="https://labl.es/svg?text=LABEL&width=200&bgcolor=3a6351"/>
+
+##
+
+#### Details: (variant-a)
+
+<details><summary>Setup: 📍</summary><br>
+ 
+    #!/bin/bash
+    # YOUR-CODE-GOES-HERE
+    
+</details>
+
+#### Details: (variant-b)
+
+<details><summary>Configuration: 📍</summary>
+ <!-- list -->   
+ <ul>
+  
+   <!-- element [0] -->    
+   <li>
+   <p>YOUR-PARAGRAPH</p>
+   <pre><code>YOUR-CODE</code></pre>
+   </li>
+   <!-- #element [0] -->
+  
+   <!-- element [1] -->  
+   <li>
+   <details open>
+       <summary>YOUR-SUMMARY:📍</summary>
+       <br>
+    
+    #!/bin/bash
+    # YOUR-CODE-GOES-HERE
+            
+   </details>
+   </li>
+   <!-- #element [1] -->
+
+   <!-- element [2] -->  
+   <li>
+    <details>
+        <summary>YOUR-SUMMARY:📍</summary>
+        <ul>
+          <li>
+            <p>YOUR-PARAGRAPH</p>
+            <pre><code>YOUR-CODE</code></pre>
+          </li>   
+        </ul>
+    </details>
+   </li>
+   <!-- #element [2] -->
+   
+ </ul>
+ <!-- #list -->    
+</details>
 
 ##
 
