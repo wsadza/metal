@@ -853,3 +853,9 @@ This section contains important disclaimers regarding the ownership of software 
   </details> 
   
 </ul>
+
+##
+
+<div align="center">
+   <img src=".media/asset/badge/asset_badge_project_backgroundless.jpg" width="50%" height="auto"/>
+</div>
