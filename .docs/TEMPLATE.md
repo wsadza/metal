@@ -59,6 +59,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
 
 > [!TIP]
 > - GPT is awsome tool to generate list stuff 😉
+> - GPT is awsome tool to rephrasing your thoughts 😉
 > - Use [jdenticon](https://jdenticon.com/) for awsome icons!
 > - For labels use [labl.es](https://labl.es/)
 > - Less Is More!
