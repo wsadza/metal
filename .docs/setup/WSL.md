@@ -46,24 +46,6 @@ $$$$$$$$\ $$\       $$$$$$$\  $$$$$$$\
 ```sh
 docker run -d --name stream --hostname stream --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined --ipc host --tmpfs /dev/shm:rw,size=64m --device /dev/dri/card0 --device /dev/dri/renderD128 --device /dev/dxg -e STREAMER_HOST="${STREAMER_HOST}" -e MESA_D3D12_DEFAULT_ADAPTER_NAME="NVIDIA" -e LIBVA_DRIVER_NAME="d3d12" -e VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/dzn_icd.x86_64.json" -e LD_LIBRARY_PATH="/usr/lib/wsl/lib" -v /usr/lib/wsl:/usr/lib/wsl:ro --gpus all -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 8091:9091 ghcr.io/utilizable/metal/full-ubuntu:latest
 ```
-
-<!---
-$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
-$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
-$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
-$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
-$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
-$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
-$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
-\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
---->
-<h2>Preview</h2>
-<div align="center">
-<sup><code>d3d12 renderer is utilizing</code></sup>
-<br>
-<img src="../../.media/wsl/preview/gif/wsl_preview_gif_usage.gif" width="800" height="auto"/>
-</div>
-
 ##
 
 <!---
@@ -82,9 +64,26 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
    - [Setup - Linux - WSL](#setup---linux---wsl)
 - [Configuration](#configuration)
    - [Configuration - WSL](#configuration---wsl)
-   - [Configuration - Linux - WSL](#configuration---linux--wsl)
+   - [Configuration - Linux - WSL](#configuration---linux---wsl)
 - [Usage](#usage)
   
+<!---
+$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
+$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
+$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
+$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
+$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
+$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
+$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
+\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
+--->
+<h2>Preview</h2>
+<div align="center">
+<sup><code>d3d12 renderer is utilizing</code></sup>
+<br>
+<img src="../../.media/wsl/preview/gif/wsl_preview_gif_usage.gif" width="800" height="auto"/>
+</div>
+
 <!---
  $$$$$$\  $$$$$$$$\ $$$$$$$$\ $$\   $$\ $$$$$$$\  
 $$  __$$\ $$  _____|\__$$  __|$$ |  $$ |$$  __$$\ 
