@@ -65,6 +65,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
 > - Less Is More!
 > - Keep It Super Simple!
 > - Check [github markdown icons](https://gist.github.com/rxaviers/7360908).
+> - Try to use more HTML rather then Markdown syntax (my personal opionon).
 
 ##
 
