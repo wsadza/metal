@@ -1,5 +1,5 @@
 <div align="center">
-   <img src="../.media/asset/badge/asset_badge_project_backgroundless.png" width="25%" height="auto"/>
+   <img src="../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
 
 ## Template
@@ -53,10 +53,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
 
 <hr>
 
-### Assets To Use:
+<div align="left">
+<h1>Assets To Use</h1>
+</div>
+
+> [!TIP]
+> - GPT is awsome tool to generate list stuff 😉
+
+##
 
 #### Label:
 <img src="https://labl.es/svg?text=LABEL&width=200&bgcolor=3a6351"/>
+
+##
+
+### Lists:
 
 #### List: (variant-a)
 - <details>
@@ -84,6 +95,31 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
 > </ul>
 > </table>
 > </details>
+
+#### List: (variant-c)
+<details>
+  <summary>List (variant-c): 📍</summary>
+  <br>  
+  <table>
+      <tr>
+          <td><strong>COLUMN-A</strong></td>
+          <td><strong>COLUMN-B</strong></td>
+          <td><strong>COLUMN-C</strong></td>
+      </tr>
+      <tr>
+          <td><sup>Element-A-A</sup></td>
+          <td><sup>Element-A-B</sup></td>
+          <td><sup>Element-A-C</sup></td>
+      </tr>
+      <tr>
+          <td><sup>Element-B-A</sup></td>
+          <td><sup>Element-B-B</sup></td>
+          <td><sup>Element-B-C</sup></td>
+      </tr>
+  </table>
+</details>
+
+##
 
 #### Comments:
 
