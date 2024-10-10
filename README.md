@@ -1,10 +1,19 @@
 <div align="center">
    <img src=".media/asset/badge/asset_badge_project.jpg" width="100%" height="auto"/>
    <br>
-   <img src="https://labl.es/svg?text=Containerized%20Gaming&width=200&bgcolor=3a6351" align="center"/>
-   <img src="https://labl.es/svg?text=Real-Time%20Streaming%20Platform&width=200&bgcolor=6a7fdb" align="center"/>
-   <img src="https://labl.es/svg?text=Play%20Anywhere&width=200&bgcolor=bf9270" align="center"/>
+   
+   <img src="https://labl.es/svg?text=Containerized%20Gaming&width=200&bgcolor=a93226" align="center" style="margin: 5px"/>
+   <img src="https://labl.es/svg?text=Real-Time%20Streaming%20Platform&width=200&bgcolor=1e8449" align="center" style="margin: 5px"/>
+   <img src="https://labl.es/svg?text=Play%20Anywhere&width=200&bgcolor=154360" align="center" style="margin: 5px"/>
+   
+   <div align="center" style="display: flex; gap: 5px; justify-content: center;">
+      <img src="https://labl.es/svg?text=GPU%20Sharing&width=200&bgcolor=a50068" align="center"/>
+      <img src="https://labl.es/svg?text=VDI&width=200&bgcolor=d35400" align="center"/>
+   </div>
+   
 </div>
+
+
 
 <!---
 $$\      $$\ $$$$$$$$\ $$$$$$$$\  $$$$$$\  $$\       
