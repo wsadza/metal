@@ -77,9 +77,14 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
    \__|    \______/  \______/
 --->
 ### Table Of Contents:
-- [Section-A](#section-a)
-- [Section-B](#section-b)
-
+- [Setup](#setup)
+   - [Setup - Windows](#setup---windows)
+   - [Setup - Linux - WSL](#setup---linux---wsl)
+- [Configuration](#configuration)
+   - [Configuration - WSL](#configuration---wsl)
+   - [Configuration - Linux - WSL](#configuration---linux--wsl)
+- [Usage](#usage)
+  
 <!---
  $$$$$$\  $$$$$$$$\ $$$$$$$$\ $$\   $$\ $$$$$$$\  
 $$  __$$\ $$  _____|\__$$  __|$$ |  $$ |$$  __$$\ 
@@ -288,7 +293,7 @@ The [.wslconfig](https://learn.microsoft.com/en-us/windows/wsl/wsl-config) file 
 #####################################################
 --->
 
-### Configuration - Linux
+### Configuration - Linux - WSL
 
 The table below provides WSL-LINUX configuration settings for specifying `Nvidia` gpu-drivers and `Vulkan` usage.
 
