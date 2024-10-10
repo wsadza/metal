@@ -12,7 +12,7 @@ $$$  / \$$$ |$$\   $$ |$$ |
 $$  /   \$$ |\$$$$$$  |$$$$$$$$\ 
 \__/     \__| \______/ \________|
 --->
-## WSL
+# WSL
 
 Throughout my exploration of WSL, I've gathered key insights about graphics rendering. It turns out that relying on EGL rendering isn't the best option. However, using the software renderer (llvmpipe) can still provide you some gaming experience - atleast terraria works 😉
 
