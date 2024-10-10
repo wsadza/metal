@@ -196,21 +196,23 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$
 
 This section aims to help users set up resource limits and GPU settings for better performance when running Linux on WSL 2, especially for graphical applications using WSLg.
 
-Helpful Resources:
-<br><br>
-<ul>
-  <sup>
-    <li><a href="https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg">WSLg GPU Selection Documentation</a></li>
-  </sup>
-  <br>
-  <sup>
-    <li><a href="https://learn.microsoft.com/en-us/windows/wsl/wsl-config#example-wslconfig-file">Sample WSL Configuration File</a></li>
-  </sup>
-  <br>
-  <sup>
-    <li><a href="https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md">WSLg GPU Docker Examples</a></li>
-  </sup>
-</ul>
+<details open>
+   <summary>Helpful Resources: 📍</summary>
+   <br>
+   <ul>
+     <sup>
+       <li><a href="https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg">WSLg GPU Selection Documentation</a></li>
+     </sup>
+     <br>
+     <sup>
+       <li><a href="https://learn.microsoft.com/en-us/windows/wsl/wsl-config#example-wslconfig-file">Sample WSL Configuration File</a></li>
+     </sup>
+     <br>
+     <sup>
+       <li><a href="https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md">WSLg GPU Docker Examples</a></li>
+     </sup>
+   </ul>
+</details>
 
 ##
 <!---
@@ -332,6 +334,23 @@ The table below provides WSL-LINUX configuration settings for specifying `Nvidia
       </tr>
   </table>
 </details>
+
+<!---
+$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
+$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
+$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
+$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
+$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
+$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
+$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
+\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
+--->
+<h2>Preview</h2>
+<div align="center">
+<sup><code>OpenGL works smoothly.</code></sup>
+<br>
+<img src="../../.media/wsl/preview/img/wsl_preview_img_glxgears.png" width="650" height="auto"/>
+</div>
 
 <!---
 $$\   $$\  $$$$$$\   $$$$$$\   $$$$$$\  $$$$$$$$\ 
