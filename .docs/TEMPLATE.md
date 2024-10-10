@@ -67,8 +67,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
 
 ##
 
-### Lists:
-
 #### List: (variant-a)
 - <details>
     <summary>List (variant-a)</summary>
