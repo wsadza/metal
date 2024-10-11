@@ -183,6 +183,28 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
 
 ##
 
+#### Table: (variant-a)
+
+<table>
+   <tr>
+       <td><strong>COLUMN-A</strong></td>
+       <td><strong>COLUMN-B</strong></td>
+       <td><strong>COLUMN-C</strong></td>
+   </tr>
+   <tr>
+       <td><sup>Element-A-A</sup></td>
+       <td><sup>Element-A-B</sup></td>
+       <td><sup>Element-A-C</sup></td>
+   </tr>
+   <tr>
+       <td><sup>Element-B-A</sup></td>
+       <td><sup>Element-B-B</sup></td>
+       <td><sup>Element-B-C</sup></td>
+   </tr>
+</table>
+
+##
+
 #### Comments:
 
 Use [text-to-ascii](https://patorjk.com/software/taag/#p=display&f=Big%20Money-nw&t=Type%20Something%20%0A) for separate sections.
