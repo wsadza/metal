@@ -60,7 +60,8 @@ $\color{yellow}{\textsf{Helpful Resources - Setup}}$
 --->
 <h3 id="helpful-resources---questions---answers">
 $\color{yellow}{\textsf{Helpful Resources - Questions / Answers }}$    
-</h3> 
+</h3>
+
 <sup>[(Back to README)](../../README.md#table-of-contents)</sup>
 <br>
 <!--- CONTENT --->
