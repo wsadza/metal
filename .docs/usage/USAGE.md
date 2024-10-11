@@ -31,7 +31,8 @@
                -p 9091:9091 \
                -e STREAMER_HOST=$(hostname -I | awk '{print $1}') \
                ghcr.io/utilizable/metal/minimal-debian:latest && \
-               echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+               echo -e "\n\tApplication: http://$(hostname -I | awk '{print $1}'):8080" && \
+               echo -e "\tSupervisor: http://$(hostname -I | awk '{print $1}'):9091\n
          </code></pre></sup>
          </td>
     </tr>
