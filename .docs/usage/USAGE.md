@@ -31,7 +31,7 @@
                -p 9091:9091 \
                -e STREAMER_HOST=$(hostname -I | awk '{print $1}') \
                ghcr.io/utilizable/metal/minimal-debian:latest \ 
-            && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+               && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
          </code></pre></sup>
          </td>
     </tr>
@@ -48,7 +48,7 @@
             -p 9091:9091 \
             -e STREAMER_HOST=$(hostname -I | awk '{print $1}') \
             ghcr.io/utilizable/metal/minimal-debian:latest \ 
-         && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+            && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
        </code></pre></sup>
        </td>
     </tr>
@@ -65,7 +65,7 @@
             -p 9091:9091 \
             -e STREAMER_HOST=$(hostname -I | awk '{print $1}') \
             ghcr.io/utilizable/metal/full-ubuntu:latest \ 
-         && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+            && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
        </code></pre></sup>
        </td>
     </tr>
@@ -95,7 +95,7 @@
             --security-opt seccomp=unconfined \
             --security-opt apparmor=unconfined \
             ghcr.io/utilizable/metal/full-ubuntu:latest \
-         && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n
+            && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n
        </code></pre></sup>
        </td>
     </tr>
