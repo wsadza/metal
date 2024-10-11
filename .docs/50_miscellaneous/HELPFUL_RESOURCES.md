@@ -5,10 +5,10 @@
 ##
 <!---
 #####################################################
-# Setup - Helpful - Resources 
+# Setup
 #####################################################
 --->
-### Setup - Helpful - Resources
+### Setup
 <sup>[(Back to Setup)](../../README.md#setup)</sup>
 <br>
 <!--- CONTENT --->
@@ -29,10 +29,10 @@
 ##
 <!---
 #####################################################
-# Setup - Helpful - Resources - WSL
+# Setup - WSL
 #####################################################
 --->
-### Setup - Helpful - Resources - WSL
+### Setup - WSL
 <sup>[(Back to Setup)](../../README.md#setup)</sup>
 <br>
 <!--- CONTENT --->
