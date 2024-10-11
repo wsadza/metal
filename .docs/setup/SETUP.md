@@ -21,6 +21,7 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && .
 
 ##
 <img src="../../.media/asset/helper/asset_helper_wip.png" align="right" width="8%" height="auto"/>
+
 <!---
 #####################################################
 Setup - Bash
