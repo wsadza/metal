@@ -10,7 +10,7 @@
 #####################################################
 --->  
 #### Development - Structure - Monolith 
-<sup>[(Back to Development)](./README.md#table-of-contents-4)</sup>
+<sup>[(Back to Development)](../../../README.md#table-of-contents-4)</sup>
 <br>
 
 The Dockerfile encompasses all the essential components required for a seamless gaming experience, with management and orchestration handled by Supervisor.
