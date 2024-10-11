@@ -50,7 +50,7 @@ Think of containers like laptops. On laptops, we often deal with NVIDIA Prime an
 <summary>Answer</summary>
 <br>
 <!--- ANSWER --->      
-Unfortunately, Microsoft started implementing D3D12 in Mesa around 2022, which limits our ability to use all Vulkan functions, resulting in significantly poor performance.
+Unfortunately, Microsoft started implementing [D3D12](https://www.phoronix.com/news/Mesa-24.1-Zink-D3D12-Default) in Mesa around year or two ago? - which limits our ability to use all Vulkan functions, resulting in significantly poor performance.
 <!--- ANSWER --->   
 </details>
 
@@ -76,15 +76,16 @@ Unfortunately, Microsoft started implementing D3D12 in Mesa around 2022, which l
 <!--- ANSWER --->  
 </details>
 
+
 ##
 
-#### Question: Are you affiliated with the Selkies-Gstreamer team?
+#### Question: Are there plans to configure and discover solutions for Intel/AMD?
 <details>
 <summary>Answer</summary>
 <br>
 <!--- ANSWER --->   
    
-Nope, my main goal in creating it was to establish a foundation for exploring containers and Kubernetes.
+It could happen in the future — who knows? But for now, NVIDIA is the dominant player in the market. Honestly, if you're looking to use your PC GPU unit for computing, you're pretty much compelled to go with NVIDIA
 
 <!--- ANSWER ---> 
 </details>
