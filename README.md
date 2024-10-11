@@ -88,10 +88,6 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 - [Usage](#usage)
 - [Setup](#setup)
 - [Configuration](#configuration)
-  - [Configuration `Selkies Gstreamer`](#configuration---selkies-gstreamer)
-  - [Configuration `Pipewire`](#configuration---pipewire)
-  - [Configuration `Coturn`](#configuration---coturn)
-  - [Configuration `Miscellaneous`](#configuration---miscellaneous)
 - [Contributing](#contributing)
   - [Contributing - Structure](#contributing---structure)
      - [Contributing - Structure - Monolith](#contributing---structure---monolith)
@@ -131,7 +127,7 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 --->
 
 ## Usage
-<sup>[(Back to top)](#table-of-contents-0)</sup>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 <img src=".media/asset/section/asset_section_b.png" align="left" width="5%" height="auto"/>
 
@@ -153,7 +149,7 @@ This section provides guidance on deploying and configuring streaming instances 
 ### Usage - Docker:
 <sup>[(Back to Usage)](#usage)</sup>
 <br>
-<sup>[(Back to top)](#table-of-contents-0)</sup>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 > [!TIP]
 > The `${STREAMER_HOST}` variable should point to IP of the machine where stream-instance is launching.
@@ -203,7 +199,7 @@ This section provides guidance on deploying and configuring streaming instances 
 ### Usage - Docker-Compose:
 <sup>[(Back to Usage)](#usage)</sup>
 <br>
-<sup>[(Back to top)](#table-of-contents-0)</sup>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 > [!IMPORTANT]  
 > Please read the compose-file header before proceeding with the setup.
@@ -241,7 +237,7 @@ This section provides guidance on deploying and configuring streaming instances 
 ### Usage - Kubernetes - Manifest:
 <sup>[(Back to Usage)](#usage)</sup>
 <br>
-<sup>[(Back to top)](#table-of-contents-0)</sup>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 > [!CAUTION]
 > The deployment below contains configurations that break container isolation to meet the requirements of the Steam client.
@@ -263,7 +259,7 @@ This section provides guidance on deploying and configuring streaming instances 
 ### Usage - Kubernetes - Helm:
 <sup>[(Back to Usage)](#usage)</sup>
 <br>
-<sup>[(Back to top)](#table-of-contents-0)</sup>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 <!--- WIP --->
 <img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
@@ -306,7 +302,7 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 --->
 
 ## Setup
-<sup>[(Back to top)](#table-of-contents-0)</sup>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 <img src=".media/asset/section/asset_section_c.png" align="left" width="5%" height="auto"/>
 
@@ -345,7 +341,7 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 ### Setup - Ansible
 <sup>[(Back to Setup)](#setup)</sup>
 <br>
-<sup>[(Back to top)](#table-of-contents-0)</sup>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 Clone this repository and run the [setup.sh](./setup/ansible/setup.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
 
@@ -363,7 +359,7 @@ Setup - Bash - WIP!
 ### Setup - Bash
 <sup>[(Back to Setup)](#setup)</sup>
 <br>
-<sup>[(Back to top)](#table-of-contents-0)</sup>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 <!--- WIP --->
 <img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
@@ -385,7 +381,7 @@ Setup - WSL
 ### Setup - WSL
 <sup>[(Back to Setup)](#setup)</sup>
 <br>
-<sup>[(Back to top)](#table-of-contents-0)</sup>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 Consider this more of a curiosity than a genuine configuration; Vulkan doesn’t function properly on WSL-Linux, which severely limits gaming options.
 
@@ -408,11 +404,17 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$
 --->
 
 ## Configuration
-<sup>[(Back to top)](#table-of-contents-0)</sup>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 <img src=".media/asset/section/asset_section_d.png" align="left" width="5%" height="auto"/>
 
 This section highlights the critical configurations and components necessary for maximizing the performance and functionality of your media streaming and communication setup. Each configuration is tailored to improve the overall user experience. You can find all the configurations described below in the [Dockerfile](https://github.com/utilizable/metal/blob/develop/build/docker/Dockerfile.debbased#L1314).
+
+### Table Of Contents:
+  - [Configuration `Selkies Gstreamer`](#configuration---selkies-gstreamer)
+  - [Configuration `Pipewire`](#configuration---pipewire)
+  - [Configuration `Coturn`](#configuration---coturn)
+  - [Configuration `Miscellaneous`](#configuration---miscellaneous)
 
 ##
 <!---
@@ -422,7 +424,9 @@ This section highlights the critical configurations and components necessary for
 --->
 
 ### Configuration - Selkies-Gstreamer
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Configuration)](#configuration)</sup>
+<br>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 Selkies-GStreamer is an open-source low-latency high-performance Linux-native GPU/CPU-accelerated WebRTC HTML5 remote desktop streaming platform. 
 
@@ -528,8 +532,9 @@ For more information, visit [selkies-gstreamer](https://github.com/selkies-proje
 --->
 
 ### Configuration - Pipewire
-<sup>[(Back to top)](#table-of-contents)</sup>
-
+<sup>[(Back to Configuration)](#configuration)</sup>
+<br>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 PipeWire is a project that aims to greatly improve handling of audio and video under Linux. 
 
 <details>
@@ -579,7 +584,9 @@ For more information, visit [coturn](https://github.com/coturn/coturn) home page
 --->
 
 ### Configuration - Coturn
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Configuration)](#configuration)</sup>
+<br>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 Coturn is a free open source implementation of TURN and STUN Server. 
 <br>
@@ -636,7 +643,9 @@ For more information, visit [coturn](https://github.com/coturn/coturn) home page
 --->
 
 ### Configuration - Miscellaneous
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Configuration)](#configuration)</sup>
+<br>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
 
 The Miscellaneous subsection includes various additional configurations.
 
