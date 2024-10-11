@@ -30,11 +30,13 @@ $$ | \_/ $$ |$$$$$$$$\    $$ |   $$ |  $$ |$$$$$$$$\
 # Metal
 <img src=".media/asset/section/asset_section_a.png" align="left" width="5%" height="auto"/>
 
-Ever been fascinated by remote gaming? Same! Inspired by the [`selkies-gstreamer`](https://github.com/selkies-project/selkies-gstreamer) project (a relic of [`Google Stadia's`](https://github.com/GoogleCloudPlatform/selkies-examples/tree/master) epicness), I decided to repack their [`egl solution`](https://github.com/selkies-project/docker-nvidia-egl-desktop) for fun - obviously. My main goal was to create a product that serves as a foundation for exploring Kubernetes and containerization.
+Ever been fascinated by remote gaming? Same! Inspired by the [`selkies-gstreamer`](https://github.com/selkies-project/selkies-gstreamer) project (a relic of [`Google Stadia's`](https://github.com/GoogleCloudPlatform/selkies-examples/tree/master) epicness), I decided to repack their [`egl solution`](https://github.com/selkies-project/docker-nvidia-egl-desktop) for fun - obviously. 
 
 Introducing totally modular, Dockerized streaming service. Build it your way, whether you're on Debian or Ubuntu (I went agnostic on dependencies to keep it flexible). I revamped the structure for ultimate control, throwing in [`Supervisor`](http://supervisord.org/) magic, with a dash of [`s6-overlay`](https://github.com/just-containers/s6-overlay) structure.
 
 Now it's a streaming powerhouse. Why? Just because!
+
+<br><blockquote>Main goal: Tailor a product that serves as a foundation for exploring Kubernetes and containerization.</blockquote>
 
 ##
 <!---
@@ -298,7 +300,7 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 
 <img src=".media/asset/section/asset_section_c.png" align="left" width="5%" height="auto"/>
 
-This repository features an [Ansible Playbook](./setup/ansible) that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The [Ansible playbook](./setup/ansible/playbooks/playbook.yml) is self explanatory - tailored for Ubuntu and Debian distributions, as well as NVIDIA hardware. 
+This repository features an [Ansible Playbook](./setup/ansible) that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The [Ansible playbook](./setup/ansible/playbooks/playbook.yml) is self explanatory - tailored for Ubuntu and Debian distributions.
 
 > [!TIP]
 > <details>
@@ -360,7 +362,7 @@ Setup - WSL
 ### Setup - WSL
 <sup>[(Back to top)](#table-of-contents)</sup>
 
-Think of this as a curiosity rather than a genuine configuration; you can join me on this exploration—perhaps you'll uncover the missing pieces that I couldn't find.
+Consider this more of a curiosity than a genuine configuration; Vulkan doesn’t function properly on WSL-Linux, which severely limits gaming options.
 
 > [!WARNING]  
 > - GPU-Sharing functionality (MPS) isn't working under WSL-Linux. ([#3024](https://github.com/canonical/microk8s/issues/3024))
@@ -811,20 +813,194 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |   $$ |   $$ |  $$ |  $$ |  $$ |  $$ |$$ |  $$ |  
 \$$$$$$  | $$$$$$  |$$ | \$$ |   $$ |   $$ |  $$ |$$$$$$\ $$$$$$$  |\$$$$$$  |   $$ |   $$$$$$\ $$ | \$$ |\$$$$$$  |
  \______/  \______/ \__|  \__|   \__|   \__|  \__|\______|\_______/  \______/    \__|   \______|\__|  \__| \______/
  --->
-
 ## Contributing
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 <img src=".media/asset/section/asset_section_e.png" align="left" width="5%" height="auto"/>
 
-### Structure Dockerfile
+I created this section primarily for myself to organize my future work, helping me quickly recall where I left off and where I can start.
+Here, I will provide a full description of the Dockerfile, the repository structure, and my future plans.
+
+<br><blockquote>Current Status: Monolithic Dockerfile with some orchestration provided by Supervisor.</blockquote>
+
+##
+<!---
+#####################################################
+# Contributing - Structure Dockerfile - Monolith
+#####################################################
+--->  
+
+### Structure Dockerfile - Monolith
 <sup>[(Back to top)](#table-of-contents)</sup>
+
+The Dockerfile includes all the core components needed to ensure a smooth gaming experience, component are management and orchestrated by Supervisor.
+
+Core components:
+
+<table>
+   <tr>
+       <td><strong>Orchiestrator</strong></td>
+       <td><strong>Component</strong></td>
+       <td><strong>Description</strong></td>
+       <td><strong>Purpose</strong></td>
+   </tr>
+   <tr>
+      <td rowspan="7"><sup>Supervisord</sup></td>
+   </tr>
+   <tr>
+       <td><sup>xvfb</sup></td>
+       <td><sup>X virtual framebuffer</sup></td>
+       <td><sup>Provides a display server for graphical applications</sup></td>
+   </tr>
+   <tr>
+       <td><sup>PipeWire</sup></td>
+       <td><sup>Multimedia server</sup></td>
+       <td><sup>Handles audio and video streams</sup></td>
+   </tr>
+   <tr>
+       <td><sup>Selkies-Gstreamer</sup></td>
+       <td><sup>Media processing framework</sup></td>
+       <td><sup>Rremote desktop streaming platform</sup></td>
+   </tr>
+   <tr>
+       <td><sup>Coturn</sup></td>
+       <td><sup>TURN and STUN server</sup></td>
+       <td><sup>Provides NAT traversal for WebRTC</sup></td>
+   </tr>
+   <tr>
+       <td><sup>D-Bus</sup></td>
+       <td><sup>Message bus system</sup></td>
+       <td><sup>Facilitates communication between processes</sup></td>
+   </tr>
+   <tr>
+       <td><sup>Kde-Plasma</sup></td>
+       <td><sup>Desktop Environment</sup></td>
+       <td><sup>Provides a graphical interface for user interaction</sup></td>
+   </tr>   
+</table>
+
+##
+
+<div align="center">
+<sup><code>What is this, Granny? Some outdated sysadmin techniques?</code></sup>
+<br>   
+<img src=".media/contributing/dockerfile/contributing_dockerfile_structure.png" width="600" height="auto"/>  
+</div>
+
+##
+
+The complete image also comes with additional components, including a fully configured Steam client, Heroic Launcher, and VirtualGL.
+
+Additonal components:
+<table>
+    <tr>
+        <td><strong>Component</strong></td>
+        <td><strong>Description</strong></td>
+        <td><strong>Purpose</strong></td>
+    </tr>
+    <tr>
+        <td><sup>VirtualGL</sup></td>
+        <td><sup>Open-source software</sup></td>
+        <td><sup>Enables OpenGL applications to run on a remote server</sup></td>
+    </tr>
+    <tr>
+        <td><sup>Wine</sup></td>
+        <td><sup>Compatibility layer</sup></td>
+        <td><sup>Allows Windows applications to run on Linux</sup></td>
+    </tr>
+    <tr>
+        <td><sup>Lutris</sup></td>
+        <td><sup>Gaming platform</sup></td>
+        <td><sup>Manages and launches games from various sources</sup></td>
+    </tr>
+    <tr>
+        <td><sup>Steam</sup></td>
+        <td><sup>Digital distribution platform</sup></td>
+        <td><sup>Offers games and software for purchase and download</sup></td>
+    </tr>
+    <tr>
+        <td><sup>Heroic Launcher</sup></td>
+        <td><sup>Game launcher</sup></td>
+        <td><sup>Manages and launches games from the Epic Games Store</sup></td>
+    </tr>
+    <tr>
+        <td><sup>PipeWire</sup></td>
+        <td><sup>Multimedia server</sup></td>
+        <td><sup>Handles audio and video streams</sup></td>
+    </tr>
+    <tr>
+        <td><sup>Pipewire-Pulse</sup></td>
+        <td><sup>PulseAudio compatibility layer</sup></td>
+        <td><sup>Allows PulseAudio applications to use PipeWire</sup></td>
+    </tr>
+    <tr>
+        <td><sup>WirePlumber</sup></td>
+        <td><sup>Session manager</sup></td>
+        <td><sup>Manages PipeWire sessions and connections</sup></td>
+    </tr>
+</table>
+
+##
+
+Each additional component has its own arguments to include during the build process, and in many cases, you can choose the appropriate version of each component.
+
+Dockerfile snippet:
+
+```sh
+ARG \
+    INSTALL_WINE="false" \
+    WINE_VERSION="latest"
+
+RUN \
+    echo "**** Optional: Install Wine / (${INSTALL_WINE}) ****" \
+    && \
+    if [ "${INSTALL_WINE}" == "true" ]; \
+    then \
+```
+
+> [!NOTE]
+> Each `RUN` block in the Dockerfile is independent — it doesn't rely on any other RUN blocks, allowing you to rearrange them as needed.
+
+Docker-Compose snippet:
+
+```sh
+ stream:
+   build:
+     context: '../../../build'
+     dockerfile: './Dockerfile.debbased'
+     args:
+       # Wine 
+       INSTALL_WINE: "true"
+       WINE_VERSION: "9.15~*-1"
+```
+
+
+##
+<!---
+#####################################################
+# Contributing - Structure Repository
+#####################################################
+--->  
 
 ### Structure Repository
 <sup>[(Back to top)](#table-of-contents)</sup>
 
+##
+<!---
+#####################################################
+# Contributing - CICD Workflow
+#####################################################
+--->  
+
 ### CICD Workflow
 <sup>[(Back to top)](#table-of-contents)</sup>
+
+##
+<!---
+#####################################################
+# Contributing - Futher Works
+#####################################################
+--->  
 
 ### Futher Works
 <sup>[(Back to top)](#table-of-contents)</sup>
