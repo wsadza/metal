@@ -11,7 +11,6 @@
 ### Usage - Docker
 <sup>[(Back to Usage)](../../README.md#usage)</sup>
 <br>
-<sup>[(Back to Readme)](../../README.md#table-of-contents)</sup><br>
 <!--- CONTENT --->
 
 <ul>
@@ -62,7 +61,6 @@
 ### Usage - Docker-Compose
 <sup>[(Back to Usage)](../../README.md#usage)</sup>
 <br>
-<sup>[(Back to Readme)](../../README.md#table-of-contents)</sup><br>
 <!--- CONTENT --->
 
 <table>
@@ -105,7 +103,6 @@
 ### Usage - Kubernetes
 <sup>[(Back to Usage)](../../README.md#usage)</sup>
 <br>
-<sup>[(Back to Readme)](../../README.md#table-of-contents)</sup><br>
 <!--- CONTENT --->
 
 <table>
