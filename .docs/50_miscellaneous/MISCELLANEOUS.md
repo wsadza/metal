@@ -17,7 +17,7 @@
 # Helpful Resources - Setup
 #####################################################
 --->
-### Helpful Resources - Setup
+### $\color{yellow}{\textsf{Helpful Resources - Setup}}$ 
 <!--- CONTENT --->
 
 #### Setup - General
@@ -52,10 +52,10 @@
 
 <!---
 #####################################################
-# Helpful Resources - Questions 
+# Helpful Resources - Questions / Answers 
 #####################################################
 --->
-### Helpful Resources - Questions
+### $\color{yellow}{\textsf{Helpful Resources - Questions / Answers }}$ 
 <sup>[(Back to README)](../../README.md#table-of-contents)</sup>
 <br>
 <!--- CONTENT --->
