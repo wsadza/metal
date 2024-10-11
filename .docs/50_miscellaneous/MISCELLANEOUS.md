@@ -8,7 +8,7 @@
 #####################################################
 --->
 ## Helpful Resources
-<sup>[(Back to README)](../../README.md#table-of-contents)</sup>
+<sup>[(Back to Miscellaneous)](../../README.md#miscellaneous)</sup>
 <br>
 <!--- CONTENT --->
 
@@ -62,7 +62,7 @@ $\color{yellow}{\textsf{Helpful Resources - Setup}}$
 $\color{yellow}{\textsf{Helpful Resources - Questions / Answers }}$    
 </h3>
 
-<sup>[(Back to README)](../../README.md#table-of-contents)</sup>
+<sup>[(Back to Miscellaneous)](../../README.md#miscellaneous)</sup>
 <br>
 <!--- CONTENT --->
 
