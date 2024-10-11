@@ -26,32 +26,26 @@
        <tr>
            <td><sup>Wine</sup></td>
            <td><sup>Compatibility layer</sup></td>
-           <td><sup>Allows Windows applications to run on Linux</sup></td>
        </tr>
        <tr>
            <td><sup>Lutris</sup></td>
            <td><sup>Gaming platform</sup></td>
-           <td><sup>Manages and launches games from various sources</sup></td>
        </tr>
        <tr>
            <td><sup>Steam</sup></td>
            <td><sup>Digital distribution platform</sup></td>
-           <td><sup>Offers games and software for purchase and download</sup></td>
        </tr>
        <tr>
            <td><sup>Heroic Launcher</sup></td>
            <td><sup>Game launcher</sup></td>
-           <td><sup>Manages and launches games from the Epic Games Store</sup></td>
        </tr>
        <tr>
            <td><sup>WirePlumber</sup></td>
            <td><sup>Session manager</sup></td>
-           <td><sup>Manages PipeWire sessions and connections</sup></td>
        </tr>
        <tr>
            <td><sup>Firefox-Nightly</sup></td>
            <td><sup>Web browser</sup></td>
-           <td><sup>Provides a testing version of the Firefox browser with the latest features</sup></td>
        </tr>
    </table>
 
