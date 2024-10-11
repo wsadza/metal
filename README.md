@@ -268,7 +268,7 @@ $$$$$$$  |$$$$$$\ \$$$$$$  |\$$$$$$  |$$$$$$$$\ $$ |  $$ |$$$$$$\ $$ | \_/ $$ |$
 The "Miscellaneous" section serves as a catch-all category for content that doesn't neatly fit into other more specific categories. 
 <br><br>
 ### Table Of Contents:
-- [Helpful Resources](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---setup)
+- [Helpful Resources](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources)
 - [Questions / Answers](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---questions---answers)
 
 <!---
