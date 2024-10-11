@@ -62,7 +62,7 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 - Setup
    - [Setup - Windows](#setup---windows)
    - [Setup - Linux - WSL](#setup---linux---wsl)
-- [Configuration](#configuration)
+- Configuration
    - [Configuration - WSL](#configuration---wsl)
    - [Configuration - Linux - WSL](#configuration---linux---wsl)
 - [Usage](#usage)
@@ -96,7 +96,7 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 --->
 ## Setup
 
-#### Setup - Windows
+### Setup - Windows
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 First, we need to install [Chocolatey](https://chocolatey.org/install#generic), after which we can use it to obtain the NVIDIA driver and the Windows Subsystem for Linux (WSL).
@@ -192,29 +192,7 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$
  \______/  \______/ \__|  \__|\__|      \______| \______/  \______/ \__|  \__|\__|  \__|  \__|   \______| \______/ \__|  \__| 
 --->
 ## Configuration
-<sup>[(Back to top)](#table-of-contents)</sup>
 
-This section aims to help users set up resource limits and GPU settings for better performance when running Linux on WSL 2, especially for graphical applications using WSLg.
-
-<details open>
-   <summary>Helpful Resources: 📍</summary>
-   <br>
-   <ul>
-     <sup>
-       <li><a href="https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg">WSLg GPU Selection Documentation</a></li>
-     </sup>
-     <br>
-     <sup>
-       <li><a href="https://learn.microsoft.com/en-us/windows/wsl/wsl-config#example-wslconfig-file">Sample WSL Configuration File</a></li>
-     </sup>
-     <br>
-     <sup>
-       <li><a href="https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md">WSLg GPU Docker Examples</a></li>
-     </sup>
-   </ul>
-</details>
-
-##
 <!---
 #####################################################
 # Configuration - WSL
