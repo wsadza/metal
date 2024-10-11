@@ -1,5 +1,5 @@
 <div align="center">
-   <img src="./.media/asset/badge/asset_badge_project.jpg" width="100%" height="auto"/>
+   <kbd><img src="./.media/asset/badge/asset_badge_project.jpg" width="100%" height="auto"/></kbd>
    <br>
    
    <img src="https://labl.es/svg?text=Containerized%20Gaming&width=200&bgcolor=a93226" align="center" style="margin: 5px"/>
@@ -60,7 +60,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>It was easy, right?</code></sup>
 <br>
-<img src="./.media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="auto"/>
+<kbd><img src="./.media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="auto"/></kbd>
 </div>
 
 <!---
@@ -124,7 +124,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Want to play with others?</code></sup>
 <br>
-<img src="./.media/native/preview/gif/native_preview_gif_companion.gif" align="center" width="800" height="auto"/>
+<kbd><img src="./.media/native/preview/gif/native_preview_gif_companion.gif" align="center" width="800" height="auto"/></kbd>
 </div>
 
 <!---
@@ -167,7 +167,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Play anywhere!</code></sup>
 <br>
-<img src="./.media/native/preview/gif/native_preview_gif_mobile.gif" align="center" width="800" height="auto"/>   
+<kbd><img src="./.media/native/preview/gif/native_preview_gif_mobile.gif" align="center" width="800" height="auto"/></kbd>
 <br>
 </div>
 
@@ -212,7 +212,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Steam? No Problem!</code></sup>
 <br>
-<img src="./.media/native/preview/gif/native_preview_gif_steam.gif" width="800" height="auto"/>
+<kbd><img src="./.media/native/preview/gif/native_preview_gif_steam.gif" width="800" height="auto"/></kbd>
 </div>
 
 <!---
