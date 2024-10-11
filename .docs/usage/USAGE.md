@@ -13,44 +13,94 @@
 <br>
 <!--- CONTENT --->
 
-<ul>
-<!-- element [0] -->    
-   <li>
-      <p>Minimal-Debian:</p>
-      <pre><code>docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 9091:9091 -e STREAMER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-debian:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"</code></pre>
-   </li>
-   <!-- #element [0] -->    
-   <!-- element [1] -->    
-   <li>
-      <p>Minimal-Ubuntu:</p>
-      <pre><code>docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 9091:9091 -e STREAMER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/minimal-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"</code></pre>
-   </li>
-<!-- #element [1] -->    
-   
-<!-- element [2] -->    
-   <li>
-      <p>Full-Ubuntu:</p>
-      <pre><code>docker run -d -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 9091:9091 -e STREAMER_HOST=$(hostname -I | awk '{print $1}') ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"</code></pre>
-   </li>
-<!-- #element [2] -->    
-
-<!-- element [3] -->    
-   <li>
-      <p>Full-Power: 🤘</p>
-      <ul>
-         <sup>
-            <li><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">[Ensure that nvidia-ctr is installed]</a></li>
-         </sup>
-      <br>
-         <sup>
-            <li><a href="">[Flatpak (steam) requires breaking container isolation]</a></li>
-         </sup>
-      </ul>
-      <br>
-      <pre><code>docker run -d --hostname stream -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 9091:9091 -e STREAMER_HOST=$(hostname -I | awk '{print $1}') -e SELKIES_ENCODER=nvh264enc --gpus '"device=0"' --tmpfs /dev/shm:rw --shm-size 64m --ipc host --ulimit nofile=1024:524288 --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined ghcr.io/utilizable/metal/full-ubuntu:latest && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"</code></pre>
-   </li>
-<!-- #element [3] -->          
-</ul>
+<table>
+    <tr>
+        <td><strong>Component</strong></td>
+        <td><strong>Snippet</strong></td>
+    </tr>
+   <!--- element[0] --->
+    <tr>
+         <td><sup><a href="">Minimal Debian</a></sup></td>
+         <td>
+         <br>
+         <sup><pre><code>
+            docker run -d \
+               -p 8080:8080 \
+               -p 3478:3478/udp \
+               -p 3478:3478/tcp \
+               -p 9091:9091 \
+               -e STREAMER_HOST=$(hostname -I | awk '{print $1}') \
+               ghcr.io/utilizable/metal/minimal-debian:latest \ 
+            && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+         </code></pre></sup>
+         </td>
+    </tr>
+    <!--- element[0] --->
+    <!--- element[1] --->
+    <tr>
+       <td><sup><a href="">Minimal Ubuntu</a></sup></td>
+       <td>
+       <br><sup><pre><code>
+         docker run -d \
+            -p 8080:8080 \
+            -p 3478:3478/udp \
+            -p 3478:3478/tcp \
+            -p 9091:9091 \
+            -e STREAMER_HOST=$(hostname -I | awk '{print $1}') \
+            ghcr.io/utilizable/metal/minimal-debian:latest \ 
+         && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+       </code></pre></sup>
+       </td>
+    </tr>
+    <!--- element[1] ---> 
+    <!--- element[2] --->
+    <tr>
+       <td><sup><a href="">Full Ubuntu</a></sup></td>
+       <td>
+       <br><sup><pre><code>
+         docker run -d \
+            -p 8080:8080 \
+            -p 3478:3478/udp \
+            -p 3478:3478/tcp \
+            -p 9091:9091 \
+            -e STREAMER_HOST=$(hostname -I | awk '{print $1}') \
+            ghcr.io/utilizable/metal/full-ubuntu:latest \ 
+         && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n"
+       </code></pre></sup>
+       </td>
+    </tr>
+    <!--- element[2] --->
+    <!--- element[3] --->
+    <tr>
+       <td><sup><a href="">Full Power</a>🤘</sup></td>
+       <td>
+       <br><sup><pre><code>
+         docker run -d \
+            --hostname stream \
+            -p 8080:8080 \
+            -p 3478:3478/udp \
+            -p 3478:3478/tcp \
+            -p 9091:9091 \
+            -e STREAMER_HOST=$(hostname -I | awk '{print $1}') \
+            -e SELKIES_ENCODER=nvh264enc \
+            --gpus '"device=0"' \
+            --tmpfs /dev/shm:rw \
+            --shm-size 64m \
+            --ipc host \
+            --ulimit nofile=1024:524288 \
+            --cap-add NET_ADMIN \
+            --cap-add SYS_ADMIN \
+            --cap-add SYS_NICE \
+            --cap-add IPC_LOCK \
+            --security-opt seccomp=unconfined \
+            --security-opt apparmor=unconfined \
+            ghcr.io/utilizable/metal/full-ubuntu:latest \
+         && echo -e "\n\thttp://$(hostname -I | awk '{print $1}'):8080\n
+       </code></pre></sup>
+       </td>
+    </tr>
+    <!--- element[3] --->
+</table>
 
 ##
 <!---
