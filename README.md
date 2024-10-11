@@ -131,13 +131,13 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 --->
 
 ## Usage
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to top)](#table-of-contents-0)</sup>
 
 <img src=".media/asset/section/asset_section_b.png" align="left" width="5%" height="auto"/>
 
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
-### TOC:
+### Table Of Contents:
   - [Usage `Docker`](#usage---docker)
   - [Usage `Docker-Compose`](#usage---docker-compose)
   - [Usage `Kubernetes`](#usage---kubernetes---manifest) ⚠️
@@ -152,6 +152,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ### Usage - Docker:
 <sup>[(Back to Usage)](#usage)</sup>
+<sup>[(Back to top)](#table-of-contents-0)</sup>
 
 > [!TIP]
 > The `${STREAMER_HOST}` variable should point to IP of the machine where stream-instance is launching.
@@ -200,6 +201,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ### Usage - Docker-Compose:
 <sup>[(Back to Usage)](#usage)</sup>
+<sup>[(Back to top)](#table-of-contents-0)</sup>
 
 > [!IMPORTANT]  
 > Please read the compose-file header before proceeding with the setup.
@@ -236,6 +238,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ### Usage - Kubernetes - Manifest:
 <sup>[(Back to Usage)](#usage)</sup>
+<sup>[(Back to top)](#table-of-contents-0)</sup>
 
 > [!CAUTION]
 > The deployment below contains configurations that break container isolation to meet the requirements of the Steam client.
@@ -256,7 +259,11 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ### Usage - Kubernetes - Helm:
 <sup>[(Back to Usage)](#usage)</sup>
+<sup>[(Back to top)](#table-of-contents-0)</sup>
+
+<!--- WIP --->
 <img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
+<!--- WIP --->
 
 <table>
     <tr>
@@ -295,16 +302,11 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 --->
 
 ## Setup
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to top)](#table-of-contents-0)</sup>
 
 <img src=".media/asset/section/asset_section_c.png" align="left" width="5%" height="auto"/>
 
 This repository features an [Ansible Playbook](./setup/ansible) that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The [Ansible playbook](./setup/ansible/playbooks/playbook.yml) is self explanatory - tailored for Ubuntu and Debian distributions.
-
-### TOC:
-  - [Setup `Ansible`](#setup---ansible)
-  - [Setup `Bash`](#setup---bash) ⚠️
-  - [Setup `WSL`](#setup---wsl)
 
 > [!TIP]
 > <details>
@@ -323,6 +325,12 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 > </table>
 > </details>
 
+### Table Of Contents:
+  - [Setup `Ansible`](#setup---ansible)
+  - [Setup `Bash`](#setup---bash) ⚠️
+  - [Setup `WSL`](#setup---wsl)
+
+
 ##
 <!---
 #####################################################
@@ -332,6 +340,7 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 
 ### Setup - Ansible
 <sup>[(Back to Setup)](#setup)</sup>
+<sup>[(Back to top)](#table-of-contents-0)</sup>
 
 Clone this repository and run the [setup.sh](./setup/ansible/setup.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
 
@@ -348,8 +357,11 @@ Setup - Bash - WIP!
 
 ### Setup - Bash
 <sup>[(Back to Setup)](#setup)</sup>
+<sup>[(Back to top)](#table-of-contents-0)</sup>
 
+<!--- WIP --->
 <img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
+<!--- WIP --->
 
 Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash script. This will fetch and install all the necessary dependencies and components.
 
@@ -366,6 +378,7 @@ Setup - WSL
 
 ### Setup - WSL
 <sup>[(Back to Setup)](#setup)</sup>
+<sup>[(Back to top)](#table-of-contents-0)</sup>
 
 Consider this more of a curiosity than a genuine configuration; Vulkan doesn’t function properly on WSL-Linux, which severely limits gaming options.
 
