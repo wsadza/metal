@@ -249,7 +249,6 @@ This section explains how we build our software, focusing on different structure
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
 
 
-
 <!---
 $$$$$$$\  $$$$$$\  $$$$$$\   $$$$$$\  $$\        $$$$$$\  $$$$$$\ $$\      $$\ $$$$$$$$\ $$$$$$$\   $$$$$$\  
 $$  __$$\ \_$$  _|$$  __$$\ $$  __$$\ $$ |      $$  __$$\ \_$$  _|$$$\    $$$ |$$  _____|$$  __$$\ $$  __$$\ 
@@ -266,7 +265,9 @@ $$$$$$$  |$$$$$$\ \$$$$$$  |\$$$$$$  |$$$$$$$$\ $$ |  $$ |$$$$$$\ $$ | \_/ $$ |$
 <img src="./.media/asset/section/asset_section_f.png" align="left" width="5%" height="auto"/>
 
 The "Miscellaneous" section serves as a catch-all category for content that doesn't neatly fit into other more specific categories. 
-<br><br>
+
+<br>
+
 ### Table Of Contents:
 - Helpful Resources
    - [Helpful Resources - Setup](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---setup)
