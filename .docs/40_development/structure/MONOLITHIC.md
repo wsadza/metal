@@ -2,7 +2,6 @@
    <img src="../../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
 
-##
 <!--- WIP --->
 <img src="../../../.media/asset/helper/asset_helper_wip.png" align="right" width="8%" height="auto"/>
 
@@ -128,8 +127,9 @@ Each additional component has its own arguments to include during the build proc
 <img src="../../../.media/development/structure/monolithic/development_structure_monolithic_modularity.png" width="800" height="auto"/>  
 </div>
 
-##
 
+<br>
+<br>
 <div align="center">
    <img src="../../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
