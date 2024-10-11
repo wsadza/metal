@@ -3,6 +3,9 @@
 </div>
 
 ##
+
+<img src="../../../.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
+
 <!---
 #####################################################
 # Development - Structure - Microservices
@@ -11,8 +14,7 @@
 ####  Development - Structure - Microservices
 <sup>[(Back to Development)](../../../README.md#table-of-contents-4)</sup>
 <br>
-
-<img src="../../../.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
+<br>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet neque non dui luctus posuere. Phasellus laoreet elit eu diam ultrices fermentum. Ut posuere, quam sed blandit ornare, lacus nisi consectetur tortor, vel dictum erat enim a leo. Curabitur dictum tristique hendrerit.
 
