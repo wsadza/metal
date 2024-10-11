@@ -1,5 +1,8 @@
 <div align="center">
-   <kbd><img src="./.media/asset/badge/asset_badge_project.jpg" width="100%" height="auto"/></kbd>
+   <div style="width: 100%; height: auto; background-color: black;">
+      <img src="./.media/asset/badge/asset_badge_project.jpg" width="100%" height="auto"/>      
+   </div>
+
    <br>
    
    <img src="https://labl.es/svg?text=Containerized%20Gaming&width=200&bgcolor=a93226" align="center" style="margin: 5px"/>
@@ -58,9 +61,11 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 --->
 ## Preview
 <div align="center">
-<sup><code>It was easy, right?</code></sup>
-<br>
-<kbd><img src="./.media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="auto"/></kbd>
+   <sup><code>It was easy, right?</code></sup>
+   <br>
+   <div style="width: 800; height: 450; background-color: black;">
+      <img src="./.media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="450"/>   
+   </div>   
 </div>
 
 <!---
@@ -122,9 +127,11 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 
 <h2>Preview</h2>
 <div align="center">
-<sup><code>Want to play with others?</code></sup>
-<br>
-<kbd><img src="./.media/native/preview/gif/native_preview_gif_companion.gif" align="center" width="800" height="auto"/></kbd>
+   <sup><code>Want to play with others?</code></sup>
+   <br>
+   <div style="width: 800; height: 450; background-color: black;">
+      <img src="./.media/native/preview/gif/native_preview_gif_companion.gif" align="center" width="800" height="450"/>
+   </div>      
 </div>
 
 <!---
@@ -165,10 +172,11 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 --->
 <h2>Preview</h2>
 <div align="center">
-<sup><code>Play anywhere!</code></sup>
-<br>
-<kbd><img src="./.media/native/preview/gif/native_preview_gif_mobile.gif" align="center" width="800" height="auto"/></kbd>
-<br>
+   <sup><code>It was easy, right?</code></sup>
+   <br>
+   <div style="width: 800; height: 450; background-color: black;">
+      <img src="./.media/native/preview/gif/native_preview_gif_mobile.gif" align="center" width="800" height="450"/>
+   </div>   
 </div>
 
 <!---
