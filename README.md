@@ -230,7 +230,7 @@ Here, I will provide a full description of the Dockerfile, the repository struct
 
 ### Table Of Contents:
   - Development - Structure
-     - [Development - Structure - Monolith](.docs/development/structure/MONOLITH.md#development---structure---monolith)
+     - [Development - Structure - Monolith](.docs/development/structure/MONOLITH.md#development---structure---monolithc)
      - [Development - Structure - Microservices](.docs/development/structure/MICROSERVICES.md#development---structure---microservices) ⚠️
      - [Development - Structure - Repository](.docs/development/structure/REPOSITORY.md#development---structure---repository) ⚠️
   - Development - Workflow
