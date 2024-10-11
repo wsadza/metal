@@ -13,8 +13,6 @@
 <br>
 <!--- CONTENT --->
 
-Here, I've compiled the most relevant questions that I found while searching online.
-
 ##
 
 #### Question: Why don't we need to install the NVIDIA driver in the finall container?
