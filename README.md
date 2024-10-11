@@ -272,7 +272,7 @@ The "Miscellaneous" section serves as a catch-all category for content that does
 - Helpful Resources
    - [Helpful Resources - Setup](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---setup)
    - [Helpful Resources - Questions / Answers](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---questions---answers)
-- [Document Template](./docs/_misc/DOCUMENT_TEMPLATE.md)
+- [Document Template](./.docs/_misc/DOCUMENT_TEMPLATE.md)
 
 <!---
 $$$$$$$\  $$$$$$\  $$$$$$\   $$$$$$\  $$\        $$$$$$\  $$$$$$\ $$\      $$\ $$$$$$$$\ $$$$$$$\   $$$$$$\  
