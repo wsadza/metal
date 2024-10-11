@@ -127,7 +127,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
    
    <!-- element [3] -->   
    <li>
-   <h3>YOUR-PARAGRAPH</p3>
+   <h3>YOUR-PARAGRAPH</h3>
    <pre><code>YOUR-CODE</code></pre>
    </li>
    <!-- #element [3] -->      
