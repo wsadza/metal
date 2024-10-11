@@ -227,6 +227,16 @@
         <td><sup>Address for the PulseAudio server.</sup></td>
         <td><sup>unix:${XDG_RUNTIME_DIR}/pulse-server</sup></td>
     </tr>
+    <tr>
+        <td><sup>PRIME_RENDERER_GLOBAL</sup></td>
+        <td><sup>Use EGL device globaly.</sup></td>
+        <td><sup>true</sup></td>
+    </tr>
+    <tr>
+        <td><sup>PRIME_RENDERER_WINE</sup></td>
+        <td><sup>Use EGL device only for WINE applications.</sup></td>
+        <td><sup>true</sup></td>
+    </tr>   
 </table>
 
 ##
@@ -284,16 +294,6 @@
         <td><sup>__GLX_VENDOR_LIBRARY_NAME</sup></td>
         <td><sup>Specifies the GLX vendor library to use.</sup></td>
         <td><sup>mesa</sup></td>
-    </tr>
-    <tr>
-        <td><sup>PRIME_RENDERER_GLOBAL</sup></td>
-        <td><sup>Global setting for PRIME renderer.</sup></td>
-        <td><sup>true</sup></td>
-    </tr>
-    <tr>
-        <td><sup>PRIME_RENDERER_WINE</sup></td>
-        <td><sup>Setting for PRIME renderer in Wine.</sup></td>
-        <td><sup>true</sup></td>
     </tr>
 </table>
 
