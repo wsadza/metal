@@ -9,7 +9,7 @@
 #####################################################
 --->
 ### Usage - Docker
-<sup>[(Back to Usage)](../../README.md#table-of-contents-1)</sup>
+<sup>[(Back to Usage)](../../README.md#usage)</sup>
 <br>
 <!--- CONTENT --->
 <div align="center">
@@ -114,7 +114,7 @@ echo -e "\tSupervisor: http://$(hostname -I | awk '{print $1}'):9091\n"
 #####################################################
 --->
 ### Usage - Docker-Compose
-<sup>[(Back to Usage)](../../README.md#table-of-contents-1)</sup>
+<sup>[(Back to Usage)](../../README.md#usage)</sup>
 <br>
 <!--- CONTENT --->
 <div align="center">
@@ -157,7 +157,7 @@ echo -e "\tSupervisor: http://$(hostname -I | awk '{print $1}'):9091\n"
 #####################################################
 --->
 ### Usage - Kubernetes
-<sup>[(Back to Usage)](../../README.md#table-of-contents-1)</sup>
+<sup>[(Back to Usage)](../../README.md#usage)</sup>
 <br>
 <!--- CONTENT --->
 
@@ -184,7 +184,7 @@ echo -e "\tSupervisor: http://$(hostname -I | awk '{print $1}'):9091\n"
 --->
 
 ### Usage - Helm
-<sup>[(Back to Usage)](../../README.md#table-of-contents-1)</sup>
+<sup>[(Back to Usage)](../../README.md#usage)</sup>
 <!--- CONTENT --->
 
 <img src="../../.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
