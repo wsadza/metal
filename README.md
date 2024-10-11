@@ -78,9 +78,7 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 - [Setup](#setup)
 - [Configuration](#configuration)
 - [Development](#development)
-- Miscellaneous
-    - [Questions](./.docs/50_miscellaneous/QUESTIONS.md#questions)
-    - [Helpful Resources](./.docs/50_miscellaneous/HELPFUL_RESOURCES.md#setup)
+- [Miscellaneous](#miscellaneous)
 - [Disclaimers](#disclaimers)
 
 <!---
@@ -250,6 +248,8 @@ This section explains how we build our software, focusing on different structure
      - [Development - Workflow - CD](./.docs/40_development/workflow/CD.md#development---workflow---cd)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
 
+
+
 <!---
 $$$$$$$\  $$$$$$\  $$$$$$\   $$$$$$\  $$\        $$$$$$\  $$$$$$\ $$\      $$\ $$$$$$$$\ $$$$$$$\   $$$$$$\  
 $$  __$$\ \_$$  _|$$  __$$\ $$  __$$\ $$ |      $$  __$$\ \_$$  _|$$$\    $$$ |$$  _____|$$  __$$\ $$  __$$\ 
@@ -260,18 +260,36 @@ $$ |  $$ |  $$ |  $$\   $$ |$$ |  $$\ $$ |      $$ |  $$ |  $$ |  $$ |\$  /$$ |$
 $$$$$$$  |$$$$$$\ \$$$$$$  |\$$$$$$  |$$$$$$$$\ $$ |  $$ |$$$$$$\ $$ | \_/ $$ |$$$$$$$$\ $$ |  $$ |\$$$$$$  |
 \_______/ \______| \______/  \______/ \________|\__|  \__|\______|\__|     \__|\________|\__|  \__| \______/
 --->
-
-## Disclaimers
+## Miscellaneous
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 <img src="./.media/asset/section/asset_section_f.png" align="left" width="5%" height="auto"/>
 
+The "Miscellaneous" section serves as a catch-all category for content that doesn't neatly fit into other more specific categories. 
+<br><br>
+### Table Of Contents:
+- [Helpful Resources](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---setup)
+- [Questions / Answers](./.docs/50_miscellaneous/MISCELLANEOUS.md)
+
+<!---
+$$$$$$$\  $$$$$$\  $$$$$$\   $$$$$$\  $$\        $$$$$$\  $$$$$$\ $$\      $$\ $$$$$$$$\ $$$$$$$\   $$$$$$\  
+$$  __$$\ \_$$  _|$$  __$$\ $$  __$$\ $$ |      $$  __$$\ \_$$  _|$$$\    $$$ |$$  _____|$$  __$$\ $$  __$$\ 
+$$ |  $$ |  $$ |  $$ /  \__|$$ /  \__|$$ |      $$ /  $$ |  $$ |  $$$$\  $$$$ |$$ |      $$ |  $$ |$$ /  \__|
+$$ |  $$ |  $$ |  \$$$$$$\  $$ |      $$ |      $$$$$$$$ |  $$ |  $$\$$\$$ $$ |$$$$$\    $$$$$$$  |\$$$$$$\  
+$$ |  $$ |  $$ |   \____$$\ $$ |      $$ |      $$  __$$ |  $$ |  $$ \$$$  $$ |$$  __|   $$  __$$<  \____$$\ 
+$$ |  $$ |  $$ |  $$\   $$ |$$ |  $$\ $$ |      $$ |  $$ |  $$ |  $$ |\$  /$$ |$$ |      $$ |  $$ |$$\   $$ |
+$$$$$$$  |$$$$$$\ \$$$$$$  |\$$$$$$  |$$$$$$$$\ $$ |  $$ |$$$$$$\ $$ | \_/ $$ |$$$$$$$$\ $$ |  $$ |\$$$$$$  |
+\_______/ \______| \______/  \______/ \________|\__|  \__|\______|\__|     \__|\________|\__|  \__| \______/
+--->
+## Disclaimers
+<sup>[(Back to top)](#table-of-contents)</sup>
+
+<img src="./.media/asset/section/asset_section_g.png" align="left" width="5%" height="auto"/>
+
 This section contains important disclaimers regarding the ownership of software and the funding sources for the project. Please review the details carefully to understand the rights associated with the software and the contributions of supporting organizations.
 
-<br>
-
+#### Disclaimers:
 <ul>
-  
   <details>
   <summary>Copyright</summary>
   <br>
