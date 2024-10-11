@@ -132,7 +132,7 @@ This section provides guidance on deploying and configuring streaming instances 
 > - Helm is currently in development.
 
 ### Table Of Contents:
-  - <a href="./.docs/usage/USAGE.md#usage---docker" target="_blank">[Usage `Docker`]</a>
+  - [Usage `Docker`](./.docs/usage/USAGE.md#usage---docker)
   - [Usage `Docker-Compose`](./.docs/usage/USAGE.md#usage---docker-compose)
   - [Usage `Kubernetes`](./.docs/usage/USAGE.md#usage---kubernetes)
   - [Usage `Helm`]() ⚠️
