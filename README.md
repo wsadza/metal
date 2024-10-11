@@ -78,7 +78,7 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 - [Setup](#setup)
 - [Configuration](#configuration)
 - [Development](#development)
-- [Questions](./.docs/miscellaneous/FAQ.md#faq)
+- [Questions](./.docs/miscellaneous/QUESTIONS.md#questions)
 - [Disclaimers](#disclaimers)
 
 <!---
