@@ -17,7 +17,7 @@ services:
 
     stream:
       build:
-        context: '../../../build'
+        context: './metal/monolithic/application'
         dockerfile: './Dockerfile.debbased'
         args:
           # Base
