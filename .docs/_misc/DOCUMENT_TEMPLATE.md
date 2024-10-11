@@ -1,5 +1,5 @@
 <div align="center">
-   <img src="../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
+   <img src="../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
 
 ## Template
@@ -50,7 +50,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
 ##
 
 <div align="center">
-   <img src="../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
+   <img src="../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
 
 <hr>
@@ -68,6 +68,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
 > - Keep It Super Simple!
 > - Check [github markdown icons](https://gist.github.com/rxaviers/7360908).
 > - [Markdown highlights options](https://github.com/orgs/community/discussions/16925)
+> - [Makrdown color text](https://gist.github.com/luigiMinardi/4574708d404cdf4fe0da7ac6fe2314db)
 
 ##
 
