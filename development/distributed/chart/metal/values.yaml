@@ -66,15 +66,15 @@ stream:
   - name: DBUS_PORT
     value: "9092"
   - name: PULSE_SERVER
-    value: "tcp:anykey.pl:4713"
+    value: "pulse.server"
   - name: SELKIES_TURN_HOST
-    value: "anykey.pl"
+    value: "turn.host"
   - name: SELKIES_TURN_PORT
-    value: "3478"
+    value: "4713"
   - name: SELKIES_TURN_USERNAME
-    value: "root"
+    value: "username"
   - name: SELKIES_TURN_PASSWORD
-    value: "9311540"
+    value: "password"
   - name: SELKIES_ENCODER
     value: "nvh264enc"
   - name: PRIME_RENDERER_GLOBAL
