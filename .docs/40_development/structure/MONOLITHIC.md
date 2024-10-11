@@ -25,7 +25,8 @@ The Dockerfile encompasses all the essential components required for a seamless 
           <td><strong>Description</strong></td>
           <td><strong>Purpose</strong></td>
       </tr>
-      <tr>
+<!--- CORE COMPONENTS --->      
+      <tr align="center">
          <td rowspan="9"><sup>Core<br>Component</sup></td>
       <tr>
       <tr align="left">
@@ -63,7 +64,8 @@ The Dockerfile encompasses all the essential components required for a seamless 
           <td><sup>TURN and STUN server</sup></td>
           <td><sup>Provides NAT traversal for WebRTC</sup></td>
       </tr>
-      <tr>
+<!--- OPTIONAL COMPONENTS --->
+      <tr align="center">
          <td rowspan="9"><sup>Optional<br>Component</sup></td>
       <tr>
        <tr align="left">
