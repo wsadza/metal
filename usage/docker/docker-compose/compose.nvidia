@@ -1,0 +1,37 @@
+############################################################
+# Copyright (c) 2024 Utilizable 
+# Released under the MIT license
+# ----------------------------------------------------------
+#
+# Example of attaching NVIDIA gpu into container 
+#
+############################################################
+
+version: '3.8'
+services:
+
+# ----------------------------
+# Stream Server [0]
+
+    stream:
+      hostname: stream 
+      image: "ghcr.io/utilizable/metalg:latest"
+      ports:
+# Expose app - stream 
+        - 8080:8080
+
+      environment:
+# Use internal turn server in case of lack of remote setting 
+        DOCKER_HOST: "${HOSTNAME:=localhost}"                
+
+# Change encoder to nvidia nvh264enc  
+        SELKIES_ENCODER: "nvh264enc"
+
+# Apply gpu resource 
+      deploy:
+          resources:
+            reservations:
+              devices:
+                - driver: nvidia
+                  count: 1
+                  capabilities: [gpu]

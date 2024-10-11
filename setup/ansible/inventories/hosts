@@ -1,0 +1,9 @@
+[server]
+target ansible_host="{{ lookup('env', 'TARGET_HOST') | default('localhost') }}"
+
+[server:vars]
+ansible_connection="{{ 'local' if lookup('env', 'TARGET_HOST') == 'localhost' else 'ssh' }}"
+ansible_ssh_user="{{ lookup('env', 'TARGET_USER') | default('your_default_user') }}"
+ansible_ssh_port="{{ lookup('env', 'TARGET_PORT') | default('22') | int }}"
+ansible_ssh_pass="{{ lookup('env', 'TARGET_PASS') | default('your_default_password') }}"
+ansible_python_interpreter="{{ '/usr/bin/python3' if lookup('env', 'TARGET_HOST') == 'localhost' else '/usr/bin/python' }}"

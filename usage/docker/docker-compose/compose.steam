@@ -1,0 +1,47 @@
+############################################################
+# Copyright (c) 2024 Utilizable 
+# Released under the MIT license
+# ----------------------------------------------------------
+#
+# Example breaking container isolation to run flatpack applications (steam) 
+#
+############################################################
+
+version: '3.8'
+services:
+
+# ----------------------------
+# Stream Server [0]
+
+    stream:
+      hostname: stream 
+      image: "ghcr.io/utilizable/metalg:latest"
+
+      ports:
+# Expose app - stream 
+        - 8080:8080
+# Expose app - turn 
+        - 3478:3478/udp
+        - 3478:3478/tcp
+
+      environment:
+# Use internal turn server in case of lack of remote setting 
+        DOCKER_HOST: "${HOSTNAME:=localhost}"                
+
+# To Make Steam working we need to break isolation
+      tmpfs:
+        - /dev/shm:rw
+      shm_size: 64 
+      ipc: host # Could also be set to 'shareable'
+      ulimits:
+        nofile:
+          soft: 1024
+          hard: 524288
+      cap_add:
+        - NET_ADMIN
+        - SYS_ADMIN
+        - SYS_NICE
+        - IPC_LOCK
+      security_opt:
+        - seccomp:unconfined
+        - apparmor:unconfined     
