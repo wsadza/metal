@@ -177,7 +177,7 @@
 #####################################################
 --->
 
-### Usage - Helm:
+### Usage - Helm
 <sup>[(Back to Usage)](../../README.md#usage)</sup>
 
 <img src="../../.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
