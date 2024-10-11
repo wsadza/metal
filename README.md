@@ -198,7 +198,7 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$
 This section highlights the critical configurations and components necessary for maximizing the performance and functionality of your media streaming and communication setup. Each configuration is tailored to improve the overall user experience. You can find all the configurations described below in the [Dockerfile](https://github.com/utilizable/metal/blob/develop/build/docker/Dockerfile.debbased#L1314).
 
 ### Table Of Contents:
-  - Configuration - Monolithc:
+  - $\color{yellow}{\textsf{Configuration - Monolithc}}$
      - [Configuration - Monolithc - `Selkies Gstreamer`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---selkies-gstreamer)
      - [Configuration - Monolithc - `Pipewire`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---pipewire)
      - [Configuration - Monolithc - `Coturn`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---coturn)
@@ -244,14 +244,14 @@ This section explains how we build our software, focusing on different structure
 <img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
-  - Development - Structure
+  - $\color{yellow}{\textsf{Development - Structure}}$
      - [Development - Structure - Monolithic](./.docs/40_development/structure/MONOLITHIC.md#development---structure---monolithic)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
      - [Development - Structure - Distributed](./.docs/40_development/structure/DISTRIBUTED.md#development---structure---distributed)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
      - [Development - Structure - Repository](./.docs/40_development/structure/REPOSITORY.md#development---structure---repository)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
-  - Development - Workflow
+  - $\color{yellow}{\textsf{Development - Workflow}}$
      - [Development - Workflow - CI](./.docs/40_development/workflow/CI.md#development---workflow---ci)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
      - [Development - Workflow - CD](./.docs/40_development/workflow/CD.md#development---workflow---cd)
@@ -278,7 +278,7 @@ The "Miscellaneous" section serves as a catch-all category for content that does
 <br>
 
 ### Table Of Contents:
-- Helpful Resources
+- $\color{yellow}{\textsf{Helpful Resources}}$
    - [Helpful Resources - Setup](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---setup)
    - [Helpful Resources - Questions / Answers](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---questions---answers)
 - [Document Template](./.docs/_misc/DOCUMENT_TEMPLATE.md)
