@@ -245,7 +245,7 @@ This section explains how we build our software, focusing on different structure
 
 ### Table Of Contents:
   - Development - Structure
-     - [Development - Structure - Monolithc](./.docs/40_development/structure/MONOLITHIC.md#development---structure---monolithc)
+     - [Development - Structure - Monolithic](./.docs/40_development/structure/MONOLITHIC.md#development---structure---monolithic)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
      - [Development - Structure - Distributed](./.docs/40_development/structure/DISTRIBUTED.md#development---structure---distributed)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
