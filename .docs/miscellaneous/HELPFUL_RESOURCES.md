@@ -27,6 +27,24 @@
 > </table>
 
 ##
+<!---
+#####################################################
+# Setup - Helpful - Resources - WSL
+#####################################################
+--->
+### Setup - Helpful - Resources - WSL
+<sup>[(Back to Setup)](../../README.md#setup)</sup>
+<br>
+<!--- CONTENT --->
+
+> [!TIP]
+> <ul>
+>    <li><a href="https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg">WSLg GPU Selection Documentation</a></li>
+>    <li><a href="https://learn.microsoft.com/en-us/windows/wsl/wsl-config#example-wslconfig-file">Sample WSL Configuration File</a></li>
+>    <li><a href="https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md">WSLg GPU Docker Examples</a></li>
+> </ul>
+> </table>
+##
 
 <div align="center">
    <img src="../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
