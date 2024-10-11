@@ -276,11 +276,6 @@
         <td><sup>/usr/local/nvidia/bin${PATH:+:${PATH}}</sup></td>
     </tr>
     <tr>
-        <td><sup>EGL_DEVICE_INDEX</sup></td>
-        <td><sup>Index of the EGL device.</sup></td>
-        <td><sup>0</sup></td>
-    </tr>
-    <tr>
         <td><sup>__NV_PRIME_RENDER_OFFLOAD</sup></td>
         <td><sup>Enables PRIME render offload.</sup></td>
         <td><sup>1</sup></td>
