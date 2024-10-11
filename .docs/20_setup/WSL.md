@@ -451,13 +451,13 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <img src="../../.media/wsl/preview/img/wsl_preview_img_vkcube.png" width="650" height="auto"/>
 </div>
 
-##
 <!---
 #####################################################
 # FOOOTER
 #####################################################
 --->
-
+<br>
+<br>
 <div align="center">
    <img src="../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
