@@ -87,9 +87,6 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 ### Table Of Contents:
 - [Usage](#usage)
 - [Setup](#setup)
-  - [Setup by `Ansible`](#setup---ansible) - `(quick-start)`
-  - [Setup by `Bash`](#setup---bash) ⚠️
-  - [Setup on `WSL`](#setup---wsl)
 - [Configuration](#configuration)
   - [Configuration `Selkies Gstreamer`](#configuration---selkies-gstreamer)
   - [Configuration `Pipewire`](#configuration---pipewire)
@@ -140,7 +137,7 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
-### Table Of Usage:
+### TOC:
   - [Usage `Docker`](#usage---docker)
   - [Usage `Docker-Compose`](#usage---docker-compose)
   - [Usage `Kubernetes`](#usage---kubernetes---manifest) ⚠️
@@ -304,6 +301,11 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 
 This repository features an [Ansible Playbook](./setup/ansible) that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The [Ansible playbook](./setup/ansible/playbooks/playbook.yml) is self explanatory - tailored for Ubuntu and Debian distributions.
 
+### TOC:
+  - [Setup `Ansible`](#setup---ansible)
+  - [Setup `Bash`](#setup---bash) ⚠️
+  - [Setup `WSL`](#setup---wsl)
+
 > [!TIP]
 > <details>
 >  <summary>Helpful Resources </summary>
@@ -329,7 +331,7 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 --->
 
 ### Setup - Ansible
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Setup)](#setup)</sup>
 
 Clone this repository and run the [setup.sh](./setup/ansible/setup.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
 
@@ -345,7 +347,8 @@ Setup - Bash - WIP!
 --->
 
 ### Setup - Bash
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Setup)](#setup)</sup>
+
 <img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash script. This will fetch and install all the necessary dependencies and components.
@@ -362,7 +365,7 @@ Setup - WSL
 --->
 
 ### Setup - WSL
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Setup)](#setup)</sup>
 
 Consider this more of a curiosity than a genuine configuration; Vulkan doesn’t function properly on WSL-Linux, which severely limits gaming options.
 
