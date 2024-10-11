@@ -235,7 +235,7 @@ This section explains how we build our software, focusing on different structure
 
 ### Table Of Contents:
   - Development - Structure
-     - [Development - Structure - Monolithc](./.docs/40_development/structure/MONOLITHIC.md#development---structure---monolithc)
+     - [Development - Structure - Monolithc](./.docs/40_development/structure/MONOLITHIC.md#development---structure---monolithc) ⚠️
      - [Development - Structure - Distributed](./.docs/40_development/structure/DISTRIBUTED.md#development---structure---distributed) ⚠️
      - [Development - Structure - Repository](./.docs/40_development/structure/REPOSITORY.md#development---structure---repository) ⚠️
   - Development - Workflow
