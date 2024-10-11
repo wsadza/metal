@@ -25,7 +25,7 @@ The Dockerfile encompasses all the essential components required for a seamless 
           <td><strong>Purpose</strong></td>
       </tr>
       <tr>
-         <td rowspan="9"><sup>Core Component</sup></td>
+         <td rowspan="9"><sup>Core<br>Component</sup></td>
       <tr>
       <tr>
           <td><sup>Supervisord</sup></td>
@@ -63,7 +63,7 @@ The Dockerfile encompasses all the essential components required for a seamless 
           <td><sup>Provides NAT traversal for WebRTC</sup></td>
       </tr>
       <tr>
-         <td rowspan="9"><sup>Optional Component</sup></td>
+         <td rowspan="9"><sup>Optional<br>Component</sup></td>
       <tr>
        <tr>
            <td><sup>VirtualGL</sup></td>
