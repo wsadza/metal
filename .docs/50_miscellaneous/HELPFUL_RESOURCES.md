@@ -9,7 +9,7 @@
 #####################################################
 --->
 ### Setup
-<sup>[(Back to Setup)](../../README.md#setup)</sup>
+<sup>[(Back to Readme)](../../README.md#table-of-contents)</sup>
 <br>
 <!--- CONTENT --->
 
@@ -33,7 +33,7 @@
 #####################################################
 --->
 ### Setup - WSL
-<sup>[(Back to Setup)](../../README.md#setup)</sup>
+<sup>[(Back to Readme)](../../README.md#table-of-contents)</sup>
 <br>
 <!--- CONTENT --->
 
