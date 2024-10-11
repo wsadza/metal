@@ -86,26 +86,22 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 
 ### Table Of Contents:
 - [Usage](#usage)
-  - [Usage `Docker`](#usage---docker)
-  - [Usage `Docker-Compose`](#usage---docker-compose)
-  - [Usage `Kubernetes`](#usage---kubernetes---manifest) ⚠️
-  - [Usage `Helm`](#usage---kubernetes---helm) ⚠️
 - [Setup](#setup)
-  - [Setup by `Ansible`](#setup---ansible)
+  - [Setup by `Ansible`](#setup---ansible) - `(quick-start)`
   - [Setup by `Bash`](#setup---bash) ⚠️
   - [Setup on `WSL`](#setup---wsl)
 - [Configuration](#configuration)
   - [Configuration `Selkies Gstreamer`](#configuration---selkies-gstreamer)
   - [Configuration `Pipewire`](#configuration---pipewire)
   - [Configuration `Coturn`](#configuration---coturn)
-  - [Configuration Miscellaneous](#configuration---miscellaneous)
-    - [Configuration Miscellaneous - `Graphic`](#configuration---miscellaneous)
-    - [Configuration Miscellaneous - `Desktop Environment`](#configuration---miscellaneous)
+  - [Configuration `Miscellaneous`](#configuration---miscellaneous)
 - [Contributing](#contributing)
-  - [Structure Dockerfile](#contributing---dockerfile)
-  - [Structure Repository](#contributing---repository)
-  - [CICD Workflow](#contributing---cicd---workflow)
-  - [Futher Works](#contributing---futher---works)
+  - [Contributing - Structure](#contributing---structure)
+     - [Contributing - Structure - Monolith](#contributing---structure---monolith)
+     - [Contributing - Structure - Microservices](#contributing---structure---microservices) ⚠️
+     - [Contributing - Structure - Repository](#contributing---structure---repository)
+  - [Contributing - Workflow - CI](#contributing---cicd---workflow)
+  - [Contributing - Workflow - CD](#contributing---workflow---ci---workflow) ⚠️
 - [Disclaimers](#disclaimers)
 
 <!---
@@ -144,6 +140,12 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
+### Table Of Usage:
+  - [Usage `Docker`](#usage---docker)
+  - [Usage `Docker-Compose`](#usage---docker-compose)
+  - [Usage `Kubernetes`](#usage---kubernetes---manifest) ⚠️
+  - [Usage `Helm`](#usage---kubernetes---helm) ⚠️
+    
 ##
 <!---
 #####################################################
@@ -152,7 +154,7 @@ This section provides guidance on deploying and configuring streaming instances 
 --->
 
 ### Usage - Docker:
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Usage)](#usage)</sup>
 
 > [!TIP]
 > The `${STREAMER_HOST}` variable should point to IP of the machine where stream-instance is launching.
@@ -200,7 +202,7 @@ This section provides guidance on deploying and configuring streaming instances 
 --->
 
 ### Usage - Docker-Compose:
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Usage)](#usage)</sup>
 
 > [!IMPORTANT]  
 > Please read the compose-file header before proceeding with the setup.
@@ -236,7 +238,7 @@ This section provides guidance on deploying and configuring streaming instances 
 --->
 
 ### Usage - Kubernetes - Manifest:
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Usage)](#usage)</sup>
 
 > [!CAUTION]
 > The deployment below contains configurations that break container isolation to meet the requirements of the Steam client.
@@ -256,7 +258,7 @@ This section provides guidance on deploying and configuring streaming instances 
 --->
 
 ### Usage - Kubernetes - Helm:
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Usage)](#usage)</sup>
 <img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 <table>
