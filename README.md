@@ -122,7 +122,8 @@ This section provides guidance on deploying and configuring streaming instances 
   - [Usage `Docker`](./.docs/usage/USAGE.md#usage---docker) 
   - [Usage `Docker-Compose`](./.docs/usage/USAGE.md#usage---docker-compose)
   - [Usage `Kubernetes`](./.docs/usage/USAGE.md#usage---kubernetes)
-
+  - [Setup `Helm`](./.docs/usage/USAGE.md#setup---helm) ⚠️
+    
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
 $$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
@@ -180,66 +181,24 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
   - [Setup `Ansible`](./.docs/setup/SETUP.md#setup---ansible)
   - [Setup `Bash`](./.docs/setup/SETUP.md#setup---bash) ⚠️
   - [Setup `WSL`](./.docs/setup/SETUP.md#setup---wsl)
-##
+
 <!---
-#####################################################
-# Setup - Ansible
-#####################################################
+$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
+$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
+$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
+$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
+$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
+$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
+$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
+\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
 --->
-
-### Setup - Ansible
-<sup>[(Back to Setup)](#setup)</sup>
+<h2>Preview</h2>
+<div align="center">
+<sup><code>Play anywhere!</code></sup>
 <br>
-<sup>[(Back to Top)](#table-of-contents)</sup><br>
-
-Clone this repository and run the [setup.sh](./setup/ansible/setup.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
-
-```sh
-git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && ./setup.sh
-```
-
-##
-<!---
-#####################################################
-Setup - Bash - WIP!
-#####################################################
---->
-
-### Setup - Bash
-<sup>[(Back to Setup)](#setup)</sup>
+<img src=".media/native/preview/gif/native_preview_gif_mobile.gif" align="center" width="800" height="auto"/>   
 <br>
-<sup>[(Back to Top)](#table-of-contents)</sup><br>
-
-<!--- WIP --->
-<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
-<!--- WIP --->
-
-Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash script. This will fetch and install all the necessary dependencies and components.
-
-```sh
-git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./setup.sh
-```
-
-##
-<!---
-#####################################################
-Setup - WSL
-#####################################################
---->
-
-### Setup - WSL
-<sup>[(Back to Setup)](#setup)</sup>
-<br>
-<sup>[(Back to Top)](#table-of-contents)</sup><br>
-
-Consider this more of a curiosity than a genuine configuration; Vulkan doesn’t function properly on WSL-Linux, which severely limits gaming options.
-
-> [!WARNING]  
-> - GPU-Sharing functionality (MPS) isn't working under WSL-Linux. ([#3024](https://github.com/canonical/microk8s/issues/3024))
-> - Vulkan isn't functioning properly; only selected linux-native games are working.
-> - Performance is lacking; you can only play very lightweight games.
-
-Instructions for setting up WSL with the D3D12 renderer are provided in a separate documentation file - [WSL.md](.docs/setup/WSL.md).
+</div>
 
 <!---
  $$$$$$\   $$$$$$\  $$\   $$\ $$$$$$$$\ $$$$$$\  $$$$$$\  $$\   $$\ $$$$$$$\   $$$$$$\ $$$$$$$$\ $$$$$$\  $$$$$$\  $$\   $$\ 
@@ -260,11 +219,13 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$
 This section highlights the critical configurations and components necessary for maximizing the performance and functionality of your media streaming and communication setup. Each configuration is tailored to improve the overall user experience. You can find all the configurations described below in the [Dockerfile](https://github.com/utilizable/metal/blob/develop/build/docker/Dockerfile.debbased#L1314).
 
 ### Table Of Contents:
-  - [Configuration `Selkies Gstreamer`](#configuration---selkies-gstreamer)
-  - [Configuration `Pipewire`](#configuration---pipewire)
-  - [Configuration `Coturn`](#configuration---coturn)
-  - [Configuration `Miscellaneous`](#configuration---miscellaneous)
-
+  - [Configuration `Selkies Gstreamer`](./.docs/configuration/CONFIGURATION.md#configuration---selkies-gstreamer)
+  - [Configuration `Pipewire`](./.docs/configuration/CONFIGURATION.md#configuration---pipewire)
+  - [Configuration `Coturn`](./.docs/configuration/CONFIGURATION.md#configuration---coturn)
+  - [Configuration `Miscellaneous`](./.docs/configuration/CONFIGURATION.md#configuration---miscellaneous)
+  - [Configuration `Graphic`](./.docs/configuration/CONFIGURATION.md#configuration---graphic)
+  - [Configuration `Desktop`](./.docs/configuration/CONFIGURATION.md#configuration---desktop)
+    
 ##
 <!---
 #####################################################
@@ -667,24 +628,6 @@ The Miscellaneous subsection includes various additional configurations.
   </li>
   
 </ul>
-
-<!---
-$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
-$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
-$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
-$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
-$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
-$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
-$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
-\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
---->
-<h2>Preview</h2>
-<div align="center">
-<sup><code>Play anywhere!</code></sup>
-<br>
-<img src=".media/native/preview/gif/native_preview_gif_mobile.gif" align="center" width="800" height="auto"/>   
-<br>
-</div>
 
 <!---
 $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$$$\ $$\       $$$$$$\  $$$$$$$\  $$\      $$\ $$$$$$$$\ $$\   $$\ $$$$$$$$\ 
