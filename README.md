@@ -275,7 +275,7 @@ $$ | \_/ $$ |$$$$$$\ \$$$$$$  |\$$$$$$  |
 
 The "Miscellaneous" section serves as a catch-all category for content that doesn't neatly fit into other more specific categories. 
 
-<br
+<br>
 
 ### Table Of Contents:
 - $\color{yellow}{\textsf{Helpful Resources}}$
