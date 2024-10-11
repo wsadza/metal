@@ -269,7 +269,7 @@ The "Miscellaneous" section serves as a catch-all category for content that does
 <br><br>
 ### Table Of Contents:
 - [Helpful Resources](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---setup)
-- [Questions / Answers](./.docs/50_miscellaneous/MISCELLANEOUS.md)
+- [Questions / Answers](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---questions---answers)
 
 <!---
 $$$$$$$\  $$$$$$\  $$$$$$\   $$$$$$\  $$\        $$$$$$\  $$$$$$\ $$\      $$\ $$$$$$$$\ $$$$$$$\   $$$$$$\  
