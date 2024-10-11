@@ -135,7 +135,7 @@ This section provides guidance on deploying and configuring streaming instances 
   - [Usage `Docker`](./.docs/usage/USAGE.md#usage---docker)
   - [Usage `Docker-Compose`](./.docs/usage/USAGE.md#usage---docker-compose)
   - [Usage `Kubernetes`](./.docs/usage/USAGE.md#usage---kubernetes)
-  - [Usage `Helm`]() ⚠️
+  - [Usage `Helm`] ⚠️
 
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
