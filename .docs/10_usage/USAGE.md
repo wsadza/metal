@@ -12,7 +12,7 @@
 <sup>[(Back to Usage)](../../README.md#usage)</sup>
 <br>
 <!--- CONTENT --->
-<div align="center">
+<div align="left">
    <table>
        <tr>
            <td><strong>Component</strong></td>
@@ -117,7 +117,7 @@ echo -e "\tSupervisor: http://$(hostname -I | awk '{print $1}'):9091\n"
 <sup>[(Back to Usage)](../../README.md#usage)</sup>
 <br>
 <!--- CONTENT --->
-<div align="center">
+<div align="left">
    <table>
        <tr align="left">
            <td><strong>Component</strong></td>
@@ -163,7 +163,7 @@ echo -e "\tSupervisor: http://$(hostname -I | awk '{print $1}'):9091\n"
 
 <img src="../../.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
-<div align="center">
+<div align="left">
    <table>
        <tr align="left">
            <td><strong>Component</strong></td>
@@ -189,7 +189,7 @@ echo -e "\tSupervisor: http://$(hostname -I | awk '{print $1}'):9091\n"
 
 <img src="../../.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
-<div align="center">
+<div align="left">
    <table>
        <tr align="left">
            <td><strong>Component</strong></td>
