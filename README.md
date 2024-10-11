@@ -36,7 +36,13 @@ Introducing totally modular, Dockerized streaming service. Build it your way, wh
 
 Now it's a streaming powerhouse. Why? Just because!
 
-<br><blockquote>Main goal: Tailor a product that serves as a foundation for exploring Kubernetes and containerization.</blockquote>
+<br>
+<blockquote>
+- Goal: Tailor a product that serves as a foundation for exploring Kubernetes and containerization.
+<br>
+- Status: The monolithic solution is ready for use.
+</blockquote>
+
 
 ##
 <!---
@@ -823,7 +829,6 @@ $$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
 $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 \__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
 --->
-
 <h2>Preview</h2>
 <div align="center">
 <sup><code>Play anywhere!</code></sup>
@@ -855,8 +860,10 @@ Here, I will provide a full description of the Dockerfile, the repository struct
      - [Development - Structure - Monolith](#development---structure---monolith)
      - [Development - Structure - Microservices](#development---structure---microservices) ⚠️
      - [Development - Structure - Repository](#development---structure---repository)
-  - [Development - Workflow - CI](#development---cicd---workflow)
-  - [Development - Workflow - CD](#development---workflow---ci---workflow) ⚠️
+  - [Development - Workflow - CICD](#development---workflow---cicd)
+     - [Development - Workflow - CI](#development---workflow---ci)
+     - [Development - Workflow - CD](#development---workflow---cd) ⚠️
+  - [Development - Futher-Works](./docs/development/FUTHER_WORKS.md)
 
 ##
 <!---
@@ -866,174 +873,136 @@ Here, I will provide a full description of the Dockerfile, the repository struct
 --->  
 ### Development - Structure 
 
-##
 <!---
 #####################################################
 # Development - Structure - Monolith
 #####################################################
 --->  
-### Development - Structure - Monolith 
+#### Development - Structure - Monolith 
 <sup>[(Back to Development)](#development)</sup>
 <br>
 <sup>[(Back to Top)](#table-of-contents)</sup>
 <br>
 
-The Dockerfile includes all the core components needed to ensure a smooth gaming experience, component are management and orchestrated by Supervisor.
+The Dockerfile encompasses all the essential components required for a seamless gaming experience, with management and orchestration handled by Supervisor.
 
-Core components:
+<details>
+   <summary>Core components: 📍</summary>
+   <br>  
+   <table>
+      <tr align="center">
+          <td><strong>Orchiestrator</strong></td>
+          <td><strong>Component</strong></td>
+          <td><strong>Description</strong></td>
+          <td><strong>Purpose</strong></td>
+      </tr>
+      <tr>
+         <td rowspan="7"><sup>Supervisord</sup></td>
+      </tr>
+      <tr>
+          <td><sup>Kde-Plasma</sup></td>
+          <td><sup>Desktop Environment</sup></td>
+          <td><sup>Provides a graphical interface for user interaction</sup></td>
+      </tr> 
+      <tr>
+          <td><sup>D-Bus</sup></td>
+          <td><sup>Message bus system</sup></td>
+          <td><sup>Facilitates communication between processes</sup></td>
+      </tr> 
+      <tr>
+          <td><sup>PipeWire</sup></td>
+          <td><sup>Multimedia server</sup></td>
+          <td><sup>Handles audio and video streams</sup></td>
+      </tr> 
+      <tr>
+          <td><sup>Selkies-Gstreamer</sup></td>
+          <td><sup>Media processing framework</sup></td>
+          <td><sup>Rremote desktop streaming platform</sup></td>
+      </tr>   
+      <tr>
+          <td><sup>xvfb</sup></td>
+          <td><sup>X virtual framebuffer</sup></td>
+          <td><sup>Provides a display server for graphical applications</sup></td>
+      </tr>
+      <tr>
+          <td><sup>Coturn</sup></td>
+          <td><sup>TURN and STUN server</sup></td>
+          <td><sup>Provides NAT traversal for WebRTC</sup></td>
+      </tr>
+   </table>
+</details>
+      
+The complete image also includes additional features, such as a fully configured Steam client, Heroic Launcher, and VirtualGL.
 
-<table>
-   <tr>
-       <td><strong>Orchiestrator</strong></td>
-       <td><strong>Component</strong></td>
-       <td><strong>Description</strong></td>
-       <td><strong>Purpose</strong></td>
-   </tr>
-   <tr>
-      <td rowspan="7"><sup>Supervisord</sup></td>
-   </tr>
-   <tr>
-       <td><sup>Kde-Plasma</sup></td>
-       <td><sup>Desktop Environment</sup></td>
-       <td><sup>Provides a graphical interface for user interaction</sup></td>
-   </tr> 
-   <tr>
-       <td><sup>D-Bus</sup></td>
-       <td><sup>Message bus system</sup></td>
-       <td><sup>Facilitates communication between processes</sup></td>
-   </tr> 
-   <tr>
-       <td><sup>PipeWire</sup></td>
-       <td><sup>Multimedia server</sup></td>
-       <td><sup>Handles audio and video streams</sup></td>
-   </tr> 
-   <tr>
-       <td><sup>Selkies-Gstreamer</sup></td>
-       <td><sup>Media processing framework</sup></td>
-       <td><sup>Rremote desktop streaming platform</sup></td>
-   </tr>   
-   <tr>
-       <td><sup>xvfb</sup></td>
-       <td><sup>X virtual framebuffer</sup></td>
-       <td><sup>Provides a display server for graphical applications</sup></td>
-   </tr>
-   <tr>
-       <td><sup>Coturn</sup></td>
-       <td><sup>TURN and STUN server</sup></td>
-       <td><sup>Provides NAT traversal for WebRTC</sup></td>
-   </tr>
-</table>
-
-> [!NOTE]
-> If `PipeWire` and `Coturn` are shipped externally, we can consider them as optional components.
+<details>
+   <summary>Additonal components: 📍</summary>
+   <br>  
+   <table>
+       <tr>
+           <td><strong>Component</strong></td>
+           <td><strong>Description</strong></td>
+           <td><strong>Purpose</strong></td>
+       </tr>
+       <tr>
+           <td><sup>VirtualGL</sup></td>
+           <td><sup>Open-source software</sup></td>
+           <td><sup>Enables OpenGL applications to run on a remote server</sup></td>
+       </tr>
+       <tr>
+           <td><sup>Wine</sup></td>
+           <td><sup>Compatibility layer</sup></td>
+           <td><sup>Allows Windows applications to run on Linux</sup></td>
+       </tr>
+       <tr>
+           <td><sup>Lutris</sup></td>
+           <td><sup>Gaming platform</sup></td>
+           <td><sup>Manages and launches games from various sources</sup></td>
+       </tr>
+       <tr>
+           <td><sup>Steam</sup></td>
+           <td><sup>Digital distribution platform</sup></td>
+           <td><sup>Offers games and software for purchase and download</sup></td>
+       </tr>
+       <tr>
+           <td><sup>Heroic Launcher</sup></td>
+           <td><sup>Game launcher</sup></td>
+           <td><sup>Manages and launches games from the Epic Games Store</sup></td>
+       </tr>
+       <tr>
+           <td><sup>WirePlumber</sup></td>
+           <td><sup>Session manager</sup></td>
+           <td><sup>Manages PipeWire sessions and connections</sup></td>
+       </tr>
+       <tr>
+           <td><sup>Firefox-Nightly</sup></td>
+           <td><sup>Web browser</sup></td>
+           <td><sup>Provides a testing version of the Firefox browser with the latest features</sup></td>
+       </tr>
+   </table>
+</details>
 
 ##
 
 <div align="center">
 <sup><code>What is this, Granny? Some outdated sysadmin techniques?</code></sup>
 <br>   
-<img src=".media/contributing/dockerfile/contributing_dockerfile_structure.png" width="600" height="auto"/>  
+<img src=".media/development/structure/monolith/development_structure_monolith_preview.png" width="600" height="auto"/>  
 </div>
 
 ##
 
-The complete image also comes with additional components, including a fully configured Steam client, Heroic Launcher, and VirtualGL.
-
-Additonal components:
-<table>
-    <tr>
-        <td><strong>Component</strong></td>
-        <td><strong>Description</strong></td>
-        <td><strong>Purpose</strong></td>
-    </tr>
-    <tr>
-        <td><sup>VirtualGL</sup></td>
-        <td><sup>Open-source software</sup></td>
-        <td><sup>Enables OpenGL applications to run on a remote server</sup></td>
-    </tr>
-    <tr>
-        <td><sup>Wine</sup></td>
-        <td><sup>Compatibility layer</sup></td>
-        <td><sup>Allows Windows applications to run on Linux</sup></td>
-    </tr>
-    <tr>
-        <td><sup>Lutris</sup></td>
-        <td><sup>Gaming platform</sup></td>
-        <td><sup>Manages and launches games from various sources</sup></td>
-    </tr>
-    <tr>
-        <td><sup>Steam</sup></td>
-        <td><sup>Digital distribution platform</sup></td>
-        <td><sup>Offers games and software for purchase and download</sup></td>
-    </tr>
-    <tr>
-        <td><sup>Heroic Launcher</sup></td>
-        <td><sup>Game launcher</sup></td>
-        <td><sup>Manages and launches games from the Epic Games Store</sup></td>
-    </tr>
-    <tr>
-        <td><sup>PipeWire</sup></td>
-        <td><sup>Multimedia server</sup></td>
-        <td><sup>Handles audio and video streams</sup></td>
-    </tr>
-    <tr>
-        <td><sup>Pipewire-Pulse</sup></td>
-        <td><sup>PulseAudio compatibility layer</sup></td>
-        <td><sup>Allows PulseAudio applications to use PipeWire</sup></td>
-    </tr>
-    <tr>
-        <td><sup>WirePlumber</sup></td>
-        <td><sup>Session manager</sup></td>
-        <td><sup>Manages PipeWire sessions and connections</sup></td>
-    </tr>
-    <tr>
-        <td><sup>Firefox-Nightly</sup></td>
-        <td><sup>Web browser</sup></td>
-        <td><sup>Provides a testing version of the Firefox browser with the latest features</sup></td>
-    </tr>
-</table>
-
-##
-
-Each additional component has its own arguments to include during the build process, and in many cases, you can choose the appropriate version of each component.
-
-Dockerfile snippet:
-
-```sh
-ARG \
-    INSTALL_WINE="false" \
-    WINE_VERSION="latest"
-
-RUN \
-    echo "**** Optional: Install Wine / (${INSTALL_WINE}) ****" \
-    && \
-    if [ "${INSTALL_WINE}" == "true" ]; \
-    then \
-```
+Each additional component has its own arguments to include during the build process, also you can choose the appropriate version of each component.
 
 > [!NOTE]
 > Each `RUN` block in the Dockerfile is independent — it doesn't rely on any other RUN blocks, allowing you to rearrange them as needed.
 
-Docker-Compose snippet:
-
-```sh
- stream:
-   build:
-     context: '../../../build'
-     dockerfile: './Dockerfile.debbased'
-     args:
-       # Wine 
-       INSTALL_WINE: "true"
-       WINE_VERSION: "9.15~*-1"
-```
-
 ##
 
-#### Development - Structure - Monolith - Futher Works
-<sup>[(Back to Development)](#development)</sup>
-<br>
-<sup>[(Back to Top)](#table-of-contents)</sup>
-<br>
+<div align="center">
+<sup><code>Build Arguments? Who's using those? Come on, bro!</code></sup>
+<br>      
+<img src=".media/development/structure/monolith/development_structure_monolith_modularity.png" width="800" height="auto"/>  
+</div>
 
 ##
 <!---
@@ -1041,7 +1010,7 @@ Docker-Compose snippet:
 # Development - Structure - Microservices
 #####################################################
 --->  
-###  Development - Structure - Microservices
+####  Development - Structure - Microservices
 <sup>[(Back to Development)](#development)</sup>
 <br>
 <sup>[(Back to Top)](#table-of-contents)</sup>
@@ -1056,16 +1025,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nequ
 <div align="center">
 <sup><code>Finaly! Something intresting.</code></sup>
 <br>   
-<img src=".media/contributing/structure/microservices/contributing_structure_microservices.png" width="800" height="auto"/>  
+<img src=".media/development/structure/microservices/development_structure_microservices_preview.png" width="800" height="auto"/>  
 </div>
-
-##
-
-#### Development - Structure - Microservices - Futher Works
-<sup>[(Back to Development)](#development)</sup>
-<br>
-<sup>[(Back to Top)](#table-of-contents)</sup>
-<br>
 
 ##
 <!---
@@ -1079,33 +1040,20 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nequ
 <sup>[(Back to Top)](#table-of-contents)</sup>
 <br>
 
-##
-<!---
-#####################################################
-# Development - Workflow CI
-#####################################################
---->  
-### Development - Workflow CI
-<sup>[(Back to Development)](#development)</sup>
-<br>
-<sup>[(Back to Top)](#table-of-contents)</sup>
-<br>
-
-##
-
-#### Development - Workflow CI - Futher Works
-<sup>[(Back to Development)](#development)</sup>
-<br>
-<sup>[(Back to Top)](#table-of-contents)</sup>
-<br>
 
 ##
 <!---
 #####################################################
-# Development - Workflow CD
+# Development - Workflow CICD
 #####################################################
 --->  
-### Development - Workflow CD
+### Development - Workflow CICD
+<!---
+#####################################################
+# Development - Workflow CICD
+#####################################################
+--->  
+#### Development - Workflow CI
 <sup>[(Back to Development)](#development)</sup>
 <br>
 <sup>[(Back to Top)](#table-of-contents)</sup>
@@ -1113,7 +1061,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nequ
 
 ##
 
-#### Development - Workflow CD - Futher Works
+#### Development - Workflow CD
 <sup>[(Back to Development)](#development)</sup>
 <br>
 <sup>[(Back to Top)](#table-of-contents)</sup>
