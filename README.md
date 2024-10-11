@@ -1,5 +1,5 @@
 <div align="center">
-   <img src=".media/asset/badge/asset_badge_project.jpg" width="100%" height="auto"/>
+   <img src="./.media/asset/badge/asset_badge_project.jpg" width="100%" height="auto"/>
    <br>
    
    <img src="https://labl.es/svg?text=Containerized%20Gaming&width=200&bgcolor=a93226" align="center" style="margin: 5px"/>
@@ -11,7 +11,7 @@
       <img src="https://labl.es/svg?text=VDI&width=200&bgcolor=d35400" align="center"/>
    </div>
    
-<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
+<img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 <br>
 </div>
 
@@ -26,7 +26,7 @@ $$ | \_/ $$ |$$$$$$$$\    $$ |   $$ |  $$ |$$$$$$$$\
 \__|     \__|\________|   \__|   \__|  \__|\________
 --->
 # Metal
-<img src=".media/asset/section/asset_section_a.png" align="left" width="5%" height="auto"/>
+<img src="./.media/asset/section/asset_section_a.png" align="left" width="5%" height="auto"/>
 
 Ever been fascinated by remote gaming? Same! Inspired by the [`selkies-gstreamer`](https://github.com/selkies-project/selkies-gstreamer) project (a relic of [`Google Stadia's`](https://github.com/GoogleCloudPlatform/selkies-examples/tree/master) epicness), I decided to repack their [`egl solution`](https://github.com/selkies-project/docker-nvidia-egl-desktop) for fun - obviously. 
 
@@ -62,7 +62,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>It was easy, right?</code></sup>
 <br>
-<img src=".media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="auto"/>
+<img src="./.media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="auto"/>
 </div>
 
 <!---
@@ -83,24 +83,6 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 - [Disclaimers](#disclaimers)
 
 <!---
-$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
-$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
-$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
-$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
-$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
-$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
-$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
-\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
---->
-
-<h2>Preview</h2>
-<div align="center">
-<sup><code>Steam? No Problem!</code></sup>
-<br>
-<img src=".media/native/preview/gif/native_preview_gif_steam.gif" width="800" height="auto"/>
-</div>
-
-<!---
 $$\   $$\  $$$$$$\   $$$$$$\   $$$$$$\  $$$$$$$$\ 
 $$ |  $$ |$$  __$$\ $$  __$$\ $$  __$$\ $$  _____|
 $$ |  $$ |$$ /  \__|$$ /  $$ |$$ /  \__|$$ |      
@@ -114,11 +96,11 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 ## Usage
 <sup>[(Back to Top)](#table-of-contents)</sup><br>
 
-<img src=".media/asset/section/asset_section_b.png" align="left" width="5%" height="auto"/>
+<img src="./.media/asset/section/asset_section_b.png" align="left" width="5%" height="auto"/>
 
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
-<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
+<img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
   - [Usage `Docker`](./.docs/usage/USAGE.md#usage---docker) 
@@ -141,7 +123,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Want to play with others?</code></sup>
 <br>
-<img src=".media/native/preview/gif/native_preview_gif_companion.gif" align="center" width="800" height="auto"/>
+<img src="./.media/native/preview/gif/native_preview_gif_companion.gif" align="center" width="800" height="auto"/>
 </div>
 
 <!---
@@ -158,11 +140,11 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 ## Setup
 <sup>[(Back to Top)](#table-of-contents)</sup><br>
 
-<img src=".media/asset/section/asset_section_c.png" align="left" width="5%" height="auto"/>
+<img src="./.media/asset/section/asset_section_c.png" align="left" width="5%" height="auto"/>
 
 This repository features an [Ansible Playbook](./setup/ansible) that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The [Ansible playbook](./setup/ansible/playbooks/playbook.yml) is self explanatory - tailored for Ubuntu and Debian distributions.
 
-<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
+<img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
   - [Setup `Ansible`](./.docs/setup/SETUP.md#setup---ansible)
@@ -184,7 +166,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
 <sup><code>Play anywhere!</code></sup>
 <br>
-<img src=".media/native/preview/gif/native_preview_gif_mobile.gif" align="center" width="800" height="auto"/>   
+<img src="./.media/native/preview/gif/native_preview_gif_mobile.gif" align="center" width="800" height="auto"/>   
 <br>
 </div>
 
@@ -213,7 +195,25 @@ This section highlights the critical configurations and components necessary for
   - [Configuration `Miscellaneous`](./.docs/configuration/CONFIGURATION.md#configuration---miscellaneous)
   - [Configuration `Graphic`](./.docs/configuration/CONFIGURATION.md#configuration---graphic)
   - [Configuration `Desktop`](./.docs/configuration/CONFIGURATION.md#configuration---desktop)
-    
+
+<!---
+$$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
+$$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
+$$ |  $$ |$$ |  $$ |$$ |      $$ |   $$ |  $$ |  $$ |      $$ |$$$\ $$ |
+$$$$$$$  |$$$$$$$  |$$$$$\    \$$\  $$  |  $$ |  $$$$$\    $$ $$ $$\$$ |
+$$  ____/ $$  __$$< $$  __|    \$$\$$  /   $$ |  $$  __|   $$$$  _$$$$ |
+$$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
+$$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
+\__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
+--->
+
+<h2>Preview</h2>
+<div align="center">
+<sup><code>Steam? No Problem!</code></sup>
+<br>
+<img src="./.media/native/preview/gif/native_preview_gif_steam.gif" width="800" height="auto"/>
+</div>
+
 <!---
 $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$$$\ $$\       $$$$$$\  $$$$$$$\  $$\      $$\ $$$$$$$$\ $$\   $$\ $$$$$$$$\ 
 $$  __$$\ $$  _____|$$ |   $$ |$$  _____|$$ |     $$  __$$\ $$  __$$\ $$$\    $$$ |$$  _____|$$$\  $$ |\__$$  __|
@@ -227,22 +227,22 @@ $$$$$$$  |$$$$$$$$\    \$  /   $$$$$$$$\ $$$$$$$$\ $$$$$$  |$$ |      $$ | \_/ $
 ## Development
 <sup>[(Back to top)](#table-of-contents)</sup>
 
-<img src=".media/asset/section/asset_section_e.png" align="left" width="5%" height="auto"/>
+<img src="./.media/asset/section/asset_section_e.png" align="left" width="5%" height="auto"/>
 
 I created this section primarily for myself to organize my future work, helping me quickly recall where I left off and where I can start.
 Here, I will provide a full description of the Dockerfile, the repository structure, and my future plans.
 
-<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
+<img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
   - Development - Structure
-     - [Development - Structure - Monolithc](.docs/development/structure/MONOLITHC.md#development---structure---monolithc)
-     - [Development - Structure - Microservices](.docs/development/structure/MICROSERVICES.md#development---structure---microservices) ⚠️
-     - [Development - Structure - Repository](.docs/development/structure/REPOSITORY.md#development---structure---repository) ⚠️
+     - [Development - Structure - Monolithc](./.docs/development/structure/MONOLITHC.md#development---structure---monolithc)
+     - [Development - Structure - Microservices](./.docs/development/structure/MICROSERVICES.md#development---structure---microservices) ⚠️
+     - [Development - Structure - Repository](./.docs/development/structure/REPOSITORY.md#development---structure---repository) ⚠️
   - Development - Workflow
-     - [Development - Workflow - CI](.docs/development/workflow/CI.md#development---workflow---ci) ⚠️
-     - [Development - Workflow - CD](.docs/development/workflow/CD.md#development---workflow---cd) ⚠️
-  - [Development - Futher - Works](./docs/development/FUTHER_WORKS.md#development---futher---works) ⚠️
+     - [Development - Workflow - CI](./.docs/development/workflow/CI.md#development---workflow---ci) ⚠️
+     - [Development - Workflow - CD](./.docs/development/workflow/CD.md#development---workflow---cd) ⚠️
+  - [Development - Futher - Works](./.docs/development/FUTHER_WORKS.md#development---futher---works) ⚠️
 
 <!---
 $$$$$$$\  $$$$$$\  $$$$$$\   $$$$$$\  $$\        $$$$$$\  $$$$$$\ $$\      $$\ $$$$$$$$\ $$$$$$$\   $$$$$$\  
@@ -258,7 +258,7 @@ $$$$$$$  |$$$$$$\ \$$$$$$  |\$$$$$$  |$$$$$$$$\ $$ |  $$ |$$$$$$\ $$ | \_/ $$ |$
 ## Disclaimers
 <sup>[(Back to top)](#table-of-contents)</sup>
 
-<img src=".media/asset/section/asset_section_f.png" align="left" width="5%" height="auto"/>
+<img src="./.media/asset/section/asset_section_f.png" align="left" width="5%" height="auto"/>
 
 This section contains important disclaimers regarding the ownership of software and the funding sources for the project. Please review the details carefully to understand the rights associated with the software and the contributions of supporting organizations.
 
@@ -287,5 +287,5 @@ This section contains important disclaimers regarding the ownership of software 
 ##
 
 <div align="center">
-   <img src=".media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
+   <img src="./.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
