@@ -58,7 +58,7 @@ $\color{yellow}{\textsf{Helpful Resources - Setup}}$
 # Helpful Resources - Questions / Answers 
 #####################################################
 --->
-<h3 id="helpful-resources---Questions / Answers">
+<h3 id="helpful-resources---questions---answers">
 $\color{yellow}{\textsf{Helpful Resources - Questions / Answers }}$    
 </h3> 
 <sup>[(Back to README)](../../README.md#table-of-contents)</sup>
