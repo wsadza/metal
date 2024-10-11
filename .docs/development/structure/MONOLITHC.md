@@ -6,10 +6,10 @@
 
 <!---
 #####################################################
-# Development - Structure - Monolith
+# Development - Structure - Monolithc
 #####################################################
 --->  
-#### Development - Structure - Monolith 
+#### Development - Structure - Monolithc
 <sup>[(Back to Development)](../../../README.md#table-of-contents-4)</sup>
 <br>
 
