@@ -4,6 +4,8 @@
 # ----------------------------------------------------------
 #
 # Example of building compose with most of core arguments 
+# ---
+# export STREAMER_HOST=$(hostname -I | awk '{print $1}')
 #
 ############################################################
 
@@ -21,6 +23,9 @@ services:
           # Base
           DISTRIBUTION: "24.04"
           OS: "ubuntu"
+
+          USER_NAME: "ubuntu"
+          USER_PASSWORD: "ubuntu"
 
           # VirtualGL 
           INSTALL_VIRTUALGL: "true"

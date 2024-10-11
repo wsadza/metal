@@ -4,6 +4,8 @@
 # ----------------------------------------------------------
 #
 # Example of attaching NVIDIA gpu into container 
+# ---
+# export STREAMER_HOST=$(hostname -I | awk '{print $1}')
 #
 ############################################################
 

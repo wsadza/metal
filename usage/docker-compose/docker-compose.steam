@@ -4,6 +4,8 @@
 # ----------------------------------------------------------
 #
 # Example breaking container isolation to run flatpack applications (steam) 
+# ---
+# export STREAMER_HOST=$(hostname -I | awk '{print $1}')
 #
 ############################################################
 

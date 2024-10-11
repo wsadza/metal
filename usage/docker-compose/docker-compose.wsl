@@ -4,6 +4,8 @@
 # ----------------------------------------------------------
 #
 # Example of attaching NVIDIA gpu into docker inside wsl-container.
+# ---
+# export STREAMER_HOST=$(hostname -I | awk '{print $1}')
 #
 ############################################################
 
@@ -16,41 +18,24 @@ services:
     stream:
       hostname: stream
       image: "ghcr.io/utilizable/metal/full-ubuntu:latest"
-      entrypoint: [ "/bin/bash", "-c" ]
-
-# Slightly mod entrypoint.sh
-      command:
-        - |
-          sudo sed -i '1,/^# Execute all container core init scripts/d' /entrypoint.sh;
-          echo "LD_LIBRARY_PATH=\"$${LD_LIBRARY_PATH:+$${LD_LIBRARY_PATH}:}/usr/lib/wsl/lib\"" \
-                | sudo tee -a /etc/bash.bashrc;
-          sudo add-apt-repository -y ppa:oibaf/graphics-drivers;
-          sudo apt-get update;
-          sudo dpkg --add-architecture i386;
-          sudo apt-get install -y\
-            vainfo \
-            mesa-vulkan-drivers \
-            libgl1-mesa-dev \
-            pkg-config \
-            libglvnd-dev \
-            libc6:i386;
-          sudo apt upgrade -y;
-          /entrypoint.sh
 
       ports:
 # Expose app - stream
         - "8080:8080"
+        - "9091:9091"
+# Expose app - coturn
         - "3478:3478/udp"
         - "3478:3478/tcp"
       environment:
 # Use internal turn server in case of lack of remote setting
-        DOCKER_HOST: "172.20.25.46"
+        STREAMER_HOST: "${STREAMER_HOST}"
 
 # WSL: ~
 #   https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg
         MESA_D3D12_DEFAULT_ADAPTER_NAME: "NVIDIA"
         LIBVA_DRIVER_NAME: "d3d12"
         VK_ICD_FILENAMES: "/usr/share/vulkan/icd.d/dzn_icd.x86_64.json"
+        LD_LIBRARY_PATH: "/usr/lib/wsl/lib"
 
 # Apply gpu resource
       deploy:
@@ -60,12 +45,6 @@ services:
                 - driver: nvidia
                   count: all
                   capabilities: [gpu]
-
-# The following devices must be shared with the container.
-      devices:
-        - /dev/dri/card0
-        - /dev/dri/renderD128
-        - /dev/dxg
 
 # To Make Steam working we need to break isolation
       tmpfs:
@@ -91,3 +70,6 @@ services:
 #   Attach WSL libraries
       volumes:
       - /usr/lib/wsl:/usr/lib/wsl:ro
+
+
+#
