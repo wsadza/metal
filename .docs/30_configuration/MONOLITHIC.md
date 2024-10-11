@@ -5,10 +5,10 @@
 ##
 <!---
 #####################################################
-# Configuration - COTURN
+# Configuration - Monolithic - COTURN
 #####################################################
 --->  
-### Configuration - Coturn
+### Configuration - Monolithic - Coturn
 <sup>[(Back to Configuration)](../../README.md#configuration)</sup>
 <br>
 
@@ -58,7 +58,7 @@
 # Configuration - Pipewire
 #####################################################
 --->  
-### Configuration - Pipewire
+### Configuration - Monolithic - Pipewire
 <sup>[(Back to Configuration)](../../README.md#configuration)</sup>
 <br>
 
@@ -103,7 +103,7 @@
 # Configuration - Selkies-Gstreamer 
 #####################################################
 --->  
-### Configuration - Selkies-Gstreamer 
+### Configuration - Monolithic - Selkies-Gstreamer 
 <sup>[(Back to Configuration)](../../README.md#configuration)</sup>
 <br>
 
@@ -200,10 +200,10 @@
 ##
 <!---
 #####################################################
-# Configuration - Miscellaneous
+# Configuration - Monolithic - Miscellaneous
 #####################################################
 --->  
-### Configuration - Miscellaneous
+### Configuration - Monolithic - Miscellaneous
 <sup>[(Back to Configuration)](../../README.md#configuration)</sup>
 <br>
 
@@ -253,7 +253,7 @@
 # Configuration - Graphic
 #####################################################
 --->  
-### Configuration - Graphic
+### Configuration - Monolithic - Graphic
 <sup>[(Back to Configuration)](../../README.md#configuration)</sup>
 <br>
 
@@ -305,10 +305,10 @@
 ##
 <!---
 #####################################################
-# Configuration - Desktop
+# Configuration - Monolithic - Desktop
 #####################################################
 --->  
-### Configuration - Desktop
+### Configuration - Monolithic - Desktop
 <sup>[(Back to Configuration)](../../README.md#configuration)</sup>
 <br>
 
