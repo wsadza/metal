@@ -22,7 +22,9 @@ Here, I've compiled the most relevant questions that I found while searching onl
 <summary>Answer</summary>
 <br>
 <!--- ANSWER --->
+   
 The NVIDIA driver toolkit ships all the necessary libraries to the final container.
+
 <!--- ANSWER --->
 </details>
 
@@ -33,6 +35,7 @@ The NVIDIA driver toolkit ships all the necessary libraries to the final contain
 <summary>Answer</summary>
 <br>
 <!--- ANSWER --->   
+   
 Think of containers like laptops. On laptops, we often deal with NVIDIA Prime and Bumblebee to manage GPU usage. However, in containers, the primary GPU is usually LLVMPipe, instead of the Intel integrated GPU. To ensure we use the NVIDIA GPU, we can set the following environment variables:
 <br><br>
    
@@ -40,6 +43,7 @@ Think of containers like laptops. On laptops, we often deal with NVIDIA Prime an
    - `__GLX_VENDOR_LIBRARY_NAME=NVIDIA`
    
    These settings force graphic applications to utilize the NVIDIA GPU. For more details, you can refer to the official NVIDIA documentation [here](https://download.nvidia.com/XFree86/Linux-x86_64/435.17/README/primerenderoffload.html).
+   
 <!--- ANSWER --->
 </details>
 
@@ -50,7 +54,9 @@ Think of containers like laptops. On laptops, we often deal with NVIDIA Prime an
 <summary>Answer</summary>
 <br>
 <!--- ANSWER --->      
+   
 Unfortunately, Microsoft started implementing [D3D12](https://www.phoronix.com/news/Mesa-24.1-Zink-D3D12-Default) in Mesa around year or two ago? - which limits our ability to use all Vulkan functions, resulting in significantly poor performance.
+
 <!--- ANSWER --->   
 </details>
 
@@ -73,6 +79,7 @@ Unfortunately, Microsoft started implementing [D3D12](https://www.phoronix.com/n
 - [DualCoder vGPU Unlock](https://github.com/DualCoder/vgpu_unlock)
 - [Using vGPU Unlock with Proxmox 7](https://www.michaelstinkerings.org/using-vgpu-unlock-with-proxmox-7/)
 - [vgpu-proxmox GitLab](https://gitlab.com/polloloco/vgpu-proxmox)
+  
 <!--- ANSWER --->  
 </details>
 
