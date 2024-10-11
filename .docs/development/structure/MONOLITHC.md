@@ -28,9 +28,9 @@ The Dockerfile encompasses all the essential components required for a seamless 
          <td rowspan="9"><sup>Core Component</sup></td>
       <tr>
       <tr>
-         <td><sup>Supervisord</sup></td>
-         <td><sup>DESCRIPTION</sup></td>
-         <td><sup>Purpose</sup></td>
+          <td><sup>Supervisord</sup></td>
+          <td><sup>Process control system for managing and monitoring services.</sup></td>
+          <td><sup>To ensure that the core components and applications are running smoothly and automatically restart them if they fail.</sup></td>
       </tr>
       <tr>
           <td><sup>Kde-Plasma</sup></td>
