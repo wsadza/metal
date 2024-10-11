@@ -146,8 +146,8 @@ It could happen in the future — who knows? But for now, NVIDIA is the dominant
 <!--- ANSWER ---> 
 </details>
 
-##
-
+<br>
+<br>
 <div align="center">
    <img src="../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
