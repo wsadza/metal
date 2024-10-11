@@ -160,27 +160,11 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 
 This repository features an [Ansible Playbook](./setup/ansible) that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The [Ansible playbook](./setup/ansible/playbooks/playbook.yml) is self explanatory - tailored for Ubuntu and Debian distributions.
 
-> [!TIP]
-> <details>
->  <summary>Helpful Resources </summary>
->    <br>
-> <ul>
->    <li><a href="https://www.reddit.com/r/devops/comments/10xty21/comparison_among_techniques_to_share_gpus_in/">Techniques to share GPU in Kubernetes</a></li>
->    <li><a href="https://docs.google.com/document/d/1H-ddA11laPQf_1olwXRjEDbzNihxprjPr74pZ4Vdf2M/edit?pli=1">MPS Support in the Kubernetes GPU Device Plugin</a></li>
->    <li><a href="https://www.declarativesystems.com/2023/11/04/kubernetes-nvidia.html">Kubernetes + NVIDIA on K3S</a></li>
->    <li><a href="https://jayground8-github-io.translate.goog/blog/20240324-k8s-device-plugin?_x_tr_sl=auto&_x_tr_tl=pl&_x_tr_hl=pl&_x_tr_hist=true">Using NVIDIA GPU Multi-Process Service with k8s-device-plugin</a></li>
->    <li><a href="https://gist.github.com/bgulla/5ea0e7fd310b5db4f9b66036d1cdb3d3">GPU Operator Snippet</a></li>
->    <li><a href="https://github.com/NVIDIA/k8s-device-plugin/tree/main/deployments/helm/nvidia-device-plugin">Nvidia Device Plugin</a></li>
->    <li><a href="https://github.com/UntouchedWagons/K3S-NVidia">K3S-NVidia</a></li>
->    <li><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a></li>
-> </ul>
-> </table>
-> </details>
-
 ### Table Of Contents:
   - [Setup `Ansible`](./.docs/setup/SETUP.md#setup---ansible)
   - [Setup `Bash`](./.docs/setup/SETUP.md#setup---bash) ⚠️
   - [Setup `WSL`](./.docs/setup/SETUP.md#setup---wsl)
+  - [Helpful Resources](./.docs/miscellaneous/HELPFUL_RESOURCES.md#setup---helpful---resources)
 
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
@@ -245,7 +229,7 @@ I created this section primarily for myself to organize my future work, helping 
 Here, I will provide a full description of the Dockerfile, the repository structure, and my future plans.
 
 ### Table Of Contents:
-  - [Development - Structure](#development---structure)
+  - Development - Structure
      - [Development - Structure - Monolith](#development---structure---monolith)
      - [Development - Structure - Microservices](#development---structure---microservices) ⚠️
      - [Development - Structure - Repository](#development---structure---repository)
