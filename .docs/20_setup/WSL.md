@@ -101,18 +101,16 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 
 First, we need to install [Chocolatey](https://chocolatey.org/install#generic), after which we can use it to obtain the NVIDIA driver and the Windows Subsystem for Linux (WSL).
 
-<details><summary>Setup: 📍</summary>
- <ul>
-    <li>
-      <p>Install Windows Subsystem for Linux</p>
-      <pre><code>choco install wsl2</code></pre>
-    </li>
-    <li>
-      <p>Install latest Nvidia drivers</p>
-      <pre><code>choco install nvidia-display-driver</code></pre>
-    </li>
- </ul>
-</details>
+<ul>
+ <li>
+   <p>Install Windows Subsystem for Linux</p>
+   <pre><code>choco install wsl2</code></pre>
+ </li>
+ <li>
+   <p>Install latest Nvidia drivers</p>
+   <pre><code>choco install nvidia-display-driver</code></pre>
+ </li>
+</ul>
 
 ##
 <!---
@@ -281,37 +279,34 @@ The [.wslconfig](https://learn.microsoft.com/en-us/windows/wsl/wsl-config) file 
 
 The table below provides WSL-LINUX configuration settings for specifying `Nvidia` gpu-drivers and `Vulkan` usage.
 
-<details>
-  <summary>Configuration: 📍</summary>
-  <br>  
-  <table>
-      <tr>
-          <td><strong>Environment Variable</strong></td>
-          <td><strong>Description</strong></td>
-          <td><strong>Value</strong></td>
-      </tr>
-      <tr>
-          <td><sup><code>LIBVA_DRIVER_NAME</code></sup></td>
-          <td><sup>Specifies the VA driver to use.</sup></td>
-          <td><sup><code>d3d12</code></sup></td>
-      </tr>
-      <tr>
-          <td><sup><code>MESA_D3D12_DEFAULT_ADAPTER_NAME</code></sup></td>
-          <td><sup>Sets the default D3D12 adapter name.</sup></td>
-          <td><sup><code>NVIDIA</code></sup></td>
-      </tr>
-      <tr>
-          <td><sup><code>VK_ICD_FILENAMES</code></sup></td>
-          <td><sup>Path to the Vulkan ICD file.</sup></td>
-          <td><sup><code>/usr/share/vulkan/icd.d/dzn_icd.x86_64.json</code></sup></td>       
-      </tr>
-      <tr>
-          <td><sup><code>LD_LIBRARY_PATH</code></sup></td>
-          <td><sup>Specifies the library search path.</sup></td>
-          <td><sup><code>/usr/lib/wsl/lib</code></sup></td>       
-      </tr>
-  </table>
-</details>
+<br>  
+<table>
+   <tr>
+       <td><strong>Environment Variable</strong></td>
+       <td><strong>Description</strong></td>
+       <td><strong>Value</strong></td>
+   </tr>
+   <tr>
+       <td><sup><code>LIBVA_DRIVER_NAME</code></sup></td>
+       <td><sup>Specifies the VA driver to use.</sup></td>
+       <td><sup><code>d3d12</code></sup></td>
+   </tr>
+   <tr>
+       <td><sup><code>MESA_D3D12_DEFAULT_ADAPTER_NAME</code></sup></td>
+       <td><sup>Sets the default D3D12 adapter name.</sup></td>
+       <td><sup><code>NVIDIA</code></sup></td>
+   </tr>
+   <tr>
+       <td><sup><code>VK_ICD_FILENAMES</code></sup></td>
+       <td><sup>Path to the Vulkan ICD file.</sup></td>
+       <td><sup><code>/usr/share/vulkan/icd.d/dzn_icd.x86_64.json</code></sup></td>       
+   </tr>
+   <tr>
+       <td><sup><code>LD_LIBRARY_PATH</code></sup></td>
+       <td><sup>Specifies the library search path.</sup></td>
+       <td><sup><code>/usr/lib/wsl/lib</code></sup></td>       
+   </tr>
+</table>
 
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
