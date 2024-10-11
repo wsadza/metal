@@ -9,9 +9,9 @@
 #####################################################
 --->
 ### Setup - Ansible
-<sup>[(Back to Setup)](#setup)</sup>
+<sup>[(Back to Usage)](../../README.md#setup)</sup>
 <br>
-<sup>[(Back to Top)](#table-of-contents)</sup><br>
+<!--- CONTENT --->
 
 Clone this repository and run the [setup.sh](./setup/ansible/setup.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
 
@@ -26,9 +26,9 @@ Setup - Bash - WIP!
 #####################################################
 --->
 ### Setup - Bash
-<sup>[(Back to Setup)](#setup)</sup>
+<sup>[(Back to Usage)](../../README.md#setup)</sup>
 <br>
-<sup>[(Back to Top)](#table-of-contents)</sup><br>
+<!--- CONTENT --->
 
 <!--- WIP --->
 <img src="../../.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
@@ -47,9 +47,9 @@ Setup - WSL
 #####################################################
 --->
 ### Setup - WSL
-<sup>[(Back to Setup)](#setup)</sup>
+<sup>[(Back to Usage)](../../README.md#setup)</sup>
 <br>
-<sup>[(Back to Top)](#table-of-contents)</sup><br>
+<!--- CONTENT --->
 
 Consider this more of a curiosity than a genuine configuration; Vulkan doesn’t function properly on WSL-Linux, which severely limits gaming options.
 
