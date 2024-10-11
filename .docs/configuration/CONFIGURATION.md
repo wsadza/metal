@@ -12,7 +12,6 @@
 <sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
-<br>
 <div align="center">
    <table>
        <tr>
@@ -63,7 +62,6 @@
 <sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
-<br>
 <div align="center">
    <table>
        <tr>
@@ -109,7 +107,6 @@
 <sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
-<br>
 <div align="center">
    <table>
        <tr>
@@ -210,7 +207,6 @@
 <sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
-<br>
 <div align="center">
    <table>
        <tr>
@@ -261,7 +257,6 @@
 <sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
-<br>
 <div align="center">
    <table>
        <tr>
@@ -317,7 +312,6 @@
 <sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
-<br>
 <div align="center">
    <table>
        <tr>
