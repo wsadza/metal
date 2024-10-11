@@ -77,6 +77,9 @@ RUN \
           "/usr/share/zoneinfo/${TZ}" \
           /etc/localtime \
         && echo "${TZ}" > /etc/timezone \
+        && sed -i -e "s/# $LANG.*/$LANG UTF-8/" /etc/locale.gen \
+        && dpkg-reconfigure --frontend=noninteractive locales \
+        && update-locale LANG=$LANG \
     && \
     echo "**** Section cleanup ****" \
         && apt-get clean autoclean -y \
