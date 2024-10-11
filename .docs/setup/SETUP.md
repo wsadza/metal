@@ -9,7 +9,7 @@
 #####################################################
 --->
 ### Setup - Ansible
-<sup>[(Back to Usage)](../../README.md#setup)</sup>
+<sup>[(Back to Setup)](../../README.md#setup)</sup>
 <br>
 <!--- CONTENT --->
 
@@ -26,7 +26,7 @@ Setup - Bash - WIP!
 #####################################################
 --->
 ### Setup - Bash
-<sup>[(Back to Usage)](../../README.md#setup)</sup>
+<sup>[(Back to Setup)](../../README.md#setup)</sup>
 <br>
 <!--- CONTENT --->
 
@@ -47,7 +47,7 @@ Setup - WSL
 #####################################################
 --->
 ### Setup - WSL
-<sup>[(Back to Usage)](../../README.md#setup)</sup>
+<sup>[(Back to Setup)](../../README.md#setup)</sup>
 <br>
 <!--- CONTENT --->
 
