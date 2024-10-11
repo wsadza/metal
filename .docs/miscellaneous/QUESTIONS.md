@@ -5,15 +5,13 @@
 ##
 <!---
 #####################################################
-# FAQ 
+# Questions 
 #####################################################
 --->
-### FAQ
+### Questions
 <sup>[(Back to README)](../../README.md#table-of-contents)</sup>
 <br>
 <!--- CONTENT --->
-
-Here, I've compiled the most relevant questions that I found while searching online.
 
 ##
 

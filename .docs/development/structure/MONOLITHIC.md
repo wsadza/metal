@@ -16,7 +16,7 @@
 The Dockerfile encompasses all the essential components required for a seamless gaming experience, with management and orchestration handled by Supervisor.
 
 <br>
-<div align="center">
+<div align="left">
    <table>
       <tr align="center">
           <td><strong></strong></td>

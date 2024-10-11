@@ -12,7 +12,7 @@
 <sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
-<div align="center">
+<div align="left">
    <table>
        <tr>
            <td><strong>VARIABLE</strong></td>
@@ -62,7 +62,7 @@
 <sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
-<div align="center">
+<div align="left">
    <table>
        <tr>
            <td><strong>VARIABLE</strong></td>
@@ -107,7 +107,7 @@
 <sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
-<div align="center">
+<div align="left">
    <table>
        <tr>
            <td><strong>VARIABLE</strong></td>
@@ -207,7 +207,7 @@
 <sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
-<div align="center">
+<div align="left">
    <table>
        <tr>
            <td><strong>VARIABLE</strong></td>
@@ -257,7 +257,7 @@
 <sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
-<div align="center">
+<div align="left">
    <table>
        <tr>
            <td><strong>VARIABLE</strong></td>
@@ -312,7 +312,7 @@
 <sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
-<div align="center">
+<div align="left">
    <table>
        <tr>
            <td><strong>VARIABLE</strong></td>
