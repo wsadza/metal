@@ -355,10 +355,10 @@
 ##
 <!---
 #####################################################
-# Configuration - Misc
+# Configuration - Miscellaneous
 #####################################################
 --->  
-### Configuration - Misc
+### Configuration - Miscellaneous
 <sup>[(Back to Configuration)](../../README.md#configuration)</sup>
 <br>
 
