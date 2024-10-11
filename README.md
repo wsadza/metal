@@ -228,15 +228,14 @@ $$$$$$$  |$$$$$$$$\    \$  /   $$$$$$$$\ $$$$$$$$\ $$$$$$  |$$ |      $$ | \_/ $
 
 <img src="./.media/asset/section/asset_section_e.png" align="left" width="5%" height="auto"/>
 
-I created this section primarily for myself to organize my future work, helping me quickly recall where I left off and where I can start.
-Here, I will provide a full description of the Dockerfile, the repository structure, and my future plans.
+This section explains how we build our software, focusing on different structures like monolithic and distributed systems. You will also find information about our development workflows, including continuous integration and delivery.
 
 <img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
   - Development - Structure
      - [Development - Structure - Monolithc](./.docs/development/structure/MONOLITHC.md#development---structure---monolithc)
-     - [Development - Structure - Microservices](./.docs/development/structure/MICROSERVICES.md#development---structure---microservices) ⚠️
+     - [Development - Structure - Distributed](./.docs/development/structure/DISTRIBUTED.md#development---structure---distributed) ⚠️
      - [Development - Structure - Repository](./.docs/development/structure/REPOSITORY.md#development---structure---repository) ⚠️
   - Development - Workflow
      - [Development - Workflow - CI](./.docs/development/workflow/CI.md#development---workflow---ci) ⚠️

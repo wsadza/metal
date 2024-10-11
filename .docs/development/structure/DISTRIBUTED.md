@@ -8,10 +8,10 @@
 
 <!---
 #####################################################
-# Development - Structure - Microservices
+# Development - Structure - Distributed
 #####################################################
 --->  
-####  Development - Structure - Microservices
+####  Development - Structure - Distributed
 <sup>[(Back to Development)](../../../README.md#table-of-contents-4)</sup>
 <br>
 
