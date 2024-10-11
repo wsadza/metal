@@ -194,10 +194,10 @@
 ##
 <!---
 #####################################################
-# Configuration - Miscellaneous - Desktop
+# Configuration - Desktop
 #####################################################
 --->  
-### Configuration - Miscellaneous - Desktop
+### Configuration - Desktop
 <sup>[(Back to Configuration)](../../README.md#configuration)</sup>
 <br>
 
@@ -287,10 +287,10 @@
 ##
 <!---
 #####################################################
-# Configuration - Miscellaneous - Graphic
+# Configuration - Graphic
 #####################################################
 --->  
-### Configuration - Miscellaneous - Graphic
+### Configuration - Graphic
 <sup>[(Back to Configuration)](../../README.md#configuration)</sup>
 <br>
 
