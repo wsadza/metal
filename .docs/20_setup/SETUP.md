@@ -33,7 +33,7 @@ Setup - Bash
 <br>
 <!--- CONTENT --->
 
-Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash script. This will fetch and install all the necessary dependencies and components.
+Clone this repository and run the [setup.sh](./setup/bash/setup.sh) bash script. This will fetch and install all the necessary dependencies and components.
 
 ```sh
 git clone https://github.com/utilizable/metal.git && cd metal/setup/bash && ./setup.sh
