@@ -89,12 +89,6 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 - [Setup](#setup)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
-  - [Contributing - Structure](#contributing---structure)
-     - [Contributing - Structure - Monolith](#contributing---structure---monolith)
-     - [Contributing - Structure - Microservices](#contributing---structure---microservices) ⚠️
-     - [Contributing - Structure - Repository](#contributing---structure---repository)
-  - [Contributing - Workflow - CI](#contributing---cicd---workflow)
-  - [Contributing - Workflow - CD](#contributing---workflow---ci---workflow) ⚠️
 - [Disclaimers](#disclaimers)
 
 <!---
@@ -645,7 +639,8 @@ For more information, visit [coturn](https://github.com/coturn/coturn) home page
 ### Configuration - Miscellaneous
 <sup>[(Back to Configuration)](#configuration)</sup>
 <br>
-<sup>[(Back to Top)](#table-of-contents-0)</sup><br>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
+<br>
 
 The Miscellaneous subsection includes various additional configurations.
 
@@ -848,14 +843,20 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |   $$ |   $$ |  $$ |  $$ |  $$ |  $$ |$$ |  $$ |  
  \______/  \______/ \__|  \__|   \__|   \__|  \__|\______|\_______/  \______/    \__|   \______|\__|  \__| \______/
  --->
 ## Contributing
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to top)](#table-of-contents-0)</sup>
 
 <img src=".media/asset/section/asset_section_e.png" align="left" width="5%" height="auto"/>
 
 I created this section primarily for myself to organize my future work, helping me quickly recall where I left off and where I can start.
 Here, I will provide a full description of the Dockerfile, the repository structure, and my future plans.
 
-<br><blockquote>Current Status: Monolithic Dockerfile with some orchestration provided by Supervisor.</blockquote>
+### Table Of Contents:
+  - [Contributing - Structure](#contributing---structure)
+     - [Contributing - Structure - Monolith](#contributing---structure---monolith)
+     - [Contributing - Structure - Microservices](#contributing---structure---microservices) ⚠️
+     - [Contributing - Structure - Repository](#contributing---structure---repository)
+  - [Contributing - Workflow - CI](#contributing---cicd---workflow)
+  - [Contributing - Workflow - CD](#contributing---workflow---ci---workflow) ⚠️
 
 ##
 <!---
@@ -874,7 +875,10 @@ Here, I will provide a full description of the Dockerfile, the repository struct
 --->  
 
 ### Structure - Monolith 
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Structure)](#structure)</sup>
+<br>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
+<br>
 
 The Dockerfile includes all the core components needed to ensure a smooth gaming experience, component are management and orchestrated by Supervisor.
 
@@ -1033,7 +1037,10 @@ Docker-Compose snippet:
 --->  
 
 #### Structure - Monolith - Futher Works
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Structure)](#structure)</sup>
+<br>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
+<br>
 
 ##
 <!---
@@ -1043,7 +1050,10 @@ Docker-Compose snippet:
 --->  
 
 ###  Structure - Microservices
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Structure)](#structure)</sup>
+<br>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
+<br>
 
 <img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
@@ -1065,7 +1075,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nequ
 --->  
 
 #### Structure - Microservices - Futher Works
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Structure)](#structure)</sup>
+<br>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
+<br>
 
 ##
 <!---
@@ -1075,7 +1088,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nequ
 --->  
 
 #### Structure - Repository
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Structure)](#structure)</sup>
+<br>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
+<br>
 
 ##
 <!---
@@ -1085,7 +1101,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nequ
 --->  
 
 ### CICD Workflow
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Structure)](#structure)</sup>
+<br>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
+<br>
 
 ##
 <!---
@@ -1095,7 +1114,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nequ
 --->  
 
 ### Futher Works
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to Structure)](#structure)</sup>
+<br>
+<sup>[(Back to Top)](#table-of-contents-0)</sup>
+<br>
 
 <!---
 $$$$$$$\  $$$$$$\  $$$$$$\   $$$$$$\  $$\        $$$$$$\  $$$$$$\ $$\      $$\ $$$$$$$$\ $$$$$$$\   $$$$$$\  
