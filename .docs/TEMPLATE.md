@@ -36,7 +36,6 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 ### Table Of Contents:
 - [Section-A](#section-a)
 - [Section-B](#section-b)
-- [your-paragraph](#your-paragraph)
 
 ### Section-A
 <sup>[(Back to top)](#table-of-contents)</sup>
@@ -125,14 +124,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
     </details>
    </li>
    <!-- #element [2] -->
-   
-   <!-- element [3] -->   
-   <li>
-   <h3>YOUR-PARAGRAPH</h3>
-   <pre><code>YOUR-CODE</code></pre>
-   </li>
-   <!-- #element [3] -->      
-   
+      
  </ul>
  <!-- #list -->    
 </details>
