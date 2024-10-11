@@ -118,12 +118,14 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
+<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
+
 ### Table Of Contents:
   - [Usage `Docker`](./.docs/usage/USAGE.md#usage---docker) 
   - [Usage `Docker-Compose`](./.docs/usage/USAGE.md#usage---docker-compose)
   - [Usage `Kubernetes`](./.docs/usage/USAGE.md#usage---kubernetes)
   - [Usage `Helm`](./.docs/usage/USAGE.md#usage---helm) ⚠️
-    
+
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
 $$  __$$\ $$  __$$\ $$  _____|$$ |   $$ |\_$$  _|$$  _____|$$ | $\  $$ |
@@ -159,6 +161,8 @@ $$\   $$ |$$ |         $$ |   $$ |  $$ |$$ |
 <img src=".media/asset/section/asset_section_c.png" align="left" width="5%" height="auto"/>
 
 This repository features an [Ansible Playbook](./setup/ansible) that guides you through a minimal setup, starting from the latest NVIDIA driver all the way to a fully functional Kubernetes cluster with GPU-MPS sharing capabilities. The [Ansible playbook](./setup/ansible/playbooks/playbook.yml) is self explanatory - tailored for Ubuntu and Debian distributions.
+
+<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
   - [Setup `Ansible`](./.docs/setup/SETUP.md#setup---ansible)
@@ -228,6 +232,8 @@ $$$$$$$  |$$$$$$$$\    \$  /   $$$$$$$$\ $$$$$$$$\ $$$$$$  |$$ |      $$ | \_/ $
 I created this section primarily for myself to organize my future work, helping me quickly recall where I left off and where I can start.
 Here, I will provide a full description of the Dockerfile, the repository structure, and my future plans.
 
+<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
+
 ### Table Of Contents:
   - Development - Structure
      - [Development - Structure - Monolithc](.docs/development/structure/MONOLITHC.md#development---structure---monolithc)
@@ -237,30 +243,6 @@ Here, I will provide a full description of the Dockerfile, the repository struct
      - [Development - Workflow - CI](.docs/development/workflow/CI.md#development---workflow---ci)
      - [Development - Workflow - CD](.docs/development/workflow/CD.md#development---workflow---cd) ⚠️
   - [Development - Futher - Works](./docs/development/FUTHER_WORKS.md#development---futher---works) ⚠️
-
-##
-<!---
-#####################################################
-# Development - Structure - Microservices
-#####################################################
---->  
-####  Development - Structure - Microservices
-<sup>[(Back to Development)](#development)</sup>
-<br>
-<sup>[(Back to Top)](#table-of-contents)</sup>
-<br>
-
-<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet neque non dui luctus posuere. Phasellus laoreet elit eu diam ultrices fermentum. Ut posuere, quam sed blandit ornare, lacus nisi consectetur tortor, vel dictum erat enim a leo. Curabitur dictum tristique hendrerit.
-
-##
-
-<div align="center">
-<sup><code>Finaly! Something intresting.</code></sup>
-<br>   
-<img src=".media/development/structure/microservices/development_structure_microservices_preview.png" width="800" height="auto"/>  
-</div>
 
 ##
 <!---
