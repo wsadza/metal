@@ -37,12 +37,7 @@ Introducing totally modular, Dockerized streaming service. Build it your way, wh
 Now it's a streaming powerhouse. Why? Just because!
 
 <br>
-<blockquote>
-- Goal: Tailor a product that serves as a foundation for exploring Kubernetes and containerization.
-<br>
-- Status: The monolithic solution is ready for use.
-</blockquote>
-
+<blockquote>Goal: Tailor a product that serves as a foundation for exploring Kubernetes and containerization.</blockquote>
 
 ##
 <!---
