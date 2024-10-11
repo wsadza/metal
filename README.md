@@ -106,8 +106,10 @@ This section provides guidance on deploying and configuring streaming instances 
 ### Table Of Contents:
   - [Usage `Docker`](./.docs/10_usage/USAGE.md#usage---docker) 
   - [Usage `Docker-Compose`](./.docs/10_usage/USAGE.md#usage---docker-compose)
-  - [Usage `Kubernetes`](./.docs/10_usage/USAGE.md#usage---kubernetes) ⚠️
-  - [Usage `Helm`](./.docs/10_usage/USAGE.md#usage---helm) ⚠️
+  - [Usage `Kubernetes`](./.docs/10_usage/USAGE.md#usage---kubernetes)
+<sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
+  - [Usage `Helm`](./.docs/10_usage/USAGE.md#usage---helm)
+<sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
 
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
@@ -149,7 +151,8 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 
 ### Table Of Contents:
   - [Setup `Ansible`](./.docs/20_setup/SETUP.md#setup---ansible)
-  - [Setup `Bash`](./.docs/20_setup/SETUP.md#setup---bash) ⚠️
+  - [Setup `Bash`](./.docs/20_setup/SETUP.md#setup---bash)
+<sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
   - [Setup `WSL`](./.docs/20_setup/SETUP.md#setup---wsl)
 
 <!---
@@ -235,12 +238,17 @@ This section explains how we build our software, focusing on different structure
 
 ### Table Of Contents:
   - Development - Structure
-     - [Development - Structure - Monolithc](./.docs/40_development/structure/MONOLITHIC.md#development---structure---monolithc) ⚠️
-     - [Development - Structure - Distributed](./.docs/40_development/structure/DISTRIBUTED.md#development---structure---distributed) ⚠️
-     - [Development - Structure - Repository](./.docs/40_development/structure/REPOSITORY.md#development---structure---repository) ⚠️
+     - [Development - Structure - Monolithc](./.docs/40_development/structure/MONOLITHIC.md#development---structure---monolithc)
+   <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
+     - [Development - Structure - Distributed](./.docs/40_development/structure/DISTRIBUTED.md#development---structure---distributed)
+   <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
+     - [Development - Structure - Repository](./.docs/40_development/structure/REPOSITORY.md#development---structure---repository)
+   <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
   - Development - Workflow
-     - [Development - Workflow - CI](./.docs/40_development/workflow/CI.md#development---workflow---ci) ⚠️
-     - [Development - Workflow - CD](./.docs/40_development/workflow/CD.md#development---workflow---cd) ⚠️
+     - [Development - Workflow - CI](./.docs/40_development/workflow/CI.md#development---workflow---ci)
+   <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
+     - [Development - Workflow - CD](./.docs/40_development/workflow/CD.md#development---workflow---cd)
+   <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
 
 <!---
 $$$$$$$\  $$$$$$\  $$$$$$\   $$$$$$\  $$\        $$$$$$\  $$$$$$\ $$\      $$\ $$$$$$$$\ $$$$$$$\   $$$$$$\  
