@@ -80,7 +80,7 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 - [Development](#development)
 - Miscellaneous
     - [Questions](./.docs/50_miscellaneous/QUESTIONS.md#questions)
-    - [Helpful Resources](./.docs/50_miscellaneous/HELPFUL_RESOURCES.md)
+    - [Helpful Resources](./.docs/50_miscellaneous/HELPFUL_RESOURCES.md#setup)
 - [Disclaimers](#disclaimers)
 
 <!---
