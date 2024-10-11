@@ -75,7 +75,7 @@ echo -e "\tSupervisor: http://$(hostname -I | awk '{print $1}'):9091\n"
        <!--- element[2] --->
        <!--- element[3] --->
        <tr align="left">
-          <td><sup><a href="">Full Power</a>🤘</sup></td>
+          <td><sup><a href="">Full Power</a></sup></td>
           <td>
           <br><sup><pre><code>
 docker run -d \
