@@ -79,8 +79,8 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 - [Configuration](#configuration)
 - [Development](#development)
 - Miscellaneous
-    - [Questions](./.docs/miscellaneous/QUESTIONS.md#questions)
-    - [Helpful Resources](./.docs/miscellaneous/HELPFUL_RESOURCES.md)
+    - [Questions](./.docs/50_miscellaneous/QUESTIONS.md#questions)
+    - [Helpful Resources](./.docs/50_miscellaneous/HELPFUL_RESOURCES.md)
 - [Disclaimers](#disclaimers)
 
 <!---
