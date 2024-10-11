@@ -194,6 +194,112 @@
 ##
 <!---
 #####################################################
+# Configuration - Miscellaneous
+#####################################################
+--->  
+### Configuration - Miscellaneous
+<sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
+<br>
+
+<table>
+    <tr>
+        <td><strong>VARIABLE</strong></td>
+        <td><strong>DESCRIPTION</strong></td>
+        <td><strong>DEFAULT</strong></td>
+    </tr>
+    <tr>
+        <td><sup>DBUS_SESSION_BUS_ADDRESS</sup></td>
+        <td><sup>Address for the D-Bus session bus.</sup></td>
+        <td><sup>unix:path=${XDG_RUNTIME_DIR}/dbus-session</sup></td>
+    </tr>
+    <tr>
+        <td><sup>APPIMAGE_EXTRACT_AND_RUN</sup></td>
+        <td><sup>Extract and run AppImage.</sup></td>
+        <td><sup>1</sup></td>
+    </tr>
+    <tr>
+        <td><sup>SUPERVISOR_PORT</sup></td>
+        <td><sup>Port for Supervisor.</sup></td>
+        <td><sup>9091</sup></td>
+    </tr>
+    <tr>
+        <td><sup>PULSE_SERVER</sup></td>
+        <td><sup>Address for the PulseAudio server.</sup></td>
+        <td><sup>unix:${XDG_RUNTIME_DIR}/pulse-server</sup></td>
+    </tr>
+</table>
+
+##
+<!---
+#####################################################
+# Configuration - Graphic
+#####################################################
+--->  
+### Configuration - Graphic
+<sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
+<br>
+
+<table>
+    <tr>
+        <td><strong>VARIABLE</strong></td>
+        <td><strong>DESCRIPTION</strong></td>
+        <td><strong>DEFAULT</strong></td>
+    </tr>
+    <tr>
+        <td><sup>NVIDIA_VISIBLE_DEVICES</sup></td>
+        <td><sup>Specifies which NVIDIA devices are visible to the application.</sup></td>
+        <td><sup>all</sup></td>
+    </tr>
+    <tr>
+        <td><sup>NVIDIA_DRIVER_CAPABILITIES</sup></td>
+        <td><sup>Specifies the capabilities of the NVIDIA driver to expose to the application.</sup></td>
+        <td><sup>all</sup></td>
+    </tr>
+    <tr>
+        <td><sup>LD_LIBRARY_PATH</sup></td>
+        <td><sup>Path to NVIDIA libraries.</sup></td>
+        <td><sup>${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/nvidia/lib:/usr/local/nvidia/lib64</sup></td>
+    </tr>
+    <tr>
+        <td><sup>PATH</sup></td>
+        <td><sup>Path to NVIDIA binaries.</sup></td>
+        <td><sup>/usr/local/nvidia/bin${PATH:+:${PATH}}</sup></td>
+    </tr>
+    <tr>
+        <td><sup>EGL_DEVICE_INDEX</sup></td>
+        <td><sup>Index of the EGL device.</sup></td>
+        <td><sup>0</sup></td>
+    </tr>
+    <tr>
+        <td><sup>__NV_PRIME_RENDER_OFFLOAD</sup></td>
+        <td><sup>Enables PRIME render offload.</sup></td>
+        <td><sup>1</sup></td>
+    </tr>
+    <tr>
+        <td><sup>__GL_SYNC_TO_VBLANK</sup></td>
+        <td><sup>Syncs to vertical blanking interval.</sup></td>
+        <td><sup>0</sup></td>
+    </tr>
+    <tr>
+        <td><sup>__GLX_VENDOR_LIBRARY_NAME</sup></td>
+        <td><sup>Specifies the GLX vendor library to use.</sup></td>
+        <td><sup>mesa</sup></td>
+    </tr>
+    <tr>
+        <td><sup>PRIME_RENDERER_GLOBAL</sup></td>
+        <td><sup>Global setting for PRIME renderer.</sup></td>
+        <td><sup>true</sup></td>
+    </tr>
+    <tr>
+        <td><sup>PRIME_RENDERER_WINE</sup></td>
+        <td><sup>Setting for PRIME renderer in Wine.</sup></td>
+        <td><sup>true</sup></td>
+    </tr>
+</table>
+
+##
+<!---
+#####################################################
 # Configuration - Desktop
 #####################################################
 --->  
@@ -281,112 +387,6 @@
         <td><sup>XMODIFIERS</sup></td>
         <td><sup>Specifies the input method modifiers.</sup></td>
         <td><sup>"@im=fcitx"</sup></td>
-    </tr>
-</table>
-
-##
-<!---
-#####################################################
-# Configuration - Graphic
-#####################################################
---->  
-### Configuration - Graphic
-<sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
-<br>
-
-<table>
-    <tr>
-        <td><strong>VARIABLE</strong></td>
-        <td><strong>DESCRIPTION</strong></td>
-        <td><strong>DEFAULT</strong></td>
-    </tr>
-    <tr>
-        <td><sup>NVIDIA_VISIBLE_DEVICES</sup></td>
-        <td><sup>Specifies which NVIDIA devices are visible to the application.</sup></td>
-        <td><sup>all</sup></td>
-    </tr>
-    <tr>
-        <td><sup>NVIDIA_DRIVER_CAPABILITIES</sup></td>
-        <td><sup>Specifies the capabilities of the NVIDIA driver to expose to the application.</sup></td>
-        <td><sup>all</sup></td>
-    </tr>
-    <tr>
-        <td><sup>LD_LIBRARY_PATH</sup></td>
-        <td><sup>Path to NVIDIA libraries.</sup></td>
-        <td><sup>${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/nvidia/lib:/usr/local/nvidia/lib64</sup></td>
-    </tr>
-    <tr>
-        <td><sup>PATH</sup></td>
-        <td><sup>Path to NVIDIA binaries.</sup></td>
-        <td><sup>/usr/local/nvidia/bin${PATH:+:${PATH}}</sup></td>
-    </tr>
-    <tr>
-        <td><sup>EGL_DEVICE_INDEX</sup></td>
-        <td><sup>Index of the EGL device.</sup></td>
-        <td><sup>0</sup></td>
-    </tr>
-    <tr>
-        <td><sup>__NV_PRIME_RENDER_OFFLOAD</sup></td>
-        <td><sup>Enables PRIME render offload.</sup></td>
-        <td><sup>1</sup></td>
-    </tr>
-    <tr>
-        <td><sup>__GL_SYNC_TO_VBLANK</sup></td>
-        <td><sup>Syncs to vertical blanking interval.</sup></td>
-        <td><sup>0</sup></td>
-    </tr>
-    <tr>
-        <td><sup>__GLX_VENDOR_LIBRARY_NAME</sup></td>
-        <td><sup>Specifies the GLX vendor library to use.</sup></td>
-        <td><sup>mesa</sup></td>
-    </tr>
-    <tr>
-        <td><sup>PRIME_RENDERER_GLOBAL</sup></td>
-        <td><sup>Global setting for PRIME renderer.</sup></td>
-        <td><sup>true</sup></td>
-    </tr>
-    <tr>
-        <td><sup>PRIME_RENDERER_WINE</sup></td>
-        <td><sup>Setting for PRIME renderer in Wine.</sup></td>
-        <td><sup>true</sup></td>
-    </tr>
-</table>
-
-##
-<!---
-#####################################################
-# Configuration - Miscellaneous
-#####################################################
---->  
-### Configuration - Miscellaneous
-<sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
-<br>
-
-<table>
-    <tr>
-        <td><strong>VARIABLE</strong></td>
-        <td><strong>DESCRIPTION</strong></td>
-        <td><strong>DEFAULT</strong></td>
-    </tr>
-    <tr>
-        <td><sup>DBUS_SESSION_BUS_ADDRESS</sup></td>
-        <td><sup>Address for the D-Bus session bus.</sup></td>
-        <td><sup>unix:path=${XDG_RUNTIME_DIR}/dbus-session</sup></td>
-    </tr>
-    <tr>
-        <td><sup>APPIMAGE_EXTRACT_AND_RUN</sup></td>
-        <td><sup>Extract and run AppImage.</sup></td>
-        <td><sup>1</sup></td>
-    </tr>
-    <tr>
-        <td><sup>SUPERVISOR_PORT</sup></td>
-        <td><sup>Port for Supervisor.</sup></td>
-        <td><sup>9091</sup></td>
-    </tr>
-    <tr>
-        <td><sup>PULSE_SERVER</sup></td>
-        <td><sup>Address for the PulseAudio server.</sup></td>
-        <td><sup>unix:${XDG_RUNTIME_DIR}/pulse-server</sup></td>
     </tr>
 </table>
 
