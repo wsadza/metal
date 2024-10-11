@@ -198,12 +198,13 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$
 This section highlights the critical configurations and components necessary for maximizing the performance and functionality of your media streaming and communication setup. Each configuration is tailored to improve the overall user experience. You can find all the configurations described below in the [Dockerfile](https://github.com/utilizable/metal/blob/develop/build/docker/Dockerfile.debbased#L1314).
 
 ### Table Of Contents:
-  - [Configuration `Selkies Gstreamer`](./.docs/30_configuration/CONFIGURATION.md#configuration---selkies-gstreamer)
-  - [Configuration `Pipewire`](./.docs/30_configuration/CONFIGURATION.md#configuration---pipewire)
-  - [Configuration `Coturn`](./.docs/30_configuration/CONFIGURATION.md#configuration---coturn)
-  - [Configuration `Miscellaneous`](./.docs/30_configuration/CONFIGURATION.md#configuration---miscellaneous)
-  - [Configuration `Graphic`](./.docs/30_configuration/CONFIGURATION.md#configuration---graphic)
-  - [Configuration `Desktop`](./.docs/30_configuration/CONFIGURATION.md#configuration---desktop)
+  - Configuration - Monolithc:
+     - [Configuration - Monolithc - `Selkies Gstreamer`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---selkies-gstreamer)
+     - [Configuration - Monolithc - `Pipewire`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---pipewire)
+     - [Configuration - Monolithc - `Coturn`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---coturn)
+     - [Configuration - Monolithc - `Miscellaneous`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---miscellaneous)
+     - [Configuration - Monolithc - `Graphic`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---graphic)
+     - [Configuration - Monolithc - `Desktop`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---desktop)
 
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
