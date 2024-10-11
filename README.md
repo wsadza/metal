@@ -240,22 +240,11 @@ Here, I will provide a full description of the Dockerfile, the repository struct
      - [Development - Structure - Microservices](.docs/development/structure/MICROSERVICES.md#development---structure---microservices) ⚠️
      - [Development - Structure - Repository](.docs/development/structure/REPOSITORY.md#development---structure---repository) ⚠️
   - Development - Workflow
-     - [Development - Workflow - CI](.docs/development/workflow/CI.md#development---workflow---ci)
+     - [Development - Workflow - CI](.docs/development/workflow/CI.md#development---workflow---ci) ⚠️
      - [Development - Workflow - CD](.docs/development/workflow/CD.md#development---workflow---cd) ⚠️
   - [Development - Futher - Works](./docs/development/FUTHER_WORKS.md#development---futher---works) ⚠️
 
 ##
-<!---
-#####################################################
-# Development - Structure - Repository
-#####################################################
---->  
-#### Development - Structure - Repository
-<sup>[(Back to Development)](#development)</sup>
-<br>
-<sup>[(Back to Top)](#table-of-contents)</sup>
-<br>
-
 
 ##
 <!---
