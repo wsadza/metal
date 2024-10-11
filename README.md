@@ -78,7 +78,9 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 - [Setup](#setup)
 - [Configuration](#configuration)
 - [Development](#development)
-- [Questions](./.docs/miscellaneous/QUESTIONS.md#questions)
+- Miscellaneous
+    - [Questions](./.docs/miscellaneous/QUESTIONS.md#questions)
+    - [Helpful Resources](./.docs/miscellaneous/HELPFUL_RESOURCES.md)
 - [Disclaimers](#disclaimers)
 
 <!---
@@ -102,10 +104,10 @@ This section provides guidance on deploying and configuring streaming instances 
 <img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
-  - [Usage `Docker`](./.docs/usage/USAGE.md#usage---docker) 
-  - [Usage `Docker-Compose`](./.docs/usage/USAGE.md#usage---docker-compose)
-  - [Usage `Kubernetes`](./.docs/usage/USAGE.md#usage---kubernetes) ⚠️
-  - [Usage `Helm`](./.docs/usage/USAGE.md#usage---helm) ⚠️
+  - [Usage `Docker`](./.docs/10_usage/USAGE.md#usage---docker) 
+  - [Usage `Docker-Compose`](./.docs/10_usage/USAGE.md#usage---docker-compose)
+  - [Usage `Kubernetes`](./.docs/10_usage/USAGE.md#usage---kubernetes) ⚠️
+  - [Usage `Helm`](./.docs/10_usage/USAGE.md#usage---helm) ⚠️
 
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
@@ -146,10 +148,9 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 <img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
-  - [Setup `Ansible`](./.docs/setup/SETUP.md#setup---ansible)
-  - [Setup `Bash`](./.docs/setup/SETUP.md#setup---bash) ⚠️
-  - [Setup `WSL`](./.docs/setup/SETUP.md#setup---wsl)
-  - [Setup `Helpful Resources`](./.docs/miscellaneous/HELPFUL_RESOURCES.md#setup---helpful---resources)
+  - [Setup `Ansible`](./.docs/20_setup/SETUP.md#setup---ansible)
+  - [Setup `Bash`](./.docs/20_setup/SETUP.md#setup---bash) ⚠️
+  - [Setup `WSL`](./.docs/20_setup/SETUP.md#setup---wsl)
 
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
@@ -234,13 +235,12 @@ This section explains how we build our software, focusing on different structure
 
 ### Table Of Contents:
   - Development - Structure
-     - [Development - Structure - Monolithc](./.docs/development/structure/MONOLITHIC.md#development---structure---monolithc)
-     - [Development - Structure - Distributed](./.docs/development/structure/DISTRIBUTED.md#development---structure---distributed) ⚠️
-     - [Development - Structure - Repository](./.docs/development/structure/REPOSITORY.md#development---structure---repository) ⚠️
+     - [Development - Structure - Monolithc](./.docs/40_development/structure/MONOLITHIC.md#development---structure---monolithc)
+     - [Development - Structure - Distributed](./.docs/40_development/structure/DISTRIBUTED.md#development---structure---distributed) ⚠️
+     - [Development - Structure - Repository](./.docs/40_development/structure/REPOSITORY.md#development---structure---repository) ⚠️
   - Development - Workflow
-     - [Development - Workflow - CI](./.docs/development/workflow/CI.md#development---workflow---ci) ⚠️
-     - [Development - Workflow - CD](./.docs/development/workflow/CD.md#development---workflow---cd) ⚠️
-  - [Development - Futher - Works](./.docs/development/FUTHER_WORKS.md#development---futher---works) ⚠️
+     - [Development - Workflow - CI](./.docs/40_development/workflow/CI.md#development---workflow---ci) ⚠️
+     - [Development - Workflow - CD](./.docs/40_development/workflow/CD.md#development---workflow---cd) ⚠️
 
 <!---
 $$$$$$$\  $$$$$$\  $$$$$$\   $$$$$$\  $$\        $$$$$$\  $$$$$$\ $$\      $$\ $$$$$$$$\ $$$$$$$\   $$$$$$\  

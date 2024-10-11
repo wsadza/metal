@@ -1,4 +1,4 @@
-<div align="left">
+<div align="center">
    <img src="../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
 
@@ -12,7 +12,7 @@
 <sup>[(Back to Usage)](../../README.md#table-of-contents-1)</sup>
 <br>
 <!--- CONTENT --->
-<div align="left">
+<div align="center">
    <table>
        <tr>
            <td><strong>Component</strong></td>
@@ -117,34 +117,34 @@ echo -e "\tSupervisor: http://$(hostname -I | awk '{print $1}'):9091\n"
 <sup>[(Back to Usage)](../../README.md#table-of-contents-1)</sup>
 <br>
 <!--- CONTENT --->
-<div align="left">
+<div align="center">
    <table>
        <tr align="left">
            <td><strong>Component</strong></td>
            <td><strong>Description</strong></td>
        </tr>
        <tr align="left">
-           <td><sup><a href="../../usage/docker-compose/docker-compose.nvidia">docker-compose.nvidia</a></sup></td>
+           <td><sup><a href="./usage/docker-compose/docker-compose.nvidia">docker-compose.nvidia</a></sup></td>
            <td><sup>Guide on using the Nvidia runtime within Docker containers.</sup></td>
        </tr>
        <tr align="left">
-           <td><sup><a href="../../usage/docker-compose/docker-compose.companion">docker-compose.companion</a></sup></td>
+           <td><sup><a href="./usage/docker-compose/docker-compose.companion">docker-compose.companion</a></sup></td>
            <td><sup>Instructions on reusing the built-in Coturn server for a second stream instance.</sup></td>
        </tr>
        <tr align="left">
-           <td><sup><a href="../../usage/docker-compose/docker-compose.steam">docker-compose.steam</a></sup></td>
+           <td><sup><a href="./usage/docker-compose/docker-compose.steam">docker-compose.steam</a></sup></td>
            <td><sup>Steps to disable isolation for Flatpak Steam applications.</sup></td>
        </tr>
        <tr align="left">
-           <td><sup><a href="../../usage/docker-compose/docker-compose.coturn">docker-compose.coturn</a></sup></td>
+           <td><sup><a href="./usage/docker-compose/docker-compose.coturn">docker-compose.coturn</a></sup></td>
            <td><sup>Setup for an external Coturn server and configuring stream to use it.</sup></td>
        </tr>
        <tr align="left">
-           <td><sup><a href="../../usage/docker-compose/docker-compose.build">docker-compose.build</a></sup></td>
+           <td><sup><a href="./usage/docker-compose/docker-compose.build">docker-compose.build</a></sup></td>
            <td><sup>Instructions for building with a list of all available build arguments.</sup></td>
        </tr>
        <tr align="left">
-           <td><sup><a href="../../usage/docker-compose/docker-compose.wsl">docker-compose.wsl</a></sup></td>
+           <td><sup><a href="./usage/docker-compose/docker-compose.wsl">docker-compose.wsl</a></sup></td>
            <td><sup>Instructions for utilizing NVIDIA GPU in WSL container.</sup></td>
        </tr>
 </table>
@@ -163,14 +163,14 @@ echo -e "\tSupervisor: http://$(hostname -I | awk '{print $1}'):9091\n"
 
 <img src="../../.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
-<div align="left">
+<div align="center">
    <table>
        <tr align="left">
            <td><strong>Component</strong></td>
            <td><strong>Description</strong></td>
        </tr>
        <tr align="left">
-           <td><sup><a href="../../usage/kubernetes/deployment.yml">deployment.yml</a></sup></td>
+           <td><sup><a href="./usage/kubernetes/deployment.yml">deployment.yml</a></sup></td>
            <td><sup>A fully configured deployment utilizing the Nvidia runtime, with broken isolation, host networking, and an internal (built-in) TURN server.</sup></td>
        </tr>
    </table>
@@ -189,7 +189,7 @@ echo -e "\tSupervisor: http://$(hostname -I | awk '{print $1}'):9091\n"
 
 <img src="../../.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
-<div align="left">
+<div align="center">
    <table>
        <tr align="left">
            <td><strong>Component</strong></td>
@@ -204,6 +204,6 @@ echo -e "\tSupervisor: http://$(hostname -I | awk '{print $1}'):9091\n"
 
 ##
 
-<div align="left">
+<div align="center">
    <img src="../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
