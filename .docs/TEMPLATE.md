@@ -125,6 +125,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et tempus nulla, non
    </li>
    <!-- #element [2] -->
    
+   <!-- element [3] -->   
+   <li>
+   <h3>YOUR-PARAGRAPH</p3>
+   <pre><code>YOUR-CODE</code></pre>
+   </li>
+   <!-- #element [3] -->      
+   
  </ul>
  <!-- #list -->    
 </details>
