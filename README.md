@@ -88,11 +88,11 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
 - [Usage](#usage)
   - [Usage `Docker`](#usage---docker)
   - [Usage `Docker-Compose`](#usage---docker-compose)
-  - [Usage `Kubernetes`](#usage---kubernetes---manifest)
-  - [Usage `Helm`](#usage---kubernetes---helm)
+  - [Usage `Kubernetes`](#usage---kubernetes---manifest) ⚠️
+  - [Usage `Helm`](#usage---kubernetes---helm) ⚠️
 - [Setup](#setup)
   - [Setup by `Ansible`](#setup---ansible)
-  - [Setup by `Bash`](#setup---bash)
+  - [Setup by `Bash`](#setup---bash) ⚠️
   - [Setup on `WSL`](#setup---wsl)
 - [Configuration](#configuration)
   - [Configuration `Selkies Gstreamer`](#configuration---selkies-gstreamer)
@@ -826,11 +826,20 @@ Here, I will provide a full description of the Dockerfile, the repository struct
 ##
 <!---
 #####################################################
-# Contributing - Structure Dockerfile - Monolith
+# Contributing - Structure
 #####################################################
 --->  
 
-### Structure Dockerfile - Monolith
+### Contributing - Structure 
+
+##
+<!---
+#####################################################
+# Contributing - Structure - Monolith
+#####################################################
+--->  
+
+### Structure - Monolith 
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 The Dockerfile includes all the core components needed to ensure a smooth gaming experience, component are management and orchestrated by Supervisor.
@@ -848,36 +857,39 @@ Core components:
       <td rowspan="7"><sup>Supervisord</sup></td>
    </tr>
    <tr>
-       <td><sup>xvfb</sup></td>
-       <td><sup>X virtual framebuffer</sup></td>
-       <td><sup>Provides a display server for graphical applications</sup></td>
-   </tr>
+       <td><sup>Kde-Plasma</sup></td>
+       <td><sup>Desktop Environment</sup></td>
+       <td><sup>Provides a graphical interface for user interaction</sup></td>
+   </tr> 
+   <tr>
+       <td><sup>D-Bus</sup></td>
+       <td><sup>Message bus system</sup></td>
+       <td><sup>Facilitates communication between processes</sup></td>
+   </tr> 
    <tr>
        <td><sup>PipeWire</sup></td>
        <td><sup>Multimedia server</sup></td>
        <td><sup>Handles audio and video streams</sup></td>
-   </tr>
+   </tr> 
    <tr>
        <td><sup>Selkies-Gstreamer</sup></td>
        <td><sup>Media processing framework</sup></td>
        <td><sup>Rremote desktop streaming platform</sup></td>
+   </tr>   
+   <tr>
+       <td><sup>xvfb</sup></td>
+       <td><sup>X virtual framebuffer</sup></td>
+       <td><sup>Provides a display server for graphical applications</sup></td>
    </tr>
    <tr>
        <td><sup>Coturn</sup></td>
        <td><sup>TURN and STUN server</sup></td>
        <td><sup>Provides NAT traversal for WebRTC</sup></td>
    </tr>
-   <tr>
-       <td><sup>D-Bus</sup></td>
-       <td><sup>Message bus system</sup></td>
-       <td><sup>Facilitates communication between processes</sup></td>
-   </tr>
-   <tr>
-       <td><sup>Kde-Plasma</sup></td>
-       <td><sup>Desktop Environment</sup></td>
-       <td><sup>Provides a graphical interface for user interaction</sup></td>
-   </tr>   
 </table>
+
+> [!NOTE]
+> If `PipeWire` and `Coturn` are shipped externally, we can consider them as optional components.
 
 ##
 
@@ -938,6 +950,11 @@ Additonal components:
         <td><sup>Session manager</sup></td>
         <td><sup>Manages PipeWire sessions and connections</sup></td>
     </tr>
+    <tr>
+        <td><sup>Firefox-Nightly</sup></td>
+        <td><sup>Web browser</sup></td>
+        <td><sup>Provides a testing version of the Firefox browser with the latest features</sup></td>
+    </tr>
 </table>
 
 ##
@@ -974,6 +991,47 @@ Docker-Compose snippet:
        WINE_VERSION: "9.15~*-1"
 ```
 
+##
+<!---
+#####################################################
+# Contributing - Structure - Monolith - Futher Works
+#####################################################
+--->  
+
+#### Structure - Monolith - Futher Works
+<sup>[(Back to top)](#table-of-contents)</sup>
+
+##
+<!---
+#####################################################
+# Contributing - Structure - Microservices
+#####################################################
+--->  
+
+###  Structure - Microservices
+<sup>[(Back to top)](#table-of-contents)</sup>
+
+<img src=".media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet neque non dui luctus posuere. Phasellus laoreet elit eu diam ultrices fermentum. Ut posuere, quam sed blandit ornare, lacus nisi consectetur tortor, vel dictum erat enim a leo. Curabitur dictum tristique hendrerit.
+
+##
+
+<div align="center">
+<sup><code>Finaly! Something intresting.</code></sup>
+<br>   
+<img src=".media/contributing/structure/microservices/contributing_structure_microservices.png" width="800" height="auto"/>  
+</div>
+
+##
+<!---
+#####################################################
+# Contributing - Structure - Microservices - Futher Works
+#####################################################
+--->  
+
+#### Structure - Microservices - Futher Works
+<sup>[(Back to top)](#table-of-contents)</sup>
 
 ##
 <!---
@@ -982,7 +1040,7 @@ Docker-Compose snippet:
 #####################################################
 --->  
 
-### Structure Repository
+#### Structure - Repository
 <sup>[(Back to top)](#table-of-contents)</sup>
 
 ##
