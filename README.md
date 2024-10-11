@@ -168,7 +168,7 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
   - [Setup `Ansible`](./.docs/setup/SETUP.md#setup---ansible)
   - [Setup `Bash`](./.docs/setup/SETUP.md#setup---bash) ⚠️
   - [Setup `WSL`](./.docs/setup/SETUP.md#setup---wsl)
-  - [Setup `Helpful Resources`](./.docs/miscellaneous/HELPFUL_RESOURCES.md#setup---helpful---resources) 💡
+  - [Setup `Helpful Resources`](./.docs/miscellaneous/HELPFUL_RESOURCES.md#setup---helpful---resources)
 
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
