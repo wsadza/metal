@@ -244,35 +244,6 @@ Here, I will provide a full description of the Dockerfile, the repository struct
      - [Development - Workflow - CD](.docs/development/workflow/CD.md#development---workflow---cd) ⚠️
   - [Development - Futher - Works](./docs/development/FUTHER_WORKS.md#development---futher---works) ⚠️
 
-##
-
-##
-<!---
-#####################################################
-# Development - Workflow CICD
-#####################################################
---->  
-### Development - Workflow CICD
-<!---
-#####################################################
-# Development - Workflow CICD
-#####################################################
---->  
-#### Development - Workflow CI
-<sup>[(Back to Development)](#development)</sup>
-<br>
-<sup>[(Back to Top)](#table-of-contents)</sup>
-<br>
-
-##
-
-#### Development - Workflow CD
-<sup>[(Back to Development)](#development)</sup>
-<br>
-<sup>[(Back to Top)](#table-of-contents)</sup>
-<br>
-
-
 <!---
 $$$$$$$\  $$$$$$\  $$$$$$\   $$$$$$\  $$\        $$$$$$\  $$$$$$\ $$\      $$\ $$$$$$$$\ $$$$$$$\   $$$$$$\  
 $$  __$$\ \_$$  _|$$  __$$\ $$  __$$\ $$ |      $$  __$$\ \_$$  _|$$$\    $$$ |$$  _____|$$  __$$\ $$  __$$\ 
