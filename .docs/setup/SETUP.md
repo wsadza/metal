@@ -20,19 +20,16 @@ git clone https://github.com/utilizable/metal.git && cd metal/setup/ansible && .
 ```
 
 ##
+<img src="../../.media/asset/helper/asset_helper_wip.png" align="right" width="8%" height="auto"/>
 <!---
 #####################################################
-Setup - Bash - WIP!
+Setup - Bash
 #####################################################
 --->
 ### Setup - Bash
 <sup>[(Back to Setup)](../../README.md#table-of-contents-2)</sup>
 <br>
 <!--- CONTENT --->
-
-<!--- WIP --->
-<img src="../../.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
-<!--- WIP --->
 
 Clone this repository and run the [setup.sh](./setup/setup/bash/setup.sh) bash script. This will fetch and install all the necessary dependencies and components.
 
