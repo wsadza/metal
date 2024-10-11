@@ -122,7 +122,7 @@ This section provides guidance on deploying and configuring streaming instances 
   - [Usage `Docker`](./.docs/usage/USAGE.md#usage---docker) 
   - [Usage `Docker-Compose`](./.docs/usage/USAGE.md#usage---docker-compose)
   - [Usage `Kubernetes`](./.docs/usage/USAGE.md#usage---kubernetes)
-  - [Setup `Helm`](./.docs/usage/USAGE.md#setup---helm) ⚠️
+  - [Setup `Helm`](./.docs/usage/USAGE.md#usage---helm) ⚠️
     
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
@@ -233,7 +233,7 @@ Here, I will provide a full description of the Dockerfile, the repository struct
      - [Development - Structure - Monolith](#development---structure---monolith)
      - [Development - Structure - Microservices](#development---structure---microservices) ⚠️
      - [Development - Structure - Repository](#development---structure---repository)
-  - [Development - Workflow](#development---workflow)
+  - Development - Workflow
      - [Development - Workflow - CI](#development---workflow---ci)
      - [Development - Workflow - CD](#development---workflow---cd) ⚠️
   - [Development - Futher-Works](./docs/development/FUTHER_WORKS.md)
