@@ -2,7 +2,6 @@
    <img src="../../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
 
-##
 <!--- WIP --->
 <img src="../../../.media/asset/helper/asset_helper_wip.png" align="right" width="8%" height="auto"/>
 
@@ -25,8 +24,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nequ
 <img src="../../../.media/development/structure/distributed/development_structure_distributed_preview.png" width="800" height="auto"/>  
 </div>
 
-##
 
+<br>
+<br>
 <div align="center">
    <img src="../../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
