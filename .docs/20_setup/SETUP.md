@@ -9,7 +9,7 @@
 #####################################################
 --->
 ### Setup - Ansible
-<sup>[(Back to Setup)](../../README.md#table-of-contents-2)</sup>
+<sup>[(Back to Setup)](../../README.md#setup)</sup>
 <br>
 <!--- CONTENT --->
 
@@ -29,7 +29,7 @@ Setup - Bash
 #####################################################
 --->
 ### Setup - Bash
-<sup>[(Back to Setup)](../../README.md#table-of-contents-2)</sup>
+<sup>[(Back to Setup)](../../README.md#setup)</sup>
 <br>
 <!--- CONTENT --->
 
@@ -46,7 +46,7 @@ Setup - WSL
 #####################################################
 --->
 ### Setup - WSL
-<sup>[(Back to Setup)](../../README.md#table-of-contents-2)</sup>
+<sup>[(Back to Setup)](../../README.md#setup)</sup>
 <br>
 <!--- CONTENT --->
 
