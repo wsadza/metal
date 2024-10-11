@@ -11,8 +11,6 @@
       <img src="https://labl.es/svg?text=VDI&width=200&bgcolor=d35400" align="center"/>
    </div>
    
-<img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
-<br>
 </div>
 
 <!---
