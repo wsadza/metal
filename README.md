@@ -25,8 +25,6 @@ $$ |\$  /$$ |$$ |         $$ |   $$ |  $$ |$$ |
 $$ | \_/ $$ |$$$$$$$$\    $$ |   $$ |  $$ |$$$$$$$$\ 
 \__|     \__|\________|   \__|   \__|  \__|\________
 --->
-
-
 # Metal
 <img src=".media/asset/section/asset_section_a.png" align="left" width="5%" height="auto"/>
 
@@ -36,17 +34,13 @@ Introducing totally modular, Dockerized streaming service. Build it your way, wh
 
 Now it's a streaming powerhouse. Why? Just because!
 
-<br>
-<blockquote>Goal: Tailor a product that serves as a foundation for exploring Kubernetes and containerization.</blockquote>
-
 ##
 <!---
 #####################################################
-# TLDR
+# TL;DR
 #####################################################
 --->
-
-### TLDR: 
+### TL;DR 
 > [!NOTE]  
 > Minimal Debian image that utilizes software rendering ([llvmpipe](https://docs.mesa3d.org/drivers/llvmpipe.html])), suitable for WSL / Native linux instances.
 
@@ -64,15 +58,12 @@ $$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
 $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 \__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
 --->
-
-<h2>Preview</h2>
+## Preview
 <div align="center">
 <sup><code>It was easy, right?</code></sup>
 <br>
 <img src=".media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="auto"/>
 </div>
-
-##
 
 <!---
 $$$$$$$$\  $$$$$$\   $$$$$$\  
@@ -84,8 +75,7 @@ $$$$$$$$\  $$$$$$\   $$$$$$\
    $$ |    $$$$$$  |\$$$$$$  |
    \__|    \______/  \______/
 --->
-
-### Table Of Contents:
+## Table Of Contents:
 - [Usage](#usage)
 - [Setup](#setup)
 - [Configuration](#configuration)
@@ -129,7 +119,7 @@ $$ |  $$ |$$\   $$ |$$ |  $$ |$$ |  $$ |$$ |
 This section provides guidance on deploying and configuring streaming instances using Docker, Docker Compose, and Kubernetes (K8S) manifests. It includes specific instructions for different Linux distributions and GPU acceleration.
 
 ### Table Of Contents:
-  - [Usage `Docker`](./.docs/usage/USAGE.md#usage---docker)
+  - [Usage `Docker`](./.docs/usage/USAGE.md#usage---docker) 
   - [Usage `Docker-Compose`](./.docs/usage/USAGE.md#usage---docker-compose)
   - [Usage `Kubernetes`](./.docs/usage/USAGE.md#usage---kubernetes)
 
@@ -187,11 +177,9 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 > </details>
 
 ### Table Of Contents:
-  - [Setup `Ansible`](#setup---ansible)
-  - [Setup `Bash`](#setup---bash) ⚠️
-  - [Setup `WSL`](#setup---wsl)
-
-
+  - [Setup `Ansible`](./.docs/setup/SETUP.md#setup---ansible)
+  - [Setup `Bash`](./.docs/setup/SETUP.md#setup---bash) ⚠️
+  - [Setup `WSL`](./.docs/setup/SETUP.md#setup---wsl)
 ##
 <!---
 #####################################################
