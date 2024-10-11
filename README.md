@@ -152,6 +152,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ### Usage - Docker:
 <sup>[(Back to Usage)](#usage)</sup>
+<br>
 <sup>[(Back to top)](#table-of-contents-0)</sup>
 
 > [!TIP]
@@ -201,6 +202,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ### Usage - Docker-Compose:
 <sup>[(Back to Usage)](#usage)</sup>
+<br>
 <sup>[(Back to top)](#table-of-contents-0)</sup>
 
 > [!IMPORTANT]  
@@ -238,6 +240,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ### Usage - Kubernetes - Manifest:
 <sup>[(Back to Usage)](#usage)</sup>
+<br>
 <sup>[(Back to top)](#table-of-contents-0)</sup>
 
 > [!CAUTION]
@@ -259,6 +262,7 @@ This section provides guidance on deploying and configuring streaming instances 
 
 ### Usage - Kubernetes - Helm:
 <sup>[(Back to Usage)](#usage)</sup>
+<br>
 <sup>[(Back to top)](#table-of-contents-0)</sup>
 
 <!--- WIP --->
@@ -340,6 +344,7 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 
 ### Setup - Ansible
 <sup>[(Back to Setup)](#setup)</sup>
+<br>
 <sup>[(Back to top)](#table-of-contents-0)</sup>
 
 Clone this repository and run the [setup.sh](./setup/ansible/setup.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
@@ -357,6 +362,7 @@ Setup - Bash - WIP!
 
 ### Setup - Bash
 <sup>[(Back to Setup)](#setup)</sup>
+<br>
 <sup>[(Back to top)](#table-of-contents-0)</sup>
 
 <!--- WIP --->
@@ -378,6 +384,7 @@ Setup - WSL
 
 ### Setup - WSL
 <sup>[(Back to Setup)](#setup)</sup>
+<br>
 <sup>[(Back to top)](#table-of-contents-0)</sup>
 
 Consider this more of a curiosity than a genuine configuration; Vulkan doesn’t function properly on WSL-Linux, which severely limits gaming options.
@@ -401,7 +408,7 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$
 --->
 
 ## Configuration
-<sup>[(Back to top)](#table-of-contents)</sup>
+<sup>[(Back to top)](#table-of-contents-0)</sup>
 
 <img src=".media/asset/section/asset_section_d.png" align="left" width="5%" height="auto"/>
 
