@@ -9,7 +9,7 @@
 #####################################################
 --->  
 ### Configuration - Coturn
-<sup>[(Back to Configuration)](../../README.md#configuration)</sup>
+<sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
 <table>
@@ -57,7 +57,7 @@
 #####################################################
 --->  
 ### Configuration - Pipewire
-<sup>[(Back to Configuration)](../../README.md#configuration)</sup>
+<sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
 <table>
@@ -100,7 +100,7 @@
 #####################################################
 --->  
 ### Configuration - Selkies-Gstreamer 
-<sup>[(Back to Configuration)](../../README.md#configuration)</sup>
+<sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
 <table>
@@ -198,7 +198,7 @@
 #####################################################
 --->  
 ### Configuration - Desktop
-<sup>[(Back to Configuration)](../../README.md#configuration)</sup>
+<sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
 <table>
@@ -291,7 +291,7 @@
 #####################################################
 --->  
 ### Configuration - Graphic
-<sup>[(Back to Configuration)](../../README.md#configuration)</sup>
+<sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
 <table>
@@ -359,7 +359,7 @@
 #####################################################
 --->  
 ### Configuration - Miscellaneous
-<sup>[(Back to Configuration)](../../README.md#configuration)</sup>
+<sup>[(Back to Configuration)](../../README.md#table-of-contents-3)</sup>
 <br>
 
 <table>
