@@ -8,10 +8,10 @@
 
 <!---
 #####################################################
-# Development - Structure - Monolithc
+# Development - Structure - Monolithic
 #####################################################
 --->  
-#### Development - Structure - Monolithc
+#### Development - Structure - Monolithic
 <sup>[(Back to Development)](../../../README.md#table-of-contents-4)</sup>
 <br>
 
@@ -110,7 +110,7 @@ The Dockerfile encompasses all the essential components required for a seamless 
 <div align="center">
 <sup><code>What is this, Granny? Some outdated sysadmin techniques?</code></sup>
 <br>   
-<img src="../../../.media/development/structure/monolith/development_structure_monolith_preview.png" width="600" height="auto"/>  
+<img src="../../../.media/development/structure/monolithic/development_structure_monolithic_preview.png" width="600" height="auto"/>  
 </div>
 
 ##
@@ -125,7 +125,7 @@ Each additional component has its own arguments to include during the build proc
 <div align="center">
 <sup><code>Build Arguments? Who's using those? Come on, bro!</code></sup>
 <br>      
-<img src="../../../.media/development/structure/monolith/development_structure_monolith_modularity.png" width="800" height="auto"/>  
+<img src="../../../.media/development/structure/monolithic/development_structure_monolithic_modularity.png" width="800" height="auto"/>  
 </div>
 
 ##
