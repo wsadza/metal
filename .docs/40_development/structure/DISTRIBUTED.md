@@ -22,7 +22,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nequ
 <div align="center">
 <sup><code>Finaly! Something intresting.</code></sup>
 <br>   
-<img src="../../../.media/development/structure/microservices/development_structure_microservices_preview.png" width="800" height="auto"/>  
+<img src="../../../.media/development/structure/distributed/development_structure_distributed_preview.png" width="800" height="auto"/>  
 </div>
 
 ##
