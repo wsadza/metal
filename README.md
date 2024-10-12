@@ -64,7 +64,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
    <sup><code>It was easy, right?</code></sup>
    <br>
    <div style="width: 800; height: 450; background-color: black;">
-      <img src="./.media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="450"/>   
+      <img src="./.media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="auto"/>   
    </div>   
 </div>
 
@@ -130,7 +130,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
    <sup><code>Want to play with others?</code></sup>
    <br>
    <div style="width: 800; height: 450; background-color: black;">
-      <img src="./.media/native/preview/gif/native_preview_gif_companion.gif" align="center" width="800" height="450"/>
+      <img src="./.media/native/preview/gif/native_preview_gif_companion.gif" align="center" width="800" height="auto"/>
    </div>      
 </div>
 
@@ -175,7 +175,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
    <sup><code>It was easy, right?</code></sup>
    <br>
    <div style="width: 800; height: 450; background-color: black;">
-      <img src="./.media/native/preview/gif/native_preview_gif_mobile.gif" align="center" width="800" height="450"/>
+      <img src="./.media/native/preview/gif/native_preview_gif_mobile.gif" align="center" width="800" height="auto"/>
    </div>   
 </div>
 
