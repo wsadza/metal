@@ -299,7 +299,7 @@ $$$$$$$  |$$$$$$\ \$$$$$$  |\$$$$$$  |$$$$$$$$\ $$ |  $$ |$$$$$$\ $$ | \_/ $$ |$
 
 This section contains important disclaimers regarding the ownership of software and the funding sources for the project. Please review the details carefully to understand the rights associated with the software and the contributions of supporting organizations.
 
-#### Disclaimers:
+<br>
 <ul>
   <details>
   <summary>Copyright</summary>
