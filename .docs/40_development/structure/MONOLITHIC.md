@@ -162,6 +162,16 @@ Managing orchestration in a monolithic architecture can be challenging. However,
 
 > Supervisord is a client/server system that enables users to monitor and manage multiple processes on UNIX-like operating systems.
 
+##
+
+<div align="center">
+<sup><code></code></sup>
+<br>   
+<img src="../../../.media/development/structure/monolithic//development_structure_monolithic_orchestrating.png" width="800" height="auto"/>  
+</div>
+
+##
+
 <!---
 #####################################################
 # Development - Structure - Monolithic - Orchiestration - Entrypoint
