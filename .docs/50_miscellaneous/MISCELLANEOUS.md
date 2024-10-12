@@ -8,8 +8,7 @@
 #####################################################
 --->
 ## Helpful Resources
-<sup>[(Back to Miscellaneous)](../../README.md#miscellaneous)</sup>
-<br>
+
 <!--- CONTENT --->
 
 <!---
@@ -20,7 +19,10 @@
 <h3 id="helpful-resources---setup">
 $\color{yellow}{\textsf{Helpful Resources - Setup}}$    
 </h3>
- 
+
+<sup>[(Back to Miscellaneous)](../../README.md#miscellaneous)</sup>
+<br>
+
 <!--- CONTENT --->
 
 #### Setup - General
