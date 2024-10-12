@@ -107,12 +107,13 @@ This section provides guidance on deploying and configuring streaming instances 
 <img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
-  - [Usage `Docker`](./.docs/10_usage/USAGE.md#usage---docker) 
-  - [Usage `Docker-Compose`](./.docs/10_usage/USAGE.md#usage---docker-compose)
-  - [Usage `Kubernetes`](./.docs/10_usage/USAGE.md#usage---kubernetes)
-<sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
-  - [Usage `Helm`](./.docs/10_usage/USAGE.md#usage---helm)
-<sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
+  - $\large\color{yellow}{\textsf{Usage}}$
+     - [Usage `Docker`](./.docs/10_usage/USAGE.md#usage---docker) 
+     - [Usage `Docker-Compose`](./.docs/10_usage/USAGE.md#usage---docker-compose)
+     - [Usage `Kubernetes`](./.docs/10_usage/USAGE.md#usage---kubernetes)
+   <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
+     - [Usage `Helm`](./.docs/10_usage/USAGE.md#usage---helm)
+   <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
 
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
@@ -155,10 +156,11 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 <img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
-  - [Setup `Ansible`](./.docs/20_setup/SETUP.md#setup---ansible)
-  - [Setup `Bash`](./.docs/20_setup/SETUP.md#setup---bash)
-<sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
-  - [Setup `WSL`](./.docs/20_setup/SETUP.md#setup---wsl)
+  - $\large\color{yellow}{\textsf{Setup}}$
+     - [Setup `Ansible`](./.docs/20_setup/SETUP.md#setup---ansible)
+     - [Setup `Bash`](./.docs/20_setup/SETUP.md#setup---bash)
+       <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
+     - [Setup `WSL`](./.docs/20_setup/SETUP.md#setup---wsl)
 
 <!---
 $$$$$$$\  $$$$$$$\  $$$$$$$$\ $$\    $$\ $$$$$$\ $$$$$$$$\ $$\      $$\ 
@@ -198,7 +200,7 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$
 This section highlights the critical configurations and components necessary for maximizing the performance and functionality of your media streaming and communication setup. Each configuration is tailored to improve the overall user experience. You can find all the configurations described below in the [Dockerfile](https://github.com/utilizable/metal/blob/develop/build/docker/Dockerfile.debbased#L1314).
 
 ### Table Of Contents:
-  - $\color{yellow}{\textsf{Configuration - Monolithc}}$
+  - $\large\color{yellow}{\textsf{Configuration - Monolithc}}$
      - [Configuration - Monolithc - `Selkies Gstreamer`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---selkies-gstreamer)
      - [Configuration - Monolithc - `Pipewire`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---pipewire)
      - [Configuration - Monolithc - `Coturn`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---coturn)
@@ -245,14 +247,14 @@ This section explains how we build our software, focusing on different structure
 <img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
-  - $\color{yellow}{\textsf{Development - Structure}}$
+  - $\large\color{yellow}{\textsf{Development - Structure}}$
      - [Development - Structure - Monolithic](./.docs/40_development/structure/MONOLITHIC.md#development---structure---monolithic)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
      - [Development - Structure - Distributed](./.docs/40_development/structure/DISTRIBUTED.md#development---structure---distributed)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
      - [Development - Structure - Repository](./.docs/40_development/structure/REPOSITORY.md#development---structure---repository)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
-  - $\color{yellow}{\textsf{Development - Workflow}}$
+  - $\large\color{yellow}{\textsf{Development - Workflow}}$
      - [Development - Workflow - CI](./.docs/40_development/workflow/CI.md#development---workflow---ci)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
      - [Development - Workflow - CD](./.docs/40_development/workflow/CD.md#development---workflow---cd)
@@ -277,10 +279,10 @@ $$ | \_/ $$ |$$$$$$\ \$$$$$$  |\$$$$$$  |
 The "Miscellaneous" section gathers various resources and content that may not belong to a specific category but are still valuable and worth referencing. It's a place for extra tools, tips, and information that support a wide range of needs.
 
 ### Table Of Contents:
-- $\color{yellow}{\textsf{Helpful Resources}}$
+- $\large\color{yellow}{\textsf{Helpful Resources}}$
    - [Helpful Resources - Setup](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---setup)
    - [Helpful Resources - Questions / Answers](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---questions---answers)
-- [Document Template](./.docs/_misc/DOCUMENT_TEMPLATE.md)
+- [Document Template](./.docs/50_miscellaneous/DOCUMENT_TEMPLATE.md)
 
 <!---
 $$$$$$$\  $$$$$$\  $$$$$$\   $$$$$$\  $$\        $$$$$$\  $$$$$$\ $$\      $$\ $$$$$$$$\ $$$$$$$\   $$$$$$\  
