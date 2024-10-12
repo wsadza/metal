@@ -63,7 +63,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
    <sup><code>It was easy, right?</code></sup>
    <br>
-   <div style="width: 800; height: 450; background-color: black;">
+   <div style="width: 800; height: auto; background-color: black;">
       <img src="./.media/native/preview/gif/native_preview_gif_tldr.gif" width="800" height="auto"/>   
    </div>   
 </div>
@@ -129,7 +129,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
    <sup><code>Want to play with others?</code></sup>
    <br>
-   <div style="width: 800; height: 450; background-color: black;">
+   <div style="width: 800; height: auto; background-color: black;">
       <img src="./.media/native/preview/gif/native_preview_gif_companion.gif" align="center" width="800" height="auto"/>
    </div>      
 </div>
@@ -174,7 +174,7 @@ $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 <div align="center">
    <sup><code>It was easy, right?</code></sup>
    <br>
-   <div style="width: 800; height: 450; background-color: black;">
+   <div style="width: 800; height: auto; background-color: black;">
       <img src="./.media/native/preview/gif/native_preview_gif_mobile.gif" align="center" width="800" height="auto"/>
    </div>   
 </div>
@@ -216,12 +216,13 @@ $$ |      $$ |  $$ |$$ |        \$$$  /    $$ |  $$ |      $$$  / \$$$ |
 $$ |      $$ |  $$ |$$$$$$$$\    \$  /   $$$$$$\ $$$$$$$$\ $$  /   \$$ |
 \__|      \__|  \__|\________|    \_/    \______|\________|\__/     \__|
 --->
-
 <h2>Preview</h2>
 <div align="center">
-<sup><code>Steam? No Problem!</code></sup>
-<br>
-<img src="./.media/native/preview/gif/native_preview_gif_steam.gif" width="800" height="auto"/>
+   <sup><code>Steam? No Problem!</code></sup>
+   <br>
+   <div style="width: 800; height: auto; background-color: black;">
+      <img src="./.media/native/preview/gif/native_preview_gif_steam.gif" width="800" height="auto"/>
+   </div>   
 </div>
 
 <!---
