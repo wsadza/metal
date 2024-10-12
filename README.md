@@ -41,7 +41,10 @@ Now it's a streaming powerhouse. Why? Just because!
 # TL;DR
 #####################################################
 --->
-### TL;DR 
+<h3 id="tldr">
+   $\large\color{Goldenrod}{\textbf{TL;DR}}$
+</h3>
+
 > [!NOTE]  
 > Minimal Debian image that utilizes software rendering ([llvmpipe](https://docs.mesa3d.org/drivers/llvmpipe.html])), suitable for WSL / Native linux instances.
 
@@ -107,7 +110,7 @@ This section provides guidance on deploying and configuring streaming instances 
 <img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
-  - $\large\color{yellow}{\textsf{Usage}}$
+  - $\large\color{Goldenrod}{\textbf{Usage}}$
      - [Usage `Docker`](./.docs/10_usage/USAGE.md#usage---docker) 
      - [Usage `Docker-Compose`](./.docs/10_usage/USAGE.md#usage---docker-compose)
      - [Usage `Kubernetes`](./.docs/10_usage/USAGE.md#usage---kubernetes)
@@ -156,7 +159,7 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 <img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
-  - $\large\color{yellow}{\textsf{Setup}}$
+  - $\large\color{Goldenrod}{\textbf{Setup}}$
      - [Setup `Ansible`](./.docs/20_setup/SETUP.md#setup---ansible)
      - [Setup `Bash`](./.docs/20_setup/SETUP.md#setup---bash)
        <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
@@ -200,7 +203,7 @@ $$ |  $$\ $$ |  $$ |$$ |\$$$ |$$ |        $$ |  $$ |  $$ |$$ |  $$ |$$ |  $$ |$$
 This section highlights the critical configurations and components necessary for maximizing the performance and functionality of your media streaming and communication setup. Each configuration is tailored to improve the overall user experience. You can find all the configurations described below in the [Dockerfile](https://github.com/utilizable/metal/blob/develop/build/docker/Dockerfile.debbased#L1314).
 
 ### Table Of Contents:
-  - $\large\color{yellow}{\textsf{Configuration - Monolithic}}$
+  - $\large\color{Goldenrod}{\textbf{Configuration - Monolithic}}$
      - [Configuration - Monolithic - `Selkies Gstreamer`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---selkies-gstreamer)
      - [Configuration - Monolithic - `Pipewire`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---pipewire)
      - [Configuration - Monolithic - `Coturn`](./.docs/30_configuration/MONOLITHIC.md#configuration---monolithic---coturn)
@@ -247,14 +250,14 @@ This section explains how we build our software, focusing on different structure
 <img src="./.media/asset/helper/asset_helper_wip.png" align="right" width="10%" height="auto"/>
 
 ### Table Of Contents:
-  - $\large\color{yellow}{\textsf{Development - Structure}}$
+  - $\large\color{Goldenrod}{\textbf{Development - Structure}}$
      - [Development - Structure - Monolithic](./.docs/40_development/structure/MONOLITHIC.md#development---structure---monolithic)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
      - [Development - Structure - Distributed](./.docs/40_development/structure/DISTRIBUTED.md#development---structure---distributed)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
      - [Development - Structure - Repository](./.docs/40_development/structure/REPOSITORY.md#development---structure---repository)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
-  - $\large\color{yellow}{\textsf{Development - Workflow}}$
+  - $\large\color{Goldenrod}{\textbf{Development - Workflow}}$
      - [Development - Workflow - CI](./.docs/40_development/workflow/CI.md#development---workflow---ci)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
      - [Development - Workflow - CD](./.docs/40_development/workflow/CD.md#development---workflow---cd)
@@ -279,7 +282,7 @@ $$ | \_/ $$ |$$$$$$\ \$$$$$$  |\$$$$$$  |
 The "Miscellaneous" section gathers various resources and content that may not belong to a specific category but are still valuable and worth referencing. It's a place for extra tools, tips, and information that support a wide range of needs.
 
 ### Table Of Contents:
-- $\large\color{yellow}{\textsf{Helpful Resources}}$
+- $\large\color{Goldenrod}{\textbf{Helpful Resources}}$
    - [Helpful Resources - Setup](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---setup)
    - [Helpful Resources - Questions / Answers](./.docs/50_miscellaneous/MISCELLANEOUS.md#helpful-resources---questions---answers)
 - [Document Template](./.docs/50_miscellaneous/DOCUMENT_TEMPLATE.md)
@@ -316,7 +319,7 @@ This section contains important disclaimers regarding the ownership of software 
   <details>
   <summary>Selkies-Gstreamer</summary>
   <br>
-    This project has been developed and is supported in part by the National Research Platform (NRP) and the Cognitive Hardware and Software Ecosystem Community Infrastructure (CHASE-CI) at the University of California, San Diego, by funding from the National Science Foundation (NSF), with awards #1730158, #1540112, #1541349, #1826967, #2138811, #2112167, #2100237, and #2120019, as well as additional funding from community partners, infrastructure utilization from the Open Science Grid Consortium, supported by the National Science Foundation (NSF) awards #1836650 and #2030508, and infrastructure utilization from the Chameleon testbed, supported by the National Science Foundation (NSF) awards #1419152, #1743354, and #2027170. This project has also been funded by the Seok-San Yonsei Medical Scientist Training Program (MSTP) Song Yong-Sang Scholarship, College of Medicine, Yonsei University, the MD-PhD/Medical Scientist Training Program (MSTP) through the Korea Health Industry Development Institute (KHIDI), funded by the Ministry of Health & Welfare, Republic of Korea, and the Student Research Bursary of Song-dang Institute for Cancer Research, College of Medicine, Yonsei University.
+    This project has been developed and is supported in part by the National Research Platform (NRP) and the Cognitive Hardware and Software Ecosystem Community Infrastructure (CHASE-CI) at the University of California, San Diego, by funding from the National Science Foundation (Nbf), with awards #1730158, #1540112, #1541349, #1826967, #2138811, #2112167, #2100237, and #2120019, as well as additional funding from community partners, infrastructure utilization from the Open Science Grid Consortium, supported by the National Science Foundation (Nbf) awards #1836650 and #2030508, and infrastructure utilization from the Chameleon testbed, supported by the National Science Foundation (Nbf) awards #1419152, #1743354, and #2027170. This project has also been funded by the Seok-San Yonsei Medical Scientist Training Program (MSTP) Song Yong-Sang Scholarship, College of Medicine, Yonsei University, the MD-PhD/Medical Scientist Training Program (MSTP) through the Korea Health Industry Development Institute (KHIDI), funded by the Ministry of Health & Welfare, Republic of Korea, and the Student Research Bursary of Song-dang Institute for Cancer Research, College of Medicine, Yonsei University.
   </details> 
   
 </ul>
