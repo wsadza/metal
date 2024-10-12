@@ -1,18 +1,32 @@
+<!---
+#####################################################
+# Header
+#####################################################
+--->  
 <div align="center">
    <img src="../../../.media/asset/badge/asset_badge_project_backgroundless.png" width="15%" height="auto"/>
 </div>
 
 <!--- WIP --->
 <img src="../../../.media/asset/helper/asset_helper_wip.png" align="right" width="8%" height="auto"/>
+<br>
+<br>
 
 <!---
 #####################################################
 # Development - Structure - Monolithic
 #####################################################
 --->  
-#### Development - Structure - Monolithic
+## Development - Structure - Monolithic
 <sup>[(Back to Development)](../../../README.md#table-of-contents-4)</sup>
 <br>
+
+<!---
+#####################################################
+# Development - Structure - Monolithic - Components
+#####################################################
+--->  
+### Components
 
 The Dockerfile encompasses all the essential components required for a seamless gaming experience, with management and orchestration handled by Supervisor.
 
@@ -116,6 +130,13 @@ The Dockerfile encompasses all the essential components required for a seamless 
 
 ##
 
+<!---
+#####################################################
+# Development - Structure - Monolithic - Components
+#####################################################
+--->  
+### Building
+
 Each additional component has its own arguments to include during the build process, also you can choose the appropriate version of each component.
 
 > [!NOTE]
@@ -129,7 +150,31 @@ Each additional component has its own arguments to include during the build proc
 <img src="../../../.media/development/structure/monolithic/development_structure_monolithic_modularity.png" width="800" height="auto"/>  
 </div>
 
+##
+<!---
+#####################################################
+# Development - Structure - Monolithic - Orchiestration
+#####################################################
+--->  
+### Orchiestration
 
+Managing orchestration in a monolithic architecture can be challenging. However, using classic tools like supervisord can simplify the process significantly.
+
+> Supervisord is a client/server system that enables users to monitor and manage multiple processes on UNIX-like operating systems.
+
+<!---
+#####################################################
+# Development - Structure - Monolithic - Orchiestration - Entrypoint
+#####################################################
+--->  
+#### Orchiestration - Entrypoint
+
+
+<!---
+#####################################################
+# Footer
+#####################################################
+--->  
 <br>
 <br>
 <div align="center">
