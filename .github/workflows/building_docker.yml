@@ -48,7 +48,7 @@ jobs:
   #
   gathering_informations:
     needs: [ workflow_keeper ]
-    if: ${{ needs.workflow_keeper.outputs.ALLOWED_TO_RUN == 'true' }}
+    if: ${{ (needs.workflow_keeper.outputs.ALLOWED_TO_RUN == 'true') || (github.event_name == 'workflow_dispatch' && github.actor) }}
     name: "Gathering Informations"
     runs-on: ubuntu-latest
     outputs:
