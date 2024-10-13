@@ -166,7 +166,7 @@ Managing processes in a monolithic architecture can be challenging. However, usi
 ##
 
 <div align="center">
-<sup><code>Example process management flow.</code></sup>
+<sup><code>Wait.. what?</code></sup>
 <br>   
 <img src="../../../.media/development/structure/monolithic/development_structure_monolithic_process_managing.png" width="800" height="auto"/>  
 </div>
