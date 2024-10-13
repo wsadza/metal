@@ -56,7 +56,7 @@ Consider this more of a curiosity than a genuine configuration; Vulkan doesn’t
 > - Vulkan isn't functioning properly; only selected linux-native games are working.
 > - Performance is lacking; you can only play very lightweight games.
 
-Instructions for setting up WSL with the D3D12 renderer are provided in a separate [documentation file](./WSL.md).
+Instructions for setting up WSL with the D3D12 renderer are provided in a separate [documentation file](./SETUP-WSL.md).
 
 <br>
 <br>
