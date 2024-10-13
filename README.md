@@ -161,7 +161,7 @@ This repository features an [Ansible Playbook](./setup/ansible) that guides you 
 ### Table Of Contents:
   - $\large\color{Goldenrod}{\textbf{Setup}}$
      - [Setup `Ansible`](./.docs/20_setup/SETUP.md#setup---ansible)
-     - [Setup `Bash`](./.docs/20_setup/SETUP.md#setup---bash)
+     - Setup `Bash`
        <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
      - [Setup `WSL`](./.docs/20_setup/SETUP.md#setup---wsl)
 
@@ -253,14 +253,13 @@ This section explains how we build our software, focusing on different structure
   - $\large\color{Goldenrod}{\textbf{Development - Structure}}$
      - [Development - Structure - Monolithic](./.docs/40_development/structure/MONOLITHIC.md#development---structure---monolithic)
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
-     - [Development - Structure - Distributed](./.docs/40_development/structure/DISTRIBUTED.md#development---structure---distributed)
+     - Development - Structure - Distributed
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
-     - [Development - Structure - Repository](./.docs/40_development/structure/REPOSITORY.md#development---structure---repository)
-   <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
+     - Development - Structure - Repository
   - $\large\color{Goldenrod}{\textbf{Development - Workflow}}$
-     - [Development - Workflow - CI](./.docs/40_development/workflow/CI.md#development---workflow---ci)
+     - Development - Workflow - CI
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
-     - [Development - Workflow - CD](./.docs/40_development/workflow/CD.md#development---workflow---cd)
+     - Development - Workflow - CD
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
 
 
