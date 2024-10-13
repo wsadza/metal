@@ -113,9 +113,9 @@ This section provides guidance on deploying and configuring streaming instances 
   - $\large\color{Goldenrod}{\textbf{Usage}}$
      - [Usage `Docker`](./.docs/10_usage/USAGE.md#usage---docker) 
      - [Usage `Docker-Compose`](./.docs/10_usage/USAGE.md#usage---docker-compose)
-     - [Usage `Kubernetes`](./.docs/10_usage/USAGE.md#usage---kubernetes)
+     - Usage `Kubernetes`
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
-     - [Usage `Helm`](./.docs/10_usage/USAGE.md#usage---helm)
+     - Usage `Helm`
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
 
 <!---
