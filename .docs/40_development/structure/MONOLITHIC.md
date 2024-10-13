@@ -139,7 +139,7 @@ The Dockerfile encompasses all the essential components required for a seamless 
 
 Each additional component has its own arguments to include during the build process, also you can choose the appropriate version of each component.
 
-> [!NOTE]
+> [!TIP]
 > Each `RUN` block in the Dockerfile is independent — it doesn't rely on any other RUN blocks, allowing you to rearrange them as needed.
 
 ##
@@ -160,12 +160,13 @@ Each additional component has its own arguments to include during the build proc
 
 Managing orchestration in a monolithic architecture can be challenging. However, using classic tools like supervisord can simplify the process significantly.
 
+> [!NOTE]
 > Supervisord is a client/server system that enables users to monitor and manage multiple processes on UNIX-like operating systems.
 
 ##
 
 <div align="center">
-<sup><code></code></sup>
+<sup><code>Example orchiestration flow.</code></sup>
 <br>   
 <img src="../../../.media/development/structure/monolithic//development_structure_monolithic_orchestrating.png" width="800" height="auto"/>  
 </div>
