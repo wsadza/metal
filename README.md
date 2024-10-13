@@ -256,6 +256,7 @@ This section explains how we build our software, focusing on different structure
      - Development - Structure - Distributed
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
      - Development - Structure - Repository
+   <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup> 
   - $\large\color{Goldenrod}{\textbf{Development - Workflow}}$
      - Development - Workflow - CI
    <sup><img src="https://labl.es/svg?text=WIP&bgcolor=F7DC6F" align="center"/></sup>
