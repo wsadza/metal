@@ -1,28 +1,37 @@
 #!/bin/bash
 
 #------------------------------------
-# Supervisord logs
+# Supervisor logs
 
-SUPERVISOR_PATH_LOGS="${XDG_RUNTIME_DIR}/logs"
+SUPERVISORD_PATH_LOGS="${XDG_RUNTIME_DIR}/logs"
 
 # Create the log directory if it doesn't exist
-if ! mkdir -p "${SUPERVISOR_PATH_LOGS}"; then
-    echo "Failed to create directory: ${SUPERVISOR_PATH_LOGS}" >&2
+if ! mkdir -p "${SUPERVISORD_PATH_LOGS}"; then
+    echo "Failed to create directory: ${SUPERVISORD_PATH_LOGS}" >&2
     exit 1
 fi
-
 # Change permissions 
-chown -R ${SUDO_USER} ${SUPERVISOR_PATH_LOGS}
+chown -R ${SUDO_USER} ${SUPERVISORD_PATH_LOGS}
 
 #------------------------------------
-# Supervisord Config 
+# Supervisor metrics 
 
-SUPERVISOR_PATH_CONFIG="/etc/supervisord.conf"
+# Skip turn in case of external proxy instance 
+if [ "${SUPERVISORD_EXPORTER_ENABLED}" = "true" ]; then
+sed -i \
+  's/autostart=false/autostart=true/' \
+  /etc/supervisor.d/*_supervisord_exporter.ini
+fi
 
-gomplate -o ${SUPERVISOR_PATH_CONFIG} << 'EOF'
-{{- if has .Env "SUPERVISOR_PORT" }}
+#------------------------------------
+# Supervisor Config 
+
+SUPERVISORD_PATH_CONFIG="/etc/supervisord.conf"
+
+gomplate -o ${SUPERVISORD_PATH_CONFIG} << 'EOF'
+{{- if has .Env "SUPERVISORD_PORT" }}
 [inet_http_server]
-port=0.0.0.0:{{ default "9001" .Env.SUPERVISOR_PORT }}
+port=0.0.0.0:{{ default "9091" .Env.SUPERVISORD_PORT }}
 
 [rpcinterface:supervisor]
 supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
@@ -57,5 +66,5 @@ environment=
 EOF
 
 # Change config permission 
-chmod -R a+rwX ${SUPERVISOR_PATH_CONFIG}
-chown -R ${SUDO_USER} ${SUPERVISOR_PATH_CONFIG}
+chmod -R a+rwX ${SUPERVISORD_PATH_CONFIG}
+chown -R ${SUDO_USER} ${SUPERVISORD_PATH_CONFIG}

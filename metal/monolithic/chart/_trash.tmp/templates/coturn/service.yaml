@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: coturn 
+  labels:
+    {{- include "labels" . | nindent 4 }}
+  annotations:
+    {{- if .Values.global.annotations }}
+    {{- toYaml .Values.global.annotations | nindent 4 }}
+    {{- end }}
+    {{- if .Values.coturn.service.annotations }}
+    {{- toYaml .Values.coturn.service.annotations | nindent 4 }}
+    {{- end }}
+spec:
+  type: {{ .Values.coturn.service.type }}
+  ports:
+    - port: {{ .Values.coturn.service.port }}
+      name: tcp 
+      targetPort: 3478 
+      protocol: TCP
+    - port: {{ .Values.coturn.service.port }}
+      name: udp 
+      targetPort: 3478 
+      protocol: UDP 
+  selector:
+    {{- include "labels" . | nindent 4 }}

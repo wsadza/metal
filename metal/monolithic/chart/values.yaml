@@ -1,0 +1,203 @@
+
+global:
+  labels: []
+
+# ------------------------------------------------------------------------------------
+# $$\      $$\  $$$$$$\  $$\   $$\  $$$$$$\  $$\       $$$$$$\ $$$$$$$$\ $$\   $$\ 
+# $$$\    $$$ |$$  __$$\ $$$\  $$ |$$  __$$\ $$ |      \_$$  _|\__$$  __|$$ |  $$ |
+# $$$$\  $$$$ |$$ /  $$ |$$$$\ $$ |$$ /  $$ |$$ |        $$ |     $$ |   $$ |  $$ |
+# $$\$$\$$ $$ |$$ |  $$ |$$ $$\$$ |$$ |  $$ |$$ |        $$ |     $$ |   $$$$$$$$ |
+# $$ \$$$  $$ |$$ |  $$ |$$ \$$$$ |$$ |  $$ |$$ |        $$ |     $$ |   $$  __$$ |
+# $$ |\$  /$$ |$$ |  $$ |$$ |\$$$ |$$ |  $$ |$$ |        $$ |     $$ |   $$ |  $$ |
+# $$ | \_/ $$ | $$$$$$  |$$ | \$$ | $$$$$$  |$$$$$$$$\ $$$$$$\    $$ |   $$ |  $$ |
+# \__|     \__| \______/ \__|  \__| \______/ \________|\______|   \__|   \__|  \__|
+# ------------------------------------------------------------------------------------
+
+monolith:
+  
+  overrideName: 
+  overrideLabels: []
+
+# -----------------------------------
+# Monolith - options
+# -----------------------------------
+
+  nodeSelector: 
+    nvidia.com/gpu.count: "1"
+
+  runtimeClassName: nvidia
+
+# -----------------------------------
+# Monolith - containers (primary)
+# -----------------------------------
+
+  # ghcr.io/wsadza/metal/full-ubuntu:1.0.0
+  # ghcr.io/coturn/coturn:edge-debian
+  image:
+    registry: ghcr.io/wsadza
+    repository: metal
+    package: full-ubuntu
+    tag: 1.0.0
+    pullSecrets: []
+    pullPolicy: Always 
+
+  env: 
+  - name: SELKIES_PORT
+    value: "8080"
+  - name: SELKIES_METRICS_HTTP_PORT
+    value: "9090"
+  - name: SUPERVISOR_PORT
+    value: "9091"
+  - name: DBUS_PORT
+    value: "9092"
+  - name: SELKIES_TURN_HOST
+    value: "anykey.pl"
+  - name: SELKIES_TURN_PORT
+    value: "3478"
+  - name: SELKIES_TURN_USERNAME
+    value: "user"
+  - name: SELKIES_TURN_PASSWORD
+    value: "pass"
+  - name: SELKIES_ENCODER
+    value: "nvh264enc"
+  - name: PRIME_RENDERER_GLOBAL
+    value: "true" 
+
+  #command: [ "bash", "-c", "while true; do continue; done" ]
+  command: []
+
+  resources:
+    requests:
+      memory: 5Gi 
+      nvidia.com/gpu: 1
+    limits:
+      memory: 10Gi
+      nvidia.com/gpu: 1
+
+  extraVolumesMounts: 
+    - name: configmap-proxy
+      mountPath: /etc/nginx/nginx.conf
+      subPath: nginx.conf
+
+# -----------------------------------
+# Monolith - containers (additionals)
+# -----------------------------------
+  sidecars:
+
+# proxy-helper
+    - name: proxy-helper
+      image: nginx
+      ports: 
+      - containerPort: 80
+        name: http
+      volumeMounts:
+        - name: configmap-proxy
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+
+  initContainers: []
+
+# -----------------------------------
+# Monolith - volumes 
+# -----------------------------------
+
+  extraVolumes:
+    - name: configmap-proxy
+      type: configMap
+
+    - name: pvc-0
+      type: persistentVolumeClaim
+      spec:
+        accessModes:
+          - ReadWriteMany
+        storage: 50Gi
+        storageClassName: storage-local-retain
+        volumeMount: /opt/config
+        annotations:
+          "helm.sh/resource-policy": "keep"
+
+    - name: pvc-1
+      type: persistentVolumeClaim
+      spec:
+        accessModes:
+          - ReadWriteMany
+        storage: 50Gi
+        storageClassName: storage-local-retain
+        volumeMount: /opt/config
+        annotations:
+          "helm.sh/resource-policy": "keep"
+
+# -----------------------------------
+# Monolith - networking
+# -----------------------------------
+
+  service:
+    annotations: {}
+    type: ClusterIP
+    ports:
+      - name: http 
+        port: 80
+        targetPort: 80
+        protocol: TCP
+
+  ingress:
+    enabled: true 
+    className: traefik
+    annotations:
+      "traefik.ingress.kubernetes.io/router.entrypoints": websecure
+    path: "/"
+    pathType: "Prefix"
+    host: "monolithic.anykey.pl"
+    portNumber: 80
+    tls: [] 
+
+# -----------------------------------
+# Monolith - probes 
+# -----------------------------------
+
+  startupProbe:
+    enabled: true 
+    scheme: HTTP
+    probePath: /health
+    initialDelaySeconds: 5 
+    periodSeconds: 5 
+    successThreshold: 1
+    failureThreshold: 5
+    timeoutSeconds: 1
+
+# ------------------------------------------------------------------------------------
+#  $$$$$$\ $$$$$$$\  $$$$$$$$\ $$\   $$\ $$$$$$$$\ $$$$$$\ $$$$$$$$\ $$\     $$\ 
+#  \_$$  _|$$  __$$\ $$  _____|$$$\  $$ |\__$$  __|\_$$  _|\__$$  __|\$$\   $$  |
+#    $$ |  $$ |  $$ |$$ |      $$$$\ $$ |   $$ |     $$ |     $$ |    \$$\ $$  / 
+#    $$ |  $$ |  $$ |$$$$$\    $$ $$\$$ |   $$ |     $$ |     $$ |     \$$$$  /  
+#    $$ |  $$ |  $$ |$$  __|   $$ \$$$$ |   $$ |     $$ |     $$ |      \$$  /   
+#    $$ |  $$ |  $$ |$$ |      $$ |\$$$ |   $$ |     $$ |     $$ |       $$ |    
+#  $$$$$$\ $$$$$$$  |$$$$$$$$\ $$ | \$$ |   $$ |   $$$$$$\    $$ |       $$ |    
+#  \______|\_______/ \________|\__|  \__|   \__|   \______|   \__|       \__|  
+# ------------------------------------------------------------------------------------
+
+identity:
+  enabled: false
+
+
+
+# TRASH
+# ----------------------------
+#
+#    - name: config
+#      accessModes:
+#        - ReadWriteMany
+#      storage: 50Gi
+#      storageClassName: storage-local-retain
+#      volumeMount: /opt/config
+#      annotations:
+#        "helm.sh/resource-policy": "keep"
+#  
+#    - name: games 
+#      accessModes:
+#        - ReadWriteMany
+#      storage: 200Gi
+#      storageClassName: storage-local-retain
+#      volumeMount: /opt/games
+#      annotations:
+#        "helm.sh/resource-policy": "keep"

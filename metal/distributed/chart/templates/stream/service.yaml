@@ -5,10 +5,10 @@ metadata:
   labels:
     {{- include "stream.labels" . | nindent 4 }}
   annotations:
-    {{- if .Values.global.annotations}}
+    {{- if .Values.global.annotations }}
     {{- toYaml .Values.global.annotations | nindent 4 }}
     {{- end }}
-    {{- if .Values.stream.service.annotations}}
+    {{- if .Values.stream.service.annotations }}
     {{- toYaml .Values.stream.service.annotations | nindent 4 }}
     {{- end }}
 spec:

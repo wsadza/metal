@@ -1,0 +1,24 @@
+
+reorganized /etc/const-init.d/supervisord.d strucutre
+reorganized /usr/bin structure
+
+added:
+  supervisord-exporter
+  nginx-proxy + config
+  fliebeat + config
+
+---
+deborphan output:
+  dnsutils:all
+  gir1.2-freedesktop:amd64
+  gstreamer1.0-pipewire:amd64
+  lib32stdc++6:amd64
+  libarpack2t64:amd64
+  libdbusmenu-gtk3-4:amd64
+  libjson-glib-1.0-0:amd64
+  libopenal1:i386
+  libpgm-5.3-0t64:amd64
+  libpmix2t64:amd64
+  libsoup-gnome-2.4-1:amd64
+  pipewire-audio-client-libraries:all
+  qml-module-qtquick-xmllistmodel:amd64

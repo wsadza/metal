@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coturn
+  labels:
+    {{- include "coturn.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.global.annotations | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "coturn.labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "coturn.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: coturn
+          {{- if .Values.coturn.command }}
+          command:
+            {{- range .Values.coturn.command }}
+            - {{ . | quote }}
+            {{- end }}
+          {{- end }}
+          image: {{ include "imageByParams" (dict "base" .Values.coturn) }}
+          imagePullPolicy: {{ .Values.coturn.image.pullPolicy }}
+          {{- if .Values.coturn.resources }}
+          resources:
+            {{- toYaml .Values.coturn.resources | nindent 12 }}
+          {{- end }}
+          ports:
+            - containerPort: 3478 
+              name: tcp
+              protocol: TCP
+            - containerPort: 3478 
+              name: udp
+              protocol: UDP 
+          env:
+          {{- with .Values.coturn.env }}
+            {{- tpl (toYaml .) $ | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            {{- if .Values.coturn.extraVolumes }}
+            {{- range .Values.coturn.extraVolumes }}
+            - name: {{ .name }}
+              mountPath: {{ .volumeMount }} 
+            {{- end }}
+            {{- end }}
+      volumes:
+        {{- if .Values.coturn.extraVolumes }}
+        {{- range .Values.coturn.extraVolumes }}
+        - name: {{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ .name }}
+        {{- end }}
+        {{- end }}

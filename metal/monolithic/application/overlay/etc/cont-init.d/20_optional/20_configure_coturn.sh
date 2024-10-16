@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Skip turn in case of remote turn instance 
+# Skip turn in case of external turn instance 
 if [ ! -z "${SELKIES_TURN_HOST}" ]; then
   exit 0
 fi
@@ -8,12 +8,12 @@ fi
 # Enable turn service in supervisord 
 sed -i \
   's/autostart=false/autostart=true/' \
-  /etc/supervisor.d/*turn.ini
+  /etc/supervisor.d/*_coturn.ini
 
 #------------------------------------
 # Create sqlite-turn database 
 
-mkdir -p "${XDG_RUNTIME_DIR}/turn"
+mkdir -p "${XDG_RUNTIME_DIR}/coturn"
 
 #------------------------------------
 # Create coturn config 

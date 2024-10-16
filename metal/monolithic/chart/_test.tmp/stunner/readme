@@ -1,0 +1,18 @@
+CONCLUSTION:
+  Stunner dind't work under firefox-desktop client
+
+ERROR:
+`
+12:49:21.499178 server.go:202: turn ERROR: Failed to handle datagram: failed to handle Refresh-request from 10.128.0.7:58439: no allocation found 10.128.0.7:58439:[::]:3478
+`
+
+* what is curious here; i saw this same error-log under google-chrome.
+
+WORKING-MATRIX:
+  desktop:
+    chromium: ture 
+    firefox:  false
+  
+  mobile:
+    safari-mobile:  true 
+    firefox-mobile: true 

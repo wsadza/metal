@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{- include "monolith.fullname" . }}"
+  labels:
+    {{- include "monolith.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.global.annotations | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "monolith.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "monolith.labels" . | nindent 8 }}
+    spec:
+# --------------------------------------------
+# SETTINGS 
+# --------------------------------------------
+      {{- if .Values.monolith.runtimeClassName }}
+      runtimeClassName: {{ toYaml .Values.monolith.runtimeClassName }}
+      {{- end }}
+      {{- with .Values.monolith.nodeSelector }}
+      nodeSelector:
+      {{ toYaml . | indent 2 }}
+      {{- end }}
+# --------------------------------------------
+# MAIN-CONTAINER 
+# --------------------------------------------
+      containers:
+        - name: {{ .Chart.Name }} 
+          {{- if .Values.monolith.command }}
+          command:
+            {{- range .Values.monolith.command }}
+            - {{ . | quote }}
+            {{- end }}
+          {{- end }}
+          image: {{ 
+                   include "metal.imageByParams" 
+                   (dict "base" .Values.monolith) 
+                 }}
+          imagePullPolicy: {{ .Values.monolith.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.monolith.resources | nindent 12 }}
+          env:
+          {{- with .Values.monolith.env }}
+            {{- tpl (toYaml .) $ | nindent 12 }}
+          {{- end }}
+# --------------------------------------------
+# PROBES 
+# --------------------------------------------
+          {{- if .Values.monolith.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              path: {{ .Values.monolith.startupProbe.probePath }}
+              scheme: {{ .Values.monolith.startupProbe.scheme }}
+              port: 8080 
+            initialDelaySeconds: {{ .Values.monolith.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.monolith.startupProbe.periodSeconds }}
+            successThreshold: {{ .Values.monolith.startupProbe.successThreshold }}
+            failureThreshold: {{ .Values.monolith.startupProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.monolith.startupProbe.timeoutSeconds }}
+          {{- end }}
+# --------------------------------------------
+# VOLUME MOUNTS 
+# --------------------------------------------
+          volumeMounts:
+            {{- if .Values.monolith.extraVolumesMounts }}
+            {{- range .Values.monolith.extraVolumesMounts }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }} 
+              {{- if .subPath }}
+              subPath: {{ .subPath }}
+              {{- end }}
+            {{- end }}
+            {{- end }}
+# --------------------------------------------
+# SIDECARS 
+# --------------------------------------------
+      {{- if .Values.monolith.sidecars }}
+        {{- .Values.monolith.sidecars | toYaml | nindent 8 }}
+      {{- end }}
+# --------------------------------------------
+# VOLUMES 
+# --------------------------------------------
+      volumes:
+        {{- if .Values.monolith.extraVolumes }}
+        {{- range .Values.monolith.extraVolumes }}
+{{/* 
+  volumes - configMap
+*/}}
+        {{- if eq .type "configMap" }}
+        - name: {{ .name }}
+          configMap:
+            name: {{ .name }}
+        {{- end }}
+{{/* 
+  volumes - persistentVolumeClaim 
+*/}}
+        {{- if eq .type "persistentVolumeClaim" }}
+        - name: {{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ .name }}
+        {{- end }}
+
+        {{- end }}
+        {{- end }}

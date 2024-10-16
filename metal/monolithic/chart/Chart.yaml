@@ -1,0 +1,20 @@
+apiVersion: v2
+name: metal 
+version: 1.0.0
+appVersion: 1.0.0 
+description: |
+  DESCRIPTION
+type: application
+icon: https://github.com/wsadza/metal/blob/0dd6ba551972df3099dc709fffc2860711ad9d1c/.media/asset/badge/asset_badge_project.jpg
+home: https://github.com/wsadza/metal 
+sources:
+  - https://github.com/wsadza/metal
+keywords:
+  - keyword 
+dependencies:
+  # Identity Dependencies.
+  - name: keycloak
+    alias: identity
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 22.2.6
+    condition: "identity.enabled"

@@ -652,6 +652,48 @@ RUN \
             /tmp/*
 
 # -----------------------------------------------
+# Core: Install Supervisord Exporter 
+# -----------------------------------------------
+
+RUN \
+    echo "**** Core: Install Supervisord Exporeter ****" \
+    && \
+    echo "**** Update apt database ****" \
+        && apt-get update \
+        && apt-get install --no-install-recommends -y \
+           git \
+           curl \
+           jq \
+           ca-certificates \
+    && \
+    echo "**** Fetch precompiled binary ****" \
+        && ARCHITECTURE="$(dpkg --print-architecture)" \
+        && SE_BINARY_NAME="supervisord-exporter" \
+        && SE_API_URL="https://api.github.com/repos/salimd/supervisord_exporter" \
+        && SE_BINARY_RELEASE_URL="$( \
+             curl -fsSL "${SE_API_URL}/releases" | \
+              jq -r \
+               --arg ARCHITECTURE "${ARCHITECTURE}" \
+               '.[0] \
+	       | .assets[] \
+               | select( \
+                 .name | contains($ARCHITECTURE) \
+               ) \ 
+               | .browser_download_url' \
+          )" \
+        && curl -fsSL "${SE_BINARY_RELEASE_URL}" \ 
+           --output "/usr/bin/${SE_BINARY_NAME}" \ 
+        && chmod +x "/usr/bin/${SE_BINARY_NAME}" \
+    && \
+    echo "**** Section cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*
+
+# -----------------------------------------------
 # Core: Install Miscellaneous
 # -----------------------------------------------
 
@@ -1191,6 +1233,7 @@ RUN \
             dnsutils \
             bash-completion \
             git \
+            nginx \
     && \
     echo "**** Cleanup ****" \
         && apt-get clean autoclean -y \
@@ -1301,6 +1344,37 @@ RUN \
             /var/tmp/* \
             /tmp/*
 
+RUN \
+    echo "**** Optional: Install FileBeat ****" \
+    && \
+    echo "**** Update apt database ****" \
+        && dpkg --add-architecture i386 \
+        && apt-get update \
+    && \
+    echo "**** APT: Add Elastic Sources ****" \
+        && install -d -m 0755 /etc/apt/keyrings \
+        && curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch \
+           | apt-key add - > /dev/null \
+        && echo "deb https://artifacts.elastic.co/packages/8.x/apt stable main" \
+        | tee -a /etc/apt/sources.list.d/elastic-8.x.list > /dev/null \
+    && \
+    echo "**** Install: filebeat ****" \
+  	  	&& apt-get update \
+  	  	&& apt-get install -y --no-install-recommends \
+          filebeat \
+    && \
+    echo "**** Section cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+            /var/lib/apt/lists/* \
+            /var/tmp/* \
+            /tmp/*
+
+# -----------------------------------------------
+# Optional: Install Libraries - Ubuntu Mesa
+# -----------------------------------------------
+
 #RUN \
 #    echo "**** Optional: Ubuntu Mesa ****" \
 #		    && ID="$(\
@@ -1310,7 +1384,7 @@ RUN \
 #        )" \
 #        && if [ "${ID}" = "ubuntu" ]; \
 #		    then \
-#              add-apt-repository -y ppa:oibaf/graphics-drivers \
+#              add-apt-repository -y ppa:kisak/kisak-mesa \
 #              && apt-get update \ 
 #              && apt-get upgrade -y \
 #        && \
@@ -1404,7 +1478,9 @@ ENV \
     GTK_IM_MODULE=fcitx \
     QT_IM_MODULE=fcitx \
     XIM=fcitx \
-    XMODIFIERS="@im=fcitx"
+    XMODIFIERS="@im=fcitx" \
+    QT_LOGGING_RULES="kscreen.xcb.helper=false" \
+    KDE_DEBUG=0 
 
 # -----------------------------------------------
 # Configuration - Pipewire 
@@ -1428,13 +1504,24 @@ ENV \
     TURN_REALM="local.host"
 
 # -----------------------------------------------
+# Configuration - Supervisor 
+
+ENV \
+    SUPERVISORD_PORT="9091" \
+    SUPERVISORD_EXPORTER_ENABLED="true" \
+    SUPERVISORD_URL="http://127.0.0.1:9091/RPC2" \
+    SUPERVISORD_METRICS_PORT="9092" \
+    SUPERVISORD_METRICS_PATH="/metrics" 
+
+# -----------------------------------------------
 # Configuration - Misc 
 
 ENV \
     DBUS_SESSION_BUS_ADDRESS=unix:path=${XDG_RUNTIME_DIR}/dbus-session \
     APPIMAGE_EXTRACT_AND_RUN=1 \
-    SUPERVISOR_PORT=9091 \
-    PULSE_SERVER="unix:${XDG_RUNTIME_DIR}/pulse-server" 
+    PULSE_SERVER="unix:${XDG_RUNTIME_DIR}/pulse-server" \
+    NGINX_PROXY_HELPER_ENABLED="true" \
+    FILEBEAT_LOGGER_ENABLED="true"
 
 # -----------------------------------------------
 # Execute
@@ -1442,7 +1529,7 @@ ENV \
 RUN \
     echo "**** Execute: Final Touch ****" \
     && \
-    echo "Make sure that everything under ${HOME} belongs to user" \
+    echo "Make sure that ${HOME} belongs to user" \
         && chmod -R a+rwX ${HOME} \
         && chown -R ${USER_UID}:${USER_UID} ${HOME} \
     && \

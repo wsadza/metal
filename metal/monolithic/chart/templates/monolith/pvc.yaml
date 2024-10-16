@@ -1,0 +1,24 @@
+{{/*
+Create PersistentVolumeClaims 
+based on the extraVolumes defined in values.yaml
+*/}}
+{{- if .Values.monolith.extraVolumes }}
+{{- range .Values.monolith.extraVolumes }}
+{{- if eq .type "persistentVolumeClaim" }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}
+  annotations:
+    {{- toYaml .spec.annotations | nindent 4 }}
+spec:
+  accessModes:
+    {{- toYaml .spec.accessModes | nindent 4 }}
+  resources:
+    requests:
+      storage: {{ .spec.storage }}
+  storageClassName: {{ .spec.storageClassName }}
+{{- end }}
+{{- end }}
+{{- end }}

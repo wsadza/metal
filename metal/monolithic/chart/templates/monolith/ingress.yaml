@@ -1,0 +1,29 @@
+{{- if .Values.monolith.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{- include "monolith.fullname" . }}"
+  labels:
+    {{- include "monolith.labels" . | nindent 4 }}
+  {{- with .Values.monolith.ingress.annotations }}
+  annotations:
+  {{- tpl (toYaml .) $ | nindent 4 }}
+  {{- end }}
+spec:
+  ingressClassName: {{ .Values.monolith.ingress.className }}
+  rules:
+    {{- if .Values.monolith.ingress.host }}
+    - host: {{ .Values.monolith.ingress.host }}
+      http:
+    {{- else }}
+    - http:
+    {{- end }}
+        paths:
+          - path: {{ .Values.monolith.ingress.path }}
+            pathType: {{ .Values.monolith.ingress.pathType }} 
+            backend:
+              service:
+                name: {{ include "monolith.fullname" . }} 
+                port:
+                  number: {{ .Values.monolith.ingress.portNumber }} 
+{{- end }}

@@ -1,0 +1,188 @@
+
+# ------------------------
+
+global:
+  annotations: {}
+
+# COTURN 
+# ------------------------
+coturn:
+  enabled: false 
+ 
+  fullnameOverride: ""
+  nameOverride: "" 
+
+  image:
+    registry: ghcr.io/coturn
+    repository: 
+    package: coturn
+    tag: edge-debian
+    pullSecrets: []
+    pullPolicy: Always 
+
+  redis:
+    enabled: false
+
+  command:
+    - turnserver
+    - -v
+    - -f
+    - --lt-cred-mech
+    - -u
+    - "$(TURN_USER):$(TURN_PASS)"
+    - -r
+    - "$(TURN_REALM)"
+    - --min-port
+    - "$(TURN_MIN_PORT)"
+    - --max-port
+    - "$(TURN_MAX_PORT)"
+
+  extraVolume: []
+  extraVolumeMounts: []
+
+  service:
+    annotations: {}
+    type: LoadBalancer 
+    port: 3478 
+    protocol: UDP
+    serverName: coturn 
+
+  resources: []
+
+  env:
+    - name: TURN_USER
+      value: "user"
+    - name: TURN_PASS
+      value: "pass"
+    - name: TURN_REALM
+      value: "anykey.pl"
+    - name: TURN_MIN_PORT
+      value: "49160"
+    - name: TURN_MAX_PORT
+      value: "49200"
+
+
+# METAL 
+# ------------------------
+
+monolith:
+  
+  overrideName: 
+  overrideLabels: []
+  
+  # ghcr.io/wsadza/metal/full-ubuntu:1.0.0
+  # ghcr.io/coturn/coturn:edge-debian
+  image:
+    registry: ghcr.io/wsadza
+    repository: metal
+    package: full-ubuntu
+    tag: 1.0.0
+    pullSecrets: []
+    pullPolicy: Always 
+
+  env: 
+  - name: SELKIES_PORT
+    value: "8080"
+  - name: SELKIES_METRICS_HTTP_PORT
+    value: "9090"
+  - name: SUPERVISOR_PORT
+    value: "9091"
+  - name: DBUS_PORT
+    value: "9092"
+  - name: SELKIES_TURN_HOST
+    value: "anykey.pl"
+  - name: SELKIES_TURN_PORT
+    value: "3478"
+  - name: SELKIES_TURN_USERNAME
+    value: "user"
+  - name: SELKIES_TURN_PASSWORD
+    value: "pass"
+  - name: SELKIES_ENCODER
+    value: "nvh264enc"
+  - name: PRIME_RENDERER_GLOBAL
+    value: "true" 
+
+  #command: [ "bash", "-c", "while true; do continue; done" ]
+  command: []
+
+  extraVolumes:
+    - name: config
+      accessModes:
+        - ReadWriteMany
+      storage: 50Gi
+      storageClassName: storage-local-retain
+      volumeMount: /opt/config
+      annotations:
+        "helm.sh/resource-policy": "keep"
+  
+    - name: games 
+      accessModes:
+        - ReadWriteMany
+      storage: 200Gi
+      storageClassName: storage-local-retain
+      volumeMount: /opt/games
+      annotations:
+        "helm.sh/resource-policy": "keep"
+
+  extraVolumeMounts: []
+
+  service:
+    annotations: {}
+    type: ClusterIP
+    port: 8080
+    serverName: http
+    managementPort: 9100
+
+  resources:
+    requests:
+      memory: 5Gi 
+      nvidia.com/gpu: 1
+    limits:
+      memory: 10Gi
+      nvidia.com/gpu: 1
+
+  ingress:
+    enabled: true 
+    className: traefik
+    annotations:
+      "traefik.ingress.kubernetes.io/router.entrypoints": websecure
+    path: "/"
+    host: "metal.anykey.pl"
+    tls: [] 
+
+  nodeSelector: 
+    nvidia.com/gpu.count: "1"
+
+# IDENTITY 
+# ------------------------
+
+identity:
+  enabled: false 
+
+  auth:
+    adminUser: "admin"
+    adminPassword: "admin"
+  
+  extraEnvVars: |
+      - name: PROXY_ADDRESS_FORWARDING
+        value: "true"
+      - name: REDIRECT_SOCKET
+        value: 'proxy-https'
+      - name: KEYCLOAK_FRONTEND_URL
+        value: 'https://identity.anykey.pl/'
+      - name: KC_HOSTNAME
+        value: 'identity.anykey.pl'
+      - name: KC_PROXY
+        value: 'edge'
+      - name: KC_HTTP_ENABLED
+        value: 'true'
+      - name: KC_HOSTNAME_HTTPS_STRICT
+        value: 'false'
+  
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    hostname: identity.anykey.pl
+    annotations:
+      "traefik.ingress.kubernetes.io/router.entrypoints": websecure
+      "traefik.ingress.kubernetes.io/router.middlewares": default-keycloak-auth@kubernetescrd
