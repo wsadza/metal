@@ -62,7 +62,8 @@ include:
         LUTRIS_VERSION: "latest"
 
         # Wine 
-        INSTALL_WINE: "true"
+        # ~ Disabled due checksum missmatch
+        INSTALL_WINE: "false"
         WINE_VERSION: "9.15~*-1"
 
         # Heroic Launcher
