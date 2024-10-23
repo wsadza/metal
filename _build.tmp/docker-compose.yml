@@ -16,7 +16,7 @@ services:
       environment:
         TURN_USER: "user" 
         TURN_PASS: "pass" 
-        TURN_REALM: "anykey.pl" 
+        TURN_REALM: "bigboy" 
         TURN_MIN_PORT: "49160" 
         TURN_MAX_PORT: "49200" 
         TURN_PORT: "3478"
@@ -61,7 +61,7 @@ services:
           LUTRIS_VERSION: "latest"
 
           # Wine 
-          INSTALL_WINE: "true"
+          INSTALL_WINE: "false"
           WINE_VERSION: "9.15~*-1"
 
           # Heroic Launcher
@@ -126,86 +126,87 @@ services:
 # ----------------------------
 # Stream Server (debian trixie)
 
-#    debian-trixie:
-#      hostname: debian-trixie 
-#      command: ["tail", "-f", "/dev/null"]
-#      build:
-#        context: '../metal/monolithic/application'
-#        dockerfile: './Dockerfile.debbased'
-#        args:
-#          # Base
-#          DISTRIBUTION: "debian"
-#          SUITE: "trixie"
-#
-#          # User
-#          USER_NAME: "debian"
-#
-#          # VirtualGL 
-#          INSTALL_VIRTUALGL: "true"
-#          VIRTUALGL_VERSION: "latest"
-#
-#          # Steam
-#          INSTALL_STEAM: "true"
-#
-#          ## Lutris 
-#          INSTALL_LUTRIS: "true"
-#          LUTRIS_VERSION: "latest"
-#
-#          ## Wine 
-#          INSTALL_WINE: "true"
-#          WINE_VERSION: "9.15~*-1"
-#
-#          ## Heroic Launcher
-#          INSTALL_HEROIC: "true"
-#          HEROIC_VERSION: "latest"
-#
-#          # Pipewire
-#          INSTALL_PIPEWIRE: "true"
-#          PIPEWIRE_VERSION: "latest"
-#      ports:
-#        - 7080:8080
-#        - 7090:9090
-#        - 7091:9091
-#        # Expose turn server
-#        #- 3478:3478/udp
-#        #- 3478:3478/tcp
-#      environment:
-#
-#        #STREAMER_HOST: "192.168.1.254" 
-#
-#        # Remote: Turn 
-#        SELKIES_TURN_HOST: "bigboy" 
-#        SELKIES_TURN_PORT: "3478"
-#        SELKIES_TURN_USERNAME: "user"
-#        SELKIES_TURN_PASSWORD: "password"
-#        
-#        # Encoder 
-#        #SELKIES_ENCODER: "nvh264enc"
-#         
-#        #PRIME_RENDERER_GLOBAL: "true" 
-#
-#      deploy:
-#          resources:
-#            reservations:
-#              devices:
-#                - driver: nvidia
-#                  count: 1
-#                  capabilities: [gpu]
-#
-## To Make Steam working we need to break isolation
-#      tmpfs:
-#        - /dev/shm:rw
-#      shm_size: 64 
-#      ipc: host # Could also be set to 'shareable'
-#      ulimits:
-#        nofile:
-#          soft: 1024
-#          hard: 524288
-#      cap_add:
-#        - NET_ADMIN
-#        - SYS_ADMIN
-#        - SYS_NICE
-#        - IPC_LOCK
-#      security_opt:
-#        - seccomp:unconfined
-#        - apparmor:unconfined     
+    debian-trixie:
+      hostname: debian-trixie 
+      command: ["tail", "-f", "/dev/null"]
+      build:
+        context: '../metal/monolithic/application'
+        dockerfile: './Dockerfile.debbased'
+        args:
+          # Base
+          DISTRIBUTION: "debian"
+          SUITE: "trixie"
+
+          # User
+          USER_NAME: "debian"
+
+          # VirtualGL 
+          INSTALL_VIRTUALGL: "true"
+          VIRTUALGL_VERSION: "latest"
+
+          # Steam
+          INSTALL_STEAM: "true"
+
+          ## Lutris 
+          INSTALL_LUTRIS: "true"
+          LUTRIS_VERSION: "latest"
+
+          ## Wine 
+          INSTALL_WINE: "false"
+          WINE_VERSION: "9.15~*-1"
+
+          ## Heroic Launcher
+          INSTALL_HEROIC: "true"
+          HEROIC_VERSION: "latest"
+
+          # Pipewire
+          INSTALL_PIPEWIRE: "true"
+          PIPEWIRE_VERSION: "latest"
+      ports:
+        - 7080:8080
+        - 7090:9090
+        - 7091:9091
+        # Expose turn server
+        #- 3478:3478/udp
+        #- 3478:3478/tcp
+      environment:
+
+        #STREAMER_HOST: "192.168.1.254" 
+
+        # Remote: Turn 
+        SELKIES_TURN_HOST: "bigboy" 
+        SELKIES_TURN_PORT: "32000"
+        SELKIES_TURN_USERNAME: "user"
+        SELKIES_TURN_PASSWORD: "pass"
+        SELKIES_TURN_PROTOCOL: "tcp"
+        
+        # Encoder 
+        #SELKIES_ENCODER: "nvh264enc"
+         
+        #PRIME_RENDERER_GLOBAL: "true" 
+
+      deploy:
+          resources:
+            reservations:
+              devices:
+                - driver: nvidia
+                  count: 1
+                  capabilities: [gpu]
+
+# To Make Steam working we need to break isolation
+      tmpfs:
+        - /dev/shm:rw
+      shm_size: 64 
+      ipc: host # Could also be set to 'shareable'
+      ulimits:
+        nofile:
+          soft: 1024
+          hard: 524288
+      cap_add:
+        - NET_ADMIN
+        - SYS_ADMIN
+        - SYS_NICE
+        - IPC_LOCK
+      security_opt:
+        - seccomp:unconfined
+        - apparmor:unconfined     
