@@ -138,7 +138,7 @@ RUN \
            fi \
     && \
     echo "**** Configure XDG_RUNTIME_DIR ****" \     
-        && mkdir /run/user/${USER_UID} \
+        && mkdir -p /run/user/${USER_UID} \
         && chown -R ${USER_UID}:${USER_UID} /run/user/${USER_UID} \
         && chmod 0700 /run/user/${USER_UID}
 
@@ -174,7 +174,7 @@ RUN \
     echo "**** Prepare ****" \
         && apt-get update \
         && apt-get install --no-install-recommends -y \          
-           software-properties-common \
+           ca-certificates \
            curl \
            jq \
            meson \
@@ -269,7 +269,7 @@ RUN \
     echo "**** Prepare ****" \
         && apt-get update \
         && apt-get install --no-install-recommends -y \          
-           software-properties-common \
+           ca-certificates \
            curl \
     && \
     echo "**** Dependencies ****" \
@@ -470,7 +470,7 @@ RUN \
     echo "**** Prepare ****" \
         && apt-get update \
         && apt-get install --no-install-recommends -y \          
-           software-properties-common \
+           ca-certificates \
     && \
     echo "**** Dependenciess ****" \
         && apt-get install --no-install-recommends -y \
@@ -577,7 +577,6 @@ RUN \
             qt5-style-plugins \
             qtspeech5-flite-plugin \
             qtvirtualkeyboard-plugin \
-            software-properties-qt \
             sweeper \
             systemsettings \
             xdg-user-dirs \
@@ -620,7 +619,7 @@ RUN \
     echo "**** Prepare ****" \
         && apt-get update \
         && apt-get install --no-install-recommends -y \          
-           software-properties-common \
+           ca-certificates \
            curl \
            jq \
     && \
@@ -775,7 +774,7 @@ RUN \
         && dpkg --add-architecture i386 \
         && apt-get update \
         && apt-get install --no-install-recommends -y \          
-           software-properties-common \
+           ca-certificates \
            curl \
     && \
     echo "**** Collecting System Info ****" \
@@ -799,7 +798,7 @@ RUN \
     	  && curl -fsSL \
     	      -o /etc/apt/sources.list.d/winehq-${CODENAME}.sources \
     	      "${WINEHQ_URL}/${ID}/dists/${CODENAME}/winehq-${CODENAME}.sources" \
-    	  && apt-get update \
+    	  && apt-get -o Acquire::CompressionTypes::Order::=gz update \
         && if [ "${WINE_VERSION}" = "latest" ]; then \
             echo "**** Fetching Latest Wine Version ****" \
             && WINE_VERSION=$( \
@@ -842,7 +841,7 @@ RUN \
     echo "**** Prepare ****" \
         && apt-get update \
         && apt-get install --no-install-recommends -y \          
-            software-properties-common \
+            ca-certificates \
             curl \
             jq \
     && \
@@ -954,6 +953,7 @@ RUN \
             libglx0:i386 \
             libglu1:i386 \
             libsm6:i386 \
+            libvdpau1:i386 \
     && \
     echo "**** Post-Installation Configuration ****" \
        && ln -sf /usr/games/steam /usr/bin/steam \
@@ -1033,7 +1033,7 @@ RUN \
     echo "**** Prepare ****" \
         && apt-get update \
         && apt-get install --no-install-recommends -y \          
-           software-properties-common \
+           ca-certificates \
            curl \
            jq \
     && \
@@ -1106,7 +1106,7 @@ RUN \
     echo "**** Prepare ****" \
         && apt-get update \
         && apt-get install --no-install-recommends -y \          
-           software-properties-common \
+           ca-certificates \
            curl \
         && ID="$(\
           grep ^ID= /etc/os-release \
@@ -1300,28 +1300,6 @@ RUN \
             /var/lib/apt/lists/* \
             /var/tmp/* \
             /tmp/*
-
-#RUN \
-#    echo "**** Optional: Ubuntu Mesa ****" \
-#		    && ID="$(\
-#        	     grep ^ID= /etc/os-release \
-#        	     | cut -d= -f2 \
-#        	     | tr -d '\"' \
-#        )" \
-#        && if [ "${ID}" = "ubuntu" ]; \
-#		    then \
-#              add-apt-repository -y ppa:oibaf/graphics-drivers \
-#              && apt-get update \ 
-#              && apt-get upgrade -y \
-#        && \
-#        echo "**** Section cleanup ****" \
-#            && apt-get clean autoclean -y \
-#            && apt-get autoremove -y \
-#            && rm -rf \
-#                /var/lib/apt/lists/* \
-#                /var/tmp/* \
-#                /tmp/*; \
-#        fi
 
 ############################################################
 #
