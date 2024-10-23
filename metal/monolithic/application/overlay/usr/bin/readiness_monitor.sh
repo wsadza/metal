@@ -80,9 +80,10 @@ readiness_turn() {
   fi
 
   timeout $TIMEOUT bash -c '
-    while ! turnutils_uclient -T \
+    while ! turnutils_uclient -y \
               -u '${SELKIES_TURN_USERNAME}' \
-              -w '${SELKIES_TURN_PASSWORD}' \
+              -w '${SELKIES_TURN_PASSWORD}'
+              -p '${SELKIES_TURN_PORT}' \
               '${SELKIES_TURN_HOST}' \
             > /dev/null 2>&1
     do
