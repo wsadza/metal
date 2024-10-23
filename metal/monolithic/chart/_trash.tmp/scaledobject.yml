@@ -1,0 +1,27 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: metal-monolith-scaledobject
+  namespace: metal
+spec:
+  scaleTargetRef:
+    name: metal-monolith
+  minReplicaCount: 1
+  maxReplicaCount: 4 
+  triggers:
+    - type: prometheus
+      metricType: Value
+      metadata:
+        serverAddress: http://prometheus-server.metal.svc.cluster.local
+#        query: (sum(client_connected) == count(client_connected)) or vector(0)
+        query: scaling_needed
+        threshold: "0.5"
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleUp:
+          policies:
+          - type: Pods
+            value: 1  # Scale up by 1 pod at a time
+            periodSeconds: 1  # Every 60 seconds
+          stabilizationWindowSeconds: 1  # Prevent excessive scaling

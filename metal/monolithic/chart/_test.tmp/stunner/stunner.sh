@@ -30,7 +30,7 @@ EOF
 # -------------------------
 
 kubectl apply -f - <<EOF
-apiVersion: stunner.l7mp.io/v1
+apiVersion: stunner.l7mp.io/v1alpha1
 kind: GatewayConfig
 metadata:
   name: stunner-gatewayconfig
@@ -40,6 +40,8 @@ spec:
   authType: plaintext
   userName: "user"
   password: "pass"
+  minPort: 30000
+  maxPort: 40000
 EOF
 
 # -------------------------
@@ -55,18 +57,9 @@ spec:
     - name: udp-listener
       port: 3478
       protocol: TURN-UDP
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
-metadata:
-  name: tcp-gateway
-  namespace: stunner
-spec:
-  gatewayClassName: stunner-gatewayclass
-  listeners:
-    - name: tcp-listener
-      port: 3478
-      protocol: TURN-TCP
+      allowedRoutes:
+        namespaces:
+          from: All      
 ---
 apiVersion: stunner.l7mp.io/v1
 kind: UDPRoute
@@ -76,11 +69,10 @@ metadata:
 spec:
   parentRefs:
     - name: udp-gateway
-    - name: tcp-gateway
   rules:
     - backendRefs:
-        - name: metal 
-          namespace: default 
+        - name: metal-monolith 
+          namespace: metal 
 ---
 apiVersion: stunner.l7mp.io/v1
 kind: Dataplane

@@ -4,7 +4,7 @@
 # Released under the MIT license
 # ----------------------------------------------------------
 #
-# Deployment definition 
+# Deployment definition - Coturn
 #
 ############################################################
 */}}
@@ -12,31 +12,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{- include "monolith.fullname" . }}"
+  name: "{{- include "coturn.fullname" . }}"
   labels:
-    {{- include "monolith.labels" . | nindent 4 }}
+    {{- include "coturn.labels" . | nindent 4 }}
   annotations:
     {{- toYaml .Values.global.annotations | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      {{- include "monolith.matchLabels" . | nindent 6 }}
+      {{- include "coturn.matchLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "monolith.labels" . | nindent 8 }}
+        {{- include "coturn.labels" . | nindent 8 }}
     spec:
 {{/*
   # --------------------------------------------
   # SETTINGS 
   # --------------------------------------------
 */}}
-      {{- if .Values.monolith.runtimeClassName }}
-      runtimeClassName: {{ toYaml .Values.monolith.runtimeClassName }}
+      {{- if .Values.coturn.runtimeClassName }}
+      runtimeClassName: {{ toYaml .Values.coturn.runtimeClassName }}
       {{- end }}
-      {{- with .Values.monolith.nodeSelector }}
+      {{- with .Values.coturn.nodeSelector }}
       nodeSelector:
       {{ toYaml . | indent 2 }}
+      {{- end }}
+      {{- if .Values.coturn.hostNetwork }}
+      hostNetwork: {{ toYaml .Values.coturn.hostNetwork }}
       {{- end }}
 {{/*
   # --------------------------------------------
@@ -45,21 +48,29 @@ spec:
 */}}
       containers:
         - name: {{ .Chart.Name }} 
-          {{- if .Values.monolith.command }}
+          {{- if .Values.coturn.command }}
           command:
-            {{- range .Values.monolith.command }}
-            - {{ . | quote }}
+            {{- range .Values.coturn.command }}
+              - {{ . | quote }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.coturn.args }}
+          args:
+            {{- range .Values.coturn.args }}
+              - {{ . | quote }}
             {{- end }}
           {{- end }}
           image: {{ 
                    include "metal.imageByParams" 
-                   (dict "base" .Values.monolith) 
+                   (dict "base" .Values.coturn) 
                  }}
-          imagePullPolicy: {{ .Values.monolith.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.coturn.image.pullPolicy }}
+          {{- if .Values.coturn.resources }}
           resources:
-            {{- toYaml .Values.monolith.resources | nindent 12 }}
+            {{- toYaml .Values.coturn.resources | nindent 12 }}
           env:
-          {{- with .Values.monolith.env }}
+          {{- end }}
+          {{- with .Values.coturn.env }}
             {{- tpl (toYaml .) $ | nindent 12 }}
           {{- end }}
 {{/*
@@ -67,58 +78,58 @@ spec:
   # PORTS 
   # --------------------------------------------
 */}}
-          {{- if .Values.monolith.ports }}
+          {{- if .Values.coturn.ports }}
           ports:
-            {{- .Values.monolith.ports | toYaml | nindent 12 }}
+            {{- .Values.coturn.ports | toYaml | nindent 12 }}
           {{- end }}
 {{/*
   # --------------------------------------------
   # PROBES 
   # --------------------------------------------
 */}}
-          {{- if .Values.monolith.startupProbe.enabled }}
+          {{- if .Values.coturn.startupProbe.enabled }}
           startupProbe:
             httpGet:
-              path: {{ .Values.monolith.startupProbe.probePath }}
-              scheme: {{ .Values.monolith.startupProbe.scheme }}
+              path: {{ .Values.coturn.startupProbe.probePath }}
+              scheme: {{ .Values.coturn.startupProbe.scheme }}
               port: 8080 
-            initialDelaySeconds: {{ .Values.monolith.startupProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.monolith.startupProbe.periodSeconds }}
-            successThreshold: {{ .Values.monolith.startupProbe.successThreshold }}
-            failureThreshold: {{ .Values.monolith.startupProbe.failureThreshold }}
-            timeoutSeconds: {{ .Values.monolith.startupProbe.timeoutSeconds }}
+            initialDelaySeconds: {{ .Values.coturn.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.coturn.startupProbe.periodSeconds }}
+            successThreshold: {{ .Values.coturn.startupProbe.successThreshold }}
+            failureThreshold: {{ .Values.coturn.startupProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.coturn.startupProbe.timeoutSeconds }}
           {{- end }}
 {{/*
   # --------------------------------------------
   # VOLUME MOUNTS 
   # --------------------------------------------
 */}}
+          {{- if .Values.coturn.extraVolumesMounts }}
           volumeMounts:
-            {{- if .Values.monolith.extraVolumesMounts }}
-            {{- range .Values.monolith.extraVolumesMounts }}
+            {{- range .Values.coturn.extraVolumesMounts }}
             - name: {{ .name }}
               mountPath: {{ .mountPath }} 
               {{- if .subPath }}
               subPath: {{ .subPath }}
               {{- end }}
             {{- end }}
-            {{- end }}
+          {{- end }}
 {{/*
   # --------------------------------------------
   # SIDECARS 
   # --------------------------------------------
 */}}
-      {{- if .Values.monolith.sidecars }}
-        {{- .Values.monolith.sidecars | toYaml | nindent 8 }}
+      {{- if .Values.coturn.sidecars }}
+        {{- .Values.coturn.sidecars | toYaml | nindent 8 }}
       {{- end }}
 {{/*
   # --------------------------------------------
   # VOLUMES 
   # --------------------------------------------
 */}}
+      {{- if .Values.coturn.extraVolumes }}
       volumes:
-        {{- if .Values.monolith.extraVolumes }}
-        {{- range .Values.monolith.extraVolumes }}
+        {{- range .Values.coturn.extraVolumes }}
 {{/* 
   volumes - configMap
 */}}
@@ -144,5 +155,5 @@ spec:
         {{- end }}
 
         {{- end }}
-        {{- end }}
+      {{- end }}
 ...

@@ -1,0 +1,55 @@
+{{/*
+############################################################
+# Copyright (c) 2024 Utilizable 
+# Released under the MIT license
+# ----------------------------------------------------------
+#
+# KEDA Scaled Object definition
+#
+# Example:
+# - https://github.com/kedacore/charts/tree/main/samples
+# Chart:
+# - https://github.com/kedacore/charts/tree/main
+# Documentation:
+# - https://keda.sh/docs/1.4/
+# Notes:
+# - describe horizonalPodAutoscaled for debug purpose;
+#   monitor 'current / traget' and adjust it accordinaly.
+#
+############################################################
+*/}}
+{{- if .Values.monolith.hpa -}}
+{{- if .Values.monolith.hpa.keda.enabled -}}
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: "{{- include "monolith.fullname" . }}"
+  labels:
+    {{- include "monolith.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    name: "{{- include "monolith.fullname" . }}"
+  minReplicaCount: {{ .Values.monolith.hpa.keda.minReplicaCount }} 
+  maxReplicaCount: {{ .Values.monolith.hpa.keda.maxReplicaCount }} 
+{{/*
+  # -----------------------------------
+  # KEDA - Triggers 
+  # -----------------------------------
+*/}}
+  triggers:
+  {{- if .Values.monolith.hpa.keda.triggers }}
+    {{- .Values.monolith.hpa.keda.triggers | toYaml | nindent 2 }}
+  {{- end }}
+{{/*
+  # -----------------------------------
+  # KEDA - ADVANCED 
+  # -----------------------------------
+*/}}
+  {{- if .Values.monolith.hpa.keda.advanced }}
+    {{- .Values.monolith.hpa.keda.advanced | toYaml | nindent 2 }}
+  {{- end }}
+...
+{{- end }}
+{{- end }}
+

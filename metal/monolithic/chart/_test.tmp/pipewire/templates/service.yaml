@@ -1,0 +1,18 @@
+{{- if .Values.pipewire.service }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "chart.fullname" . }}
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+spec:
+{{- with .Values.pipewire.service }}
+  type: {{ .type }}
+  ports:
+    - port: {{ .port }}
+      name: {{ .name }} 
+      protocol: TCP
+{{- end }}
+  selector:
+    {{- include "chart.selectorLabels" . | nindent 4 }}
+{{- end }}

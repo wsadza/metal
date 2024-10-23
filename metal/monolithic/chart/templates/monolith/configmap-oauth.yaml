@@ -1,0 +1,32 @@
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: configmap-oauth2-proxy
+#  namespace: metal
+#data:
+#  oauth2-proxy.cfg: |
+#    http_address="0.0.0.0:4180"
+#    cookie_secret="oqinaroshte9tczknam-5zs2pv3xawytbmc5w7spx7w="
+#    email_domains="*"
+#    cookie_secure="true"
+#    upstreams="http://monolithic.metal.svc.cluster.local:8080"
+#    cookie_domains=".anykey.pl"
+#    whitelist_domains=[".anykey.pl"] 
+#    
+#    # keycloak provider
+#    client_secret="cFdKXHNRZvWMdxYsuLsvpIB8taxTMntw"
+#    client_id="oauth2-proxy"
+#    redirect_url="https://proxy.anykey.pl/oauth2/callback"
+#    
+#    # in this case oauth3-proxy is going to visit
+#    oidc_issuer_url="https://identity.anykey.pl/realms/oauth2-proxy"
+#    provider="oidc"
+#    provider_display_name="keycloak"
+#
+#    # redis
+#    redis_connection_url="redis://localhost:6379"
+#
+#    cookie-samesite="strict"
+#    session_store_type="redis"
+#    skip_provider_button="false"
+#

@@ -1,0 +1,108 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: openresty-html
+  namespace: metal
+data:
+  nginx.conf: |
+    worker_processes 1;
+    
+    events {
+        worker_connections 1024;
+    }
+    
+    http {
+        lua_package_path "$prefix/lua/?.lua;;";
+    
+        server {
+            listen 7080 reuseport;
+            resolver 10.43.0.10 valid=1s ipv6=off;
+    
+            # Declare the target_pod_ip variable for use in the configuration
+            set $target_pod_ip "";
+    
+            location / {
+                default_type text/html;
+                content_by_lua_block {
+                    local metrics_module = require("main")
+    
+                    -- Main request handler
+                    local function handle_request()
+                        local kube_token, err = metrics_module.get_kube_token()
+                        if not kube_token then
+                            ngx.status = 500
+                            ngx.say("Error retrieving Kubernetes token: " .. err)
+                            ngx.log(ngx.ERR, "Failed to retrieve Kubernetes token: " .. err)
+                            return
+                        end
+    
+                        local pod_ips, err = metrics_module.get_pod_ips(kube_token)
+                        if not pod_ips then
+                            ngx.status = 500
+                            ngx.say("Error retrieving pod IPs: " .. err)
+                            ngx.log(ngx.ERR, "Failed to retrieve pod IPs: " .. err)
+                            return
+                        end
+    
+                        -- Iterate through pods to find one with client_connected == 0
+                        for _, pod_ip in ipairs(pod_ips) do
+                            local client_connected, err = metrics_module.check_client_connected(pod_ip)
+                            if client_connected == 0 then
+                                -- Set the target pod IP for proxying
+                                ngx.var.target_pod_ip = pod_ip
+                                ngx.log(ngx.INFO, "Automatically selected pod with IP: " .. pod_ip)
+    
+                                -- Perform internal redirect to proxy traffic
+                                ngx.req.set_header("X-Real-IP", ngx.var.remote_addr)
+                                ngx.req.set_header("X-Forwarded-For", ngx.var.remote_addr)
+                                ngx.exec("@proxy_pass")
+                                return
+                            else
+                                ngx.log(ngx.INFO, "Pod IP: " .. pod_ip .. ", client_connected: " .. (client_connected or "unknown"))
+                            end
+                        end
+    
+                        -- If no suitable pod is found, respond with an error
+                        ngx.status = 503
+                        ngx.say("No pods available with client_connected == 0")
+                        ngx.log(ngx.WARN, "No pods available with client_connected == 0")
+                    end
+    
+                    -- Call the main request handler
+                    handle_request()
+                }
+            }
+    
+            # New endpoint for metrics
+            location /metrics {
+                default_type text/plain;
+                content_by_lua_block {
+                    local metrics_module = require("main")
+                    local metrics, err = metrics_module.gather_metrics()
+                    if not metrics then
+                        ngx.status = 500
+                        ngx.say("Error gathering metrics: " .. err)
+                        ngx.log(ngx.ERR, "Failed to gather metrics: " .. err)
+                        return
+                    end
+    
+                    ngx.say(metrics)
+                }
+            }
+    
+            # Define a named location for proxying requests
+            location @proxy_pass {
+                internal;
+                proxy_pass http://$target_pod_ip;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                # Handle WebSocket upgrades
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+            }
+        }
+    }

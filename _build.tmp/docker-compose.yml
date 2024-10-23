@@ -7,13 +7,16 @@ services:
     coturn:
       hostname: coturn
       image: coturn/coturn
-      ports:
-        - "3478:3478/udp"
-        - "3478:3478/tcp"
+      network_mode: host
+        #ports:
+        #  - "3478:3478/udp"
+        #  - "3478:3478"
+        #  - "49160-49200:49160-49200"
+        #  - "49160-49200:49160-49200/udp"
       environment:
         TURN_USER: "user" 
-        TURN_PASS: "password" 
-        TURN_REALM: "realm.local" 
+        TURN_PASS: "pass" 
+        TURN_REALM: "anykey.pl" 
         TURN_MIN_PORT: "49160" 
         TURN_MAX_PORT: "49200" 
         TURN_PORT: "3478"
@@ -22,11 +25,15 @@ services:
         --listening-ip="0.0.0.0"
         --listening-ip="::"
         --listening-port="$${TURN_PORT}"
-        --lt-cred-mech 
         --user $${TURN_USER}:$${TURN_PASS} 
         --realm $${TURN_REALM} 
         --min-port $${TURN_MIN_PORT} 
         --max-port $${TURN_MAX_PORT}
+        --cli-password $${TURN_PASS}
+        --lt-cred-mech 
+        --no-dtls
+        --no-tls
+        --allow-loopback-peers 
 
 # ----------------------------
 # Stream Server (ubuntu 24.04)
@@ -81,7 +88,7 @@ services:
         SELKIES_TURN_HOST: "bigboy" 
         SELKIES_TURN_PORT: "3478"
         SELKIES_TURN_USERNAME: "user"
-        SELKIES_TURN_PASSWORD: "password"
+        SELKIES_TURN_PASSWORD: "pass"
 
         NGINX_PROXY_HELPER: "true"
         

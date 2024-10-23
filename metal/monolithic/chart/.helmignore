@@ -1,1 +1,4 @@
 /nvim-linux64/*
+/_*
+#/templates/coturn
+#/templates/monolith

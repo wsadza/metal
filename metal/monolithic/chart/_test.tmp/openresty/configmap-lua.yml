@@ -1,0 +1,115 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-lua 
+  namespace: metal
+data:
+  main.lua: |
+    -- /path/to/lua/metrics.lua
+    local http = require("resty.http")
+    local cjson = require("cjson")
+    
+    local _M = {}
+    
+    -- Function to read the Kubernetes token
+    function _M.get_kube_token()
+        local file = io.open("/var/run/secrets/kubernetes.io/serviceaccount/token", "r")
+        if not file then
+            return nil, "Could not open token file"
+        end
+        local token = file:read("*a")
+        file:close()
+        return token
+    end
+    
+    -- Function to get the pod IPs from Kubernetes API
+    function _M.get_pod_ips(token)
+        local httpc = http.new()
+        local res, err = httpc:request_uri("https://kubernetes.default.svc.cluster.local/api/v1/namespaces/metal/pods", {
+            method = "GET",
+            headers = {
+                ["Authorization"] = "Bearer " .. token,
+                ["Accept"] = "application/json",
+            },
+            ssl_ca_cert = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt",
+            ssl_verify = false,
+            keepalive_timeout = 60000,
+            keepalive_pool = 10,
+        })
+    
+        if not res then
+            return nil, "Failed to request pod list: " .. err
+        end
+    
+        local pods = cjson.decode(res.body)
+        local pod_ips = {}
+        for _, item in ipairs(pods.items) do
+            table.insert(pod_ips, item.status.podIP)
+        end
+    
+        return pod_ips
+    end
+    
+    -- Function to check the client_connected metric
+    function _M.check_client_connected(pod_ip)
+        local httpc = http.new()
+        local res, err = httpc:request_uri("http://" .. pod_ip .. "/metrics", {
+            method = "GET",
+        })
+    
+        if not res then
+            return nil, "Failed to request metrics: " .. err
+        end
+    
+        -- Iterate through each line of the response body to find the client_connected metric
+        for line in res.body:gmatch("[^\n]+") do
+            local matched_value = line:match("^client_connected%s+(%d+)$")
+            if matched_value then
+                return tonumber(matched_value)
+            end
+        end
+    
+        return nil, "client_connected not found"
+    end
+    
+    -- Function to gather metrics for all pods
+    function _M.gather_metrics()
+        local kube_token, err = _M.get_kube_token()
+        if not kube_token then
+            return nil, "Error retrieving Kubernetes token: " .. err
+        end
+    
+        local pod_ips, err = _M.get_pod_ips(kube_token)
+        if not pod_ips then
+            return nil, "Error retrieving pod IPs: " .. err
+        end
+    
+        local metrics = {}
+        local all_connected = true  -- Flag to check if all pods are connected
+        for _, pod_ip in ipairs(pod_ips) do
+            local client_connected, err = _M.check_client_connected(pod_ip)
+            if client_connected then
+                table.insert(metrics, "# pod_ip{" .. pod_ip .. "} " .. client_connected)
+                if client_connected ~= 1 then
+                    all_connected = false  -- If any pod has client_connected not equal to 1
+                end
+            else
+                ngx.log(ngx.INFO, "Pod IP: " .. pod_ip .. ", Error fetching metrics: " .. err)
+            end
+        end
+    
+        if all_connected then
+            table.insert(metrics, "# HELP scaling_needed Indicates if all client hosts are arelady occupated (1) or not (0).")
+            table.insert(metrics, "# TYPE scaling_needed gauge")
+            table.insert(metrics, "scaling_needed 1")
+        else
+            table.insert(metrics, "# HELP scaling_needed Indicates if all client hosts are arelady occupated (1) or not (0).")
+            table.insert(metrics, "# TYPE scaling_needed gauge")
+            table.insert(metrics, "scaling_needed 0")
+        end
+    
+        return table.concat(metrics, "\n")
+    end
+    
+    return _M

@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-keycloak
+data:
+  realm.json: |
+    {
+      "realm": "metal",
+      "enabled": true,
+      "clients": [
+        {
+          "clientId": "metal",
+          "secret": "secret",
+          "directAccessGrantsEnabled": true,
+          "serviceAccountsEnabled": true,
+          "redirectUris": ["https://oauth.anykey.pl/oauth2/callback"]
+        }
+      ],
+      "users": [
+        {
+          "username": "metal@anykey.pl",
+          "enabled": true,
+          "credentials": [
+            {
+              "type": "9311540",
+              "value": "9311540"
+            }
+          ]
+        }
+      ]
+    }

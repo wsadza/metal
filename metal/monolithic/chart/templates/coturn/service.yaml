@@ -1,0 +1,23 @@
+{{- if .Values.coturn.service }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{- include "coturn.fullname" . }}"
+  labels:
+    {{- include "coturn.labels" . | nindent 4 }}
+  annotations:
+    {{- if .Values.global.annotations }}
+    {{- toYaml .Values.global.annotations | nindent 4 }}
+    {{- end }}
+    {{- if .Values.coturn.service.annotations }}
+    {{- toYaml .Values.coturn.service.annotations | nindent 4 }}
+    {{- end }}
+spec:
+  type: {{ .Values.coturn.service.type }}
+  ports:
+    {{- if .Values.coturn.service.ports }}
+      {{- .Values.coturn.service.ports | toYaml | nindent 4 }}
+    {{- end }}
+  selector:
+    {{- include "coturn.matchLabels" . | nindent 4 }}
+{{- end }}

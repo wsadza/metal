@@ -1,0 +1,35 @@
+server:
+  ingress:
+     enabled: true 
+     annotations: 
+       "traefik.ingress.kubernetes.io/router.entrypoints": websecure
+     hosts: 
+       - prometheus.anykey.pl
+
+serverFiles:
+  prometheus.yml:
+    scrape_configs:
+      - job_name: metal
+        metrics_path: /metrics
+        scrape_interval: 10s
+        scrape_timeout: 10s
+        kubernetes_sd_configs:
+          - role: pod 
+        #static_configs:
+        #  - targets:
+        #    - metal-monolith.metal.svc.cluster.local
+        relabel_configs:
+          # Keep only the pods with the specific app.kubernetes.io/name label
+          #- source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_name]
+          #  regex: metal  # Match your app name
+          #  action: keep
+    
+          ## If you want to target a specific component
+          #- source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_component]
+          #  regex: monolith  # Match your component
+          #  action: keep
+
+          # If you want to target a specific component
+          - source_labels: [__meta_kubernetes_namespace]
+            regex: metal # Match your component
+            action: keep

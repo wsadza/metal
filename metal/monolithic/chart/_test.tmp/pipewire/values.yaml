@@ -1,0 +1,73 @@
+nameOverride: ""
+fullnameOverride: ""
+
+#pipewire:
+#
+#  image:
+#    repository: "ghcr.io/utilizable/mgr-pipewire"
+#    tag: "0.4.0"
+# 
+#  podAnnotations: {}
+#  podLabels: {}
+#
+#  service: 
+#    type: ClusterIP
+#    port: 4713 
+#    name: tcp
+#  
+#  extraEnv: []
+#  
+#  livnessProbe:
+#    exec:
+#      command: [ "pactl", "info" ]
+#    periodSeconds: 10 
+#    initialDelaySeconds: 10 
+#
+#  resources: 
+#    limits:
+#      cpu: 100m
+#      memory: 128Mi
+#    requests:
+#      cpu: 100m
+#      memory: 128Mi
+#
+#---
+pipewire:
+
+  nameOverride: "pipewire"
+  fullnameOverride: "pipewire"
+
+  image:
+    repository: "ghcr.io/wsadza/mgr-pipewire"
+    tag: "0.7.0"
+  
+  service: 
+    type: ClusterIP
+    port: 4713 
+    name: tcp
+  
+  extraEnv:
+  - name: PIPEWIRE_PORT  
+    value: "4713"
+  - name: PIPEWIRE_DEBUG
+    value: "E"
+  - name: WIREPLUMBER_DEBUG
+    value: "E"
+  - name: PIPEWIRE_LATENCY
+    value: "32/48000"
+  - name: PIPEWIRE_QUANTUM
+    value: "1024/48000"
+  
+  readinessProbe:
+    exec:
+      command: [ "pactl", "info" ]
+    periodSeconds: 10 
+    initialDelaySeconds: 10 
+
+  resources: 
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi

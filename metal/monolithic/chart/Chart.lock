@@ -2,5 +2,11 @@ dependencies:
 - name: keycloak
   repository: oci://registry-1.docker.io/bitnamicharts
   version: 22.2.6
-digest: sha256:84d4626ce7b272d4c3ef2587955d35273ba18feb515689de43979fc54e2e20c4
-generated: "2024-10-15T00:53:00.422442481+02:00"
+- name: oauth2-proxy
+  repository: https://oauth2-proxy.github.io/manifests
+  version: 7.7.27
+- name: coturn
+  repository: https://small-hack.github.io/coturn-chart/
+  version: 7.0.3
+digest: sha256:3160322dcd24d4179766ae91d5a6766021837ec0e94ff0fba1bae87b8d3a046c
+generated: "2024-10-23T00:04:15.995485127+02:00"

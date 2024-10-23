@@ -1,0 +1,108 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-helper-gateway
+data:
+  nginx.conf: |
+    worker_processes 1;
+    
+    events {
+        worker_connections 1024;
+    }
+    
+    http {
+        lua_package_path "$prefix/lua/?.lua;;";
+    
+        server {
+            listen 80 reuseport;
+    
+            location / {
+                default_type text/html;
+                content_by_lua_block {
+                    local log_file = "/tmp/shared-logs/log_stream"  -- Path to your log file
+                    local connection_state = "0"  -- Default to not connected
+    
+                    -- Open the log file and read its content
+                    local file = io.open(log_file, "r")
+                    if not file then
+                        ngx.say("Error: Could not open log file.")
+                        return
+                    end
+    
+                    -- Read the log file line by line to determine connection state
+                    for line in file:lines() do
+                        if string.find(line, "INFO:main:starting session for peer id") then
+                            connection_state = "1"  -- Connected
+                        elseif string.find(line, "INFO:signaling:Disconnected from peer") then
+                            connection_state = "0"  -- Not connected
+                        end
+                    end
+    
+                    -- Close the log file
+                    file:close()
+    
+                    -- Determine the response based on connection state
+                    if connection_state == "1" then
+                        -- Render an HTML page indicating that the connection is already established
+                        ngx.header.content_type = "text/html"  -- Ensure the response is HTML
+                        ngx.say("<html>")
+                        ngx.say("<head><title>Connection Status</title></head>")
+                        ngx.say("<body><h1>Connection is already established.</h1></body>")
+                        ngx.say("</html>")
+                    else
+                        -- Set necessary headers for proxying to the upstream server
+                        ngx.req.set_header("X-Real-IP", ngx.var.remote_addr)
+                        ngx.req.set_header("X-Forwarded-For", ngx.var.remote_addr)
+                        ngx.exec("@proxy_pass")  -- Perform internal redirect for proxying
+                    end
+                }
+            }
+    
+            # Define a named location for proxying requests
+            location @proxy_pass {
+                proxy_pass http://localhost:8080;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                # Handle WebSocket upgrades
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+            }
+    
+            # Status endpoint
+            location /metrics {
+                default_type text/plain;
+                content_by_lua_block {
+                    local log_file = "/tmp/shared-logs/log_stream"  -- Path to your log file
+                    local connection_state = "0"  -- Default to not connected
+    
+                    -- Open the log file and read its content
+                    local file = io.open(log_file, "r")
+                    if not file then
+                        ngx.say("Error: Could not open log file.")
+                        return
+                    end
+    
+                    -- Read the log file line by line to determine connection state
+                    for line in file:lines() do
+                        if string.find(line, "INFO:main:starting session for peer id") then
+                            connection_state = "1"  -- Connected
+                        elseif string.find(line, "INFO:signaling:Disconnected from peer") then
+                            connection_state = "0"  -- Not connected
+                        end
+                    end
+    
+                    -- Close the log file
+                    file:close()
+    
+                    -- Return the connection state as plain text
+                    -- Output the Prometheus-compatible metric
+                    ngx.say("# HELP client_connected Indicates if a client is currently connected (1) or not (0).")
+                    ngx.say("# TYPE client_connected gauge")
+                    ngx.say("client_connected " .. connection_state)
+                }
+            }
+        }
+    }  

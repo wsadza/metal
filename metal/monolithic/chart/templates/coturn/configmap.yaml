@@ -1,0 +1,24 @@
+{{- if .Values.coturn.enabled -}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "coturn.fullname" . }}-configuration
+  labels:
+    {{- include "coturn.labels" . | nindent 4 }}
+data:
+  turnserver.conf: |-
+    verbose
+    lt-cred-mech
+    realm="{{ .Values.coturn.configuration.realm }}"
+    listening-ip={{ .Values.coturn.configuration.listeningIP }}
+    listening-port={{ .Values.coturn.configuration.ports.listening }}
+    min-port="{{ .Values.coturn.configuration.ports.min }}"
+    max-port="{{ .Values.coturn.configuration.ports.max }}"
+    user="{{ 
+             printf "%s:%s" 
+             .Values.coturn.configuration.auth.username 
+             .Values.coturn.configuration.auth.password 
+          }}"
+...
+{{- end -}}

@@ -2,7 +2,147 @@
 global:
   labels: []
 
+proxy-gateway:
+  enabled: false
+
 # ------------------------------------------------------------------------------------
+#
+#   /$$$$$$   /$$$$$$  /$$$$$$$$ /$$   /$$ /$$$$$$$  /$$   /$$
+#  /$$__  $$ /$$__  $$|__  $$__/| $$  | $$| $$__  $$| $$$ | $$
+# | $$  \__/| $$  \ $$   | $$   | $$  | $$| $$  \ $$| $$$$| $$
+# | $$      | $$  | $$   | $$   | $$  | $$| $$$$$$$/| $$ $$ $$
+# | $$      | $$  | $$   | $$   | $$  | $$| $$__  $$| $$  $$$$
+# | $$    $$| $$  | $$   | $$   | $$  | $$| $$  \ $$| $$\  $$$
+# |  $$$$$$/|  $$$$$$/   | $$   |  $$$$$$/| $$  | $$| $$ \  $$
+#  \______/  \______/    |__/    \______/ |__/  |__/|__/  \__/
+
+coturn:
+  enabled: true
+  
+  overrideName: 
+  overrideLabels: []
+
+# -----------------------------------
+# Coturn - configuration 
+# -----------------------------------
+
+  configuration:
+    realm: anykey.pl
+
+    auth:
+      username: user
+      password: pass
+
+    listeningIP: 0.0.0.0
+
+    ports:
+      min: 49152
+      max: 65535
+      listening: 3478 
+      tlsListening: 5349  
+
+# -----------------------------------
+# Coturn - pod options
+# -----------------------------------
+
+  nodeSelector: 
+    nvidia.com/gpu.count: "1"
+
+  runtimeClassName: 
+
+    #hostNetwork: true
+
+# -----------------------------------
+# Coturn - pod container (primary)
+# -----------------------------------
+
+  image:
+    registry: ghcr.io/coturn
+    repository: 
+    package: coturn
+    tag: edge-debian
+    pullSecrets: []
+    pullPolicy: Always 
+
+  command: []
+
+  args: 
+    - "-c"
+    - "/turnserver.conf"
+
+  env: []
+
+  ports:
+    - containerPort: 3478 
+      name: coturn-udp
+      protocol: UDP
+    - containerPort: 3478 
+      name: coturn-tcp
+      protocol: tcp 
+
+  resources: []
+
+  extraVolumesMounts:
+    - name: metal-coturn-configuration
+      mountPath: /turnserver.conf
+      subPath: turnserver.conf
+
+# -----------------------------------
+# Coturn - pod containers (additionals)
+# -----------------------------------
+
+  sidecars: []
+
+  initContainers: []
+
+# -----------------------------------
+# Coturn - pod volumes 
+# -----------------------------------
+
+  extraVolumes:
+    - name: metal-coturn-configuration
+      type: configMap
+
+# -----------------------------------
+# Coturn - networking - service
+# -----------------------------------
+
+  service:
+    annotations: {}
+    type: NodePort 
+    ports:
+      - name: coturn-udp
+        port: 3478
+        targetPort: 3478
+        protocol: UDP 
+        nodePort: 32000
+      - name: coturn-tcp
+        port: 3478
+        targetPort: 3478
+        protocol: TCP 
+        nodePort: 32000
+
+# -----------------------------------
+# Coturn - networking - ingress 
+# -----------------------------------
+
+  ingress:
+
+# -----------------------------------
+# Coturn - probes 
+# -----------------------------------
+
+  startupProbe:
+    enabled: false
+
+# -----------------------------------
+# Coturn - hpa
+# -----------------------------------
+
+  hpa:
+
+# ------------------------------------------------------------------------------------
+#
 # $$\      $$\  $$$$$$\  $$\   $$\  $$$$$$\  $$\       $$$$$$\ $$$$$$$$\ $$\   $$\ 
 # $$$\    $$$ |$$  __$$\ $$$\  $$ |$$  __$$\ $$ |      \_$$  _|\__$$  __|$$ |  $$ |
 # $$$$\  $$$$ |$$ /  $$ |$$$$\ $$ |$$ /  $$ |$$ |        $$ |     $$ |   $$ |  $$ |
@@ -11,7 +151,6 @@ global:
 # $$ |\$  /$$ |$$ |  $$ |$$ |\$$$ |$$ |  $$ |$$ |        $$ |     $$ |   $$ |  $$ |
 # $$ | \_/ $$ | $$$$$$  |$$ | \$$ | $$$$$$  |$$$$$$$$\ $$$$$$\    $$ |   $$ |  $$ |
 # \__|     \__| \______/ \__|  \__| \______/ \________|\______|   \__|   \__|  \__|
-# ------------------------------------------------------------------------------------
 
 monolith:
   
@@ -53,7 +192,7 @@ monolith:
   - name: SELKIES_TURN_HOST
     value: "anykey.pl"
   - name: SELKIES_TURN_PORT
-    value: "3478"
+    value: "32000"
   - name: SELKIES_TURN_USERNAME
     value: "user"
   - name: SELKIES_TURN_PASSWORD
@@ -62,9 +201,22 @@ monolith:
     value: "nvh264enc"
   - name: PRIME_RENDERER_GLOBAL
     value: "true" 
+  - name: PULSE_SERVER 
+    value: tcp:pipewire.metal.svc.cluster.local:4713
+  - name: SELKIES_ENABLE_WEBRTC_STATISTICS
+    value: "true"
 
-  #command: [ "bash", "-c", "while true; do continue; done" ]
-  command: []
+  command: [ 
+    "bash", 
+    "-c", 
+    "sudo sed -i 's/readiness_turn//g' /usr/bin/40_start_stream.sh && ./entrypoint.sh",
+  ]
+  #command: []
+
+  ports: []
+  #ports: 
+  #- containerPort: 9090
+  #  name: metrics
 
   resources:
     requests:
@@ -75,25 +227,45 @@ monolith:
       nvidia.com/gpu: 1
 
   extraVolumesMounts: 
-    - name: configmap-proxy
-      mountPath: /etc/nginx/nginx.conf
-      subPath: nginx.conf
+    - name: shared-logs 
+      mountPath: /run/user/1000/logs
+      subPath: logs
 
 # -----------------------------------
 # Monolith - containers (additionals)
 # -----------------------------------
   sidecars:
 
-# proxy-helper
-    - name: proxy-helper
-      image: nginx
+# helper-gateway
+    - name: helper-gateway
+      image: openresty:latest
+      imagePullPolicy: Never
+      command: [ 
+        "bash", 
+        "-c", 
+        "cd /modules && mkdir logs && /usr/local/openresty/nginx/sbin/nginx -p ${PWD}/ -g \"daemon off;error_log /dev/stdout debug;\"", 
+      ]
       ports: 
       - containerPort: 80
-        name: http
+        name: helper-gateway
       volumeMounts:
-        - name: configmap-proxy
-          mountPath: /etc/nginx/nginx.conf
+        - name: configmap-helper-gateway
+          mountPath: /modules/conf/nginx.conf
           subPath: nginx.conf
+        - name: shared-logs
+          mountPath: /tmp/shared-logs
+          subPath: logs
+
+# proxy-helper
+#    - name: helper-proxy
+#      image: nginx
+#      ports: 
+#      - containerPort: 80
+#        name: helper-proxy 
+#      volumeMounts:
+#        - name: configmap-helper-proxy
+#          mountPath: /etc/nginx/nginx.conf
+#          subPath: nginx.conf
 
   initContainers: []
 
@@ -102,8 +274,14 @@ monolith:
 # -----------------------------------
 
   extraVolumes:
-    - name: configmap-proxy
+    - name: configmap-helper-gateway
       type: configMap
+
+    - name: configmap-helper-proxy
+      type: configMap
+
+    - name: shared-logs 
+      type: emptyDir
 
     - name: pvc-0
       type: persistentVolumeClaim
@@ -135,10 +313,14 @@ monolith:
     annotations: {}
     type: ClusterIP
     ports:
-      - name: http 
+      - name: helper-gateway
         port: 80
         targetPort: 80
         protocol: TCP
+#      - name: metrics
+#        port: 9090
+#        targetPort: 9090
+#        protocol: TCP
 
   ingress:
     enabled: true 
@@ -156,7 +338,7 @@ monolith:
 # -----------------------------------
 
   startupProbe:
-    enabled: true 
+    enabled: false 
     scheme: HTTP
     probePath: /health
     initialDelaySeconds: 5 
@@ -165,7 +347,38 @@ monolith:
     failureThreshold: 5
     timeoutSeconds: 1
 
+# -----------------------------------
+# Monolith - hpa
+# -----------------------------------
+
+  hpa:
+
+# keda - autoscaler
+#   keda: []
+    keda: 
+      enabled: true 
+      minReplicaCount: 1
+      maxReplicaCount: 4
+      triggers: 
+        - type: prometheus
+          metricType: Value
+          metadata:
+            serverAddress: http://prometheus-server.metal.svc.cluster.local
+            query: scaling_needed
+            threshold: "0.5"
+      advanced:
+        horizontalPodAutoscalerConfig:
+          behavior:
+            scaleUp:
+              policies:
+              - type: Pods
+                value: 1  
+                periodSeconds: 1  
+              stabilizationWindowSeconds: 1 
+
+
 # ------------------------------------------------------------------------------------
+#
 #  $$$$$$\ $$$$$$$\  $$$$$$$$\ $$\   $$\ $$$$$$$$\ $$$$$$\ $$$$$$$$\ $$\     $$\ 
 #  \_$$  _|$$  __$$\ $$  _____|$$$\  $$ |\__$$  __|\_$$  _|\__$$  __|\$$\   $$  |
 #    $$ |  $$ |  $$ |$$ |      $$$$\ $$ |   $$ |     $$ |     $$ |    \$$\ $$  / 
@@ -174,12 +387,44 @@ monolith:
 #    $$ |  $$ |  $$ |$$ |      $$ |\$$$ |   $$ |     $$ |     $$ |       $$ |    
 #  $$$$$$\ $$$$$$$  |$$$$$$$$\ $$ | \$$ |   $$ |   $$$$$$\    $$ |       $$ |    
 #  \______|\_______/ \________|\__|  \__|   \__|   \______|   \__|       \__|  
-# ------------------------------------------------------------------------------------
 
-identity:
+identity-provider:
+  enabled: false 
+
+  auth:
+    adminUser: "admin"
+    adminPassword: "admin"
+  
+  extraEnvVars: |
+      - name: PROXY_ADDRESS_FORWARDING
+        value: "true"
+      - name: REDIRECT_SOCKET
+        value: 'proxy-https'
+      - name: KEYCLOAK_FRONTEND_URL
+        value: 'https://identity.anykey.pl/'
+      - name: KC_HOSTNAME
+        value: 'identity.anykey.pl'
+      - name: KC_PROXY
+        value: 'edge'
+      - name: KC_HTTP_ENABLED
+        value: 'true'
+      - name: KC_HOSTNAME_HTTPS_STRICT
+        value: 'false'
+  
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    hostname: identity.anykey.pl
+    annotations:
+      "traefik.ingress.kubernetes.io/router.entrypoints": websecure
+      "traefik.ingress.kubernetes.io/router.middlewares": default-keycloak-auth@kubernetescrd
+
+  keycloakConfigCli:
+    enabled: true
+    existingConfigmap: "configmap-keycloak"
+
+identity-proxy:
   enabled: false
-
-
 
 # TRASH
 # ----------------------------

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: configmap-proxy
+  name: configmap-helper-proxy
 data:
   nginx.conf: |
     worker_processes 1;
@@ -23,7 +23,13 @@ data:
       server {
         listen       80;
         server_name  localhost;
-
+        # ------------------
+        # NGINX - status
+        # ------------------
+        location /proxy-status {
+            stub_status on;
+            allow all; 
+        }
         # ------------------
         # SUPERVISOR
         # ------------------

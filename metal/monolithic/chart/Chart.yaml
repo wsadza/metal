@@ -14,7 +14,18 @@ keywords:
 dependencies:
   # Identity Dependencies.
   - name: keycloak
-    alias: identity
+    alias: identity-provider
     repository: oci://registry-1.docker.io/bitnamicharts
     version: 22.2.6
-    condition: "identity.enabled"
+    condition: "identity-provider.enabled"
+  - name: oauth2-proxy
+    alias: identity-proxy 
+    repository: https://oauth2-proxy.github.io/manifests
+    version: 7.7.27 
+    condition: "identity-proxy.enabled"
+  # Coturn
+  #- name: coturn
+  #  alias: turn 
+  #  repository: https://small-hack.github.io/coturn-chart/
+  #  version: 7.0.3
+  #  condition: "coturn.enabled"

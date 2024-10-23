@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: openresty-sa
+  namespace: metal
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: openresty-reader
+  namespace: metal
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: openresty-reader-binding
+  namespace: metal
+subjects:
+  - kind: ServiceAccount
+    name: openresty-sa
+    namespace: metal
+roleRef:
+  kind: Role
+  name: openresty-reader
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openresty
+  namespace: metal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openresty
+  template:
+    metadata:
+      labels:
+        app: openresty
+    spec:
+      serviceAccountName: openresty-sa
+      containers:
+        - name: openresty
+          image: openresty
+          imagePullPolicy: Never
+#          command: [ "bash", "-c", "tail -f /dev/null" ]
+          command: [ 
+            "bash", 
+            "-c", 
+            "cd /modules && mkdir logs && /usr/local/openresty/nginx/sbin/nginx -p ${PWD}/ -g \"daemon off; error_log /dev/stdout debug;\"", 
+          ]
+          ports:
+            - containerPort: 7080
+          volumeMounts:
+            - name: html-volume 
+              mountPath: /modules/conf/nginx.conf
+              subPath: nginx.conf
+            - name: configmap-lua 
+              mountPath: /modules/lua/main.lua
+              subPath: main.lua 
+      volumes:
+        - name: html-volume
+          configMap:
+            name: openresty-html
+        - name: configmap-lua 
+          configMap:
+            name: configmap-lua 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openresty-service
+  namespace: metal
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: openresty
