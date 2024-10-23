@@ -29,7 +29,7 @@ include:
       arguments:
         # Core: Base
         DISTRIBUTION: "debian"
-        SUITE: "trixie"
+        SUITE: "sid"
      
         # Core: Selkies Gstreamer
         SELKIES_RELEASE: "24.04" 
