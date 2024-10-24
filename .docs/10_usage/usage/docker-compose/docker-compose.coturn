@@ -1,5 +1,5 @@
 ############################################################
-# Copyright (c) 2024 Utilizable 
+# Copyright (c) 2024 wsadza 
 # Released under the MIT license
 # ----------------------------------------------------------
 #
@@ -44,7 +44,7 @@ services:
 
     stream:
       hostname: stream 
-      image: "ghcr.io/utilizable/metalg:latest"
+      image: "ghcr.io/wsadza/metal/full-ubuntu:latest"
       ports:
 # Expose app - stream 
         - 8080:8080
