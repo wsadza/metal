@@ -22,6 +22,3 @@
 
 - name: Bash Completion - Git
   command: cp /usr/share/bash-completion/completions/git /etc/bash_completion.d/git
-
-- name: Tmux Configuration
-  command: curl -X GET https://raw.githubusercontent.com/utilizable/snippets/develop/tmux/tmux.conf -o  ~/.tmux.conf
