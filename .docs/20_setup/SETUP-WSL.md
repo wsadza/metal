@@ -44,7 +44,7 @@ $$$$$$$$\ $$\       $$$$$$$\  $$$$$$$\
 > - The command below are designed to leverage the NVIDIA GPU.
 
 ```sh
-docker run -d --name stream --hostname stream --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined --ipc host --tmpfs /dev/shm:rw,size=64m --device /dev/dri/card0 --device /dev/dri/renderD128 --device /dev/dxg -e STREAMER_HOST="${STREAMER_HOST}" -e MESA_D3D12_DEFAULT_ADAPTER_NAME="NVIDIA" -e LIBVA_DRIVER_NAME="d3d12" -e VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/dzn_icd.x86_64.json" -e LD_LIBRARY_PATH="/usr/lib/wsl/lib" -v /usr/lib/wsl:/usr/lib/wsl:ro --gpus all -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 8091:9091 ghcr.io/utilizable/metal/full-ubuntu:latest
+docker run -d --name stream --hostname stream --cap-add NET_ADMIN --cap-add SYS_ADMIN --cap-add SYS_NICE --cap-add IPC_LOCK --security-opt seccomp=unconfined --security-opt apparmor=unconfined --ipc host --tmpfs /dev/shm:rw,size=64m --device /dev/dri/card0 --device /dev/dri/renderD128 --device /dev/dxg -e STREAMER_HOST="${STREAMER_HOST}" -e MESA_D3D12_DEFAULT_ADAPTER_NAME="NVIDIA" -e LIBVA_DRIVER_NAME="d3d12" -e VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/dzn_icd.x86_64.json" -e LD_LIBRARY_PATH="/usr/lib/wsl/lib" -v /usr/lib/wsl:/usr/lib/wsl:ro --gpus all -p 8080:8080 -p 3478:3478/udp -p 3478:3478/tcp -p 8091:9091 ghcr.io/wsadza/metal/full-ubuntu:latest
 ```
 ##
 
@@ -364,7 +364,7 @@ Here’s a fully prepared Docker Compose file that allows you to run Steam and u
    
        stream:
          hostname: stream
-         image: "ghcr.io/utilizable/metal/full-ubuntu:latest"
+         image: "ghcr.io/wsadza/metal/full-ubuntu:latest"
          entrypoint: [ "/bin/bash", "-c" ]
    
          ports:
