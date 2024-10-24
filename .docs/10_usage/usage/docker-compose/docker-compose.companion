@@ -1,5 +1,5 @@
 ############################################################
-# Copyright (c) 2024 Wsadza 
+# Copyright (c) 2024 wsadza 
 # Released under the MIT license
 # ----------------------------------------------------------
 #
@@ -18,7 +18,7 @@ services:
 
     stream:
       hostname: stream 
-      image: "ghcr.io/utilizable/metalg:latest"
+      image: "ghcr.io/wsadza/metal/full-ubuntu:latest"
       ports:
 # Expose app - stream 
         - 8080:8080
@@ -27,7 +27,7 @@ services:
         - 3478:3478/tcp
       environment:
 # Use internal turn server in case of lack of remote setting 
-        DOCKER_HOST: "${HOSTNAME:=localhost}"                
+        STREAMER_HOST: "${HOSTNAME:=localhost}"                
 
 # ----------------------------
 # Stream Server [1]
@@ -35,12 +35,12 @@ services:
 
     stream:
       hostname: stream 
-      image: "ghcr.io/utilizable/metalg:latest"
+      image: "ghcr.io/wsadza/metal/full-ubuntu:latest"
       ports:
 # Expose app - stream 
         - 7080:8080
       environment:
 # Use internal turn server in case of lack of remote setting 
-        DOCKER_HOST: "${HOSTNAME:=localhost}"                
+        STREAMER_HOST: "${HOSTNAME:=localhost}"                
 
 
