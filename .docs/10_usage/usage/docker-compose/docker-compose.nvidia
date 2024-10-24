@@ -24,7 +24,7 @@ services:
 
       environment:
 # Use internal turn server in case of lack of remote setting 
-        DOCKER_HOST: "${HOSTNAME:=localhost}"                
+        STREAMER_HOST: "${HOSTNAME:=localhost}"                
 
 # Change encoder to nvidia nvh264enc  
         SELKIES_ENCODER: "nvh264enc"
