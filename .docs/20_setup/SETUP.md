@@ -15,7 +15,7 @@
 Clone this repository and run the [setup.sh](./setup/ansible/setup.sh) bash script. This will fetch all the necessary Ansible dependencies and execute the playbook.
 
 ```sh
-git clone https://github.com/utilizable/metal.git && cd ./.docs/20_setup/setup/ansible && ./setup.sh
+git clone https://github.com/wsadza/metal.git && cd ./.docs/20_setup/setup/ansible && ./setup.sh
 ```
 
 ##
@@ -35,7 +35,7 @@ Setup - Bash
 Clone this repository and run the [setup.sh](./setup/bash/setup.sh) bash script. This will fetch and install all the necessary dependencies and components.
 
 ```sh
-git clone https://github.com/utilizable/metal.git && cd ./.docs/20_setup/setup/bash && ./setup.sh
+git clone https://github.com/wsadza/metal.git && cd ./.docs/20_setup/setup/bash && ./setup.sh
 ```
 
 ##
