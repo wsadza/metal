@@ -17,7 +17,7 @@ services:
 
     stream:
       hostname: stream
-      image: "ghcr.io/utilizable/metal/full-ubuntu:latest"
+      image: "ghcr.io/wsadza/metal/full-ubuntu:latest"
 
       ports:
 # Expose app - stream
