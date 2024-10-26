@@ -1,11 +1,13 @@
+{{- if .Values.gatekeeper.enabled -}}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: openresty-html
-  namespace: metal
+  name: {{ include "gatekeeper.fullname" . }}-nginx
+  labels:
+    {{- include "gatekeeper.labels" . | nindent 4 }}
 data:
-
+  nginx.conf: |
     worker_processes 1;
     
     events {
@@ -14,7 +16,9 @@ data:
     
     http {
         lua_package_path "$prefix/lua/?.lua;;";
-    
+        limit_conn_zone $binary_remote_addr zone=one:10m; 
+        lua_shared_dict client_pod_map 10m;  # 10 MB shared memory for client-pod mapping
+
         server {
             listen 80 reuseport;
             resolver 10.43.0.10 valid=1s ipv6=off;
@@ -29,6 +33,20 @@ data:
     
                     -- Main request handler
                     local function handle_request()
+
+                        -- Retrieve shared dictionary
+                        local client_pod_map = ngx.shared.client_pod_map
+                        local client_ip = ngx.var.remote_addr
+
+                        -- Check if the client IP already has a pod assigned
+                        local existing_pod_ip = client_pod_map:get(client_ip)
+                        if existing_pod_ip then
+                            ngx.var.target_pod_ip = existing_pod_ip
+                            ngx.log(ngx.INFO, "Using previously assigned pod IP for client: " .. client_ip .. " -> " .. existing_pod_ip)
+                            ngx.exec("@proxy_pass")
+                            return
+                        end
+
                         local kube_token, err = metrics_module.get_kube_token()
                         if not kube_token then
                             ngx.status = 500
@@ -106,3 +124,5 @@ data:
             }
         }
     }
+...
+{{- end -}}

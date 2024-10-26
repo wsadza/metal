@@ -2,8 +2,8 @@
 Create PersistentVolumeClaims 
 based on the extraVolumes defined in values.yaml
 */}}
-{{- if .Values.monolith.extraVolumes }}
-{{- range .Values.monolith.extraVolumes }}
+{{- if .Values.stream.extraVolumes }}
+{{- range .Values.stream.extraVolumes }}
 {{- if eq .type "persistentVolumeClaim" }}
 ---
 apiVersion: v1

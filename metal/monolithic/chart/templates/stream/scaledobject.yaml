@@ -18,36 +18,37 @@
 #
 ############################################################
 */}}
-{{- if .Values.monolith.hpa -}}
-{{- if .Values.monolith.hpa.keda.enabled -}}
+{{- if .Values.stream.hpa -}}
+{{- if .Values.stream.hpa.keda.enabled -}}
 ---
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
-  name: "{{- include "monolith.fullname" . }}"
+  name: "{{- include "stream.fullname" . }}"
   labels:
-    {{- include "monolith.labels" . | nindent 4 }}
+    {{- include "stream.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
-    name: "{{- include "monolith.fullname" . }}"
-  minReplicaCount: {{ .Values.monolith.hpa.keda.minReplicaCount }} 
-  maxReplicaCount: {{ .Values.monolith.hpa.keda.maxReplicaCount }} 
+    name: "{{- include "stream.fullname" . }}"
+  minReplicaCount: {{ .Values.stream.hpa.keda.minReplicaCount }} 
+  maxReplicaCount: {{ .Values.stream.hpa.keda.maxReplicaCount }} 
 {{/*
   # -----------------------------------
   # KEDA - Triggers 
   # -----------------------------------
 */}}
   triggers:
-  {{- if .Values.monolith.hpa.keda.triggers }}
-    {{- .Values.monolith.hpa.keda.triggers | toYaml | nindent 2 }}
+  {{- if .Values.stream.hpa.keda.triggers }}
+    {{- .Values.stream.hpa.keda.triggers | toYaml | nindent 2 }}
   {{- end }}
 {{/*
   # -----------------------------------
   # KEDA - ADVANCED 
   # -----------------------------------
 */}}
-  {{- if .Values.monolith.hpa.keda.advanced }}
-    {{- .Values.monolith.hpa.keda.advanced | toYaml | nindent 2 }}
+  {{- if .Values.stream.hpa.keda.advanced }}
+  advanced:
+    {{- .Values.stream.hpa.keda.advanced | toYaml | nindent 4 }}
   {{- end }}
 ...
 {{- end }}

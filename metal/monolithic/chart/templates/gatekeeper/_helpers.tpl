@@ -2,48 +2,48 @@
 
 {{/*
 **********************
-Monolith - Naming 
+Gatekeeper - Naming 
 **********************
 */}}
 
-{{- define "monolith.name" -}}
-    {{- default .Chart.Name .Values.monolith.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- define "gatekeeper.name" -}}
+    {{- default .Chart.Name .Values.gatekeeper.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "monolith.fullname" -}}
+{{- define "gatekeeper.fullname" -}}
     {{- include "metal.componentFullname" (dict
-        "componentName" "monolith"
-        "componentValues" .Values.monolith
+        "componentName" "gatekeeper"
+        "componentValues" .Values.gatekeeper
         "context" $
     ) -}}
 {{- end -}}
 
 {{/*
 **********************
-Monolith - Labels
+Gatekeeper - Labels
 **********************
 */}}
 
 {{/*
 Defines extra labels for optimize.
 */}}
-{{- define "monolith.extraLables" -}}
-app.kubernetes.io/component: monolith 
+{{- define "gatekeeper.extraLables" -}}
+app.kubernetes.io/component: gatekeeper 
 {{- end -}}
 
 {{/*
 Define common labels, combining the match labels and transient labels, which might change on updating
 (version depending). These labels should not be used on matchLabels selector, since the selectors are immutable.
 */}}
-{{- define "monolith.labels" -}}
+{{- define "gatekeeper.labels" -}}
 {{- template "metal.labels" . }}
-{{ template "monolith.extraLables" . }}
+{{ template "gatekeeper.extraLables" . }}
 {{- end -}}
 
 {{/*
 Selector labels
 */}}
-{{- define "monolith.matchLabels" -}}
+{{- define "gatekeeper.matchLabels" -}}
 {{- template "metal.matchLabels" . }}
-app.kubernetes.io/component: monolith 
+app.kubernetes.io/component: gatekeeper 
 {{- end -}}

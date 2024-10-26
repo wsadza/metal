@@ -2,8 +2,102 @@
 global:
   labels: []
 
-proxy-gateway:
-  enabled: false
+gatekeeper:
+  enabled: true 
+
+  serviceAccountName: metal-gatekeeper 
+
+# -----------------------------------
+# Gateway - pod container (primary)
+# -----------------------------------
+
+  image:
+    registry:
+    repository: 
+    package: openresty 
+    tag: latest 
+    pullSecrets: []
+    pullPolicy: Never 
+
+  command: [ 
+    "bash", 
+    "-c", 
+    "cd /modules && mkdir logs && /usr/local/openresty/nginx/sbin/nginx -p ${PWD}/ -g \"daemon off;error_log /dev/stdout debug;\"", 
+  ]
+#  command: 
+#  - "bash"
+#  - "-c"
+#  - "cd /modules"
+#  - "mkdir logs"
+#  - "/usr/local/openresty/nginx/sbin/nginx"
+#  - "-p ${PWD}/"
+#  - "-g \"daemon off; error_log /dev/stdout debug;\""
+
+  args: []
+
+  env: []
+
+  ports:
+    - containerPort: 80 
+      name: gatekeeper-tcp 
+      protocol: TCP 
+
+  resources: []
+
+  extraVolumesMounts:
+    - name: metal-gatekeeper-nginx
+      mountPath: /modules/conf/nginx.conf
+      subPath: nginx.conf 
+
+    - name: metal-gatekeeper-lua
+      mountPath: /modules/lua/main.lua
+      subPath: main.lua 
+
+# -----------------------------------
+# Gatekeeper - networking - ingress 
+# -----------------------------------
+
+  ingress:
+    enabled: true 
+    className: traefik
+    annotations:
+      "traefik.ingress.kubernetes.io/router.entrypoints": websecure
+    path: "/"
+    pathType: "Prefix"
+    host: "metal.anykey.pl"
+    portNumber: 80
+    tls: [] 
+
+# -----------------------------------
+# Gatekeeper - probes 
+# -----------------------------------
+
+  startupProbe:
+    enabled: false 
+
+# -----------------------------------
+# Gatekeeper - pod volumes 
+# -----------------------------------
+
+  extraVolumes:
+    - name: metal-gatekeeper-nginx
+      type: configMap
+
+    - name: metal-gatekeeper-lua
+      type: configMap
+
+# -----------------------------------
+# Coturn - networking - service
+# -----------------------------------
+
+  service:
+    annotations: {}
+    type: ClusterIP 
+    ports:
+      - name: gatekeeper-tcp
+        port: 80 
+        targetPort: 80
+        protocol: TCP 
 
 # ------------------------------------------------------------------------------------
 #
@@ -50,7 +144,7 @@ coturn:
 
   runtimeClassName: 
 
-    #hostNetwork: true
+  hostNetwork:
 
 # -----------------------------------
 # Coturn - pod container (primary)
@@ -133,7 +227,21 @@ coturn:
 # -----------------------------------
 
   startupProbe:
-    enabled: false
+    enabled: true 
+    exec:
+      command:
+        - /usr/bin/turnutils_uclient 
+        - -y 
+        - -u 
+        - "user"
+        - -w 
+        - "pass"
+        - 127.0.0.1 
+    initialDelaySeconds: 15 
+    periodSeconds: 15 
+    successThreshold: 1
+    failureThreshold: 15
+    timeoutSeconds: 15
 
 # -----------------------------------
 # Coturn - hpa
@@ -152,13 +260,13 @@ coturn:
 # $$ | \_/ $$ | $$$$$$  |$$ | \$$ | $$$$$$  |$$$$$$$$\ $$$$$$\    $$ |   $$ |  $$ |
 # \__|     \__| \______/ \__|  \__| \______/ \________|\______|   \__|   \__|  \__|
 
-monolith:
+stream:
   
   overrideName: 
   overrideLabels: []
 
 # -----------------------------------
-# Monolith - options
+# stream - options
 # -----------------------------------
 
   nodeSelector: 
@@ -167,7 +275,7 @@ monolith:
   runtimeClassName: nvidia
 
 # -----------------------------------
-# Monolith - containers (primary)
+# stream - containers (primary)
 # -----------------------------------
 
   # ghcr.io/wsadza/metal/full-ubuntu:1.0.0
@@ -232,7 +340,7 @@ monolith:
       subPath: logs
 
 # -----------------------------------
-# Monolith - containers (additionals)
+# stream - containers (additionals)
 # -----------------------------------
   sidecars:
 
@@ -270,7 +378,7 @@ monolith:
   initContainers: []
 
 # -----------------------------------
-# Monolith - volumes 
+# stream - volumes 
 # -----------------------------------
 
   extraVolumes:
@@ -306,7 +414,7 @@ monolith:
           "helm.sh/resource-policy": "keep"
 
 # -----------------------------------
-# Monolith - networking
+# stream - networking
 # -----------------------------------
 
   service:
@@ -329,7 +437,7 @@ monolith:
       "traefik.ingress.kubernetes.io/router.entrypoints": websecure
     path: "/"
     pathType: "Prefix"
-    host: "monolithic.anykey.pl"
+    host: "stream.anykey.pl"
     portNumber: 80
     tls: [] 
 
@@ -339,8 +447,10 @@ monolith:
 
   startupProbe:
     enabled: false 
-    scheme: HTTP
-    probePath: /health
+    httpGet:
+      scheme: HTTP
+      path: /health
+      port: 8080
     initialDelaySeconds: 5 
     periodSeconds: 5 
     successThreshold: 1
@@ -373,8 +483,14 @@ monolith:
               policies:
               - type: Pods
                 value: 1  
-                periodSeconds: 1  
+                periodSeconds: 1 
               stabilizationWindowSeconds: 1 
+            scaleDown:
+              policies:
+              - type: Pods
+                value: 1
+                periodSeconds: 60
+              stabilizationWindowSeconds: 60
 
 
 # ------------------------------------------------------------------------------------

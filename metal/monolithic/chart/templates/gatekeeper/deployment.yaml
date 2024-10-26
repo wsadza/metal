@@ -1,45 +1,49 @@
 {{/*
 ############################################################
-# Copyright (c) 2024 Utilizable 
+# Copyright (c) 2024 wsadza 
 # Released under the MIT license
 # ----------------------------------------------------------
 #
-# Deployment definition - Coturn
+# Deployment definition - Gatekeeper 
 #
 ############################################################
 */}}
 ---
+{{- if .Values.gatekeeper.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{- include "coturn.fullname" . }}"
+  name: "{{- include "gatekeeper.fullname" . }}"
   labels:
-    {{- include "coturn.labels" . | nindent 4 }}
+    {{- include "gatekeeper.labels" . | nindent 4 }}
   annotations:
     {{- toYaml .Values.global.annotations | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      {{- include "coturn.matchLabels" . | nindent 6 }}
+      {{- include "gatekeeper.matchLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "coturn.labels" . | nindent 8 }}
+        {{- include "gatekeeper.labels" . | nindent 8 }}
     spec:
 {{/*
   # --------------------------------------------
   # SETTINGS 
   # --------------------------------------------
 */}}
-      {{- if .Values.coturn.runtimeClassName }}
-      runtimeClassName: {{ toYaml .Values.coturn.runtimeClassName }}
+      {{- if .Values.gatekeeper.runtimeClassName }}
+      runtimeClassName: {{ toYaml .Values.gatekeeper.runtimeClassName }}
       {{- end }}
-      {{- with .Values.coturn.nodeSelector }}
+      {{- with .Values.gatekeeper.nodeSelector }}
       nodeSelector:
       {{ toYaml . | indent 2 }}
       {{- end }}
-      {{- if .Values.coturn.hostNetwork }}
-      hostNetwork: {{ toYaml .Values.coturn.hostNetwork }}
+      {{- if .Values.gatekeeper.hostNetwork }}
+      hostNetwork: {{ toYaml .Values.gatekeeper.hostNetwork }}
+      {{- end }}
+      {{- if .Values.gatekeeper.serviceAccountName }}
+      serviceAccountName: {{ toYaml .Values.gatekeeper.serviceAccountName }}
       {{- end }}
 {{/*
   # --------------------------------------------
@@ -48,29 +52,29 @@ spec:
 */}}
       containers:
         - name: {{ .Chart.Name }} 
-          {{- if .Values.coturn.command }}
+          {{- if .Values.gatekeeper.command }}
           command:
-            {{- range .Values.coturn.command }}
+            {{- range .Values.gatekeeper.command }}
               - {{ . | quote }}
             {{- end }}
           {{- end }}
-          {{- if .Values.coturn.args }}
+          {{- if .Values.gatekeeper.args }}
           args:
-            {{- range .Values.coturn.args }}
+            {{- range .Values.gatekeeper.args }}
               - {{ . | quote }}
             {{- end }}
           {{- end }}
           image: {{ 
                    include "metal.imageByParams" 
-                   (dict "base" .Values.coturn) 
+                   (dict "base" .Values.gatekeeper) 
                  }}
-          imagePullPolicy: {{ .Values.coturn.image.pullPolicy }}
-          {{- if .Values.coturn.resources }}
+          imagePullPolicy: {{ .Values.gatekeeper.image.pullPolicy }}
+          {{- if .Values.gatekeeper.resources }}
           resources:
-            {{- toYaml .Values.coturn.resources | nindent 12 }}
+            {{- toYaml .Values.gatekeeper.resources | nindent 12 }}
           env:
           {{- end }}
-          {{- with .Values.coturn.env }}
+          {{- with .Values.gatekeeper.env }}
             {{- tpl (toYaml .) $ | nindent 12 }}
           {{- end }}
 {{/*
@@ -78,47 +82,47 @@ spec:
   # PORTS 
   # --------------------------------------------
 */}}
-          {{- if .Values.coturn.ports }}
+          {{- if .Values.gatekeeper.ports }}
           ports:
-            {{- .Values.coturn.ports | toYaml | nindent 12 }}
+            {{- .Values.gatekeeper.ports | toYaml | nindent 12 }}
           {{- end }}
 {{/*
   # --------------------------------------------
   # PROBES 
   # --------------------------------------------
 */}}
-          {{- if .Values.coturn.startupProbe.enabled }}
+          {{- if .Values.gatekeeper.startupProbe.enabled }}
           startupProbe:
 {{/* http probe */}}
-            {{- if .Values.coturn.startupProbe.httpGet }}
+            {{- if .Values.gatekeeper.startupProbe.httpGet }}
             httpGet:
-              path: {{ .Values.coturn.startupProbe.probePath }}
-              scheme: {{ .Values.coturn.startupProbe.scheme }}
+              path: {{ .Values.gatekeeper.startupProbe.probePath }}
+              scheme: {{ .Values.gatekeeper.startupProbe.scheme }}
               port: 8080 
             {{- end }}
 {{/* cmd probe */}}
-            {{- if .Values.coturn.startupProbe.exec }}
+            {{- if .Values.gatekeeper.startupProbe.exec }}
             exec:
               command: 
-              {{- range .Values.coturn.startupProbe.exec.command }}
+              {{- range .Values.gatekeeper.startupProbe.exec.command }}
                 - {{ . | quote }}
               {{- end }}
             {{- end }}
 
-            initialDelaySeconds: {{ .Values.coturn.startupProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.coturn.startupProbe.periodSeconds }}
-            successThreshold: {{ .Values.coturn.startupProbe.successThreshold }}
-            failureThreshold: {{ .Values.coturn.startupProbe.failureThreshold }}
-            timeoutSeconds: {{ .Values.coturn.startupProbe.timeoutSeconds }}
+            initialDelaySeconds: {{ .Values.gatekeeper.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.gatekeeper.startupProbe.periodSeconds }}
+            successThreshold: {{ .Values.gatekeeper.startupProbe.successThreshold }}
+            failureThreshold: {{ .Values.gatekeeper.startupProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.gatekeeper.startupProbe.timeoutSeconds }}
           {{- end }}
 {{/*
   # --------------------------------------------
   # VOLUME MOUNTS 
   # --------------------------------------------
 */}}
-          {{- if .Values.coturn.extraVolumesMounts }}
+          {{- if .Values.gatekeeper.extraVolumesMounts }}
           volumeMounts:
-            {{- range .Values.coturn.extraVolumesMounts }}
+            {{- range .Values.gatekeeper.extraVolumesMounts }}
             - name: {{ .name }}
               mountPath: {{ .mountPath }} 
               {{- if .subPath }}
@@ -131,17 +135,17 @@ spec:
   # SIDECARS 
   # --------------------------------------------
 */}}
-      {{- if .Values.coturn.sidecars }}
-        {{- .Values.coturn.sidecars | toYaml | nindent 8 }}
+      {{- if .Values.gatekeeper.sidecars }}
+        {{- .Values.gatekeeper.sidecars | toYaml | nindent 8 }}
       {{- end }}
 {{/*
   # --------------------------------------------
   # VOLUMES 
   # --------------------------------------------
 */}}
-      {{- if .Values.coturn.extraVolumes }}
+      {{- if .Values.gatekeeper.extraVolumes }}
       volumes:
-        {{- range .Values.coturn.extraVolumes }}
+        {{- range .Values.gatekeeper.extraVolumes }}
 {{/* 
   volumes - configMap
 */}}
@@ -169,3 +173,4 @@ spec:
         {{- end }}
       {{- end }}
 ...
+{{- end }}
