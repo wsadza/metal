@@ -123,13 +123,24 @@ Unfortunately, Microsoft started implementing [D3D12](https://www.phoronix.com/n
 - **AMD**: Provides solutions like MxGPU, which allows multiple virtual machines to share a single GPU.
 - **Dual-Coder Crack for RTX Series 20***: Enables the use of NVIDIA's vGPU technology on consumer-grade RTX 20 series cards.
 - **Older NVIDIA GPUs**: Models like the K2 support vGPU technology, which can be leveraged for virtualization and resource sharing.
-
+- **Fractional-GPU by ClearML**: This appears to be the first Docker-related project to offer a sharing mechanism publicly.
+   - <details>
+     <summary>$\color{green}{\textsf{Details}}$</summary>
+      
+     - The project utilizes a customized libnvidia-ml.so.1, which includes non-NVIDIA functions such as get_max_gpu_mem.
+     - They effectively reduce the size of this library by half (from 2MB original to 0.9MB after modification).
+     - The get_max_gpu_mem function is located at f30f1efab800000080c3.
+     - They have created a patch similar to the one found at [vgpu-proxmox](https://gitlab.com/polloloco/vgpu-proxmox).
+       
+     </details>
+   
 Some resources:
 - [Intel vGPU KubeVirt](https://kubevirt.io/2021/intel-vgpu-kubevirt.html)
 - [NVIDIA vGPU on Proxmox VE](https://pve.proxmox.com/wiki/NVIDIA_vGPU_on_Proxmox_VE)
 - [DualCoder vGPU Unlock](https://github.com/DualCoder/vgpu_unlock)
 - [Using vGPU Unlock with Proxmox 7](https://www.michaelstinkerings.org/using-vgpu-unlock-with-proxmox-7/)
 - [vgpu-proxmox GitLab](https://gitlab.com/polloloco/vgpu-proxmox)
+- [clearml-fractional-gpu](https://github.com/allegroai/clearml-fractional-gpu)
   
 <!--- ANSWER --->  
 </details>
