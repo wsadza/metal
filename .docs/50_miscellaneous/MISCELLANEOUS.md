@@ -130,7 +130,6 @@ Unfortunately, Microsoft started implementing [D3D12](https://www.phoronix.com/n
      - The project utilizes a customized libnvidia-ml.so.1, which includes non-NVIDIA functions such as get_max_gpu_mem.
      - They effectively reduce the size of this library by half (from 2MB original to 0.9MB after modification).
      - The get_max_gpu_mem function is located at f30f1efab800000080c3.
-     - They have created a patch similar to the one found at [vgpu-proxmox](https://gitlab.com/polloloco/vgpu-proxmox).
        
      </details>
    
@@ -141,6 +140,9 @@ Some resources:
 - [Using vGPU Unlock with Proxmox 7](https://www.michaelstinkerings.org/using-vgpu-unlock-with-proxmox-7/)
 - [vgpu-proxmox GitLab](https://gitlab.com/polloloco/vgpu-proxmox)
 - [clearml-fractional-gpu](https://github.com/allegroai/clearml-fractional-gpu)
+- [HAMi](https://github.com/Project-HAMi/HAMi)
+- [gpu-partitioning-guide](https://github.com/rh-aiservices-bu/gpu-partitioning-guide)
+- [mortalgpu](https://gitlab.com/MaxIV/kubernetes/mortalgpu)
   
 <!--- ANSWER --->  
 </details>
