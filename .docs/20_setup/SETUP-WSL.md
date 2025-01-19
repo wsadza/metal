@@ -37,7 +37,7 @@ $$$$$$$$\ $$\       $$$$$$$\  $$$$$$$\
    $$ |   $$$$$$$$\ $$$$$$$  |$$ |  $$ |
    \__|   \________|\_______/ \__|  \__|
 --->
-### TLDR: 
+### TL;DR 
 > [!NOTE]
 > - Consider this as a POC.
 > - WSL setup can be useful for software-rendering usage.
