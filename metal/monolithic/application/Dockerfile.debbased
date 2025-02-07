@@ -1,5 +1,5 @@
 ############################################################
-# Copyright (c) 2024 Utilizable 
+# Copyright (c) 2024 Utilizable
 # Released under the MIT license
 # ----------------------------------------------------------
 #
@@ -9,10 +9,10 @@
 #
 #   /$$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$$$
 #  | $$__  $$ /$$__  $$ /$$__  $$| $$_____/
-#  | $$  \ $$| $$  \ $$| $$  \__/| $$      
-#  | $$$$$$$ | $$$$$$$$|  $$$$$$ | $$$$$   
-#  | $$__  $$| $$__  $$ \____  $$| $$__/   
-#  | $$  \ $$| $$  | $$ /$$  \ $$| $$      
+#  | $$  \ $$| $$  \ $$| $$  \__/| $$
+#  | $$$$$$$ | $$$$$$$$|  $$$$$$ | $$$$$
+#  | $$__  $$| $$__  $$ \____  $$| $$__/
+#  | $$  \ $$| $$  | $$ /$$  \ $$| $$
 #  | $$$$$$$/| $$  | $$|  $$$$$$/| $$$$$$$$
 #  |_______/ |__/  |__/ \______/ |________/
 #
@@ -36,7 +36,7 @@ FROM ${DISTRIBUTION}:${SUITE}
 ARG \
     DEBIAN_FRONTEND=noninteractive
 
-# Configure locale 
+# Configure locale
 # --
 ARG \
     TZ=UTC \
@@ -52,7 +52,7 @@ ENV \
     TZ=${TZ}
 
 # -----------------------------------------------
-# Base: User Tools 
+# Base: User Tools
 # -----------------------------------------------
 
 RUN \
@@ -70,7 +70,7 @@ RUN \
     dialog \
     pkg-config \
     && \
-    echo "**** Set locale and timezone ****" \ 
+    echo "**** Set locale and timezone ****" \
     && locale-gen ${LANG} \
     && localedef -i en_US -f UTF-8 en_US.UTF-8 \
     && ln -snf \
@@ -110,7 +110,7 @@ RUN \
     fi
 
 # -----------------------------------------------
-# Base: Configure user 
+# Base: Configure user
 # -----------------------------------------------
 
 ARG \
@@ -118,7 +118,7 @@ ARG \
     USER_PASSWORD=ubuntu \
     USER_UID=1000
 
-RUN \ 
+RUN \
     echo "**** Base: User Configure ****" \
     && if ! getent group ${USER_NAME}; \
     then \
@@ -137,7 +137,7 @@ RUN \
     echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers; \
     fi \
     && \
-    echo "**** Configure XDG_RUNTIME_DIR ****" \     
+    echo "**** Configure XDG_RUNTIME_DIR ****" \
     && mkdir /run/user/${USER_UID} \
     && chown -R ${USER_UID}:${USER_UID} /run/user/${USER_UID} \
     && chmod 0700 /run/user/${USER_UID}
@@ -148,6 +148,32 @@ ENV \
 # Switch to non-root user.
 USER ${USER_NAME}
 
+# -----------------------------------------------
+# Install OpenSSH Server
+# -----------------------------------------------
+
+RUN echo "**** Installing OpenSSH Server ****" \
+    && sudo apt-get update \
+    && sudo apt-get install -y --no-install-recommends \
+       openssh-server \
+    && mkdir /var/run/sshd \
+    && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config \
+    && echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config \
+    && echo "UsePAM yes" >> /etc/ssh/sshd_config \
+    # Set root password (change 'rootpassword' to a secure password)
+    && echo 'root:rootpassword' | sudo chpasswd \
+    # Allow the non-root user to SSH
+    && echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
+    && echo 'ubuntu:ubuntu' | sudo chpasswd \
+    # Expose SSH port
+    && echo "**** Exposing SSH port ****" \
+    && echo "EXPOSE 22" \
+    # Cleanup
+    && sudo apt-get clean \
+    && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
+
 # Execute bash as root for futher installations.
 SHELL [ "/usr/bin/sudo", "-E", "--", "/bin/bash", "-c" ]
 
@@ -155,17 +181,17 @@ SHELL [ "/usr/bin/sudo", "-E", "--", "/bin/bash", "-c" ]
 #
 #    /$$$$$$   /$$$$$$  /$$$$$$$  /$$$$$$$$
 #   /$$__  $$ /$$__  $$| $$__  $$| $$_____/
-#  | $$  \__/| $$  \ $$| $$  \ $$| $$      
-#  | $$      | $$  | $$| $$$$$$$/| $$$$$   
-#  | $$      | $$  | $$| $$__  $$| $$__/   
-#  | $$    $$| $$  | $$| $$  \ $$| $$      
+#  | $$  \__/| $$  \ $$| $$  \ $$| $$
+#  | $$      | $$  | $$| $$$$$$$/| $$$$$
+#  | $$      | $$  | $$| $$__  $$| $$__/
+#  | $$    $$| $$  | $$| $$  \ $$| $$
 #  |  $$$$$$/|  $$$$$$/| $$  | $$| $$$$$$$$
 #   \______/  \______/ |__/  |__/|________/
 #
 #
 
 # -----------------------------------------------
-# Core: Install Nvidia VAAPI 
+# Core: Install Nvidia VAAPI
 # -----------------------------------------------
 
 RUN \
@@ -173,7 +199,7 @@ RUN \
     && \
     echo "**** Prepare ****" \
     && apt-get update \
-    && apt-get install --no-install-recommends -y \          
+    && apt-get install --no-install-recommends -y \
     software-properties-common \
     curl \
     jq \
@@ -192,10 +218,10 @@ RUN \
     jq -r '.tarball_url' \
     )" \
     && mkdir /tmp/nvidia-vaapi-driver \
-    && curl -fsSL "${NVIDIA_VAAPI_DRIVER_TARBALL}" | \ 
+    && curl -fsSL "${NVIDIA_VAAPI_DRIVER_TARBALL}" | \
     tar zxf - -C \
     /tmp/nvidia-vaapi-driver \
-    --strip-components 1 \ 
+    --strip-components 1 \
     && cd /tmp/nvidia-vaapi-driver \
     && meson setup build \
     && meson install -C build \
@@ -252,7 +278,7 @@ RUN \
     > /usr/share/glvnd/egl_vendor.d/10_nvidia.json
 
 # -----------------------------------------------
-# Core: Install Selkies Gstreamer 
+# Core: Install Selkies Gstreamer
 # -----------------------------------------------
 #
 # Ubuntu <-> Debian diff:
@@ -268,7 +294,7 @@ RUN \
     && \
     echo "**** Prepare ****" \
     && apt-get update \
-    && apt-get install --no-install-recommends -y \          
+    && apt-get install --no-install-recommends -y \
     software-properties-common \
     curl \
     && \
@@ -364,7 +390,7 @@ RUN \
     '.[] \
     | select( \
     .tag_name == $VERSION \
-    ) \ 
+    ) \
     | .assets[] \
     | select( \
     .name \
@@ -372,11 +398,11 @@ RUN \
     and contains($SUITE) \
     and contains($ARCHITECTURE) \
     and contains(".tar.gz") \
-    ) \ 
+    ) \
     | .browser_download_url' \
     )" \
     && mkdir -p "${GS_TARBALL_RELEASE_TARGET}" \
-    && curl -fsSL "${GS_TARBALL_RELEASE_URL}" | \ 
+    && curl -fsSL "${GS_TARBALL_RELEASE_URL}" | \
     tar zxf - -C "${GS_TARBALL_RELEASE_TARGET}" \
     --strip-components=1 \
     && \
@@ -388,7 +414,7 @@ RUN \
     '.[] \
     | select( \
     .tag_name == $VERSION \
-    ) \ 
+    ) \
     | .assets[] \
     | select( \
     .name \
@@ -401,7 +427,7 @@ RUN \
     --no-cache-dir \
     --force-reinstall \
     --break-system-packages \
-    ./*.whl \ 
+    ./*.whl \
     && rm -f ./*.whl \
     && \
     echo "**** [2]: Selkies Streamer WebPack ****" \
@@ -413,7 +439,7 @@ RUN \
     '.[] \
     | select( \
     .tag_name == $VERSION \
-    ) \ 
+    ) \
     | .assets[] \
     | select( \
     .name \
@@ -422,7 +448,7 @@ RUN \
     | .browser_download_url' \
     )" \
     && mkdir "${GS_TARBALL_WEB_TARGET}" \
-    && curl -fsSL ${GS_TARBALL_WEB_URL} | \ 
+    && curl -fsSL ${GS_TARBALL_WEB_URL} | \
     tar zxf - -C "${GS_TARBALL_WEB_TARGET}" \
     --strip-components 1 \
     && \
@@ -436,7 +462,7 @@ RUN \
     '.[] \
     | select( \
     .tag_name == $VERSION \
-    ) \ 
+    ) \
     .assets[] \
     | select( \
     .name \
@@ -461,7 +487,7 @@ RUN \
     /tmp/*
 
 # -----------------------------------------------
-# Core: Install KDE Plasma 
+# Core: Install KDE Plasma
 # -----------------------------------------------
 
 RUN \
@@ -469,7 +495,7 @@ RUN \
     && \
     echo "**** Prepare ****" \
     && apt-get update \
-    && apt-get install --no-install-recommends -y \          
+    && apt-get install --no-install-recommends -y \
     software-properties-common \
     && \
     echo "**** Dependenciess ****" \
@@ -611,7 +637,7 @@ RUN \
     /tmp/*
 
 # -----------------------------------------------
-# Core: Install Gomplate 
+# Core: Install Gomplate
 # -----------------------------------------------
 
 RUN \
@@ -619,7 +645,7 @@ RUN \
     && \
     echo "**** Prepare ****" \
     && apt-get update \
-    && apt-get install --no-install-recommends -y \          
+    && apt-get install --no-install-recommends -y \
     software-properties-common \
     curl \
     jq \
@@ -636,7 +662,7 @@ RUN \
     .name \
     | contains("linux") \
     and contains($ARCHITECTURE) \
-    ) \ 
+    ) \
     | .browser_download_url' \
     )" \
     && curl -o gomplate -fsSL "${BIN_RELEASE_URL}" \
@@ -696,19 +722,19 @@ RUN \
 
 ############################################################
 #
-#    /$$$$$$  /$$$$$$$$ /$$$$$$$  /$$$$$$  /$$$$$$  /$$   /$$  /$$$$$$  /$$      
-#   /$$__  $$|__  $$__/| $$__  $$|_  $$_/ /$$__  $$| $$$ | $$ /$$__  $$| $$      
-#  | $$  \ $$   | $$   | $$  \ $$  | $$  | $$  \ $$| $$$$| $$| $$  \ $$| $$      
-#  | $$  | $$   | $$   | $$$$$$$/  | $$  | $$  | $$| $$ $$ $$| $$$$$$$$| $$      
-#  | $$  | $$   | $$   | $$____/   | $$  | $$  | $$| $$  $$$$| $$__  $$| $$      
-#  | $$  | $$   | $$   | $$        | $$  | $$  | $$| $$\  $$$| $$  | $$| $$      
+#    /$$$$$$  /$$$$$$$$ /$$$$$$$  /$$$$$$  /$$$$$$  /$$   /$$  /$$$$$$  /$$
+#   /$$__  $$|__  $$__/| $$__  $$|_  $$_/ /$$__  $$| $$$ | $$ /$$__  $$| $$
+#  | $$  \ $$   | $$   | $$  \ $$  | $$  | $$  \ $$| $$$$| $$| $$  \ $$| $$
+#  | $$  | $$   | $$   | $$$$$$$/  | $$  | $$  | $$| $$ $$ $$| $$$$$$$$| $$
+#  | $$  | $$   | $$   | $$____/   | $$  | $$  | $$| $$  $$$$| $$__  $$| $$
+#  | $$  | $$   | $$   | $$        | $$  | $$  | $$| $$\  $$$| $$  | $$| $$
 #  |  $$$$$$/   | $$   | $$       /$$$$$$|  $$$$$$/| $$ \  $$| $$  | $$| $$$$$$$$
 #   \______/    |__/   |__/      |______/ \______/ |__/  \__/|__/  |__/|________/
-#                                                                                
-#                                                                                
+#
+#
 
 # -----------------------------------------------
-# Optional: Install VirtualGL 
+# Optional: Install VirtualGL
 # -----------------------------------------------
 
 ARG \
@@ -721,7 +747,7 @@ RUN \
     then \
     echo "**** Install VirtualGL ****" \
     && curl -fsSL \
-    https://packagecloud.io/dcommander/virtualgl/gpgkey \ 
+    https://packagecloud.io/dcommander/virtualgl/gpgkey \
     | gpg --dearmor >/etc/apt/trusted.gpg.d/VirtualGL.gpg \
     && curl -X GET \
     https://raw.githubusercontent.com/VirtualGL/repo/main/VirtualGL.list \
@@ -759,7 +785,7 @@ RUN \
     fi
 
 # -----------------------------------------------
-# Optional: Install Wine 
+# Optional: Install Wine
 # -----------------------------------------------
 
 ARG \
@@ -774,7 +800,7 @@ RUN \
     echo "**** Prepare ****" \
     && dpkg --add-architecture i386 \
     && apt-get update \
-    && apt-get install --no-install-recommends -y \          
+    && apt-get install --no-install-recommends -y \
     software-properties-common \
     curl \
     && \
@@ -827,7 +853,7 @@ RUN \
     fi
 
 # -----------------------------------------------
-# Optional: Install Lutris 
+# Optional: Install Lutris
 # -----------------------------------------------
 
 ARG \
@@ -841,7 +867,7 @@ RUN \
     then \
     echo "**** Prepare ****" \
     && apt-get update \
-    && apt-get install --no-install-recommends -y \          
+    && apt-get install --no-install-recommends -y \
     software-properties-common \
     curl \
     jq \
@@ -1001,7 +1027,7 @@ RUN \
     && { \
     kill \"\${steam_pid}\" 2>/dev/null; \
     wait \"\${steam_pid}\" 2>/dev/null; \
-    break; \ 
+    break; \
     }; \
     done; \
     wait \"\${steam_pid}\"; \
@@ -1018,7 +1044,7 @@ RUN \
     fi
 
 # -----------------------------------------------
-# Optional: Install Heroic Launcher 
+# Optional: Install Heroic Launcher
 # -----------------------------------------------
 
 ARG \
@@ -1028,11 +1054,11 @@ ARG \
 RUN \
     echo "**** Optional: Install Heroic / (${INSTALL_HEROIC}) ****" \
     && \
-    if [ "${INSTALL_HEROIC}" == "true" ]; \ 
+    if [ "${INSTALL_HEROIC}" == "true" ]; \
     then \
     echo "**** Prepare ****" \
     && apt-get update \
-    && apt-get install --no-install-recommends -y \          
+    && apt-get install --no-install-recommends -y \
     software-properties-common \
     curl \
     jq \
@@ -1058,7 +1084,7 @@ RUN \
     | .assets[] \
     | select( \
     .browser_download_url \
-    | contains($VERSION) \ 
+    | contains($VERSION) \
     and contains($ARCHITECTURE) \
     and contains(".deb") \
     ) \
@@ -1069,7 +1095,7 @@ RUN \
     echo "**** Installation ****" \
     && echo "${RELEASE_URL}" \
     && curl -o heroic.deb -fsSL "${RELEASE_URL}" \
-    && apt-get install --no-install-recommends -y \  
+    && apt-get install --no-install-recommends -y \
     ./heroic.deb \
     gamemode \
     mangohud \
@@ -1092,7 +1118,7 @@ RUN \
     fi
 
 # -----------------------------------------------
-# Optional: Install Pipewire & Pipewire-Pulse & Wireplumber 
+# Optional: Install Pipewire & Pipewire-Pulse & Wireplumber
 # -----------------------------------------------
 
 ARG \
@@ -1105,7 +1131,7 @@ RUN \
     then \
     echo "**** Prepare ****" \
     && apt-get update \
-    && apt-get install --no-install-recommends -y \          
+    && apt-get install --no-install-recommends -y \
     software-properties-common \
     curl \
     && ID="$(\
@@ -1131,7 +1157,7 @@ RUN \
     --dearmor \
     -o /etc/apt/trusted.gpg.d/pipewire-debian-ubuntu-pipewire-upstream.gpg \
     && \
-    echo "**** Pipewire - Sources ****" \      
+    echo "**** Pipewire - Sources ****" \
     && SOURCES_BASE="/etc/apt/sources.list.d/pipewire-debian-ubuntu" \
     && VERSION_CODENAME="$(\
     grep VERSION_CODENAME= /etc/os-release \
@@ -1145,17 +1171,17 @@ RUN \
     ${VERSION_CODENAME} main" \
     > "${SOURCES_BASE}-pipewire-upstream-${VERSION_CODENAME}.list" \
     && \
-    echo "**** Wireplumber - Sources ****" \      
+    echo "**** Wireplumber - Sources ****" \
     && SOURCES_BASE="/etc/apt/sources.list.d/pipewire-debian-ubuntu" \
-    && mkdir -p /etc/apt/sources.list.d \ 
-    && chmod 0755 /etc/apt/sources.list.d \ 
+    && mkdir -p /etc/apt/sources.list.d \
+    && chmod 0755 /etc/apt/sources.list.d \
     && echo \
     "deb https://ppa.launchpadcontent.net/pipewire-debian/wireplumber-upstream/ubuntu \
     ${VERSION_CODENAME} main" \
     > "${SOURCES_BASE}-wireplumber-upstream-${VERSION_CODENAME}.list"; \
     fi \
     && \
-    echo "**** Pipewire - Installation ****" \     
+    echo "**** Pipewire - Installation ****" \
     && apt-get update \
     && apt-get install --no-install-recommends -y \
     pipewire \
@@ -1201,7 +1227,7 @@ RUN \
     /tmp/*
 
 # -----------------------------------------------
-# Optional: Install Libraries 
+# Optional: Install Libraries
 # -----------------------------------------------
 
 RUN \
@@ -1258,7 +1284,7 @@ RUN \
     intel-media-va-driver-non-free \
     va-driver-all:i386 \
     i965-va-driver-shaders:i386 \
-    intel-media-va-driver-non-free:i386 \ 
+    intel-media-va-driver-non-free:i386 \
     && \
     echo "**** Install 32/64-bit Vulkan and Video Decoding Drivers ****" \
     && apt-get install -y --no-install-recommends \
@@ -1311,7 +1337,7 @@ RUN \
 #        && if [ "${ID}" = "ubuntu" ]; \
 #		    then \
 #              add-apt-repository -y ppa:oibaf/graphics-drivers \
-#              && apt-get update \ 
+#              && apt-get update \
 #              && apt-get upgrade -y \
 #        && \
 #        echo "**** Section cleanup ****" \
@@ -1325,20 +1351,20 @@ RUN \
 
 ############################################################
 #
-#    /$$$$$$   /$$$$$$  /$$   /$$ /$$$$$$$$ /$$$$$$  /$$$$$$ 
+#    /$$$$$$   /$$$$$$  /$$   /$$ /$$$$$$$$ /$$$$$$  /$$$$$$
 #   /$$__  $$ /$$__  $$| $$$ | $$| $$_____/|_  $$_/ /$$__  $$
 #  | $$  \__/| $$  \ $$| $$$$| $$| $$        | $$  | $$  \__/
 #  | $$      | $$  | $$| $$ $$ $$| $$$$$     | $$  | $$ /$$$$
 #  | $$      | $$  | $$| $$  $$$$| $$__/     | $$  | $$|_  $$
 #  | $$    $$| $$  | $$| $$\  $$$| $$        | $$  | $$  \ $$
 #  |  $$$$$$/|  $$$$$$/| $$ \  $$| $$       /$$$$$$|  $$$$$$/
-#   \______/  \______/ |__/  \__/|__/      |______/ \______/ 
-#                                                            
-#                                                            
-#                                                            
+#   \______/  \______/ |__/  \__/|__/      |______/ \______/
+#
+#
+#
 
 # -----------------------------------------------
-# Configuration - Graphic 
+# Configuration - Graphic
 
 ENV \
     NVIDIA_VISIBLE_DEVICES=all \
@@ -1349,11 +1375,11 @@ ENV \
     __NV_PRIME_RENDER_OFFLOAD=1 \
     __GL_SYNC_TO_VBLANK=0 \
     __GLX_VENDOR_LIBRARY_NAME=mesa \
-    PRIME_RENDERER_GLOBAL="true" \ 
-    PRIME_RENDERER_WINE="true" 
+    PRIME_RENDERER_GLOBAL="true" \
+    PRIME_RENDERER_WINE="true"
 
 # -----------------------------------------------
-# Configuration - Display 
+# Configuration - Display
 #
 # - Maximum resolution for `nvh264enc` encoder is 4k
 #
@@ -1366,7 +1392,7 @@ ENV \
     DISPLAY_CDEPTH=24
 
 # -----------------------------------------------
-# Configuration - Selkies Gstreamer 
+# Configuration - Selkies Gstreamer
 #
 ENV \
     SELKIES_AUDIO_BITRATE="128000" \
@@ -1384,10 +1410,10 @@ ENV \
     SELKIES_PORT="8080" \
     SELKIES_TURN_PORT="3478" \
     SELKIES_TURN_USERNAME="user" \
-    SELKIES_TURN_PASSWORD="password" 
+    SELKIES_TURN_PASSWORD="password"
 
 # -----------------------------------------------
-# Configuration - Plasma Desktop 
+# Configuration - Plasma Desktop
 #
 ENV \
     DESKTOP_SESSION=plasma \
@@ -1407,17 +1433,17 @@ ENV \
     XMODIFIERS="@im=fcitx"
 
 # -----------------------------------------------
-# Configuration - Pipewire 
+# Configuration - Pipewire
 
 ENV \
     DISABLE_RTKIT=y \
     PIPEWIRE_PORT="4713" \
     PIPEWIRE_DEBUG="E" \
     WIREPLUMBER_DEBUG="E" \
-    PIPEWIRE_LATENCY="32/48000" 
+    PIPEWIRE_LATENCY="32/48000"
 
 # -----------------------------------------------
-# Configuration - Turn server 
+# Configuration - Turn server
 
 ENV \
     TURN_PORT="3478" \
@@ -1428,13 +1454,13 @@ ENV \
     TURN_REALM="local.host"
 
 # -----------------------------------------------
-# Configuration - Misc 
+# Configuration - Misc
 
 ENV \
     DBUS_SESSION_BUS_ADDRESS=unix:path=${XDG_RUNTIME_DIR}/dbus-session \
     APPIMAGE_EXTRACT_AND_RUN=1 \
     SUPERVISOR_PORT=9091 \
-    PULSE_SERVER="unix:${XDG_RUNTIME_DIR}/pulse-server" 
+    PULSE_SERVER="unix:${XDG_RUNTIME_DIR}/pulse-server"
 
 # -----------------------------------------------
 # Execute
@@ -1451,7 +1477,7 @@ RUN \
     && chown -R ${USER_UID}:${USER_UID} /opt
 
 # Add FS overlay and set permissions in one step
-COPY --chmod=0755 overlay / 
+COPY --chmod=0755 overlay /
 
 # Set entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
