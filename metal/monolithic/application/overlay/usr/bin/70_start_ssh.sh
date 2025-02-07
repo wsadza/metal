@@ -27,10 +27,10 @@ else
 fi
 
 # Continous monitoring - SSH
-while true; do
-    sleep 5
-    readiness_ssh || echo "SSH service is not ready."
-done &
+# while true; do
+#     sleep 5
+#     readiness_ssh || echo "SSH service is not ready."
+# done &
 
 #################
 
