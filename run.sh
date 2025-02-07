@@ -12,6 +12,7 @@ CMD="docker run -d \
   -e DISPLAY_SIZE_Y=2234 \
   -e STREAMER_HOST=$(hostname | tr '-' '.' | awk '{print $1}') \
   -e SELKIES_ENCODER=nvh264enc \
+  --gpus all
   ghcr.io/wsadza/metal/full-ubuntu:latest"
 
 echo $CMD
