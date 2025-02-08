@@ -147,8 +147,7 @@ RUN \
 ENV \
     XDG_RUNTIME_DIR=/run/user/${USER_UID}
 
-# Switch to non-root user.
-USER ${USER_NAME}
+
 
 # -----------------------------------------------
 # Install OpenSSH Server
@@ -173,6 +172,40 @@ RUN echo "**** Installing OpenSSH Server ****" \
     # Cleanup
     && sudo apt-get clean \
     && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# -----------------------------------------------
+# Optional: Install conda
+# -----------------------------------------------
+
+
+
+# Switch to non-root user.
+USER ${USER_NAME}
+
+
+
+ARG \
+    INSTALL_CONDA="true"
+
+RUN echo "**** Optional: Install Conda / (${INSTALL_CONDA}) ****" \
+    && \
+    if [ "${INSTALL_CONDA}" == "true" ]; \
+    then \
+    echo "**** Installing Conda  ****" \
+    && rm -rf /opt/conda/ \
+    && curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh \
+    && /opt/conda/bin/conda init bash \
+    && \
+    echo "**** Section cleanup ****" \
+    && apt-get clean autoclean -y \
+    && apt-get autoremove -y \
+    && rm -rf \
+    /var/lib/apt/lists/* \
+    /var/tmp/* \
+    /tmp/*; \
+    fi
 
 
 
@@ -487,6 +520,9 @@ RUN \
     /var/lib/apt/lists/* \
     /var/tmp/* \
     /tmp/*
+
+RUN pip3 install websockets==13 --break-system-packages
+
 
 # -----------------------------------------------
 # Core: Install KDE Plasma

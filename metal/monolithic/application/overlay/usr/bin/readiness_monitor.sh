@@ -39,7 +39,7 @@ readiness_xorg() {
 
 # -----------------------------------------------
 # Function to check presence of Nvidia GPU
-# 
+#
 readiness_nvidia() {
   echo "Checking NVIDIA GPU presence..."
   timeout $TIMEOUT bash -c '
@@ -54,7 +54,7 @@ readiness_nvidia() {
 
 # -----------------------------------------------
 # Function to check conectivity to pulse server
-# 
+#
 readiness_pulse() {
   echo "Checking PulseAudio server connectivity..."
   timeout $TIMEOUT bash -c '
@@ -69,12 +69,12 @@ readiness_pulse() {
 
 # -----------------------------------------------
 # Function to check conectivity to turn server
-# 
+#
 readiness_turn() {
   echo "Checking Turn server connectivity..."
   # Check if turn server is arleady exposed;
-  
-  # Use internal turn server in case of lack of remote setting 
+
+  # Use internal turn server in case of lack of remote setting
   if [ -z "${SELKIES_TURN_HOST}" ]; then
     export SELKIES_TURN_HOST="${STREAMER_HOST:=localhost}"
   fi
@@ -88,17 +88,47 @@ readiness_turn() {
     do
         sleep 1
     done
-  ' || { 
-    echo "Turn server did not become available in time."; 
-    exit 1; 
+  ' || {
+    echo "Turn server did not become available in time.";
+    exit 1;
   }
   echo "Turn server is reachable and ready."
 }
 
+
 # -----------------------------------------------
-# Function to obtain remote address 
-# (which client is using to reach server) 
-# 
+# Function to check SSH service readiness
+#
+readiness_ssh() {
+    echo "Checking SSH service status..."
+    timeout $TIMEOUT bash -c '
+        while ! systemctl is-active --quiet ssh
+        do
+            sleep 1
+        done
+    ' || { echo "SSH service did not become active in time."; exit 1; }
+    echo "SSH service is active."
+}
+
+
+# -----------------------------------------------
+# Function to check conda service readiness
+#
+readiness_conda() {
+    echo "Checking Conda installation..."
+    timeout $TIMEOUT bash -c '
+        while ! conda info >/dev/null 2>&1
+        do
+            sleep 1
+        done
+    ' || { echo "Conda is not properly initialized."; exit 1; }
+    echo "Conda is ready."
+}
+
+# -----------------------------------------------
+# Function to obtain remote address
+# (which client is using to reach server)
+#
 obtaining_remote_address() {
   echo "Checking external address..."
   # Set the timeout in seconds (e.g., 15 seconds)
