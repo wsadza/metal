@@ -23,7 +23,7 @@ ARG \
     DISTRIBUTION=ubuntu \
     SUITE=24.04
 
-FROM nvidia/cuda:12.4-base-ubuntu24.04
+    FROM pytorch/pytorch:2.5.1-cuda${CUDA_VERSION}-cudnn9-devel AS builder
 
 # It also works!
 # --
@@ -68,6 +68,7 @@ RUN \
     lsb-release \
     sudo \
     udev \
+    tar \
     tzdata \
     dialog \
     pkg-config \
@@ -174,14 +175,14 @@ RUN echo "**** Installing OpenSSH Server ****" \
     && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # -----------------------------------------------
-# Optional: Install conda
+# Base: Install General Deps
 # -----------------------------------------------
 
 
+ARG PYTHON_VERSION=3.11
 
 # Switch to non-root user.
 USER ${USER_NAME}
-
 
 
 ARG \
@@ -321,8 +322,8 @@ RUN \
 # *libjpeg-turbo8 - not present on debian
 
 ARG \
-    SELKIES_SUITE="24.04" \
-    SELKIES_VERSION="latest"
+    SELKIES_SUITE="22.04" \
+    SELKIES_VERSION="1.6.2"
 
 RUN \
     echo "**** Core: Install Gstreamer ****" \
@@ -394,132 +395,8 @@ RUN \
     xcvt \
     libopenh264-dev \
     libde265-0 svt-av1 \
-    aom-tools \
-    && \
-    echo "**** Collecting System Info ****" \
-    && RELEASE="$( \
-    grep VERSION_ID= /etc/os-release \
-    | cut -d= -f2 \
-    | tr -d '\"' \
-    )" \
-    && ARCHITECTURE="$(dpkg --print-architecture)" \
-    && \
-    echo "**** Fetching Gstreamer Assets ****" \
-    && \
-    echo "**** [0]: Gstreamer Binaries ****" \
-    && API_URL_BASE="https://api.github.com/repos" \
-    && API_URL="${API_URL_BASE}/selkies-project/selkies-gstreamer" \
-    && if [ "$SELKIES_VERSION" = "latest" ]; then \
-    SELKIES_VERSION="$(\
-    curl -fsSL ${API_URL}/releases/latest \
-    | jq -r .tag_name \
-    )"; \
-    fi \
-    && GS_TARBALL_RELEASE_TARGET="/opt/gstreamer" \
-    && GS_TARBALL_RELEASE_URL="$( \
-    curl -fsSL "${API_URL}/releases?per_page=100" | \
-    jq -r \
-    --arg VERSION "${SELKIES_VERSION}" \
-    --arg SUITE "${SELKIES_SUITE}" \
-    --arg ARCHITECTURE "${ARCHITECTURE}" \
-    '.[] \
-    | select( \
-    .tag_name == $VERSION \
-    ) \
-    | .assets[] \
-    | select( \
-    .name \
-    | contains("gpl") \
-    and contains($SUITE) \
-    and contains($ARCHITECTURE) \
-    and contains(".tar.gz") \
-    ) \
-    | .browser_download_url' \
-    )" \
-    && mkdir -p "${GS_TARBALL_RELEASE_TARGET}" \
-    && curl -fsSL "${GS_TARBALL_RELEASE_URL}" | \
-    tar zxf - -C "${GS_TARBALL_RELEASE_TARGET}" \
-    --strip-components=1 \
-    && \
-    echo "**** [1]: Selkies Streamer Application  ****" \
-    && GS_WHL_PY_URL="$( \
-    curl -fsSL "${API_URL}/releases?per_page=100" | \
-    jq -r \
-    --arg VERSION "${SELKIES_VERSION}" \
-    '.[] \
-    | select( \
-    .tag_name == $VERSION \
-    ) \
-    | .assets[] \
-    | select( \
-    .name \
-    | contains("py3-none-any.whl") \
-    ) \
-    | .browser_download_url' \
-    )" \
-    && curl -fsSL ${GS_WHL_PY_URL} -O \
-    && pip3 install \
-    --no-cache-dir \
-    --force-reinstall \
-    --break-system-packages \
-    ./*.whl \
-    && rm -f ./*.whl \
-    && \
-    echo "**** [2]: Selkies Streamer WebPack ****" \
-    && GS_TARBALL_WEB_TARGET="/opt/gst-web" \
-    && GS_TARBALL_WEB_URL="$( \
-    curl -fsSL "${API_URL}/releases?per_page=100" | \
-    jq -r \
-    --arg VERSION "${SELKIES_VERSION}" \
-    '.[] \
-    | select( \
-    .tag_name == $VERSION \
-    ) \
-    | .assets[] \
-    | select( \
-    .name \
-    | contains("web") \
-    ) \
-    | .browser_download_url' \
-    )" \
-    && mkdir "${GS_TARBALL_WEB_TARGET}" \
-    && curl -fsSL ${GS_TARBALL_WEB_URL} | \
-    tar zxf - -C "${GS_TARBALL_WEB_TARGET}" \
-    --strip-components 1 \
-    && \
-    echo "**** [3]: Selkies Streamer Joistic Interposer ****" \
-    && GS_DEB_INTERPOSER_URL="$( \
-    curl -fsSL "${API_URL}/releases?per_page=100" | \
-    jq -r \
-    --arg SUITE "${SELKIES_SUITE}" \
-    --arg ARCHITECTURE "${ARCHITECTURE}" \
-    --arg VERSION "${SELKIES_VERSION}" \
-    '.[] \
-    | select( \
-    .tag_name == $VERSION \
-    ) \
-    .assets[] \
-    | select( \
-    .name \
-    | contains("interposer") \
-    and contains($SUITE) \
-    and contains($ARCHITECTURE) \
-    and contains(".deb") \
-    ) \
-    | .browser_download_url' \
-    )" \
-    && curl -fsSL ${GS_DEB_INTERPOSER_URL} -O \
-    && apt-get install --no-install-recommends -y \
-    ./*.deb \
-    && rm -f ./*.deb \
-    && \
-    echo "**** Cleanup ****" \
-    && apt-get clean autoclean -y \
-    && apt-get autoremove -y \
-    && rm -rf \
-    /var/lib/apt/lists/* \
-    /var/tmp/* \
-    /tmp/*
+    aom-tools
+
 
 RUN pip3 install websockets==13 --break-system-packages
 
@@ -1499,6 +1376,98 @@ ENV \
     APPIMAGE_EXTRACT_AND_RUN=1 \
     SUPERVISOR_PORT=9091 \
     PULSE_SERVER="unix:${XDG_RUNTIME_DIR}/pulse-server"
+
+
+# CORE: Install General Dependencies
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    manpages-dev \
+    libvulkan-dev \
+    zlib1g-dev \
+    xorg-dev libglu1-mesa-dev \
+    libsnappy-dev \
+    software-properties-common \
+    git \
+    curl \
+    wget
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
+    apt update && \
+    apt install -y --no-install-recommends \
+    gcc-11 \
+    g++-11 \
+    gcc-11 g++-11 patchelf && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set GCC-11 and G++-11 as the default
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 110 && \
+    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 110
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+RUN pip install "pybind11[global]"
+
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.0-rc2/cmake-3.31.0-rc2-linux-x86_64.sh && \
+    chmod +x cmake-3.31.0-rc2-linux-x86_64.sh && \
+    ./cmake-3.31.0-rc2-linux-x86_64.sh --skip-license --prefix=/usr/local && \
+    rm cmake-3.31.0-rc2-linux-x86_64.sh
+
+# Build LuisaRender
+WORKDIR /workspace
+RUN git clone https://github.com/Genesis-Embodied-AI/Genesis.git && \
+    cd Genesis && \
+    git submodule update --init --recursive
+COPY build_luisa.sh /workspace/build_luisa.sh
+RUN chmod +x ./build_luisa.sh && ./build_luisa.sh ${PYTHON_VERSION}
+
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    tmux \
+    git \
+    curl \
+    wget \
+    bash-completion \
+    libgl1 \
+    libgl1-mesa-glx \
+    libegl-dev \
+    libegl1 \
+    libxrender1 \
+    libglib2.0-0 \
+    ffmpeg \
+    libgtk2.0-dev \
+    pkg-config \
+    libvulkan-dev \
+    libgles2 \
+    libglvnd0 \
+    libglx0 \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir open3d
+RUN git clone https://github.com/Genesis-Embodied-AI/Genesis.git && \
+    cd Genesis && \
+    pip install . && \
+    pip install --no-cache-dir PyOpenGL==3.1.5
+
+RUN PYTHON_MAJOR_MINOR=$(echo ${PYTHON_VERSION} | tr -d '.') && \
+    wget https://github.com/ompl/ompl/releases/download/prerelease/ompl-1.6.0-cp${PYTHON_MAJOR_MINOR}-cp${PYTHON_MAJOR_MINOR}-manylinux_2_28_x86_64.whl && \
+    pip install ompl-1.6.0-cp${PYTHON_MAJOR_MINOR}-cp${PYTHON_MAJOR_MINOR}-manylinux_2_28_x86_64.whl && \
+    rm ompl-1.6.0-cp${PYTHON_MAJOR_MINOR}-cp${PYTHON_MAJOR_MINOR}-manylinux_2_28_x86_64.whl
+
+RUN cp /workspace/Genesis/genesis/ext/ParticleMesher/ParticleMesherPy /opt/conda/lib/python3.1/site-packages/genesis/ext/ParticleMesher/ParticleMesherPy
+
+ENV LD_LIBRARY_PATH=/opt/conda/lib/python3.1/site-packages/genesis/ext/ParticleMesher/ParticleMesherPy:$LD_LIBRARY_PATH
+
+RUN cp /workspace/Genesis/genesis/ext/LuisaRender/build/bin /opt/conda/lib/python3.1/site-packages/genesis/ext/LuisaRender/build/bin
+
+RUN cd /opt/conda/lib && \
+    mv libstdc++.so.6 libstdc++.so.6.old && \
+    ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 libstdc++.so.6
+
+COPY 10_nvidia.json /usr/share/glvnd/egl_vendor.d/10_nvidia.json
+COPY nvidia_icd.json /usr/share/vulkan/icd.d/nvidia_icd.json
+COPY nvidia_layers.json /etc/vulkan/implicit_layer.d/nvidia_layers.json
 
 # -----------------------------------------------
 # Execute

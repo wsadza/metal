@@ -9,6 +9,18 @@ _term() {
 }
 trap _term SIGTERM SIGINT
 
+# curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+# bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda
+
+# rm -f Miniconda3-latest-Linux-x86_64.sh
+
+# /opt/conda/bin/conda init bash;
+
+# source ~/.bashrc && \
+# conda activate base && \
+# conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+
 # continous monitoring - pulse
 while true; do sleep 5 && readiness_conda; done &
 

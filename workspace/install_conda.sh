@@ -1,23 +1,26 @@
-if [ -n "$(docker ps -q)" ]; then
-  docker kill $(docker ps -q)
-fi
 
-# Build the image
-# ./build.sh
+# curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
-CMD="docker run -d \
-  -p 8080:8080 \
-  -p 2223:22 \
-  -p 3478:3478/udp \
-  -p 3478:3478/tcp \
-  -p 9091:9091 \
-  -e DISPLAY_SIZE_X=3456 \
-  -e DISPLAY_SIZE_Y=2234 \
-  -e STREAMER_HOST=$(hostname | tr '-' '.' | awk '{print $1}') \
-  -e SELKIES_ENCODER=x264enc \
-  --gpus all \
-  -v ./workspace:/home/ubuntu/workspace \
-  luke/metal-mono"
+# bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda
 
-echo $CMD
-eval $CMD
+# rm -f Miniconda3-latest-Linux-x86_64.sh
+
+# conda init;
+
+# Set the environment variable to prevent prompting
+export CONDA_EXCLUDE_TIKZ=1
+
+# Create the environment
+conda create -n eleven python=3.11 -y;
+
+# # Activate the environment
+# source /opt/conda/bin/activate eleven;
+
+# Make the 'eleven' environment the default
+# Activate the environment
+conda activate eleven;
+
+# Make the 'eleven' environment the default
+# conda activate eleven;
+
+pip install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia;

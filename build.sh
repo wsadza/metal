@@ -1,1 +1,1 @@
-docker build -t luke/metal-mono -f metal/monolithic/application/Dockerfile metal/monolithic/application
+docker build -t luke/metal-mono-v2 -f metal/monolithic/application/Dockerfile.v2 metal/monolithic/application

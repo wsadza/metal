@@ -17,7 +17,7 @@ CMD="docker run -d \
   -e SELKIES_ENCODER=x264enc \
   --gpus all \
   -v ./workspace:/home/ubuntu/workspace \
-  luke/metal-mono"
+  luke/metal-mono-v2"
 
 echo $CMD
 eval $CMD
