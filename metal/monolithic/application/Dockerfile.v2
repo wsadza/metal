@@ -420,7 +420,7 @@ RUN \
         --strip-components 1 \
         && \
         echo "**** [3]: Selkies Streamer Joistic Interposer ****" \
-        && GS_DEB_INTERPOSER_URL="https://github.com/selkies-project/selkies-gstreamer/releases/download/v1.6.2/selkies-js-interposer_v1.6.2_ubuntu22.04_amd64.tar.gz" \
+        && GS_DEB_INTERPOSER_URL="https://github.com/selkies-project/selkies-gstreamer/releases/download/v1.6.2/selkies-js-interposer_v1.6.2_ubuntu22.04_amd64.deb" \
         && curl -fsSL ${GS_DEB_INTERPOSER_URL} -O \
         && apt-get install --no-install-recommends -y \
         ./*.deb \
