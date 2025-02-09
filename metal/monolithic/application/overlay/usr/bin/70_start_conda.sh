@@ -20,6 +20,8 @@ trap _term SIGTERM SIGINT
 # source ~/.bashrc && \
 # conda activate base && \
 # conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+#
+/usr/bin/python3 -m pip install websockets==13
 
 # continous monitoring - pulse
 while true; do sleep 5 && readiness_conda; done &

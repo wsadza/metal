@@ -1290,27 +1290,27 @@ RUN \
     /var/tmp/* \
     /tmp/*
 
-#RUN \
-#    echo "**** Optional: Ubuntu Mesa ****" \
-#		    && ID="$(\
-#        	     grep ^ID= /etc/os-release \
-#        	     | cut -d= -f2 \
-#        	     | tr -d '\"' \
-#        )" \
-#        && if [ "${ID}" = "ubuntu" ]; \
-#		    then \
-#              add-apt-repository -y ppa:oibaf/graphics-drivers \
-#              && apt-get update \
-#              && apt-get upgrade -y \
-#        && \
-#        echo "**** Section cleanup ****" \
-#            && apt-get clean autoclean -y \
-#            && apt-get autoremove -y \
-#            && rm -rf \
-#                /var/lib/apt/lists/* \
-#                /var/tmp/* \
-#                /tmp/*; \
-#        fi
+RUN \
+    echo "**** Optional: Ubuntu Mesa ****" \
+      && ID="$(\
+              grep ^ID= /etc/os-release \
+              | cut -d= -f2 \
+              | tr -d '\"' \
+        )" \
+        && if [ "${ID}" = "ubuntu" ]; \
+      then \
+              add-apt-repository -y ppa:oibaf/graphics-drivers \
+              && apt-get update \
+              && apt-get upgrade -y \
+        && \
+        echo "**** Section cleanup ****" \
+            && apt-get clean autoclean -y \
+            && apt-get autoremove -y \
+            && rm -rf \
+                /var/lib/apt/lists/* \
+                /var/tmp/* \
+                /tmp/*; \
+        fi
 
 ############################################################
 #
@@ -1328,6 +1328,7 @@ RUN \
 
 # -----------------------------------------------
 # Configuration - Graphic
+
 
 ENV \
     NVIDIA_VISIBLE_DEVICES=all \
@@ -1545,6 +1546,7 @@ RUN chown -R ${USER_UID}:${USER_UID} /opt
 
 # Add FS overlay and set permissions in one step
 COPY --chmod=0755 overlay /
+COPY --chmod=0755 workspace /workspace
 
 # Set entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
