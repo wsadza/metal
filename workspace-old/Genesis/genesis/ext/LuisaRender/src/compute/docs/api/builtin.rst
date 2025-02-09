@@ -1,4 +1,0 @@
-Built-in Functions
-==================
-
-TODO
