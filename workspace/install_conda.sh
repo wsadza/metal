@@ -1,11 +1,13 @@
 
-# curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
-# bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda
+bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda
 
-# rm -f Miniconda3-latest-Linux-x86_64.sh
+rm -f Miniconda3-latest-Linux-x86_64.sh
 
-# conda init;
+/opt/conda/bin/conda init bash
+
+source /opt/conda/bin/activate
 
 # Set the environment variable to prevent prompting
 export CONDA_EXCLUDE_TIKZ=1

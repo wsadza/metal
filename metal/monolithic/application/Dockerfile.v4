@@ -188,14 +188,29 @@ RUN echo "**** Installing OpenSSH Server ****" \
 # -----------------------------------------------
 
 
-ARG PYTHON_VERSION=3.11
+ARG PYTHON_VERSION=3.10.12
+
 
 # Switch to non-root user.
 USER ${USER_NAME}
 
 
-# Execute bash as root for futher installations.
 SHELL [ "/usr/bin/sudo", "-E", "--", "/bin/bash", "-c" ]
+
+
+
+RUN source /opt/conda/etc/profile.d/conda.sh \
+    && conda activate base \
+    && pip install numpy
+
+
+RUN source /opt/conda/etc/profile.d/conda.sh \
+    && conda activate base && \
+    echo "**** Testing Python installation ****" \
+    && python --version \
+    && python -c "import sys; print('Python is working correctly.')"
+
+
 
 #############################################################
 #
@@ -324,11 +339,11 @@ RUN \
     && \
     echo "**** Dependencies ****" \
         && apt-get install --no-install-recommends -y \
-            python3-pip \
-            python3-dev \
-            python3-gi \
-            python3-setuptools \
-            python3-wheel \
+        python3-pip \
+        python3-dev \
+        python3-gi \
+        python3-setuptools \
+        python3-wheel \
            libaa1 \
            bzip2 \
            libgcrypt20 \
@@ -1439,14 +1454,16 @@ RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 110 && \
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-RUN pip install "pybind11[global]"
+RUN source /opt/conda/etc/profile.d/conda.sh \
+    && conda activate base \
+    && pip install "pybind11[global]"
 
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.0-rc2/cmake-3.31.0-rc2-linux-x86_64.sh && \
     chmod +x cmake-3.31.0-rc2-linux-x86_64.sh && \
     ./cmake-3.31.0-rc2-linux-x86_64.sh --skip-license --prefix=/usr/local && \
     rm cmake-3.31.0-rc2-linux-x86_64.sh
 
-ARG PYTHON_VERSION=3.10.12
+ARG PYTHON_VERSION=3.11
 
 # Build LuisaRender
 WORKDIR /workspace
@@ -1455,7 +1472,9 @@ RUN git clone https://github.com/Genesis-Embodied-AI/Genesis.git && \
     git submodule update --init --recursive
 COPY --chmod=0755 genesis /workspace
 RUN cat /workspace/build_luisa.sh
-RUN chmod +x /workspace/build_luisa.sh && /workspace/build_luisa.sh ${PYTHON_VERSION}
+RUN source /opt/conda/etc/profile.d/conda.sh \
+    && conda activate base \
+    && chmod +x /workspace/build_luisa.sh && /workspace/build_luisa.sh ${PYTHON_VERSION}
 
 # Install runtime dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -1480,22 +1499,30 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir open3d
-RUN git clone https://github.com/Genesis-Embodied-AI/Genesis.git && \
-    cd Genesis && \
-    pip install . && \
-    pip install --no-cache-dir PyOpenGL==3.1.5
+
+RUN source /opt/conda/etc/profile.d/conda.sh \
+    && conda activate base \
+    && pip install --no-cache-dir open3d
+RUN cd Genesis && \
+    source /opt/conda/etc/profile.d/conda.sh \
+    && conda activate base \
+    && pip install . && \
+    source /opt/conda/etc/profile.d/conda.sh \
+    && conda activate base \
+    && pip install --no-cache-dir PyOpenGL==3.1.5
 
 RUN PYTHON_MAJOR_MINOR=$(echo ${PYTHON_VERSION} | tr -d '.') && \
     wget https://github.com/ompl/ompl/releases/download/prerelease/ompl-1.6.0-cp${PYTHON_MAJOR_MINOR}-cp${PYTHON_MAJOR_MINOR}-manylinux_2_28_x86_64.whl && \
-    pip install ompl-1.6.0-cp${PYTHON_MAJOR_MINOR}-cp${PYTHON_MAJOR_MINOR}-manylinux_2_28_x86_64.whl && \
+    source /opt/conda/etc/profile.d/conda.sh \
+    && conda activate base \
+    && pip install ompl-1.6.0-cp${PYTHON_MAJOR_MINOR}-cp${PYTHON_MAJOR_MINOR}-manylinux_2_28_x86_64.whl && \
     rm ompl-1.6.0-cp${PYTHON_MAJOR_MINOR}-cp${PYTHON_MAJOR_MINOR}-manylinux_2_28_x86_64.whl
 
-RUN cp /workspace/Genesis/genesis/ext/ParticleMesher/ParticleMesherPy /opt/conda/lib/python3.1/site-packages/genesis/ext/ParticleMesher/ParticleMesherPy
+RUN cp -r Genesis/genesis/ext/ParticleMesher/ParticleMesherPy /opt/conda/lib/python3.1/site-packages/genesis/ext/ParticleMesher/ParticleMesherPy
 
 ENV LD_LIBRARY_PATH=/opt/conda/lib/python3.1/site-packages/genesis/ext/ParticleMesher/ParticleMesherPy:$LD_LIBRARY_PATH
-
-RUN cp /workspace/Genesis/genesis/ext/LuisaRender/build/bin /opt/conda/lib/python3.1/site-packages/genesis/ext/LuisaRender/build/bin
+RUN mkdir -p /opt/conda/lib/python3.1/site-packages/genesis/ext/LuisaRender/build
+RUN cp -r Genesis/genesis/ext/LuisaRender/build/bin /opt/conda/lib/python3.1/site-packages/genesis/ext/LuisaRender/build/bin
 
 RUN cd /opt/conda/lib && \
     mv libstdc++.so.6 libstdc++.so.6.old && \
@@ -1508,16 +1535,13 @@ COPY genesis/nvidia_layers.json /etc/vulkan/implicit_layer.d/nvidia_layers.json
 # -----------------------------------------------
 # Execute
 
-RUN \
-    echo "**** Execute: Final Touch ****" \
-    && \
-    echo "Make sure that everything under ${HOME} belongs to user" \
-    && chmod -R a+rwX ${HOME} \
-    && chown -R ${USER_UID}:${USER_UID} ${HOME} \
-    && \
-    echo "Change Permissions for config opt" \
-    && chmod -R a+rwX /opt \
-    && chown -R ${USER_UID}:${USER_UID} /opt
+RUN echo "**** Execute: Final Touch ****"
+RUN echo "Make sure that everything under ${HOME} belongs to user"
+RUN chmod -R a+rwX ${HOME}
+RUN chown -R ${USER_UID}:${USER_UID} ${HOME}
+RUN echo "Change Permissions for config opt"
+RUN chmod -R a+rwX /opt
+RUN chown -R ${USER_UID}:${USER_UID} /opt
 
 # Add FS overlay and set permissions in one step
 COPY --chmod=0755 overlay /

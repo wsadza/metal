@@ -16,8 +16,9 @@ CMD="docker run -d \
   -e STREAMER_HOST=$(hostname | tr '-' '.' | awk '{print $1}') \
   -e SELKIES_ENCODER=x264enc \
   --gpus all \
+  --runtime=nvidia \
   -v ./workspace:/home/ubuntu/workspace \
-  luke/metal-mono-v2"
+  luke/metal-mono"
 
 echo $CMD
 eval $CMD

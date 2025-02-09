@@ -2,6 +2,8 @@ if [ -n "$(docker ps -q)" ]; then
   docker kill $(docker ps -q)
 fi
 
+docker build -t luke/metal-mono-v4 -f metal/monolithic/application/Dockerfile.v4 metal/monolithic/application
+
 CMD="docker run -d \
   -p 8080:8080 \
   -p 2223:22 \
@@ -12,11 +14,10 @@ CMD="docker run -d \
   -e DISPLAY_SIZE_Y=2234 \
   -e STREAMER_HOST=$(hostname | tr '-' '.' | awk '{print $1}') \
   -e SELKIES_ENCODER=x264enc \
-  --gpus all \
   --runtime=nvidia \
-  --rm \
+  --gpus all \
   -v ./workspace:/home/ubuntu/workspace \
-  ghcr.io/wsadza/metal/full-ubuntu:latest"
+  luke/metal-mono-v4"
 
 echo $CMD
 eval $CMD

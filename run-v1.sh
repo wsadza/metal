@@ -2,6 +2,9 @@ if [ -n "$(docker ps -q)" ]; then
   docker kill $(docker ps -q)
 fi
 
+# Build the image
+# ./build.sh
+
 CMD="docker run -d \
   -p 8080:8080 \
   -p 2223:22 \
@@ -14,9 +17,8 @@ CMD="docker run -d \
   -e SELKIES_ENCODER=x264enc \
   --gpus all \
   --runtime=nvidia \
-  --rm \
   -v ./workspace:/home/ubuntu/workspace \
-  ghcr.io/wsadza/metal/full-ubuntu:latest"
+  luke/metal-mono-v3"
 
 echo $CMD
 eval $CMD

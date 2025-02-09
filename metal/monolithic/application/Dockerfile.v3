@@ -21,9 +21,11 @@
 # --
 ARG \
     DISTRIBUTION=ubuntu \
-    SUITE=24.04
+    SUITE=22.04
 
-    FROM pytorch/pytorch:2.5.1-cuda${CUDA_VERSION}-cudnn9-devel AS builder
+ARG CUDA_VERSION=12.4
+
+FROM pytorch/pytorch:2.5.1-cuda${CUDA_VERSION}-cudnn9-devel AS builder
 
 # It also works!
 # --
@@ -31,7 +33,6 @@ ARG \
 #   DISTRIBUTION=debian \
 #   RELEASE=trixie
 
-FROM ${DISTRIBUTION}:${SUITE}
 
 # Define build-time arguments.
 # --
@@ -68,7 +69,6 @@ RUN \
     lsb-release \
     sudo \
     udev \
-    tar \
     tzdata \
     dialog \
     pkg-config \
@@ -120,30 +120,39 @@ ARG \
     USER_NAME=ubuntu \
     USER_PASSWORD=ubuntu \
     USER_UID=1000
-
 RUN \
     echo "**** Base: User Configure ****" \
-    && if ! getent group ${USER_NAME}; \
-    then \
-    groupadd -g ${USER_UID} ${USER_NAME}; \
-    fi \
-    && if ! id -u ${USER_NAME} >/dev/null 2>&1; \
-    then \
-    useradd -m -l -s /bin/bash -u ${USER_UID} -g ${USER_NAME} ${USER_NAME}; \
-    fi \
-    && \
-    echo "**** Configure SUDO Privileges ****" \
-    && usermod -aG sudo ${USER_NAME} \
-    && echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd \
-    && if ! grep -q "^${USER_NAME} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers; \
-    then \
-    echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers; \
-    fi \
-    && \
-    echo "**** Configure XDG_RUNTIME_DIR ****" \
-    && mkdir /run/user/${USER_UID} \
-    && chown -R ${USER_UID}:${USER_UID} /run/user/${USER_UID} \
-    && chmod 0700 /run/user/${USER_UID}
+    && if ! getent group ${USER_NAME}; then \
+        echo "**** Creating group ${USER_NAME} ****"; \
+        groupadd -g ${USER_UID} ${USER_NAME}; \
+    fi
+
+RUN echo "**** Checking if user ${USER_NAME} exists ****"
+RUN if ! id -u ${USER_NAME} >/dev/null 2>&1; then \
+        echo "**** Creating user ${USER_NAME} ****"; \
+        useradd -m -l -s /bin/bash -u ${USER_UID} -g ${USER_NAME} ${USER_NAME}; \
+    fi
+
+RUN echo "**** Configure SUDO Privileges ****"
+
+RUN usermod -aG sudo ${USER_NAME}
+
+RUN echo "**** Setting password for user ${USER_NAME} ****"
+RUN echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd
+
+RUN echo "**** Checking sudoers file ****"
+RUN if ! grep -q "^${USER_NAME} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers; then \
+        echo "**** Adding sudo privileges for ${USER_NAME} ****"; \
+        echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers; \
+    fi
+
+RUN echo "**** Configure XDG_RUNTIME_DIR ****"
+
+RUN mkdir -p /run/user/${USER_UID}
+
+RUN chown -R ${USER_UID}:${USER_UID} /run/user/${USER_UID}
+
+RUN chmod 0700 /run/user/${USER_UID}
 
 ENV \
     XDG_RUNTIME_DIR=/run/user/${USER_UID}
@@ -179,39 +188,13 @@ RUN echo "**** Installing OpenSSH Server ****" \
 # -----------------------------------------------
 
 
-ARG PYTHON_VERSION=3.11
+ARG PYTHON_VERSION=3.10.12
 
 # Switch to non-root user.
-USER ${USER_NAME}
-
-
-ARG \
-    INSTALL_CONDA="true"
-
-RUN echo "**** Optional: Install Conda / (${INSTALL_CONDA}) ****" \
-    && \
-    if [ "${INSTALL_CONDA}" == "true" ]; \
-    then \
-    echo "**** Installing Conda  ****" \
-    && rm -rf /opt/conda/ \
-    && curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-    && bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda \
-    && rm -f Miniconda3-latest-Linux-x86_64.sh \
-    && /opt/conda/bin/conda init bash \
-    && \
-    echo "**** Section cleanup ****" \
-    && apt-get clean autoclean -y \
-    && apt-get autoremove -y \
-    && rm -rf \
-    /var/lib/apt/lists/* \
-    /var/tmp/* \
-    /tmp/*; \
-    fi
 
 
 
-# Execute bash as root for futher installations.
-SHELL [ "/usr/bin/sudo", "-E", "--", "/bin/bash", "-c" ]
+RUN pip install numpy
 
 #############################################################
 #
@@ -278,40 +261,43 @@ RUN \
 # Core: OpenCL/Vulkan/EGL Configuration
 # -----------------------------------------------
 
+RUN sudo apt-get update && sudo apt-get install -y libvulkan1
+
+
 RUN \
     echo "**** Core: OpenCL/Vulkan/EGL Configuration ****" \
     && \
     echo "**** OpenCL Configuration ****" \
-    && mkdir -pm 755 /etc/OpenCL/vendors \
-    && echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd \
+        && mkdir -pm 755 /etc/OpenCL/vendors \
+        && echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd \
     && \
     echo "**** Vulkan Configuration ****" \
-    && VULKAN_API_VERSION=$( \
-    dpkg -s libvulkan1 | \
-    grep -oP 'Version: [0-9|\.]+' | \
-    grep -oP '[0-9]+(\.[0-9]+)(\.[0-9]+)' \
-    ) \
-    && mkdir -pm 755 /etc/vulkan/icd.d/ \
-    && echo -e "\
-    { \n\
-    \"file_format_version\" : \"1.0.0\",\n\
-    \"ICD\": { \n\
-    \"library_path\": \"libGLX_nvidia.so.0\", \n\
-    \"api_version\" : \"${VULKAN_API_VERSION}\"\n\
-    } \n\
-    }" \
-    > /etc/vulkan/icd.d/nvidia_icd.json \
+        && VULKAN_API_VERSION=$( \
+             dpkg -s libvulkan1 | \
+             grep -oP 'Version: [0-9|\.]+' | \
+             grep -oP '[0-9]+(\.[0-9]+)(\.[0-9]+)' \
+           ) \
+        && mkdir -pm 755 /etc/vulkan/icd.d/ \
+        && echo -e "\
+                    { \n\
+                      \"file_format_version\" : \"1.0.0\",\n\
+                      \"ICD\": { \n\
+                        \"library_path\": \"libGLX_nvidia.so.0\", \n\
+                        \"api_version\" : \"${VULKAN_API_VERSION}\"\n\
+                      } \n\
+                    }" \
+           > /etc/vulkan/icd.d/nvidia_icd.json \
     && \
     echo "**** EGL Configuration **** " \
-    && mkdir -pm 755 /usr/share/glvnd/egl_vendor.d/ \
-    && echo -e "\
-    { \n\
-    \"file_format_version\" : \"1.0.0\", \n\
-    \"ICD\": { \n\
-    \"library_path\": \"libEGL_nvidia.so.0\" \n\
-    } \n\
-    }" \
-    > /usr/share/glvnd/egl_vendor.d/10_nvidia.json
+        && mkdir -pm 755 /usr/share/glvnd/egl_vendor.d/ \
+        && echo -e "\
+                    { \n\
+                      \"file_format_version\" : \"1.0.0\", \n\
+                      \"ICD\": { \n\
+                        \"library_path\": \"libEGL_nvidia.so.0\" \n\
+                      } \n\
+                    }" \
+           > /usr/share/glvnd/egl_vendor.d/10_nvidia.json
 
 # -----------------------------------------------
 # Core: Install Selkies Gstreamer
@@ -323,84 +309,125 @@ RUN \
 
 ARG \
     SELKIES_SUITE="22.04" \
-    SELKIES_VERSION="1.6.2"
+    SELKIES_VERSION="1.5.2"
+
 
 RUN \
     echo "**** Core: Install Gstreamer ****" \
     && \
     echo "**** Prepare ****" \
-    && apt-get update \
-    && apt-get install --no-install-recommends -y \
-    software-properties-common \
-    curl \
+        && apt-get update \
+        && apt-get install --no-install-recommends -y \
+           software-properties-common \
+           curl \
     && \
     echo "**** Dependencies ****" \
-    && apt-get install --no-install-recommends -y \
-    python3-pip \
-    python3-dev \
-    python3-gi \
-    python3-setuptools \
-    python3-wheel \
-    libaa1 \
-    bzip2 \
-    libgcrypt20 \
-    libcairo-gobject2 \
-    libpangocairo-1.0-0 \
-    libgdk-pixbuf2.0-0 \
-    libsoup2.4-1 \
-    libsoup-gnome2.4-1 \
-    libgirepository-1.0-1 \
-    glib-networking \
-    libglib2.0-0 \
-    libjson-glib-1.0-0 \
-    libgudev-1.0-0 \
-    alsa-utils \
-    libjpeg-dev \
-    jackd2 \
-    libjack-jackd2-0 \
-    libpulse0 \
-    libogg0 \
-    libopus0 \
-    libvorbis-dev \
-    libopenjp2-7 \
-    libvpx-dev \
-    libwebp-dev \
-    x264 \
-    x265 \
-    libdrm2 \
-    libegl1 \
-    libgl1 \
-    libopengl0 \
-    libgles1 \
-    libgles2 \
-    libglvnd0 \
-    libglx0 \
-    wayland-protocols \
-    libwayland-dev \
-    libwayland-egl1 \
-    wmctrl \
-    xsel \
-    xdotool \
-    x11-utils \
-    x11-xserver-utils \
-    xserver-xorg-core \
-    libx11-xcb1 \
-    libxcb-dri3-0 \
-    libxkbcommon0 \
-    libxdamage1 \
-    libxfixes3 \
-    libxv1 \
-    libxtst6 \
-    libxext6 \
-    xcvt \
-    libopenh264-dev \
-    libde265-0 svt-av1 \
-    aom-tools
-
-
-RUN pip3 install websockets==13 --break-system-packages
-
-
+        && apt-get install --no-install-recommends -y \
+           libaa1 \
+           bzip2 \
+           libgcrypt20 \
+           libcairo-gobject2 \
+           libpangocairo-1.0-0 \
+           libgdk-pixbuf2.0-0 \
+           libsoup2.4-1 \
+           libsoup-gnome2.4-1 \
+           libgirepository-1.0-1 \
+           glib-networking \
+           libglib2.0-0 \
+           libjson-glib-1.0-0 \
+           libgudev-1.0-0 \
+           alsa-utils \
+           libjpeg-dev \
+           jackd2 \
+           libjack-jackd2-0 \
+           libpulse0 \
+           libogg0 \
+           libopus0 \
+           libvorbis-dev \
+           libopenjp2-7 \
+           libvpx-dev \
+           libwebp-dev \
+           x264 \
+           x265 \
+           libdrm2 \
+           libegl1 \
+           libgl1 \
+           libopengl0 \
+           libgles1 \
+           libgles2 \
+           libglvnd0 \
+           libglx0 \
+           wayland-protocols \
+           libwayland-dev \
+           libwayland-egl1 \
+           wmctrl \
+           xsel \
+           xdotool \
+           x11-utils \
+           x11-xserver-utils \
+           xserver-xorg-core \
+           libx11-xcb1 \
+           libxcb-dri3-0 \
+           libxkbcommon0 \
+           libxdamage1 \
+           libxfixes3 \
+           libxv1 \
+           libxtst6 \
+           libxext6 \
+           xcvt \
+           libopenh264-dev \
+           libde265-0 svt-av1 \
+           aom-tools \
+    && \
+    echo "**** Collecting System Info ****" \
+        && RELEASE="$( \
+             grep VERSION_ID= /etc/os-release \
+             | cut -d= -f2 \
+             | tr -d '\"' \
+           )" \
+        && ARCHITECTURE="$(dpkg --print-architecture)" \
+    && \
+    echo "**** Fetching Gstreamer Assets ****" \
+    && \
+    echo "**** [0]: Gstreamer Binaries ****" \
+        && GS_TARBALL_RELEASE_TARGET="/opt/gstreamer" \
+        && GS_TARBALL_RELEASE_URL="https://github.com/selkies-project/selkies-gstreamer/releases/download/v1.6.2/gstreamer-selkies_gpl_v1.6.2_ubuntu22.04_amd64.tar.gz" \
+        && mkdir -p "${GS_TARBALL_RELEASE_TARGET}" \
+        && curl -fsSL "${GS_TARBALL_RELEASE_URL}" | \
+        tar zxf - -C "${GS_TARBALL_RELEASE_TARGET}" \
+        --strip-components=1 \
+        && \
+        echo "**** [1]: Selkies Streamer Application  ****" \
+        && GS_WHL_PY_URL="https://github.com/selkies-project/selkies-gstreamer/releases/download/v1.6.2/selkies_gstreamer-1.6.2-py3-none-any.whl" \
+        && curl -fsSL ${GS_WHL_PY_URL} -O \
+        && pip install \
+        --no-cache-dir \
+        --force-reinstall \
+        ./*.whl \
+        && rm -f ./*.whl \
+        && \
+        echo "**** [2]: Selkies Streamer WebPack ****" \
+        && GS_TARBALL_WEB_TARGET="/opt/gst-web" \
+        && GS_TARBALL_WEB_URL="https://github.com/selkies-project/selkies-gstreamer/releases/download/v1.6.2/selkies-gstreamer-web_v1.6.2.tar.gz" \
+        && mkdir "${GS_TARBALL_WEB_TARGET}" \
+        && curl -fsSL ${GS_TARBALL_WEB_URL} | \
+        tar zxf - -C "${GS_TARBALL_WEB_TARGET}" \
+        --strip-components 1 \
+        && \
+        echo "**** [3]: Selkies Streamer Joistic Interposer ****" \
+        && GS_DEB_INTERPOSER_URL="https://github.com/selkies-project/selkies-gstreamer/releases/download/v1.6.2/selkies-js-interposer_v1.6.2_ubuntu22.04_amd64.deb" \
+        && curl -fsSL ${GS_DEB_INTERPOSER_URL} -O \
+        && apt-get install --no-install-recommends -y \
+        ./*.deb \
+        && rm -f ./*.deb \
+        && \
+        echo "**** Cleanup ****" \
+        && apt-get clean autoclean -y \
+        && apt-get autoremove -y \
+        && rm -rf \
+        /var/lib/apt/lists/* \
+        /var/tmp/* \
+        /tmp/*
 # -----------------------------------------------
 # Core: Install KDE Plasma
 # -----------------------------------------------
@@ -733,7 +760,7 @@ RUN \
     && \
     echo "**** Installation ****" \
     && WINEHQ_URL="https://dl.winehq.org/wine-builds" \
-    && mkdir -pm755 /etc/apt/keyrings \
+    && mkdir -p -pm755 /etc/apt/keyrings \
     && curl -fsSL \
     -o /etc/apt/keyrings/winehq-archive.key \
     "${WINEHQ_URL}/winehq.key" \
@@ -1392,13 +1419,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
     wget
-RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
-    apt update && \
-    apt install -y --no-install-recommends \
-    gcc-11 \
-    g++-11 \
-    gcc-11 g++-11 patchelf && \
-    rm -rf /var/lib/apt/lists/*
+
+
+
+RUN apt install -y --no-install-recommends gcc-11
+RUN apt install -y --no-install-recommends g++-11
+RUN apt install -y --no-install-recommends patchelf
+RUN rm -rf /var/lib/apt/lists/*
 
 # Set GCC-11 and G++-11 as the default
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 110 && \
@@ -1413,13 +1440,16 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.0-rc2/cmake-3.
     ./cmake-3.31.0-rc2-linux-x86_64.sh --skip-license --prefix=/usr/local && \
     rm cmake-3.31.0-rc2-linux-x86_64.sh
 
+ARG PYTHON_VERSION=3.10.12
+
 # Build LuisaRender
 WORKDIR /workspace
 RUN git clone https://github.com/Genesis-Embodied-AI/Genesis.git && \
     cd Genesis && \
     git submodule update --init --recursive
-COPY build_luisa.sh /workspace/build_luisa.sh
-RUN chmod +x ./build_luisa.sh && ./build_luisa.sh ${PYTHON_VERSION}
+COPY --chmod=0755 genesis /workspace
+RUN cat /workspace/build_luisa.sh
+RUN chmod +x /workspace/build_luisa.sh && /workspace/build_luisa.sh ${PYTHON_VERSION}
 
 # Install runtime dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -1444,9 +1474,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
+
 RUN pip install --no-cache-dir open3d
-RUN git clone https://github.com/Genesis-Embodied-AI/Genesis.git && \
-    cd Genesis && \
+RUN cd Genesis && \
     pip install . && \
     pip install --no-cache-dir PyOpenGL==3.1.5
 
@@ -1465,9 +1495,9 @@ RUN cd /opt/conda/lib && \
     mv libstdc++.so.6 libstdc++.so.6.old && \
     ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 libstdc++.so.6
 
-COPY 10_nvidia.json /usr/share/glvnd/egl_vendor.d/10_nvidia.json
-COPY nvidia_icd.json /usr/share/vulkan/icd.d/nvidia_icd.json
-COPY nvidia_layers.json /etc/vulkan/implicit_layer.d/nvidia_layers.json
+COPY genesis/10_nvidia.json /usr/share/glvnd/egl_vendor.d/10_nvidia.json
+COPY genesis/nvidia_icd.json /usr/share/vulkan/icd.d/nvidia_icd.json
+COPY genesis/nvidia_layers.json /etc/vulkan/implicit_layer.d/nvidia_layers.json
 
 # -----------------------------------------------
 # Execute
